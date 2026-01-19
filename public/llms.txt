@@ -1,0 +1,5 @@
+## Pages
+- [AI & Development Portfolio | Top 1% Global Performance](/home): Portfolio of an elite developer ranked in the Top 1% globally for web performance. Specializing in Generative AI, React, and Enterprise Cloud Integration.
+- [Case Study: hsvdrone.com SEO | Page 1 Rankings in 30 Days](/casestudyhsvdrone): SEO case study for hsvdrone.com showcasing rapid growth to Google Page 1 rankings (Position 9.0) in less than 30 days.
+- [Case Study: reallivebonsai.us SEO Performance | Zero Paid Ads Organic Growth](/casestudybonsai): Comprehensive SEO case study for reallivebonsai.us showing 12-month organic growth: 1000+ clicks, 48k+ impressions, and 21.3 average search position without paid advertising.
+- [Case Study: themeaningsoflife.com | Top 1% Global Performance](/casestudymeanings): Technical analysis of a top 1% globally ranked website achieving perfect 100/100 Accessibility & SEO scores and 95/100 Performance on Google Lighthouse.
