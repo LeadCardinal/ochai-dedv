@@ -26,6 +26,20 @@ const Home = () => {
       <Helmet>
         <title>Jeremy Och | AI Operations & Full-Stack Developer | Huntsville, AL</title>
         <meta name="description" content="AI operations specialist and full-stack developer in Huntsville, Alabama. Specializing in AI integration, enterprise systems, React, and digital operations. Available for technical leadership roles in defense and aerospace." />
+        
+        {/* Open Graph / Social Media */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ochai.dev/" />
+        <meta property="og:title" content="Jeremy Och | AI Operations & Full-Stack Developer | Huntsville, AL" />
+        <meta property="og:description" content="AI operations specialist and full-stack developer in Huntsville, Alabama. Specializing in AI integration, enterprise systems, React, and digital operations. Available for technical leadership roles in defense and aerospace." />
+        <meta property="og:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://ochai.dev/" />
+        <meta name="twitter:title" content="Jeremy Och | AI Operations & Full-Stack Developer | Huntsville, AL" />
+        <meta name="twitter:description" content="AI operations specialist and full-stack developer in Huntsville, Alabama. Specializing in AI integration, enterprise systems, React, and digital operations." />
+        <meta name="twitter:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
       </Helmet>
       
       {/* 
