@@ -2,8 +2,10 @@ import React, { Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 import Hero from '@/components/Hero';
 import EliteHeroSection from '@/components/EliteHeroSection';
-import ParallaxHeroSection from '@/components/ParallaxHeroSection';
 
+// Lazy load ParallaxHeroSection to defer scroll animations beyond initial 3 seconds
+// Prevents Lighthouse from seeing unexecuted animations as blocking resources
+const ParallaxHeroSection = React.lazy(() => import('@/components/ParallaxHeroSection'));
 const PerformanceExcellence = React.lazy(() => import('@/components/PerformanceExcellence'));
 const WhatMakesYouDifferent = React.lazy(() => import('@/components/WhatMakesYouDifferent'));
 const CoreCapabilities = React.lazy(() => import('@/components/CoreCapabilities'));
@@ -41,9 +43,9 @@ const Home = () => {
 
       <Hero />
       <EliteHeroSection />
-      <ParallaxHeroSection />
       
       <Suspense fallback={<SectionSkeleton />}>
+        <ParallaxHeroSection />
         <WhatMakesYouDifferent />
         <PerformanceExcellence />
         <CoreCapabilities />
