@@ -49,19 +49,19 @@ const SinglePainPoint = ({ data, isLast }) => {
     offset: ["start start", "end end"]
   });
 
-  const titleOpacity = useTransform(scrollYProgress, [0.15, 0.25, 0.85, 1], [0, 1, 1, 0]);
-  const titleX = useTransform(scrollYProgress, [0.15, 0.25], [-50, 0]);
+  const titleOpacity = useTransform(scrollYProgress, [0.10, 0.20, 0.90, 1], [0, 1, 1, 0]);
+  const titleX = useTransform(scrollYProgress, [0.10, 0.20], [-50, 0]);
 
-  const imageOpacity = useTransform(scrollYProgress, [0.30, 0.45, 0.85, 1], [0, 1, 1, 0]);
-  const imageX = useTransform(scrollYProgress, [0.30, 0.45], [100, 0]);
+  const imageOpacity = useTransform(scrollYProgress, [0.20, 0.30, 0.90, 1], [0, 1, 1, 0]);
+  const imageX = useTransform(scrollYProgress, [0.20, 0.30], [100, 0]);
 
-  const blurbOpacity = useTransform(scrollYProgress, [0.50, 0.65, 0.85, 1], [0, 1, 1, 0]);
-  const blurbY = useTransform(scrollYProgress, [0.50, 0.65], [50, 0]);
+  const blurbOpacity = useTransform(scrollYProgress, [0.30, 0.40, 0.90, 1], [0, 1, 1, 0]);
+  const blurbY = useTransform(scrollYProgress, [0.30, 0.40], [50, 0]);
 
   const Icon = data.icon;
 
   return (
-    <div ref={containerRef} className={`h-[250vh] relative z-10 ${!isLast ? 'border-b border-slate-900/50' : ''}`}>
+    <div ref={containerRef} className={`h-[300vh] relative z-10 ${!isLast ? 'border-b border-slate-900/50' : ''}`}>
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         <div className="container mx-auto px-4 md:px-8 max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">

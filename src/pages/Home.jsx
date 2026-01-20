@@ -22,8 +22,8 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Top 0.05% Digital Operator | Integrated Full-Stack Elite</title>
-        <meta name="description" content="Claude AI Validated Top 1% Developer. Specializing in high-performance integrated digital operations: Build, Market, Measure, Iterate. Perfect Lighthouse scores guaranteed." />
+        <title>Jeremy Och | AI Operations & Full-Stack Developer | Huntsville, AL</title>
+        <meta name="description" content="AI operations specialist and full-stack developer in Huntsville, Alabama. Specializing in AI integration, enterprise systems, React, and digital operations. Available for technical leadership roles in defense and aerospace." />
       </Helmet>
       
       {/* 
