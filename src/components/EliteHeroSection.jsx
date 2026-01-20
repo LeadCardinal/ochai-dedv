@@ -12,7 +12,7 @@ const EliteHeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10 bg-slate-950">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10 bg-slate-950 mt-[700px]">
       {/* Background with Gradient Overlay - Unsplash Image Removed */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
@@ -63,7 +63,7 @@ const EliteHeroSection = () => {
             className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-tight"
             style={{ willChange: 'opacity, transform' }}
           >
-            Top 0<span className="text-[0.5em] text-cyan-400 align-middle">.05%</span> Integrated <br/>
+            Top <span className="text-[0.5em] text-cyan-400 align-middle">.05%</span> Integrated <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
               Digital Operator
             </span>

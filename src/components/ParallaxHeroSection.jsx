@@ -15,7 +15,7 @@ const ParallaxHeroSection = () => {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   
   return (
-    <section id="differentiation" ref={containerRef} className="relative bg-slate-950 z-20 overflow-hidden pt-[700px]">
+    <section id="differentiation" ref={containerRef} className="relative bg-slate-950 z-20 overflow-hidden">
       {/* Parallax Background - Gradient/Pattern for compliance */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div 
