@@ -29,9 +29,9 @@ const Hero = () => {
         - Top-20 ensures it starts below header.
         - Pointer-events-none ensures it doesn't block interaction.
       */}
-      <div className="fixed top-20 bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[602px] -z-10 pointer-events-none">
+      <div className="fixed top-20 bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] -z-10 pointer-events-none">
         <img 
-          src="https://horizons-cdn.hostinger.com/7e478c06-fe94-4e18-9741-42caa0185580/herohero-1-h7bRG.avif" 
+          src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_new.webp" 
           alt="Hero Background" 
           className="w-full h-full object-cover object-top opacity-100 block"
         />

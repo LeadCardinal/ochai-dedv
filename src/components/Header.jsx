@@ -72,9 +72,13 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link 
           to="/"
-          className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+          className="flex items-center"
         >
-          AI Portfolio
+          <img 
+            src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/HEADER_LOGO_SMALL.webp" 
+            alt="Jeremy Och Portfolio" 
+            className="h-[50px] w-[250px] object-contain"
+          />
         </Link>
 
         {/* Desktop Navigation */}
