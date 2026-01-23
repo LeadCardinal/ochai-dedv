@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,6 +14,18 @@
 
   html {
     scroll-behavior: smooth;
+  }
+
+  /* FIX: Prevent text clipping on heading descenders (g, y, p, q) */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    padding-bottom: 0.1em;
+  }
+  
+  /* Extra fix for large display headings */
+  .text-5xl, .text-6xl, .text-7xl, .text-8xl {
+    line-height: 1.15;
+    padding-bottom: 0.15em;
   }
 }
 
@@ -62,10 +73,17 @@
     animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  /* Staggered delays using CSS variables or specific classes if needed */
+  /* Staggered delays */
   .delay-100 { animation-delay: 100ms; }
   .delay-200 { animation-delay: 200ms; }
   .delay-300 { animation-delay: 300ms; }
   .delay-500 { animation-delay: 500ms; }
   .delay-700 { animation-delay: 700ms; }
+
+  /* Utility class for heading fixes */
+  .heading-fix-large {
+    line-height: 1.15 !important;
+    padding-bottom: 0.15em;
+    overflow: visible !important;
+  }
 }

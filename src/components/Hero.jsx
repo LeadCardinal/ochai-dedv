@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -56,7 +57,18 @@ const Hero = () => {
             Self-taught anti-fragile operator who architects, optimizes, markets, and deploys proven enterprise-grade digital systems solo—thriving on constraints, eliminating coordination overhead, and delivering results at startup velocity.
           </p>
           
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <Link to="/biography">
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 px-8 py-6 text-base rounded-full transition-all hover:scale-105"
+              >
+                <FileText className="mr-2 w-5 h-5" />
+                Full Biography
+              </Button>
+            </Link>
+            
             <Button 
               onClick={scrollToContact} 
               size="lg" 
@@ -71,9 +83,9 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10">
-        <div className="flex flex-col items-center gap-2 text-slate-300">
-          <span className="text-sm font-medium tracking-wider uppercase">Scroll to Explore</span>
-          <ChevronDown className="w-6 h-6 animate-bounce" />
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm font-medium tracking-wider uppercase text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]">Scroll to Explore</span>
+          <ChevronDown className="w-6 h-6 animate-bounce text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
         </div>
       </div>
     </section>

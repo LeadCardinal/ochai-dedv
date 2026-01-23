@@ -1,49 +1,56 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, BrainCircuit, Search, BarChart3, CloudCog, Server, PenTool, Workflow } from 'lucide-react';
+import { Code2, BrainCircuit, Search, BarChart3, CloudCog, Server, PenTool, Workflow, Sparkles, Zap } from 'lucide-react';
 
 const CoreCapabilities = () => {
   const capabilities = [
     {
-      icon: Code2,
-      title: "Web Development",
-      description: "Mastery of HTML5, CSS3, JavaScript, and React ecosystem designed for pixel-perfect interfaces."
+      icon: BrainCircuit,
+      title: "AI Integration & Deployment",
+      description: "Production implementation of Adobe Firefly, ElevenLabs, Claude API, and LLM orchestration. Real systems generating measurable revenue—not demos.",
+      highlight: true
     },
     {
-      icon: BrainCircuit,
-      title: "Generative AI",
-      description: "Deep integration of LLMs to create intelligent, adaptive, and automated user experiences."
+      icon: Code2,
+      title: "Perfect Web Development",
+      description: "React, Vite, Tailwind—hand-coded to 100/100 Lighthouse scores. Performance that outperforms 99.95% of developers globally.",
+      highlight: true
+    },
+    {
+      icon: Sparkles,
+      title: "Prompt Engineering",
+      description: "Strategic AI prompt architecture for business ROI. Workflow automation that eliminates manual bottlenecks while maintaining quality control.",
+      highlight: false
+    },
+    {
+      icon: CloudCog,
+      title: "Cloud Infrastructure",
+      description: "Cloudflare optimization, Google Cloud Console, server-side analytics. Full-stack deployment pipelines maintaining 100% uptime.",
+      highlight: false
     },
     {
       icon: Search,
-      title: "SEO & Optimization",
-      description: "Technical SEO and Search Console mastery ensuring maximum visibility and organic growth potential."
+      title: "Technical SEO Mastery",
+      description: "Search Console optimization and organic growth strategies. Perfect technical scores driving actual traffic—not vanity metrics.",
+      highlight: false
     },
     {
       icon: BarChart3,
       title: "Data Analytics",
-      description: "Turning raw user data into actionable insights for continuous product iteration and improvement."
+      description: "Server-side conversions API, Meta integration, custom tracking architecture. Data infrastructure fewer than 1,000 people can build solo.",
+      highlight: false
     },
     {
-      icon: CloudCog,
-      title: "API & Cloud",
-      description: "Seamless orchestration of third-party services and serverless cloud architecture."
-    },
-    {
-      icon: Server,
-      title: "Infrastructure",
-      description: "Robust deployment pipelines and secure backend management using Supabase/Firebase."
-    },
-    {
-      icon: PenTool,
-      title: "Content Strategy",
-      description: "Strategic narrative building that aligns technical delivery with market positioning."
+      icon: Zap,
+      title: "Creative Automation",
+      description: "Adobe Creative Cloud mastery (Photoshop, Illustrator, InDesign, Premiere, After Effects, Firefly) producing enterprise output at solo speed.",
+      highlight: false
     },
     {
       icon: Workflow,
-      title: "Automation",
-      description: "End-to-end workflow optimization to eliminate manual bottlenecks and scale efficiency."
+      title: "Full-Stack Operations",
+      description: "E-commerce management, content strategy, marketing automation, customer service—complete business operations executing at top 0.05% standards.",
+      highlight: false
     }
   ];
 
@@ -52,12 +59,10 @@ const CoreCapabilities = () => {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Core <span className="text-purple-400">Capabilities</span>
+            AI-Augmented <span className="text-purple-400">Technical Arsenal</span>
           </h2>
           <p className="text-lg text-slate-400">
-            A comprehensive toolkit designed for execution of enterprise-grade digital products.
-            <br className="hidden md:block" />
-            <span className="text-slate-500 text-base mt-2 block">Positioned to serve Huntsville's Research Park & Global Clients</span>
+            The complete toolkit for solo execution of enterprise-grade digital products. Each capability performed at standards that beat 99.95% of individual practitioners worldwide.
           </p>
         </div>
 
@@ -69,10 +74,15 @@ const CoreCapabilities = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="bg-slate-950 border border-slate-800 p-6 rounded-xl hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group hover:-translate-y-1"
+              className={`${cap.highlight ? 'bg-gradient-to-br from-purple-900/30 to-slate-950 border-purple-500/30' : 'bg-slate-950 border-slate-800'} border p-6 rounded-xl hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden`}
             >
-              <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors">
-                <cap.icon className="w-6 h-6 text-slate-300 group-hover:text-purple-400 transition-colors" />
+              {cap.highlight && (
+                <div className="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                  ELITE
+                </div>
+              )}
+              <div className={`w-12 h-12 ${cap.highlight ? 'bg-purple-500/20' : 'bg-slate-900'} rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors`}>
+                <cap.icon className={`w-6 h-6 ${cap.highlight ? 'text-purple-400' : 'text-slate-300'} group-hover:text-purple-400 transition-colors`} />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">{cap.title}</h3>
               <p className="text-sm text-slate-400 leading-relaxed">
@@ -81,6 +91,20 @@ const CoreCapabilities = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom Call-out */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 text-center max-w-4xl mx-auto"
+        >
+          <div className="bg-slate-800/30 border border-slate-700 rounded-2xl p-8 backdrop-blur-sm">
+            <p className="text-lg text-slate-300 leading-relaxed">
+              <span className="text-cyan-400 font-bold">The Integration Advantage:</span> Most technical professionals excel in 1-2 areas. Agencies distribute capabilities across teams, introducing communication overhead and dependency chains. <span className="text-white font-bold">Fewer than 1,000 people worldwide</span> can execute this complete stack solo while maintaining top 0.05% performance standards.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

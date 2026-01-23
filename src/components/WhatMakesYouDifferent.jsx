@@ -1,38 +1,37 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Layers, Cpu, Lock, Users } from 'lucide-react';
+import { Zap, Layers, Cpu, Lock, Award, Target } from 'lucide-react';
 
 const WhatMakesYouDifferent = () => {
   const differentiators = [
     {
       icon: Lock,
-      title: 'Total Autonomy',
-      description: 'Zero dependency on external teams. From database schema to frontend animation, I handle every layer of the stack with expert precision, eliminating communication overhead.',
+      title: 'AI-First Architecture',
+      description: 'Weaponizing generative AI (Adobe Firefly, ElevenLabs, Claude API) for production workflows that 99.95% of developers can\'t replicate. Not theory—deployed systems generating measurable revenue.',
       color: 'text-rose-400',
       bg: 'bg-rose-500/10',
       border: 'border-rose-500/20'
     },
     {
       icon: Layers,
-      title: 'Full-Stack Execution',
-      description: 'Most 1%ers specialize in one area. I integrate the entire digital lifecycle: engineering, design, analytics, and marketing strategy into one cohesive operational unit.',
+      title: 'Full-Spectrum Integration',
+      description: 'Engineering → Design → Analytics → Marketing → Deployment. Complete vertical integration performed solo at standards fewer than 1,000 people worldwide can maintain simultaneously.',
       color: 'text-blue-400',
       bg: 'bg-blue-500/10',
       border: 'border-blue-500/20'
     },
     {
       icon: Zap,
-      title: 'Extreme Velocity',
-      description: 'By removing the friction of bureaucratic handoffs and vendor delays, I deploy production-ready features in days, not months. Speed is the ultimate competitive advantage.',
+      title: 'Perfect Technical Execution',
+      description: 'Perfect Lighthouse scores across multiple production properties. Not "good enough"—top 0.05% performance verified by Google\'s own metrics. Hand-coded optimization that beats automated tools.',
       color: 'text-yellow-400',
       bg: 'bg-yellow-500/10',
       border: 'border-yellow-500/20'
     },
     {
       icon: Cpu,
-      title: 'Defense-Grade Standard',
-      description: 'Applying Huntsville\'s aerospace engineering mindset to web development. Systems are built for mission-critical reliability, security, and scale from Day 1.',
+      title: 'Proven Business Outcomes',
+      description: '$1,200/month e-commerce revenue, published author, multiple production web properties—all solo operations executing at enterprise quality with startup overhead. Results that speak louder than credentials.',
       color: 'text-emerald-400',
       bg: 'bg-emerald-500/10',
       border: 'border-emerald-500/20'
@@ -41,42 +40,32 @@ const WhatMakesYouDifferent = () => {
 
   return (
     <section id="differentiation" className="py-24 bg-slate-900 relative overflow-hidden">
-      {/* Abstract Background Accent - Replaced Unsplash with Gradient/Pattern */}
+      {/* Abstract Background Accent */}
       <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-l from-slate-800 via-slate-900 to-slate-950" />
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900/20 via-slate-900/0 to-transparent"></div>
+        <img 
+          src="https://images.unsplash.com/photo-1643101807331-21a4a3f081d5?auto=format&fit=crop&q=80" 
+          alt="Abstract Network" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-slate-900 to-slate-900" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto mb-16 text-center">
+          <div className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 px-4 py-2 rounded-full mb-6 backdrop-blur-sm">
+            <Target className="w-4 h-4 text-purple-400" />
+            <span className="text-sm font-bold text-purple-400 tracking-wide uppercase">
+              Elite Performance Verified
+            </span>
+          </div>
+          
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            The <span className="text-cyan-400">Integrated</span> Advantage
+            Why <span className="text-cyan-400">Top 0.05%</span> Matters
           </h2>
           <p className="text-xl text-slate-400 leading-relaxed">
-            Claude AI analysis confirms: Integrated Digital Operations acts as a massive force multiplier. 
-            From <span className="text-slate-200">Huntsville's tech hub</span> to global markets, I am positioned to deliver end-to-end value.
+            Less than 1,000 developers worldwide can combine AI implementation expertise with perfect technical execution and proven business outcomes. Most specialists stay in their lane. I own the entire value chain.
           </p>
         </div>
-
-        {/* Team Collaboration Insight */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-500/20 rounded-2xl p-8 mb-16 max-w-5xl mx-auto"
-        >
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="shrink-0 bg-blue-500/10 p-4 rounded-xl">
-              <Users className="w-12 h-12 text-blue-400" />
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-3">A Force Multiplier, Not a Silo</h3>
-              <p className="text-slate-300 leading-relaxed">
-                While capable of full-stack solo execution, I thrive as a collaborative team player. My broad skillset allows me to fill any gap—whether frontend, backend, or ops—acting as a force multiplier that accelerates existing teams rather than replacing them. I am flexible, adaptable, and ready to integrate seamlessly into your workflow.
-              </p>
-            </div>
-          </div>
-        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {differentiators.map((item, index) => (
@@ -100,6 +89,32 @@ const WhatMakesYouDifferent = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom Stats Bar */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 max-w-5xl mx-auto bg-gradient-to-r from-slate-800/50 to-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <Award className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
+              <div className="text-3xl font-bold text-white mb-1">100/100</div>
+              <div className="text-sm text-slate-400">Perfect Lighthouse Scores<br/>Across All Properties</div>
+            </div>
+            <div>
+              <Target className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
+              <div className="text-3xl font-bold text-white mb-1">&lt;1000</div>
+              <div className="text-sm text-slate-400">People Worldwide<br/>Operating at This Level</div>
+            </div>
+            <div>
+              <Cpu className="w-8 h-8 text-purple-400 mx-auto mb-3" />
+              <div className="text-3xl font-bold text-white mb-1">0.05%</div>
+              <div className="text-sm text-slate-400">Global Performance<br/>Ranking Verified</div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

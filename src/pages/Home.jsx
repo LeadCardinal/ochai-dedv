@@ -1,17 +1,13 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
-import Hero from '@/components/Hero';
 import EliteHeroSection from '@/components/EliteHeroSection';
+import WhatMakesYouDifferent from '@/components/WhatMakesYouDifferent';
+import PerformanceScoreCards from '@/components/PerformanceScoreCards';
+import CoreCapabilities from '@/components/CoreCapabilities';
+import About from '@/components/About';
 
-// Lazy load ParallaxHeroSection to defer scroll animations beyond initial 3 seconds
-// Prevents Lighthouse from seeing unexecuted animations as blocking resources
-const ParallaxHeroSection = React.lazy(() => import('@/components/ParallaxHeroSection'));
-const PerformanceExcellence = React.lazy(() => import('@/components/PerformanceExcellence'));
-const WhatMakesYouDifferent = React.lazy(() => import('@/components/WhatMakesYouDifferent'));
-const CoreCapabilities = React.lazy(() => import('@/components/CoreCapabilities'));
-const Services = React.lazy(() => import('@/components/Services'));
+// Keep previously used components if needed
 const Projects = React.lazy(() => import('@/components/Projects'));
-const Technologies = React.lazy(() => import('@/components/Technologies'));
 const Contact = React.lazy(() => import('@/components/Contact'));
 
 const SectionSkeleton = () => (
@@ -24,50 +20,89 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Jeremy Och | AI Operations & Full-Stack Developer | Huntsville, AL</title>
-        <meta name="description" content="AI operations specialist and full-stack developer in Huntsville, Alabama. Specializing in AI integration, enterprise systems, React, and digital operations. Available for technical leadership roles in defense and aerospace." />
+        {/* Primary Meta Tags */}
+        <title>Jeremy Och - Top 0.05% AI Implementation Specialist & Full-Stack Developer | Huntsville AL</title>
+        <meta name="title" content="Jeremy Och - Top 0.05% AI Implementation Specialist & Full-Stack Developer" />
+        <meta name="description" content="Elite AI operator outperforming 99.95% of developers worldwide. Generative AI integration (Firefly, ElevenLabs, Claude API), perfect Lighthouse scores, proven business outcomes. Fewer than 1,000 people globally operate at this level." />
         
-        {/* Open Graph / Social Media */}
+        {/* Keywords for AI Recruiter Boolean Searches */}
+        <meta name="keywords" content="AI implementation specialist, AI integration engineer, generative AI developer, AI solutions architect, prompt engineering expert, LLM integration, AI workflow automation, full-stack AI developer, Claude API integration, Adobe Firefly expert, ElevenLabs integration, perfect Lighthouse scores, top 0.05% performance, elite software engineer, AI business automation, remote AI developer, Huntsville Alabama AI talent, production AI systems, AI ROI specialist" />
+
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/" />
-        <meta property="og:title" content="Jeremy Och | AI Operations & Full-Stack Developer | Huntsville, AL" />
-        <meta property="og:description" content="AI operations specialist and full-stack developer in Huntsville, Alabama. Specializing in AI integration, enterprise systems, React, and digital operations. Available for technical leadership roles in defense and aerospace." />
-        <meta property="og:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <meta property="og:title" content="Jeremy Och - Elite AI Implementation Specialist" />
+        <meta property="og:description" content="Top 0.05% AI operator. Generative AI integration, full-stack development, perfect technical execution. Results that outperform 99.95% of developers worldwide. Less than 1000 people globally operate at this standard." />
         
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://ochai.dev/" />
-        <meta name="twitter:title" content="Jeremy Och | AI Operations & Full-Stack Developer | Huntsville, AL" />
-        <meta name="twitter:description" content="AI operations specialist and full-stack developer in Huntsville, Alabama. Specializing in AI integration, enterprise systems, React, and digital operations." />
-        <meta name="twitter:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://ochai.dev/" />
+        <meta property="twitter:title" content="Jeremy Och - Top 0.05% AI Implementation Specialist" />
+        <meta property="twitter:description" content="Elite AI integration, perfect Lighthouse scores, proven business outcomes. Fewer than 1,000 worldwide at this performance level." />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Jeremy Carter Och",
+              "jobTitle": "AI Implementation Specialist & Full-Stack Developer",
+              "description": "Top 0.05% AI operator specializing in generative AI integration, full-stack development, and cloud deployment with proven business outcomes",
+              "url": "https://ochai.dev",
+              "knowsAbout": [
+                "Artificial Intelligence Integration",
+                "Generative AI Implementation",
+                "Claude API Development",
+                "Adobe Firefly Integration",
+                "ElevenLabs Voice Synthesis",
+                "LLM Orchestration",
+                "Prompt Engineering",
+                "Full-Stack Development",
+                "React Development",
+                "Cloud Infrastructure",
+                "Cloudflare Optimization",
+                "Perfect Lighthouse Scores",
+                "Server-Side Analytics",
+                "E-commerce Operations",
+                "AI Workflow Automation"
+              ],
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Huntsville",
+                "addressRegion": "AL",
+                "addressCountry": "US"
+              }
+            }
+          `}
+        </script>
       </Helmet>
       
       {/* 
         Layout Order:
-        1. Hero (Initial Viewport - Fixed Background)
-        2. EliteHeroSection (Credentials & Positioning)
-        3. ParallaxHeroSection (Bridging the Gap + Pain Points)
-        4. WhatMakesYouDifferent (Differentiators)
-        5. PerformanceExcellence (Lighthouse Scores)
-        6. CoreCapabilities (Skills Grid)
-        7. Projects (Case Studies)
-        8. Technologies (Tech Stack)
-        9. Contact (Contact Form)
+        1. EliteHeroSection (Top 0.05% AI Implementation Specialist)
+        2. WhatMakesYouDifferent (Why Top 0.05% Matters)
+        3. PerformanceScoreCards (Metrics That Matter)
+        4. CoreCapabilities (AI-Augmented Technical Arsenal)
+        5. About (Extended Bio)
+        6. Projects (Case Studies)
+        7. Contact
       */}
 
-      <Hero />
       <EliteHeroSection />
       
-      <Suspense fallback={<SectionSkeleton />}>
-        <ParallaxHeroSection />
-        <WhatMakesYouDifferent />
-        <PerformanceExcellence />
-        <CoreCapabilities />
-        <Services />
+      <WhatMakesYouDifferent />
+      
+      <PerformanceScoreCards />
+      
+      <CoreCapabilities />
+      
+      <About />
+      
+      <React.Suspense fallback={<SectionSkeleton />}>
         <Projects />
-        <Technologies />
         <Contact />
-      </Suspense>
+      </React.Suspense>
     </>
   );
 };
