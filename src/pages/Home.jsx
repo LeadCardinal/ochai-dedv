@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import EliteHeroSection from '@/components/EliteHeroSection';
 import WhatMakesYouDifferent from '@/components/WhatMakesYouDifferent';
-import PerformanceScoreCards from '@/components/PerformanceScoreCards';
+import PerformanceExcellence from '@/components/PerformanceExcellence';
 import CoreCapabilities from '@/components/CoreCapabilities';
 import About from '@/components/About';
 
@@ -93,7 +93,7 @@ const Home = () => {
       
       <WhatMakesYouDifferent />
       
-      <PerformanceScoreCards />
+      <PerformanceExcellence />
       
       <CoreCapabilities />
       
