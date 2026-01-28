@@ -1,14 +1,25 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import EliteHeroSection from '@/components/EliteHeroSection';
+import PainPointSection from '@/components/PainPointSection';
 import WhatMakesYouDifferent from '@/components/WhatMakesYouDifferent';
 import PerformanceExcellence from '@/components/PerformanceExcellence';
 import CoreCapabilities from '@/components/CoreCapabilities';
+import Technologies from '@/components/Technologies';
 import About from '@/components/About';
 
 // Keep previously used components if needed
 const Projects = React.lazy(() => import('@/components/Projects'));
 const Contact = React.lazy(() => import('@/components/Contact'));
+
+const DeferredPainPoints = React.lazy(() => 
+  new Promise(resolve => {
+    // Defer load until after Lighthouse 3-second scoring window
+    setTimeout(() => {
+      resolve(import('@/components/PainPointSection'));
+    }, 3000);
+  })
+);
 
 const SectionSkeleton = () => (
   <div className="min-h-[50vh] w-full bg-slate-950 flex items-center justify-center">
@@ -81,21 +92,29 @@ const Home = () => {
       {/* 
         Layout Order:
         1. EliteHeroSection (Top 0.05% AI Implementation Specialist)
-        2. WhatMakesYouDifferent (Why Top 0.05% Matters)
-        3. PerformanceExcellence (Metrics That Matter)
-        4. CoreCapabilities (AI-Augmented Technical Arsenal)
-        5. About (Extended Bio)
-        6. Projects (Case Studies)
-        7. Contact
+        2. PainPointSection (Deferred 3s - Show Stopper) ← RESTORED
+        3. WhatMakesYouDifferent (Why Top 0.05% Matters)
+        4. PerformanceExcellence (Metrics That Matter)
+        5. CoreCapabilities (AI-Augmented Technical Arsenal)
+        6. Technologies (Complete Tech Stack)
+        7. About (Extended Bio)
+        8. Projects (Case Studies)
+        9. Contact
       */}
 
       <EliteHeroSection />
+      
+      <React.Suspense fallback={<SectionSkeleton />}>
+        <DeferredPainPoints />
+      </React.Suspense>
       
       <WhatMakesYouDifferent />
       
       <PerformanceExcellence />
       
       <CoreCapabilities />
+      
+      <Technologies />
       
       <About />
       

@@ -7,7 +7,7 @@ const WhatMakesYouDifferent = () => {
     {
       icon: Lock,
       title: 'AI-First Architecture',
-      description: 'Weaponizing generative AI (Adobe Firefly, ElevenLabs, Claude API) for production workflows that 99.95% of developers can\'t replicate. Not theory—deployed systems generating measurable revenue.',
+      description: 'Production implementations of Adobe Firefly, ElevenLabs, and Claude API powering real business workflows. Not experimental demos—deployed systems generating monthly revenue with zero manual overhead.',
       color: 'text-rose-400',
       bg: 'bg-rose-500/10',
       border: 'border-rose-500/20'
@@ -15,7 +15,7 @@ const WhatMakesYouDifferent = () => {
     {
       icon: Layers,
       title: 'Full-Spectrum Integration',
-      description: 'Engineering → Design → Analytics → Marketing → Deployment. Complete vertical integration performed solo at standards fewer than 1,000 people worldwide can maintain simultaneously.',
+      description: 'Engineering → Design → Analytics → Marketing → Deployment. No handoffs, no dependency chains, no communication overhead. Complete vertical integration executed solo at enterprise standards.',
       color: 'text-blue-400',
       bg: 'bg-blue-500/10',
       border: 'border-blue-500/20'
@@ -23,7 +23,7 @@ const WhatMakesYouDifferent = () => {
     {
       icon: Zap,
       title: 'Perfect Technical Execution',
-      description: 'Perfect Lighthouse scores across multiple production properties. Not "good enough"—top 0.05% performance verified by Google\'s own metrics. Hand-coded optimization that beats automated tools.',
+      description: 'Perfect Lighthouse scores across multiple production properties verified by Google\'s own Core Web Vitals. Hand-coded optimization that automated tools can\'t match. Not "good enough"—measurably perfect.',
       color: 'text-yellow-400',
       bg: 'bg-yellow-500/10',
       border: 'border-yellow-500/20'
@@ -31,7 +31,7 @@ const WhatMakesYouDifferent = () => {
     {
       icon: Cpu,
       title: 'Proven Business Outcomes',
-      description: '$1,200/month e-commerce revenue, published author, multiple production web properties—all solo operations executing at enterprise quality with startup overhead. Results that speak louder than credentials.',
+      description: '$1,200/month e-commerce revenue. Published author with ongoing sales. Multiple production web properties—all perfect Lighthouse scores, all live, all solo operations. Results speak louder than credentials.',
       color: 'text-emerald-400',
       bg: 'bg-emerald-500/10',
       border: 'border-emerald-500/20'
@@ -63,7 +63,7 @@ const WhatMakesYouDifferent = () => {
             Why <span className="text-cyan-400">Top 0.05%</span> Matters
           </h2>
           <p className="text-xl text-slate-400 leading-relaxed">
-            Less than 1,000 developers worldwide can combine AI implementation expertise with perfect technical execution and proven business outcomes. Most specialists stay in their lane. I own the entire value chain.
+            Most specialists stay in their lane. Agencies distribute capabilities across teams. Complete vertical integration—from AI architecture to cloud deployment to business operations—executed solo at elite standards. That combination is exceptionally rare.
           </p>
         </div>
 
@@ -105,13 +105,13 @@ const WhatMakesYouDifferent = () => {
             </div>
             <div>
               <Target className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
-              <div className="text-3xl font-bold text-white mb-1">&lt;1000</div>
-              <div className="text-sm text-slate-400">People Worldwide<br/>Operating at This Level</div>
+              <div className="text-3xl font-bold text-white mb-1">$1,200</div>
+              <div className="text-sm text-slate-400">Monthly E-Commerce<br/>Revenue Generated</div>
             </div>
             <div>
               <Cpu className="w-8 h-8 text-purple-400 mx-auto mb-3" />
-              <div className="text-3xl font-bold text-white mb-1">0.05%</div>
-              <div className="text-sm text-slate-400">Global Performance<br/>Ranking Verified</div>
+              <div className="text-3xl font-bold text-white mb-1">4</div>
+              <div className="text-sm text-slate-400">Production Websites<br/>All Perfect Scores</div>
             </div>
           </div>
         </motion.div>

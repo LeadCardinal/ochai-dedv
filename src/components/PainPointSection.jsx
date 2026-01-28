@@ -113,7 +113,7 @@ const PainPointSection = () => {
       - Z-index 30: Ensures it sits above everything else.
       - bg-slate-950: Opaque background to cover the fixed hero image when scrolling over it.
     */
-    <div className="w-full bg-slate-950 relative z-30">
+    <div id="pain-points" className="w-full bg-slate-950 relative z-30">
       {painPointsData.map((painPoint, index) => (
         <SinglePainPoint 
           key={painPoint.id} 

@@ -13,7 +13,7 @@ const CoreCapabilities = () => {
     {
       icon: Code2,
       title: "Perfect Web Development",
-      description: "React, Vite, Tailwind—hand-coded to 100/100 Lighthouse scores. Performance that outperforms 99.95% of developers globally.",
+      description: "React, Vite, Tailwind—hand-coded to 100/100 Lighthouse scores. Performance optimizations that automated tools can't match.",
       highlight: true
     },
     {
@@ -37,7 +37,7 @@ const CoreCapabilities = () => {
     {
       icon: BarChart3,
       title: "Data Analytics",
-      description: "Server-side conversions API, Meta integration, custom tracking architecture. Data infrastructure fewer than 1,000 people can build solo.",
+      description: "Server-side conversions API, Meta integration, custom tracking architecture. Complete data infrastructure built and maintained solo.",
       highlight: false
     },
     {
@@ -49,7 +49,7 @@ const CoreCapabilities = () => {
     {
       icon: Workflow,
       title: "Full-Stack Operations",
-      description: "E-commerce management, content strategy, marketing automation, customer service—complete business operations executing at top 0.05% standards.",
+      description: "E-commerce management, content strategy, marketing automation, customer service—complete business operations executing at elite standards.",
       highlight: false
     }
   ];
@@ -62,7 +62,7 @@ const CoreCapabilities = () => {
             AI-Augmented <span className="text-purple-400">Technical Arsenal</span>
           </h2>
           <p className="text-lg text-slate-400">
-            The complete toolkit for solo execution of enterprise-grade digital products. Each capability performed at standards that beat 99.95% of individual practitioners worldwide.
+            The complete toolkit for solo execution of enterprise-grade digital products. From AI orchestration to cloud deployment to business operations—all capabilities performed at standards that produce measurable results.
           </p>
         </div>
 
@@ -101,7 +101,7 @@ const CoreCapabilities = () => {
         >
           <div className="bg-slate-800/30 border border-slate-700 rounded-2xl p-8 backdrop-blur-sm">
             <p className="text-lg text-slate-300 leading-relaxed">
-              <span className="text-cyan-400 font-bold">The Integration Advantage:</span> Most technical professionals excel in 1-2 areas. Agencies distribute capabilities across teams, introducing communication overhead and dependency chains. <span className="text-white font-bold">Fewer than 1,000 people worldwide</span> can execute this complete stack solo while maintaining top 0.05% performance standards.
+              <span className="text-cyan-400 font-bold">The Integration Advantage:</span> Most technical professionals excel in 1-2 areas. Agencies distribute capabilities across teams, introducing communication overhead and dependency chains. Fewer than 1,000 people worldwide can execute this complete stack solo while maintaining elite performance standards. <span className="text-cyan-400 font-bold">I am one of them.</span>
             </p>
           </div>
         </motion.div>

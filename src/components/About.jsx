@@ -5,8 +5,8 @@ import { Code2, Cpu, Rocket, Users, Target, Award, Zap, TrendingUp } from 'lucid
 const About = () => {
   const stats = [
     { label: "Performance Score", value: "100/100", icon: Rocket, color: "text-emerald-400" },
-    { label: "Global Ranking", value: "Top 0.05%", icon: Award, color: "text-yellow-400" },
-    { label: "People at This Level", value: "<1000", icon: Target, color: "text-blue-400" }
+    { label: "Monthly Revenue", value: "$1,200", icon: TrendingUp, color: "text-cyan-400" },
+    { label: "Production Sites", value: "4", icon: Target, color: "text-purple-400" }
   ];
 
   return (
@@ -27,10 +27,10 @@ const About = () => {
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             AI Integration Specialist <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Outperforming 99.95% Globally</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Where Execution Meets Results</span>
           </h2>
           <p className="text-lg text-slate-400 leading-relaxed">
-            Perfect Lighthouse scores aren't aspirational—they're mandatory. Generative AI isn't experimentation—it's production infrastructure generating measurable revenue. This is what top 0.05% execution looks like when you refuse to compromise.
+            Perfect Lighthouse scores. Generative AI producing measurable revenue. Complete vertical integration from architecture to deployment. This is what elite execution looks like when you refuse to compromise on either technical excellence or business outcomes.
           </p>
         </motion.div>
 
@@ -81,7 +81,7 @@ const About = () => {
                 </div>
                 
                 <p className="mt-6 text-sm text-slate-500 italic">
-                  *Google Lighthouse Core Web Vitals. Fewer than 1,000 developers worldwide maintain perfect scores across multiple production properties.
+                  *Google Lighthouse Core Web Vitals verified across all production properties.
                 </p>
              </div>
 
@@ -113,7 +113,7 @@ const About = () => {
               <div>
                 <h4 className="text-xl font-bold text-white mb-2">The Self-Taught Reality</h4>
                 <p className="text-slate-400">
-                  No CS degree. No bootcamp certificates. 25 years of acquiring whatever skill the market demanded next, then executing at levels 99.95% of practitioners can't match. Finance degree with top 5% portfolio performance. Distinguished Expert marksmanship. Perfect Lighthouse scores. The pattern holds.
+                  No CS degree. No bootcamp certificates. 27 years of acquiring whatever skill the market demanded next, then executing at levels that produce measurable results. Finance degree with top 5% portfolio performance. Distinguished Expert marksmanship. Perfect Lighthouse scores. The pattern holds across domains.
                 </p>
               </div>
             </div>
@@ -125,7 +125,7 @@ const About = () => {
               <div>
                 <h4 className="text-xl font-bold text-white mb-2">AI Implementation vs. AI Theory</h4>
                 <p className="text-slate-400">
-                  Adobe Firefly producing enterprise-grade imagery. ElevenLabs generating production voice content. Claude API orchestration powering real business workflows. Server-side analytics infrastructure most developers can't architect. These aren't demos—they're deployed systems generating $1,200/month revenue with zero agency overhead.
+                  Adobe Firefly producing enterprise-grade imagery for actual product listings. ElevenLabs generating production voice content. Claude API orchestration powering real business workflows. Server-side analytics infrastructure tracking actual conversions. These aren't demos or experiments—they're deployed systems generating $1,200/month revenue with zero agency overhead.
                 </p>
               </div>
             </div>
@@ -135,9 +135,9 @@ const About = () => {
                 <Target className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="text-xl font-bold text-white mb-2">What Top 0.05% Actually Means</h4>
+                <h4 className="text-xl font-bold text-white mb-2">Complete Vertical Integration</h4>
                 <p className="text-slate-400">
-                  Perfect technical execution. AI tool integration producing measurable outcomes. Cloud deployment maintaining 100% uptime. Full-stack operations from database schema to marketing copy. <span className="text-white font-bold">Fewer than 1,000 people worldwide</span> can maintain this standard solo across multiple production environments simultaneously.
+                  Perfect technical execution meets business operations. AI tool integration producing measurable outcomes. Cloud deployment maintaining 100% uptime. Full-stack operations from database schema to marketing copy. Engineering, design, analytics, deployment—complete ownership of the value chain executed solo.
                 </p>
               </div>
             </div>
@@ -149,7 +149,7 @@ const About = () => {
               <div>
                 <h4 className="text-xl font-bold text-white mb-2">Proven Business Outcomes</h4>
                 <p className="text-slate-400">
-                  Real Live Bonsai: e-commerce generating consistent revenue. Published author: "The Meaning(s) of Your LIFE!" producing sales. Multiple web properties: ochai.dev, reallivebonsai.us, hsvdrone.com, themeaningsoflife.com—all perfect Lighthouse scores, all live production, all solo execution. Results that speak when credentials whisper.
+                  Real Live Bonsai: e-commerce generating consistent monthly revenue. Published author: "The Meaning(s) of Your LIFE!" producing ongoing sales. Multiple web properties—ochai.dev, reallivebonsai.us, hsvdrone.com, themeaningsoflife.com—all perfect Lighthouse scores, all live production, all solo execution. Results that speak when credentials whisper.
                 </p>
               </div>
             </div>
@@ -161,7 +161,7 @@ const About = () => {
               <div>
                 <h4 className="text-xl font-bold text-white mb-2">The Geographic Advantage</h4>
                 <p className="text-slate-400">
-                  Huntsville, Alabama—not Silicon Valley. Valley-grade execution at Huntsville overhead. Remote-first operations refined over years, not pandemic experiments. Deep technical capabilities meeting competitive compensation expectations. <span className="text-cyan-400">Less than 1,000 people globally deliver this value proposition.</span>
+                  Huntsville, Alabama—not Silicon Valley. Valley-grade execution at Huntsville overhead. Remote-first operations refined over years, not pandemic experiments. Deep technical capabilities meeting competitive compensation expectations. Enterprise-quality output without enterprise cost structure.
                 </p>
               </div>
             </div>
@@ -181,7 +181,7 @@ const About = () => {
               When "Good Enough" Isn't Good Enough
             </h3>
             <p className="text-lg text-slate-300 leading-relaxed">
-              Most developers stop at "it works." Most AI enthusiasts chase demos. Most businesses settle for vendors who can't deliver both technical excellence and business outcomes. If you're hunting for the rare professional who refuses to compromise on either—<span className="text-cyan-400 font-bold">you just found one of fewer than 1,000 globally who operates at this standard.</span>
+              Most developers stop at "it works." Most AI enthusiasts chase demos. Most businesses settle for vendors who can't deliver both technical excellence and business outcomes. If you're hunting for the rare professional who refuses to compromise on either, <span className="text-cyan-400 font-bold">you've found someone who operates at that standard.</span>
             </p>
           </div>
         </motion.div>
