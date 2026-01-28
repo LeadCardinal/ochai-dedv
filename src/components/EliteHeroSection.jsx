@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, ArrowRight, Award, Sparkles } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Award, Sparkles, ChevronDown } from 'lucide-react';
 
 const EliteHeroSection = () => {
   const scrollToNext = () => {
@@ -43,6 +43,8 @@ const EliteHeroSection = () => {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
                 AI Implementation Specialist
               </span>
+              <br/>
+              <span className="text-3xl md:text-4xl lg:text-5xl text-slate-400">Worldwide</span>
             </motion.h1>
 
             {/* Context Subheadline */}
@@ -97,7 +99,7 @@ const EliteHeroSection = () => {
                 onClick={scrollToNext}
                 className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-cyan-600 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 hover:bg-cyan-500 shadow-[0_0_20px_rgba(8,145,178,0.5)] hover:shadow-[0_0_30px_rgba(8,145,178,0.7)] hover:-translate-y-1"
               >
-                See The Complete Stack
+                Why This Matters
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </motion.div>
@@ -127,7 +129,7 @@ const EliteHeroSection = () => {
                 />
                 <img
                   src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_V3.webp"
-                  alt="Jeremy Och - OCH AI DEV - Top 0.05% AI Implementation Specialist"
+                  alt="Jeremy Och - OCH AI DEV - Top 0.05% AI Implementation Specialist Worldwide"
                   width="800"
                   height="600"
                   fetchpriority="high"
@@ -140,6 +142,23 @@ const EliteHeroSection = () => {
 
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
+        onClick={scrollToNext}
+      >
+        <span className="text-slate-400 text-sm font-medium tracking-wide uppercase">Scroll to Continue</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="w-6 h-6 text-cyan-400" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

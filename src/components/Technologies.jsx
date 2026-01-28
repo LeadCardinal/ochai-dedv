@@ -8,6 +8,7 @@ const Technologies = () => {
       category: 'AI & Generative Tools',
       technologies: [
         { name: 'Claude API', color: 'from-orange-500 to-amber-500' },
+        { name: 'Gemini', color: 'from-blue-500 to-indigo-500' },
         { name: 'Adobe Firefly', color: 'from-blue-500 to-purple-500' },
         { name: 'ElevenLabs', color: 'from-emerald-500 to-teal-500' },
         { name: 'Prompt Engineering', color: 'from-cyan-500 to-blue-500' },
@@ -17,11 +18,24 @@ const Technologies = () => {
     {
       category: 'Frontend Development',
       technologies: [
+        { name: 'HTML5', color: 'from-orange-600 to-red-500' },
+        { name: 'CSS3', color: 'from-blue-500 to-cyan-500' },
+        { name: 'JavaScript (ES6+)', color: 'from-yellow-500 to-orange-500' },
         { name: 'React', color: 'from-cyan-500 to-blue-500' },
         { name: 'Vite', color: 'from-purple-600 to-violet-600' },
         { name: 'Tailwind CSS', color: 'from-sky-500 to-cyan-500' },
         { name: 'Framer Motion', color: 'from-pink-500 to-rose-500' },
-        { name: 'Lucide React', color: 'from-blue-600 to-indigo-600' }
+        { name: 'CSS/HTML Animation', color: 'from-indigo-500 to-purple-500' }
+      ]
+    },
+    {
+      category: 'Backend & CMS',
+      technologies: [
+        { name: 'PHP Systems', color: 'from-indigo-600 to-purple-600' },
+        { name: 'October CMS', color: 'from-orange-500 to-red-500' },
+        { name: 'Twig Templating', color: 'from-green-600 to-teal-600' },
+        { name: 'Node.js', color: 'from-green-500 to-emerald-500' },
+        { name: 'REST APIs', color: 'from-blue-500 to-cyan-500' }
       ]
     },
     {
@@ -58,10 +72,13 @@ const Technologies = () => {
       ]
     },
     {
-      category: 'E-Commerce & Business',
+      category: 'E-Commerce & Payments',
       technologies: [
+        { name: 'Meta Business Suite', color: 'from-blue-600 to-indigo-600' },
         { name: 'Shopify Integration', color: 'from-green-600 to-emerald-600' },
-        { name: 'Stripe Payments', color: 'from-purple-600 to-indigo-600' },
+        { name: 'WooCommerce', color: 'from-purple-600 to-pink-600' },
+        { name: 'Stripe API (Full Integration)', color: 'from-purple-600 to-indigo-600' },
+        { name: 'Square API (Full Integration)', color: 'from-slate-700 to-slate-900' },
         { name: 'Amazon KDP', color: 'from-orange-500 to-amber-500' },
         { name: 'Email Automation', color: 'from-blue-500 to-cyan-500' },
         { name: 'Customer Analytics', color: 'from-pink-500 to-rose-500' }
@@ -77,7 +94,7 @@ const Technologies = () => {
             The <span className="text-cyan-400">Complete Tech Stack</span>
           </h2>
           <p className="text-lg text-slate-400">
-            From AI orchestration to creative automation to cloud deployment. Each tool mastered to production standards, integrated into cohesive systems that generate measurable results.
+            From my AI orchestration to creative automation to cloud deployment. Each tool I have mastered to production standards, then integrated into cohesive systems that generate proven measurable results.
           </p>
         </div>
 
