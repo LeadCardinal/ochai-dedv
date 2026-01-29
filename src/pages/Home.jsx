@@ -7,6 +7,7 @@ import PerformanceExcellence from '@/components/PerformanceExcellence';
 import CoreCapabilities from '@/components/CoreCapabilities';
 import Technologies from '@/components/Technologies';
 import About from '@/components/About';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
 
 // Keep previously used components if needed
 const Projects = React.lazy(() => import('@/components/Projects'));
@@ -122,6 +123,9 @@ const Home = () => {
         <Projects />
         <Contact />
       </React.Suspense>
+
+      {/* Floating WhatsApp Bubble */}
+      <WhatsAppFloat />
     </>
   );
 };
