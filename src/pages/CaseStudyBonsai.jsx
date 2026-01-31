@@ -320,12 +320,13 @@ const CaseStudyBonsai = () => {
             color="blue"
           >
             <ResponsiveLineChart
+            className="h-80">
               data={data}
               dataKey="clicks"
               color="#3b82f6"
               maxY={140}
               fill="rgba(59, 130, 246, 0.2)"
-            />
+            </div>
           </ChartCard>
 
           {/* Impressions Chart */}
@@ -335,12 +336,14 @@ const CaseStudyBonsai = () => {
             color="indigo"
           >
             <ResponsiveLineChart
+             className="h-80">
               data={data}
               dataKey="impressions"
               color="#6366f1"
               maxY={60000}
               fill="rgba(99, 102, 241, 0.2)"
-            />
+              ...
+                        </div>
           </ChartCard>
 
           {/* CTR Chart */}
@@ -350,13 +353,14 @@ const CaseStudyBonsai = () => {
             color="emerald"
           >
             <ResponsiveLineChart
+            className="h-80">
               data={data}
               dataKey="ctr"
               color="#10b981"
               maxY={4.5}
               fill="rgba(16, 185, 129, 0.2)"
               baseline={2.0}
-            />
+            </div>
           </ChartCard>
 
           {/* Position Chart */}
@@ -366,13 +370,14 @@ const CaseStudyBonsai = () => {
             color="rose"
           >
             <ResponsiveLineChart
+            className="h-80">
               data={data}
               dataKey="position"
               color="#f43f5e"
               maxY={50}
               fill="rgba(244, 63, 94, 0.1)"
               reversed={true}
-            />
+            </div>
           </ChartCard>
         </div>
 
