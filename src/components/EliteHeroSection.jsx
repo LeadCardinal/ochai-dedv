@@ -1,11 +1,17 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ShieldCheck, ArrowRight, Award, Sparkles, ChevronDown } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  ShieldCheck,
+  ArrowRight,
+  Award,
+  Sparkles,
+  ChevronDown,
+} from "lucide-react";
 
 const EliteHeroSection = () => {
   const scrollToNext = () => {
-    const element = document.getElementById('pain-points');
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById("pain-points");
+    if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -15,12 +21,10 @@ const EliteHeroSection = () => {
 
       <div className="container relative z-10 mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
-          
           {/* Left Column - Text Content */}
           <div className="text-center lg:text-left">
-            
             {/* Badge */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -33,43 +37,66 @@ const EliteHeroSection = () => {
             </motion.div>
 
             {/* Main Headline - Fixed Line Breaks */}
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight"
             >
               <span className="inline-block">
-                Top <span className="text-5xl md:text-[3.5rem] lg:text-6xl align-baseline">.05%</span> AI Implementation
+                Top{" "}
+                <span className="text-5xl md:text-[3.5rem] lg:text-6xl align-baseline">
+                  .05%
+                </span>{" "}
+                AI Implementation
               </span>
-              <br/>
+              <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
                 Specialist Worldwide
               </span>
             </motion.h1>
 
             {/* Hero Statement - The Money Shot */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed space-y-4"
             >
               <p>
-                <strong className="text-white">Top .05% means I outperform 99.95% of technical professionals worldwide.</strong> Verified elite status—not self-reported, but measured by Google's own Lighthouse benchmarks across my production properties.
+                <strong className="text-white">
+                  Top .05% means I outperform 99.95% of technical professionals
+                  worldwide.
+                </strong>{" "}
+                Verified elite status—not self-reported, but measured by
+                Google's own Lighthouse benchmarks across my production
+                properties.
               </p>
-              
+
               <p>
-                <strong className="text-cyan-400">I execute the complete value chain solo as fewer than 1,000 people globally do:</strong> AI orchestration → frontend/backend development → cloud deployment → analytics infrastructure → business operations. All at standards producing perfect technical scores and backed by measurable revenue.
+                <strong className="text-cyan-400">
+                  I execute the complete value chain solo as fewer than 1,000
+                  people globally do:
+                </strong>{" "}
+                AI orchestration → frontend/backend development → cloud
+                deployment → analytics infrastructure → business operations. All
+                at standards producing perfect technical scores and backed by
+                measurable revenue.
               </p>
-              
+
               <p className="text-slate-400">
-                Most developers specialize. Agencies distribute across teams. <span className="text-white font-semibold">I deliver the exceptionally rare combination of elite technical execution meeting complete vertical integration—at performance standards the other 99.95% call perfectionism. I call it baseline.</span>
+                Most developers specialize. Agencies distribute across teams.{" "}
+                <span className="text-white font-semibold">
+                  I deliver the exceptionally rare combination of elite
+                  technical execution meeting complete vertical integration—at
+                  performance standards the other 99.95% call perfectionism. I
+                  call it baseline.
+                </span>
               </p>
             </motion.div>
 
             {/* Differentiator Box */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -79,9 +106,16 @@ const EliteHeroSection = () => {
                 <div className="flex items-start gap-3">
                   <Award className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-base font-bold text-white mb-1">AI Integration That Works</h3>
+                    <h3 className="text-base font-bold text-white mb-1">
+                      AI Integration That Works
+                    </h3>
                     <p className="text-slate-300 text-sm">
-                      Adobe Firefly, ElevenLabs, Claude API integrated into production workflows generating <span className="text-cyan-400">$1,200/month revenue.</span> Complete systems, zero agency overhead.
+                      Adobe Firefly, ElevenLabs, Claude API integrated into
+                      production workflows generating{" "}
+                      <span className="text-cyan-400">
+                        $1,200/month revenue.
+                      </span>{" "}
+                      Complete systems, zero agency overhead.
                     </p>
                   </div>
                 </div>
@@ -89,9 +123,16 @@ const EliteHeroSection = () => {
                 <div className="flex items-start gap-3">
                   <ShieldCheck className="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-base font-bold text-white mb-1">Perfect Technical Execution</h3>
+                    <h3 className="text-base font-bold text-white mb-1">
+                      Perfect Technical Execution
+                    </h3>
                     <p className="text-slate-300 text-sm">
-                      100/100 Lighthouse scores across reallivebonsai.us, hsvdrone.com, themeaningsoflife.com. Hand-coded optimizations. <span className="text-purple-400">Google's benchmarks confirm it.</span>
+                      100/100 Lighthouse scores across reallivebonsai.us,
+                      hsvdrone.com, themeaningsoflife.com. Hand-coded
+                      optimizations.{" "}
+                      <span className="text-purple-400">
+                        Google's benchmarks confirm it.
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -99,21 +140,20 @@ const EliteHeroSection = () => {
             </motion.div>
 
             {/* CTA */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <button 
+              <button
                 onClick={scrollToNext}
-                className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-cyan-600 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 hover:bg-cyan-500 shadow-[0_0_20px_rgba(8,145,178,0.5)] hover:shadow-[0_0_30px_rgba(8,145,178,0.7)] hover:-translate-y-1"
+                className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-cyan-500 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 hover:bg-cyan-400 shadow-[0_0_20px_rgba(8,145,178,0.5)] hover:shadow-[0_0_30px_rgba(8,145,178,0.7)] hover:-translate-y-1"
               >
                 Why This Matters
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </motion.div>
-
           </div>
 
           {/* Right Column - Hero Image */}
@@ -126,16 +166,16 @@ const EliteHeroSection = () => {
             <div className="relative w-full max-w-xl">
               {/* Glow Effect Behind Image */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 blur-3xl rounded-full" />
-              
+
               {/* Hero Image with AVIF + WebP Fallback */}
               <picture>
-                <source 
-                  srcSet="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_V3.avif?v=2" 
-                  type="image/avif" 
+                <source
+                  srcSet="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_V3.avif?v=2"
+                  type="image/avif"
                 />
-                <source 
-                  srcSet="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_V3.webp?v=2" 
-                  type="image/webp" 
+                <source
+                  srcSet="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_V3.webp?v=2"
+                  type="image/webp"
                 />
                 <img
                   src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_V3.webp?v=2"
@@ -149,7 +189,6 @@ const EliteHeroSection = () => {
               </picture>
             </div>
           </motion.div>
-
         </div>
       </div>
 
@@ -161,12 +200,14 @@ const EliteHeroSection = () => {
         className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
         onClick={scrollToNext}
       >
-        <span className="text-slate-400 text-sm font-medium tracking-wide uppercase">Scroll to Continue</span>
+        <span className="text-slate-400 text-sm font-medium tracking-wide uppercase">
+          Scroll to Continue
+        </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="w-6 h-6 text-cyan-400" />
+          <ChevronDown className="w-6 h-6 text-cyan-300" />
         </motion.div>
       </motion.div>
     </section>

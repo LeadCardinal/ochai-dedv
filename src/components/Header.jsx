@@ -52,13 +52,23 @@ const Header = () => {
     }
   };
 
-  const navItems = [
+const navItems = [
     { label: 'About', id: 'about' },
+    { label: 'Contact', id: 'contact' },
     { label: 'Projects', id: 'projects' },
-    { label: 'Technologies', id: 'technologies' },
-    { label: 'Contact', id: 'contact' }
+    { label: 'Technologies', id: 'technologies' }
   ];
+```
 
+**Save:** `Ctrl + S`
+
+---
+## ✅ **Next File: Fix #2 (Contrast Issues)**
+
+**In the left sidebar, navigate to:**
+```
+
+src → components → EliteHeroSection.jsx
   return (
     <motion.header
       initial={{ y: -100 }}
