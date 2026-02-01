@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageCircle, X } from "lucide-react";
 
 const WhatsAppFloat = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,7 +19,7 @@ const WhatsAppFloat = () => {
   }, []);
 
   const handleClick = () => {
-    window.open('https://wa.me/12563619056', '_blank');
+    window.open("https://wa.me/12563619056", "_blank");
   };
 
   return (
@@ -44,7 +44,7 @@ const WhatsAppFloat = () => {
                 Need help? Chat with me!
                 <button
                   onClick={() => setShowTooltip(false)}
-                  className="ml-2 text-slate-500 hover:text-slate-700"
+                  className="ml-2 text-slate-400 hover:text-slate-700"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -62,10 +62,10 @@ const WhatsAppFloat = () => {
           >
             {/* Ping Animation */}
             <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75"></span>
-            
+
             {/* Icon */}
             <MessageCircle className="w-7 h-7 relative z-10" />
-            
+
             {/* Notification Badge */}
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
               1

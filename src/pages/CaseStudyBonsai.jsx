@@ -505,7 +505,7 @@ const CaseStudyBonsai = () => {
                       $110+
                     </div>
                   </div>
-                  <div className="text-xs text-slate-500">Monthly Avg</div>
+                  <div className="text-xs 400">Monthly Avg</div>
                 </div>
 
                 {/* Our Cost */}
@@ -524,7 +524,7 @@ const CaseStudyBonsai = () => {
                       &lt;$5
                     </div>
                   </div>
-                  <div className="text-xs text-slate-500">My Cost</div>
+                  <div className="text-xs text-slate-400">My Cost</div>
                 </div>
               </div>
             </div>
@@ -542,7 +542,7 @@ const CaseStudyBonsai = () => {
                     Aggregated scroll activity by time of day
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-slate-500">
+                <div className="flex items-center gap-2 text-xs 400">
                   <span>Low</span>
                   <div className="flex gap-0.5">
                     <div className="w-3 h-3 bg-purple-900/40 rounded-sm"></div>
