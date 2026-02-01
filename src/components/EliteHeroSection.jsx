@@ -84,7 +84,7 @@ const EliteHeroSection = () => {
                 measurable revenue.
               </p>
 
-              <p className="text-slate-400">
+              <p className="text-slate-200">
                 Most developers specialize. Agencies distribute across teams.{" "}
                 <span className="text-white font-semibold">
                   I deliver the exceptionally rare combination of elite
@@ -106,9 +106,9 @@ const EliteHeroSection = () => {
                 <div className="flex items-start gap-3">
                   <Award className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-base font-bold text-white mb-1">
+                    <h2 className="text-base font-bold text-white mb-1">
                       AI Integration That Works
-                    </h3>
+                    </h2>
                     <p className="text-slate-300 text-sm">
                       Adobe Firefly, ElevenLabs, Claude API integrated into
                       production workflows generating{" "}
@@ -123,9 +123,9 @@ const EliteHeroSection = () => {
                 <div className="flex items-start gap-3">
                   <ShieldCheck className="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-base font-bold text-white mb-1">
+                    <h2 className="text-base font-bold text-white mb-1">
                       Perfect Technical Execution
-                    </h3>
+                    </h2>
                     <p className="text-slate-300 text-sm">
                       100/100 Lighthouse scores across reallivebonsai.us,
                       hsvdrone.com, themeaningsoflife.com. Hand-coded
@@ -200,7 +200,7 @@ const EliteHeroSection = () => {
         className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
         onClick={scrollToNext}
       >
-        <span className="text-slate-400 text-sm font-medium tracking-wide uppercase">
+        <span className="text-slate-200 text-sm font-medium tracking-wide uppercase">
           Scroll to Continue
         </span>
         <motion.div

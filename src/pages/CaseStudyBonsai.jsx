@@ -319,13 +319,14 @@ const CaseStudyBonsai = () => {
             subtitle="Peak: 121 clicks (May 2025)"
             color="blue"
           >
-            <ResponsiveLineChart
-            className="h-80">
-              data={data}
-              dataKey="clicks"
-              color="#3b82f6"
-              maxY={140}
-              fill="rgba(59, 130, 246, 0.2)"
+            <div className="h-80">
+              <ResponsiveLineChart
+                data={data}
+                dataKey="clicks"
+                color="#3b82f6"
+                maxY={140}
+                fill="rgba(59, 130, 246, 0.2)"
+              />
             </div>
           </ChartCard>
 
@@ -335,15 +336,15 @@ const CaseStudyBonsai = () => {
             subtitle="Total: 48,779 impressions"
             color="indigo"
           >
-            <ResponsiveLineChart
-             className="h-80">
-              data={data}
-              dataKey="impressions"
-              color="#6366f1"
-              maxY={60000}
-              fill="rgba(99, 102, 241, 0.2)"
-              ...
-                        </div>
+            <div className="h-80">
+              <ResponsiveLineChart
+                data={data}
+                dataKey="impressions"
+                color="#6366f1"
+                maxY={60000}
+                fill="rgba(99, 102, 241, 0.2)"
+              />
+            </div>
           </ChartCard>
 
           {/* CTR Chart */}
@@ -352,14 +353,15 @@ const CaseStudyBonsai = () => {
             subtitle="Avg: 2.28% (vs 2.0% Baseline)"
             color="emerald"
           >
-            <ResponsiveLineChart
-            className="h-80">
-              data={data}
-              dataKey="ctr"
-              color="#10b981"
-              maxY={4.5}
-              fill="rgba(16, 185, 129, 0.2)"
-              baseline={2.0}
+            <div className="h-80">
+              <ResponsiveLineChart
+                data={data}
+                dataKey="ctr"
+                color="#10b981"
+                maxY={4.5}
+                fill="rgba(16, 185, 129, 0.2)"
+                baseline={2.0}
+              />
             </div>
           </ChartCard>
 
@@ -369,14 +371,15 @@ const CaseStudyBonsai = () => {
             subtitle="Best: 21.3 (Lower is Better)"
             color="rose"
           >
-            <ResponsiveLineChart
-            className="h-80">
-              data={data}
-              dataKey="position"
-              color="#f43f5e"
-              maxY={50}
-              fill="rgba(244, 63, 94, 0.1)"
-              reversed={true}
+            <div className="h-80">
+              <ResponsiveLineChart
+                data={data}
+                dataKey="position"
+                color="#f43f5e"
+                maxY={50}
+                fill="rgba(244, 63, 94, 0.1)"
+                reversed={true}
+              />
             </div>
           </ChartCard>
         </div>

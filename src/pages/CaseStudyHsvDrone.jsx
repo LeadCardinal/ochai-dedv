@@ -178,15 +178,17 @@ const CaseStudyHsvDrone = () => {
         {/* Main Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <ChartCard title="Search Position Performance" subtitle="Stabilized at Position 9.0 (Page 1)" color="blue">
-            <ResponsiveLineChart 
-              data={hsvData} 
-              dataKey="position" 
-              color="#3b82f6" 
-              maxY={50} 
-              fill="rgba(59, 130, 246, 0.2)"
-              reversed={true} // Lower is better for rank
-              targetLine={10}
-            />
+            <div className="h-80">
+              <ResponsiveLineChart 
+                data={hsvData} 
+                dataKey="position" 
+                color="#3b82f6" 
+                maxY={50} 
+                fill="rgba(59, 130, 246, 0.2)"
+                reversed={true} // Lower is better for rank
+                targetLine={10}
+              />
+            </div>
           </ChartCard>
 
           <div className="space-y-8">
@@ -301,7 +303,9 @@ const CaseStudyHsvDrone = () => {
           <div className="grid lg:grid-cols-2 gap-8 mb-8">
             {/* Daily Volume Chart */}
             <ChartCard title="Daily Scroll Event Volume" subtitle="Meta Conversions API (12/9/25 - 1/6/26)" color="purple">
-              <ResponsiveBarChart data={analyticsData} dataKey="volume" color="#a855f7" />
+              <div className="h-80">
+                <ResponsiveBarChart data={analyticsData} dataKey="volume" color="#a855f7" />
+              </div>
             </ChartCard>
 
             {/* Cost Comparison */}
