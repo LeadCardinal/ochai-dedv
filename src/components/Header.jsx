@@ -58,17 +58,7 @@ const navItems = [
     { label: 'Projects', id: 'projects' },
     { label: 'Technologies', id: 'technologies' }
   ];
-```
 
-**Save:** `Ctrl + S`
-
----
-## ✅ **Next File: Fix #2 (Contrast Issues)**
-
-**In the left sidebar, navigate to:**
-```
-
-src → components → EliteHeroSection.jsx
   return (
     <motion.header
       initial={{ y: -100 }}
