@@ -2,7 +2,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { ArrowLeft, TrendingUp, Search, MousePointer, Eye, Trophy, Zap, BarChart3, Server, DollarSign, ShieldCheck, Clock, Activity } from 'lucide-react';
+import { ArrowLeft, TrendingUp, Search, MousePointer, Eye, Trophy, Zap, BarChart3, Server, DollarSign, ShieldCheck, Clock, Activity, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const CaseStudyHsvDrone = () => {
@@ -263,156 +263,6 @@ const CaseStudyHsvDrone = () => {
           </div>
         </motion.div>
 
-        {/* Server-Side Analytics Section */}
-        <section className="mb-16">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-purple-500/10 rounded-xl border border-purple-500/20">
-              <Server className="w-6 h-6 text-purple-400" />
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-white">Server-Side Analytics Infrastructure</h2>
-              <p className="text-slate-400">Enterprise-grade tracking built on Google Cloud Run + Meta Conversions API</p>
-            </div>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-6 mb-8">
-             {/* Key Metrics for Analytics */}
-             <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-center gap-4">
-               <div className="p-3 bg-green-500/10 rounded-lg"><Activity className="w-6 h-6 text-green-400" /></div>
-               <div>
-                 <div className="text-2xl font-bold text-white">1,054</div>
-                 <div className="text-sm text-slate-400">Total Scroll Events</div>
-               </div>
-             </div>
-             <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-center gap-4">
-               <div className="p-3 bg-blue-500/10 rounded-lg"><Clock className="w-6 h-6 text-blue-400" /></div>
-               <div>
-                 <div className="text-2xl font-bold text-white">~18</div>
-                 <div className="text-sm text-slate-400">Avg. Events / Day</div>
-               </div>
-             </div>
-             <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-center gap-4">
-               <div className="p-3 bg-purple-500/10 rounded-lg"><TrendingUp className="w-6 h-6 text-purple-400" /></div>
-               <div>
-                 <div className="text-2xl font-bold text-white">109</div>
-                 <div className="text-sm text-slate-400">Peak (12/18 5:00 AM)</div>
-               </div>
-             </div>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 mb-8">
-            {/* Daily Volume Chart */}
-            <ChartCard title="Daily Scroll Event Volume" subtitle="Meta Conversions API (12/9/25 - 1/6/26)" color="purple">
-              <div className="h-80">
-                <ResponsiveBarChart data={analyticsData} dataKey="volume" color="#a855f7" />
-              </div>
-            </ChartCard>
-
-            {/* Cost Comparison */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col h-[350px]">
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-white">Cost Efficiency Analysis</h3>
-                <div className="text-sm font-medium text-emerald-400">95%+ Savings vs Industry Standard</div>
-              </div>
-              
-              <div className="flex-grow flex items-end justify-around pb-4 px-8 gap-8">
-                {/* Standard Cost */}
-                <div className="w-full flex flex-col items-center gap-2 group">
-                  <div className="text-slate-400 text-sm font-medium mb-1">Standard SaaS</div>
-                  <div className="w-full bg-slate-800 rounded-t-xl relative h-48 overflow-hidden">
-                     <motion.div 
-                       initial={{ height: 0 }}
-                       whileInView={{ height: '100%' }}
-                       transition={{ duration: 1 }}
-                       className="w-full bg-slate-600 absolute bottom-0"
-                     />
-                     <div className="absolute top-2 left-0 right-0 text-center font-bold text-white">$110+</div>
-                  </div>
-                  <div className="text-xs text-slate-500">Monthly Avg</div>
-                </div>
-
-                {/* Our Cost */}
-                <div className="w-full flex flex-col items-center gap-2">
-                  <div className="text-emerald-400 text-sm font-bold mb-1">My Solution</div>
-                  <div className="w-full bg-slate-800 rounded-t-xl relative h-48 flex items-end">
-                     <motion.div 
-                       initial={{ height: 0 }}
-                       whileInView={{ height: '4.5%' }}
-                       transition={{ duration: 1, delay: 0.5 }}
-                       className="w-full bg-emerald-500 absolute bottom-0 rounded-t-xl"
-                     />
-                     <div className="w-full text-center font-bold text-emerald-400 mb-6">&lt;$5</div>
-                  </div>
-                  <div className="text-xs text-slate-500">My Cost</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Heatmap & Info */}
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6">
-               <div className="mb-6 flex justify-between items-center">
-                  <div>
-                    <h3 className="text-lg font-bold text-white">Hourly Event Distribution</h3>
-                    <div className="text-sm text-slate-400">Aggregated scroll activity by time of day</div>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-slate-500">
-                    <span>Low</span>
-                    <div className="flex gap-0.5">
-                       <div className="w-3 h-3 bg-purple-900/40 rounded-sm"></div>
-                       <div className="w-3 h-3 bg-purple-700/60 rounded-sm"></div>
-                       <div className="w-3 h-3 bg-purple-500 rounded-sm"></div>
-                       <div className="w-3 h-3 bg-purple-300 rounded-sm"></div>
-                    </div>
-                    <span>High</span>
-                  </div>
-               </div>
-               <div className="grid grid-cols-12 md:grid-cols-24 gap-1 h-32 items-end">
-                 {/* Visual Heatmap based on Actual Hourly Data */}
-                 {hourlyDistribution.map((val, i) => {
-                    // Max hourly total is roughly around 150-200 based on inspection, normalizing to ~200
-                    const maxHour = Math.max(...hourlyDistribution);
-                    const opacity = val / (maxHour || 1); // Avoid div/0
-                    
-                    let colorClass = 'bg-purple-900/40';
-                    if (val === 0) colorClass = 'bg-slate-800/20';
-                    else if (opacity > 0.6) colorClass = 'bg-purple-300';
-                    else if (opacity > 0.3) colorClass = 'bg-purple-500';
-                    else colorClass = 'bg-purple-700/60';
-
-                    return (
-                      <div key={i} className="flex flex-col items-center gap-1 h-full justify-end group relative">
-                        <div className="opacity-0 group-hover:opacity-100 absolute -top-8 bg-slate-800 text-xs px-2 py-1 rounded text-white whitespace-nowrap z-10 pointer-events-none transition-opacity">
-                          {i}:00 - {val} events
-                        </div>
-                        <motion.div
-                          initial={{ height: 0 }}
-                          whileInView={{ height: `${Math.max(10, (val/maxHour) * 100)}%` }}
-                          transition={{ delay: i * 0.02 }}
-                          className={`rounded-sm ${colorClass} w-full`} 
-                        />
-                        <span className="text-[9px] text-slate-600 hidden md:block">{i}</span>
-                      </div>
-                    )
-                 })}
-               </div>
-            </div>
-
-            <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 flex flex-col justify-center">
-               <h3 className="text-lg font-bold text-white mb-4">Why This Matters?</h3>
-               <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                 Actual server logs confirm <strong>1,054 high-value scroll events</strong> captured directly via Cloud Run + Meta CAPI, bypassing ad-blockers entirely.
-               </p>
-               <ul className="space-y-2 text-sm text-slate-300">
-                 <li className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-emerald-400" /> <strong>$5.00/mo</strong> vs $110/mo SaaS</li>
-                 <li className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-blue-400" /> 100% Data Fidelity</li>
-                 <li className="flex items-center gap-2"><Activity className="w-4 h-4 text-purple-400" /> Zero-Loss Tracking</li>
-               </ul>
-            </div>
-          </div>
-        </section>
-
       </div>
     </div>
   );
@@ -440,6 +290,7 @@ const ChartCard = ({ title, subtitle, children, color }) => (
 const ResponsiveLineChart = ({ data, dataKey, color, maxY, fill, targetLine, reversed = false }) => {
   return (
     <svg className="w-full h-full overflow-hidden" preserveAspectRatio="none" viewBox="0 0 100 100">
+      <title>Line chart showing search position performance over time</title>
       {[0, 25, 50, 75, 100].map(y => (
         <line key={y} x1="0" y1={y} x2="100" y2={y} stroke="#334155" strokeWidth="0.5" strokeDasharray="2" opacity="0.5" />
       ))}
@@ -516,6 +367,7 @@ const ResponsiveLineChart = ({ data, dataKey, color, maxY, fill, targetLine, rev
 
 const ResponsiveSimpleLine = ({ data, color, maxY, reversed }) => (
     <svg className="w-full h-full overflow-hidden" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <title>Simplified line chart comparing website performance metrics</title>
         <motion.path
         initial={{ pathLength: 0 }}
         whileInView={{ pathLength: 1 }}
@@ -547,6 +399,7 @@ const ResponsiveBarChart = ({ data, dataKey, color }) => {
   const maxVal = Math.max(...data.map(d => d[dataKey]));
   return (
     <svg className="w-full h-full overflow-hidden" preserveAspectRatio="none" viewBox="0 0 100 100">
+      <title>Bar chart displaying data distribution</title>
       {/* Bars */}
       {data.map((d, i) => {
         const barWidth = 80 / data.length;

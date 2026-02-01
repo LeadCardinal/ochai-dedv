@@ -429,7 +429,7 @@ const CaseStudyBonsai = () => {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid lg:grid-cols-4 gap-6 mb-8">
             {/* Key Metrics for Analytics */}
             <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-center gap-4">
               <div className="p-3 bg-green-500/10 rounded-lg">
@@ -462,23 +462,20 @@ const CaseStudyBonsai = () => {
                 </div>
               </div>
             </div>
+            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-center gap-4">
+              <div className="p-3 bg-slate-500/10 rounded-lg">
+                <Calendar className="w-6 h-6 text-slate-400" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-white">29</div>
+                <div className="text-sm text-slate-400">
+                  Days Tracked
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8 mb-8">
-            {/* Daily Volume Chart */}
-            <ChartCard
-              title="Daily Scroll Event Volume"
-              subtitle="Meta Conversions API (12/9/25 - 1/6/26)"
-              color="purple"
-            >
-              <div className="h-80">
-                <ResponsiveBarChart
-                  data={analyticsData}
-                  dataKey="volume"
-                  color="#a855f7"
-                />
-              </div>
-            </ChartCard>
 
             {/* Cost Comparison */}
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col h-[350px]">
@@ -556,41 +553,43 @@ const CaseStudyBonsai = () => {
                   <span>High</span>
                 </div>
               </div>
-              <div className="grid grid-cols-12 md:grid-cols-24 gap-1 h-32 items-end">
-                {/* Visual Heatmap based on Actual Hourly Data */}
-                {hourlyDistribution.map((val, i) => {
-                  // Max hourly total is roughly around 150-200 based on inspection, normalizing to ~200
-                  const maxHour = Math.max(...hourlyDistribution);
-                  const opacity = val / (maxHour || 1); // Avoid div/0
+              <div className="relative h-32 overflow-hidden">
+                <div className="grid grid-cols-12 md:grid-cols-24 gap-1 h-full items-end">
+                  {/* Visual Heatmap based on Actual Hourly Data */}
+                  {hourlyDistribution.map((val, i) => {
+                    // Max hourly total is roughly around 150-200 based on inspection, normalizing to ~200
+                    const maxHour = Math.max(...hourlyDistribution);
+                    const opacity = val / (maxHour || 1); // Avoid div/0
 
-                  let colorClass = "bg-purple-900/40";
-                  if (val === 0) colorClass = "bg-slate-800/20";
-                  else if (opacity > 0.6) colorClass = "bg-purple-300";
-                  else if (opacity > 0.3) colorClass = "bg-purple-500";
-                  else colorClass = "bg-purple-700/60";
+                    let colorClass = "bg-purple-900/40";
+                    if (val === 0) colorClass = "bg-slate-800/20";
+                    else if (opacity > 0.6) colorClass = "bg-purple-300";
+                    else if (opacity > 0.3) colorClass = "bg-purple-500";
+                    else colorClass = "bg-purple-700/60";
 
-                  return (
-                    <div
-                      key={i}
-                      className="flex flex-col items-center gap-1 h-full justify-end group relative"
-                    >
-                      <div className="opacity-0 group-hover:opacity-100 absolute -top-8 bg-slate-800 text-xs px-2 py-1 rounded text-white whitespace-nowrap z-10 pointer-events-none transition-opacity">
-                        {i}:00 - {val} events
+                    return (
+                      <div
+                        key={i}
+                        className="flex flex-col items-center gap-1 h-full justify-end group relative"
+                      >
+                        <div className="opacity-0 group-hover:opacity-100 absolute -top-8 bg-slate-800 text-xs px-2 py-1 rounded text-white whitespace-nowrap z-10 pointer-events-none transition-opacity">
+                          {i}:00 - {val} events
+                        </div>
+                        <motion.div
+                          initial={{ height: 0 }}
+                          whileInView={{
+                            height: `${Math.max(10, (val / maxHour) * 100)}%`,
+                          }}
+                          transition={{ delay: i * 0.02 }}
+                          className={`rounded-sm ${colorClass} w-full`}
+                        />
+                        <span className="text-[9px] text-slate-600 hidden md:block">
+                          {i}
+                        </span>
                       </div>
-                      <motion.div
-                        initial={{ height: 0 }}
-                        whileInView={{
-                          height: `${Math.max(10, (val / maxHour) * 100)}%`,
-                        }}
-                        transition={{ delay: i * 0.02 }}
-                        className={`rounded-sm ${colorClass} w-full`}
-                      />
-                      <span className="text-[9px] text-slate-600 hidden md:block">
-                        {i}
-                      </span>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
@@ -648,16 +647,20 @@ const ResponsiveLineChart = ({
   dataKey,
   color,
   maxY,
+  minY = 0,
   fill,
   baseline,
   reversed = false,
 }) => {
+  const range = maxY - minY;
+  
   return (
     <svg
       className="w-full h-full overflow-hidden"
       preserveAspectRatio="none"
       viewBox="0 0 100 100"
     >
+      <title>Line chart showing SEO performance metrics over time</title>
       {/* Grid Lines */}
       {[0, 25, 50, 75, 100].map((y) => (
         <line
@@ -677,9 +680,9 @@ const ResponsiveLineChart = ({
       {baseline && (
         <line
           x1="0"
-          y1={100 - (baseline / maxY) * 100}
+          y1={100 - ((baseline - minY) / range) * 100}
           x2="100"
-          y2={100 - (baseline / maxY) * 100}
+          y2={100 - ((baseline - minY) / range) * 100}
           stroke="#ef4444"
           strokeWidth="1"
           strokeDasharray="4"
@@ -697,7 +700,8 @@ const ResponsiveLineChart = ({
             const x = (i / (data.length - 1)) * 100;
             let val = p[dataKey];
             if (reversed) val = maxY - val; // Invert for Position chart
-            const y = reversed ? (val / maxY) * 100 : 100 - (val / maxY) * 100;
+            const normalizedVal = val - minY;
+            const y = reversed ? (normalizedVal / range) * 100 : 100 - (normalizedVal / range) * 100;
             d += `${i === 0 ? "M" : "L"} ${x} ${y} `;
           });
           d += `L 100 ${reversed ? 0 : 100} L 0 ${reversed ? 0 : 100} Z`;
@@ -718,7 +722,8 @@ const ResponsiveLineChart = ({
             const x = (i / (data.length - 1)) * 100;
             let val = p[dataKey];
             if (reversed) val = maxY - val;
-            const y = reversed ? (val / maxY) * 100 : 100 - (val / maxY) * 100;
+            const normalizedVal = val - minY;
+            const y = reversed ? (normalizedVal / range) * 100 : 100 - (normalizedVal / range) * 100;
             d += `${i === 0 ? "M" : "L"} ${x} ${y} `;
           });
           return d;
@@ -759,6 +764,7 @@ const ResponsiveBarChart = ({ data, dataKey, color }) => {
       preserveAspectRatio="none"
       viewBox="0 0 100 100"
     >
+      <title>Bar chart showing hourly event distribution</title>
       {/* Bars */}
       {data.map((d, i) => {
         const barWidth = 80 / data.length;
@@ -807,6 +813,7 @@ const TimelineChart = ({ data }) => {
       preserveAspectRatio="none"
       viewBox="0 0 100 100"
     >
+      <title>Timeline chart showing clicks, impressions, and click-through rate over time</title>
       {/* Background Grid */}
       {[0, 20, 40, 60, 80, 100].map((y) => (
         <line

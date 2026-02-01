@@ -24,6 +24,7 @@ const ScoreRing = ({ score, label, color, delay }) => {
     <div className="flex flex-col items-center gap-2">
       <div className="relative w-16 h-16 flex items-center justify-center">
         <svg className="w-full h-full transform -rotate-90">
+          <title>Lighthouse performance score indicator</title>
           <circle
             cx="32"
             cy="32"
