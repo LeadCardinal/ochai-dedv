@@ -341,7 +341,7 @@ const CaseStudyBonsai = () => {
                 data={data}
                 dataKey="impressions"
                 color="#6366f1"
-                maxY={60000}
+                maxY={50000}
                 fill="rgba(99, 102, 241, 0.2)"
               />
             </div>
@@ -471,11 +471,13 @@ const CaseStudyBonsai = () => {
               subtitle="Meta Conversions API (12/9/25 - 1/6/26)"
               color="purple"
             >
-              <ResponsiveBarChart
-                data={analyticsData}
-                dataKey="volume"
-                color="#a855f7"
-              />
+              <div className="h-80">
+                <ResponsiveBarChart
+                  data={analyticsData}
+                  dataKey="volume"
+                  color="#a855f7"
+                />
+              </div>
             </ChartCard>
 
             {/* Cost Comparison */}
