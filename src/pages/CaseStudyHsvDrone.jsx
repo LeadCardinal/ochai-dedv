@@ -439,7 +439,7 @@ const ChartCard = ({ title, subtitle, children, color }) => (
 
 const ResponsiveLineChart = ({ data, dataKey, color, maxY, fill, targetLine, reversed = false }) => {
   return (
-    <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
+    <svg className="w-full h-full overflow-hidden" preserveAspectRatio="none" viewBox="0 0 100 100">
       {[0, 25, 50, 75, 100].map(y => (
         <line key={y} x1="0" y1={y} x2="100" y2={y} stroke="#334155" strokeWidth="0.5" strokeDasharray="2" opacity="0.5" />
       ))}
@@ -515,7 +515,7 @@ const ResponsiveLineChart = ({ data, dataKey, color, maxY, fill, targetLine, rev
 };
 
 const ResponsiveSimpleLine = ({ data, color, maxY, reversed }) => (
-    <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
+    <svg className="w-full h-full overflow-hidden" preserveAspectRatio="none" viewBox="0 0 100 100">
         <motion.path
         initial={{ pathLength: 0 }}
         whileInView={{ pathLength: 1 }}
@@ -546,7 +546,7 @@ const ResponsiveSimpleLine = ({ data, color, maxY, reversed }) => (
 const ResponsiveBarChart = ({ data, dataKey, color }) => {
   const maxVal = Math.max(...data.map(d => d[dataKey]));
   return (
-    <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
+    <svg className="w-full h-full overflow-hidden" preserveAspectRatio="none" viewBox="0 0 100 100">
       {/* Bars */}
       {data.map((d, i) => {
         const barWidth = 80 / data.length;

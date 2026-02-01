@@ -652,7 +652,7 @@ const ResponsiveLineChart = ({
 }) => {
   return (
     <svg
-      className="w-full h-full overflow-visible"
+      className="w-full h-full overflow-hidden"
       preserveAspectRatio="none"
       viewBox="0 0 100 100"
     >
@@ -753,7 +753,7 @@ const ResponsiveBarChart = ({ data, dataKey, color }) => {
   const maxVal = Math.max(...data.map((d) => d[dataKey]));
   return (
     <svg
-      className="w-full h-full overflow-visible"
+      className="w-full h-full overflow-hidden"
       preserveAspectRatio="none"
       viewBox="0 0 100 100"
     >
@@ -801,7 +801,7 @@ const TimelineChart = ({ data }) => {
 
   return (
     <svg
-      className="w-full h-full overflow-visible"
+      className="w-full h-full overflow-hidden"
       preserveAspectRatio="none"
       viewBox="0 0 100 100"
     >
