@@ -62,9 +62,9 @@ const Projects = () => {
                   <Layers className="w-6 h-6 text-blue-400" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-2">
+                  <h3 className="text-lg font-bold text-white mb-2">
                     Integrated Operations in Action
-                  </h4>
+                  </h3>
                   <p className="text-slate-400 text-sm leading-relaxed">
                     These aren't just coding projects. Each case study
                     demonstrates the full "Integrated Digital Operator" chain:
