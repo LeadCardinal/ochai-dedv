@@ -58,7 +58,7 @@ const Footer = () => {
                   className="w-10 h-10 bg-slate-800/50 hover:bg-cyan-500/20 border border-slate-700 hover:border-cyan-500/50 rounded-full flex items-center justify-center transition-all duration-300"
                   aria-label={social.label}
                 >
-                  <Icon className="w-5 h-5 text-slate-400 hover:text-cyan-400 transition-colors" />
+                  <Icon className="w-5 h-5 text-slate-300 hover:text-cyan-400 transition-colors" />
                 </motion.button>
               );
             })}
@@ -70,7 +70,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-slate-400 text-sm"
+            className="text-slate-300 text-sm"
           >
             © {currentYear} AI Portfolio. All rights reserved.
           </motion.p>

@@ -254,7 +254,7 @@ const CaseStudyBonsai = () => {
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center text-slate-400 hover:text-cyan-400 transition-colors"
+            className="inline-flex items-center text-slate-300 hover:text-cyan-400 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Portfolio
           </Link>
@@ -298,7 +298,7 @@ const CaseStudyBonsai = () => {
                     >
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-slate-400 text-sm font-medium">
+                    <span className="text-slate-300 text-sm font-medium">
                       {metric.label}
                     </span>
                   </div>
@@ -395,7 +395,7 @@ const CaseStudyBonsai = () => {
             <h3 className="text-2xl font-bold text-white mb-2">
               Comprehensive Performance Timeline
             </h3>
-            <p className="text-slate-400">
+            <p className="text-slate-300">
               Multi-metric correlation analysis over 12 months
             </p>
           </div>
@@ -422,7 +422,7 @@ const CaseStudyBonsai = () => {
               <h2 className="text-3xl font-bold text-white">
                 Server-Side Analytics Infrastructure
               </h2>
-              <p className="text-slate-400">
+              <p className="text-slate-300">
                 Enterprise-grade tracking built on Google Cloud Run + Meta
                 Conversions API
               </p>
@@ -437,7 +437,7 @@ const CaseStudyBonsai = () => {
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">1,054</div>
-                <div className="text-sm text-slate-400">
+                <div className="text-sm text-slate-300">
                   Total Scroll Events
                 </div>
               </div>
@@ -448,7 +448,7 @@ const CaseStudyBonsai = () => {
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">~18</div>
-                <div className="text-sm text-slate-400">Avg. Events / Day</div>
+                <div className="text-sm text-slate-300">Avg. Events / Day</div>
               </div>
             </div>
             <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-center gap-4">
@@ -457,18 +457,18 @@ const CaseStudyBonsai = () => {
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">109</div>
-                <div className="text-sm text-slate-400">
+                <div className="text-sm text-slate-300">
                   Peak (12/18 5:00 AM)
                 </div>
               </div>
             </div>
             <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-center gap-4">
               <div className="p-3 bg-slate-500/10 rounded-lg">
-                <Calendar className="w-6 h-6 text-slate-400" />
+                <Calendar className="w-6 h-6 text-slate-300" />
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">29</div>
-                <div className="text-sm text-slate-400">
+                <div className="text-sm text-slate-300">
                   Days Tracked
                 </div>
               </div>
@@ -491,7 +491,7 @@ const CaseStudyBonsai = () => {
               <div className="flex-grow flex items-end justify-around pb-4 px-8 gap-8">
                 {/* Standard Cost */}
                 <div className="w-full flex flex-col items-center gap-2 group">
-                  <div className="text-slate-400 text-sm font-medium mb-1">
+                  <div className="text-slate-300 text-sm font-medium mb-1">
                     Standard SaaS
                   </div>
                   <div className="w-full bg-slate-800 rounded-t-xl relative h-48 overflow-hidden">
@@ -524,7 +524,7 @@ const CaseStudyBonsai = () => {
                       &lt;$5
                     </div>
                   </div>
-                  <div className="text-xs text-slate-400">My Cost</div>
+                  <div className="text-xs text-slate-300">My Cost</div>
                 </div>
               </div>
             </div>
@@ -538,7 +538,7 @@ const CaseStudyBonsai = () => {
                   <h3 className="text-lg font-bold text-white">
                     Hourly Event Distribution
                   </h3>
-                  <div className="text-sm text-slate-400">
+                  <div className="text-sm text-slate-300">
                     Aggregated scroll activity by time of day
                   </div>
                 </div>
@@ -597,7 +597,7 @@ const CaseStudyBonsai = () => {
               <h3 className="text-lg font-bold text-white mb-4">
                 Why This Matters?
               </h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-4">
+              <p className="text-slate-300 text-sm leading-relaxed mb-4">
                 Actual server logs confirm{" "}
                 <strong>1,054 high-value scroll events</strong> captured
                 directly via Cloud Run + Meta CAPI, bypassing ad-blockers
@@ -897,7 +897,7 @@ const CombinedPath = ({ data, dataKey, max, color, width, dash }) => (
 const LegendItem = ({ color, label }) => (
   <div className="flex items-center gap-2">
     <div className={`w-3 h-3 rounded-full ${color}`}></div>
-    <span className="text-sm text-slate-400">{label}</span>
+    <span className="text-sm text-slate-300">{label}</span>
   </div>
 );
 

@@ -86,7 +86,7 @@ const CaseStudyMeanings = () => {
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center text-slate-400 hover:text-cyan-400 transition-colors"
+            className="inline-flex items-center text-slate-300 hover:text-cyan-400 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Portfolio
           </Link>
@@ -201,7 +201,7 @@ const CaseStudyMeanings = () => {
                         className={
                           item.color.includes("emerald")
                             ? "text-emerald-400 font-bold"
-                            : "text-slate-400"
+                            : "text-slate-300"
                         }
                       >
                         {item.score}/100
@@ -219,7 +219,7 @@ const CaseStudyMeanings = () => {
                   </div>
                 ))}
               </div>
-              <p className="mt-8 text-slate-400 text-sm italic border-l-2 border-slate-700 pl-4">
+              <p className="mt-8 text-slate-300 text-sm italic border-l-2 border-slate-700 pl-4">
                 Most Fortune 500 sites suffer from "tag bloat" and unoptimized
                 assets, averaging scores below 50. Achieving a 98 average across
                 all categories places this project in the top tier of global web
@@ -234,7 +234,7 @@ const CaseStudyMeanings = () => {
                   <TrendingUp className="w-6 h-6 text-pink-500" />
                   The Performance Reality
                 </h3>
-                <p className="text-slate-400">
+                <p className="text-slate-300">
                   Why a 95 Performance score is statistically exceptional for a
                   modern React app.
                 </p>
@@ -251,15 +251,15 @@ const CaseStudyMeanings = () => {
                         YOU ARE HERE
                       </div>
                     )}
-                    <div className="text-sm text-slate-400 mb-1">
+                    <div className="text-sm text-slate-300 mb-1">
                       {item.type}
                     </div>
                     <div
-                      className={`text-3xl font-bold mb-2 ${item.type === "This Project" ? "text-emerald-400" : "text-slate-400"}`}
+                      className={`text-3xl font-bold mb-2 ${item.type === "This Project" ? "text-emerald-400" : "text-slate-300"}`}
                     >
                       {item.range}
                     </div>
-                    <div className="text-xs text-slate-400">{item.desc}</div>
+                    <div className="text-xs text-slate-300">{item.desc}</div>
                   </div>
                 ))}
               </div>
@@ -305,7 +305,7 @@ const CaseStudyMeanings = () => {
 
             {/* Individual Metrics Breakdown */}
             <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6">
-              <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-6">
+              <h4 className="text-sm font-bold text-slate-300 uppercase tracking-wider mb-6">
                 Detailed Scores
               </h4>
               <div className="space-y-4">
@@ -347,8 +347,8 @@ const CaseStudyMeanings = () => {
                 <div className="text-4xl font-bold text-emerald-400 mb-2">
                   -40%
                 </div>
-                <div className="text-slate-400 font-medium">Bounce Rate</div>
-                <p className="text-sm text-slate-400 mt-2">
+                <div className="text-slate-300 font-medium">Bounce Rate</div>
+                <p className="text-sm text-slate-300 mt-2">
                   Users stay longer on instant-loading pages.
                 </p>
               </div>
@@ -356,10 +356,10 @@ const CaseStudyMeanings = () => {
                 <div className="text-4xl font-bold text-blue-400 mb-2">
                   +25%
                 </div>
-                <div className="text-slate-400 font-medium">
+                <div className="text-slate-300 font-medium">
                   Conversion Rate
                 </div>
-                <p className="text-sm text-slate-400 mt-2">
+                <p className="text-sm text-slate-300 mt-2">
                   Smooth interactions lead to more actions.
                 </p>
               </div>
@@ -367,10 +367,10 @@ const CaseStudyMeanings = () => {
                 <div className="text-4xl font-bold text-purple-400 mb-2">
                   100%
                 </div>
-                <div className="text-slate-400 font-medium">
+                <div className="text-slate-300 font-medium">
                   Accessibility Reach
                 </div>
-                <p className="text-sm text-slate-400 mt-2">
+                <p className="text-sm text-slate-300 mt-2">
                   Legally compliant and usable by everyone.
                 </p>
               </div>

@@ -62,7 +62,7 @@ const ScoreRing = ({ score, label, color, delay }) => {
           {score}
         </span>
       </div>
-      <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium text-center">
+      <span className="text-[10px] uppercase tracking-wider text-slate-300 font-medium text-center">
         {label}
       </span>
     </div>
@@ -83,7 +83,7 @@ const PerformanceExcellence = () => {
           <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent mb-6 max-w-4xl">
             Engineering Digital Perfection
           </h2>
-          <p className="text-lg text-slate-400 leading-relaxed max-w-2xl">
+          <p className="text-lg text-slate-300 leading-relaxed max-w-2xl">
             I don't just build websites; I engineer elite digital experiences.
             My work consistently ranks in the{" "}
             <strong>Top 1% of all websites globally</strong>, verified by Google
@@ -112,7 +112,7 @@ const PerformanceExcellence = () => {
                     href={site.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-slate-400 flex items-center gap-1 hover:text-cyan-400 transition-colors"
+                    className="text-xs text-slate-300 flex items-center gap-1 hover:text-cyan-400 transition-colors"
                   >
                     Visit Site <ExternalLink className="w-3 h-3" />
                   </a>
@@ -168,7 +168,7 @@ const PerformanceExcellence = () => {
                 <span className="block font-bold text-white">
                   Top 1% Globally
                 </span>
-                <span className="text-slate-400">Performance Rank</span>
+                <span className="text-slate-300">Performance Rank</span>
               </div>
             </div>
             <div className="w-px h-8 bg-slate-800" />
@@ -178,7 +178,7 @@ const PerformanceExcellence = () => {
               </div>
               <div className="text-sm">
                 <span className="block font-bold text-white">Sub-Second</span>
-                <span className="text-slate-400">Load Times</span>
+                <span className="text-slate-300">Load Times</span>
               </div>
             </div>
           </div>

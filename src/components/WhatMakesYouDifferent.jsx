@@ -62,7 +62,7 @@ const WhatMakesYouDifferent = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
             Why <span className="text-cyan-400">Top 0.05%</span> Matters
           </h2>
-          <p className="text-xl text-slate-400 leading-relaxed">
+          <p className="text-xl text-slate-300 leading-relaxed">
             Most specialists stay in their lane. Agencies distribute capabilities across teams. Complete vertical integration—from AI architecture to cloud deployment to business operations—executed solo at elite standards. That combination is exceptionally rare.
           </p>
         </div>
@@ -83,7 +83,7 @@ const WhatMakesYouDifferent = () => {
               <h3 className={`text-2xl font-bold text-white mb-4 group-hover:${item.color} transition-colors`}>
                 {item.title}
               </h3>
-              <p className="text-slate-400 leading-relaxed text-lg">
+              <p className="text-slate-300 leading-relaxed text-lg">
                 {item.description}
               </p>
             </motion.div>
@@ -101,17 +101,17 @@ const WhatMakesYouDifferent = () => {
             <div>
               <Award className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
               <div className="text-3xl font-bold text-white mb-1">100/100</div>
-              <div className="text-sm text-slate-400">Perfect Lighthouse Scores<br/>Across All Properties</div>
+              <div className="text-sm text-slate-300">Perfect Lighthouse Scores<br/>Across All Properties</div>
             </div>
             <div>
               <Target className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
               <div className="text-3xl font-bold text-white mb-1">$1,200</div>
-              <div className="text-sm text-slate-400">Monthly E-Commerce<br/>Revenue Generated</div>
+              <div className="text-sm text-slate-300">Monthly E-Commerce<br/>Revenue Generated</div>
             </div>
             <div>
               <Cpu className="w-8 h-8 text-purple-400 mx-auto mb-3" />
               <div className="text-3xl font-bold text-white mb-1">4</div>
-              <div className="text-sm text-slate-400">Production Websites<br/>All Perfect Scores</div>
+              <div className="text-sm text-slate-300">Production Websites<br/>All Perfect Scores</div>
             </div>
           </div>
         </motion.div>

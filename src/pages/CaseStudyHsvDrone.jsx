@@ -185,7 +185,7 @@ const CaseStudyHsvDrone = () => {
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center text-slate-400 hover:text-cyan-400 transition-colors"
+            className="inline-flex items-center text-slate-300 hover:text-cyan-400 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Portfolio
           </Link>
@@ -247,7 +247,7 @@ const CaseStudyHsvDrone = () => {
                     >
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-slate-400 text-sm font-medium">
+                    <span className="text-slate-300 text-sm font-medium">
                       {metric.label}
                     </span>
                   </div>
@@ -289,7 +289,7 @@ const CaseStudyHsvDrone = () => {
               <div className="h-full flex items-center justify-center">
                 <div className="w-full space-y-4 px-4">
                   <div className="flex items-center gap-4">
-                    <span className="w-24 text-sm text-slate-400">
+                    <span className="w-24 text-sm text-slate-300">
                       Page 1 (Top 10)
                     </span>
                     <div className="flex-1 h-8 bg-slate-800 rounded-full overflow-hidden">
@@ -306,11 +306,11 @@ const CaseStudyHsvDrone = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-4 opacity-50">
-                    <span className="w-24 text-sm text-slate-400">Page 2</span>
+                    <span className="w-24 text-sm text-slate-300">Page 2</span>
                     <div className="flex-1 h-8 bg-slate-800 rounded-full"></div>
                   </div>
                   <div className="flex items-center gap-4 opacity-50">
-                    <span className="w-24 text-sm text-slate-400">Page 3+</span>
+                    <span className="w-24 text-sm text-slate-300">Page 3+</span>
                     <div className="flex-1 h-8 bg-slate-800 rounded-full"></div>
                   </div>
                 </div>
@@ -331,7 +331,7 @@ const CaseStudyHsvDrone = () => {
               <h3 className="text-2xl font-bold text-white mb-2">
                 Performance Comparison
               </h3>
-              <p className="text-slate-400">
+              <p className="text-slate-300">
                 Organic Growth (Bonsai) vs. Rapid Deployment (HSV Drone)
               </p>
             </div>
@@ -359,7 +359,7 @@ const CaseStudyHsvDrone = () => {
                 maxY={50}
                 reversed
               />
-              <div className="absolute bottom-4 right-4 text-xs text-slate-400">
+              <div className="absolute bottom-4 right-4 text-xs text-slate-300">
                 Avg Pos: 30.2
               </div>
             </div>
@@ -375,7 +375,7 @@ const CaseStudyHsvDrone = () => {
                 maxY={50}
                 reversed
               />
-              <div className="absolute bottom-4 right-4 text-xs text-slate-400">
+              <div className="absolute bottom-4 right-4 text-xs text-slate-300">
                 Avg Pos: 9.0
               </div>
             </div>

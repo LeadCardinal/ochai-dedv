@@ -18,7 +18,7 @@ const Biography = () => {
           
           {/* Back Button */}
           <Link to="/">
-            <Button variant="ghost" className="mb-8 text-slate-400 hover:text-cyan-400">
+            <Button variant="ghost" className="mb-8 text-slate-300 hover:text-cyan-400">
               <ArrowLeft className="mr-2 w-4 h-4" />
               Back to Portfolio
             </Button>
@@ -34,7 +34,7 @@ const Biography = () => {
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
               Extended Biography
             </h1>
-            <p className="text-xl text-slate-400">
+            <p className="text-xl text-slate-300">
               The complete story behind the top .05% digital operator
             </p>
           </motion.div>

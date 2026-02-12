@@ -56,7 +56,7 @@ const About = () => {
               Where Execution Meets Results
             </span>
           </h2>
-          <p className="text-lg text-slate-400 leading-relaxed">
+          <p className="text-lg text-slate-300 leading-relaxed">
             Perfect Lighthouse scores. Generative AI producing measurable
             revenue. Complete vertical integration from architecture to
             deployment. This is what elite execution looks like when you refuse
@@ -77,8 +77,8 @@ const About = () => {
               <div className="space-y-6">
                 <div>
                   <div className="flex justify-between text-sm mb-2">
-                    <span className="text-slate-400">Fortune 500 Average</span>
-                    <span className="text-slate-400">45/100</span>
+                    <span className="text-slate-300">Fortune 500 Average</span>
+                    <span className="text-slate-300">45/100</span>
                   </div>
                   <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
                     <div className="h-full w-[45%] bg-slate-600 rounded-full" />
@@ -86,10 +86,10 @@ const About = () => {
                 </div>
                 <div>
                   <div className="flex justify-between text-sm mb-2">
-                    <span className="text-slate-400">
+                    <span className="text-slate-300">
                       Professional Agencies
                     </span>
-                    <span className="text-slate-400">72/100</span>
+                    <span className="text-slate-300">72/100</span>
                   </div>
                   <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
                     <div className="h-full w-[72%] bg-blue-900 rounded-full" />
@@ -113,7 +113,7 @@ const About = () => {
                 </div>
               </div>
 
-              <p className="mt-6 text-sm text-slate-400 italic">
+              <p className="mt-6 text-sm text-slate-300 italic">
                 *Google Lighthouse Core Web Vitals verified across all
                 production properties.
               </p>
@@ -134,7 +134,7 @@ const About = () => {
                   <div className="text-xl font-bold text-white mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-slate-400 leading-tight">
+                  <div className="text-xs text-slate-300 leading-tight">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -152,7 +152,7 @@ const About = () => {
                 <h4 className="text-xl font-bold text-white mb-2">
                   The Self-Taught Reality
                 </h4>
-                <p className="text-slate-400">
+                <p className="text-slate-300">
                   No CS degree. No bootcamp certificates. 27 years of acquiring
                   whatever skill the market demanded next, then executing at
                   levels that produce measurable results. Finance degree with
@@ -171,7 +171,7 @@ const About = () => {
                 <h4 className="text-xl font-bold text-white mb-2">
                   AI Implementation vs. AI Theory
                 </h4>
-                <p className="text-slate-400">
+                <p className="text-slate-300">
                   Adobe Firefly producing enterprise-grade imagery for actual
                   product listings. ElevenLabs generating production voice
                   content. Claude API orchestration powering real business
@@ -191,7 +191,7 @@ const About = () => {
                 <h4 className="text-xl font-bold text-white mb-2">
                   Complete Vertical Integration
                 </h4>
-                <p className="text-slate-400">
+                <p className="text-slate-300">
                   Perfect technical execution meets business operations. AI tool
                   integration producing measurable outcomes. Cloud deployment
                   maintaining 100% uptime. Full-stack operations from database
@@ -210,7 +210,7 @@ const About = () => {
                 <h4 className="text-xl font-bold text-white mb-2">
                   Proven Business Outcomes
                 </h4>
-                <p className="text-slate-400">
+                <p className="text-slate-300">
                   Real Live Bonsai: e-commerce generating consistent monthly
                   revenue. Published author: "The Meaning(s) of Your LIFE!"
                   producing ongoing sales. Multiple web properties—ochai.dev,
@@ -229,7 +229,7 @@ const About = () => {
                 <h4 className="text-xl font-bold text-white mb-2">
                   The Geographic Advantage
                 </h4>
-                <p className="text-slate-400">
+                <p className="text-slate-300">
                   Huntsville, Alabama—not Silicon Valley. Valley-grade execution
                   at Huntsville overhead. Remote-first operations refined over
                   years, not pandemic experiments. Deep technical capabilities

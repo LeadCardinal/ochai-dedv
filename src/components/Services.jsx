@@ -39,7 +39,7 @@ const Services = () => {
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Services Engineered for <span className="text-emerald-400">Excellence</span>
           </h2>
-          <p className="text-lg text-slate-400">
+          <p className="text-lg text-slate-300">
             I don't just deliver code; I deliver results. Every service is backed by a commitment to the Top 1% performance standards.
           </p>
         </div>
@@ -72,7 +72,7 @@ const Services = () => {
               )}
 
               <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
-              <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+              <p className="text-slate-300 text-sm mb-6 leading-relaxed">
                 {service.description}
               </p>
               

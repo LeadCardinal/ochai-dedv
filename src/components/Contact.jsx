@@ -21,7 +21,7 @@ const Contact = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
             Let's Work Together
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-300 text-lg max-w-2xl mx-auto">
             Ready to transform your ideas into reality? Get in touch and let's discuss your next project.
           </p>
         </motion.div>
@@ -65,7 +65,7 @@ const Contact = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors">Email</h3>
-                <p className="text-slate-400 break-all text-lg font-medium group-hover:text-white transition-colors">jeremy@ochai.dev</p>
+                <p className="text-slate-300 break-all text-lg font-medium group-hover:text-white transition-colors">jeremy@ochai.dev</p>
               </div>
             </div>
           </motion.a>
@@ -79,7 +79,7 @@ const Contact = () => {
           className="max-w-3xl mx-auto mt-8"
         >
           <div className="bg-slate-900/30 border border-slate-800/50 rounded-xl p-6 text-center">
-            <p className="text-sm text-slate-400 italic">
+            <p className="text-sm text-slate-300 italic">
               "Based in Huntsville, AL, I operate on Central Time but capable of supporting global infrastructures 24/7."
             </p>
           </div>

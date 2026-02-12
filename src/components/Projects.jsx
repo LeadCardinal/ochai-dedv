@@ -65,7 +65,7 @@ const Projects = () => {
                   <h3 className="text-lg font-bold text-white mb-2">
                     Integrated Operations in Action
                   </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-relaxed">
                     These aren't just coding projects. Each case study
                     demonstrates the full "Integrated Digital Operator" chain:
                     <span className="text-blue-400 font-medium">
@@ -88,7 +88,7 @@ const Projects = () => {
 
           <Link
             to="/#contact"
-            className="hidden md:flex items-center gap-2 text-slate-400 hover:text-white transition-colors group self-end mb-2"
+            className="hidden md:flex items-center gap-2 text-slate-300 hover:text-white transition-colors group self-end mb-2"
           >
             Start your project{" "}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -145,7 +145,7 @@ const Projects = () => {
                     {project.title}
                   </a>
                 </h3>
-                <p className="text-slate-400 text-sm mb-6 line-clamp-3">
+                <p className="text-slate-300 text-sm mb-6 line-clamp-3">
                   {project.description}
                 </p>
 
@@ -187,7 +187,7 @@ const Projects = () => {
         <div className="mt-12 text-center md:hidden">
           <Link
             to="/#contact"
-            className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
           >
             Start your project <ArrowRight className="w-4 h-4" />
           </Link>

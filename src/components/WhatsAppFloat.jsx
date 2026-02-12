@@ -44,7 +44,7 @@ const WhatsAppFloat = () => {
                 Need help? Chat with me!
                 <button
                   onClick={() => setShowTooltip(false)}
-                  className="ml-2 text-slate-400 hover:text-slate-700"
+                  className="ml-2 text-slate-300 hover:text-slate-700"
                   aria-label="Close tooltip"
                 >
                   <X className="w-4 h-4" />

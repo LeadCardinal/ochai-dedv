@@ -93,7 +93,7 @@ const Technologies = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
             The <span className="text-cyan-400">Complete Tech Stack</span>
           </h2>
-          <p className="text-lg text-slate-400">
+          <p className="text-lg text-slate-300">
             From my AI orchestration to creative automation to cloud deployment. Each tool I have mastered to production standards, then integrated into cohesive systems that generate proven measurable results.
           </p>
         </div>
@@ -126,7 +126,7 @@ const Technologies = () => {
           viewport={{ once: true }}
           className="mt-16 text-center max-w-3xl mx-auto"
         >
-          <p className="text-slate-400 leading-relaxed">
+          <p className="text-slate-300 leading-relaxed">
             <span className="text-cyan-400 font-bold">27 years of continuous skill acquisition</span> across creative tools, development frameworks, cloud platforms, and AI systems. Not a résumé list—working production knowledge applied daily across multiple business operations.
           </p>
         </motion.div>

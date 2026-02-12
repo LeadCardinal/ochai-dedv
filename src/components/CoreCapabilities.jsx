@@ -61,7 +61,7 @@ const CoreCapabilities = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
             AI-Augmented <span className="text-purple-400">Technical Arsenal</span>
           </h2>
-          <p className="text-lg text-slate-400">
+          <p className="text-lg text-slate-300">
             The complete toolkit for solo execution of enterprise-grade digital products. From AI orchestration to cloud deployment to business operations—all capabilities performed at standards that produce measurable results.
           </p>
         </div>
@@ -85,7 +85,7 @@ const CoreCapabilities = () => {
                 <cap.icon className={`w-6 h-6 ${cap.highlight ? 'text-purple-400' : 'text-slate-300'} group-hover:text-purple-400 transition-colors`} />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">{cap.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-300 leading-relaxed">
                 {cap.description}
               </p>
             </motion.div>

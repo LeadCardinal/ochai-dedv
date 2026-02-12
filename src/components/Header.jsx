@@ -194,7 +194,7 @@ const Header = () => {
                 )
               )}
               <div className="h-px bg-slate-800 my-2"></div>
-              <p className="text-sm font-semibold text-slate-400 uppercase">
+              <p className="text-sm font-semibold text-slate-300 uppercase">
                 Case Studies
               </p>
               <Link
