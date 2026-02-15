@@ -7,6 +7,7 @@ import LoadingOverlay from '@/components/LoadingOverlay';
 import { Toaster } from '@/components/ui/toaster';
 import Home from '@/pages/Home';
 import Biography from '@/pages/Biography';
+import Security from '@/pages/Security';
 import CaseStudyBonsai from '@/pages/CaseStudyBonsai';
 import CaseStudyHsvDrone from '@/pages/CaseStudyHsvDrone';
 import CaseStudyMeanings from '@/pages/CaseStudyMeanings';
@@ -48,6 +49,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/biography" element={<Biography />} />
+            <Route path="/security" element={<Security />} />
             <Route path="/case-study/reallivebonsai" element={<CaseStudyBonsai />} />
             <Route path="/case-study/hsvdrone" element={<CaseStudyHsvDrone />} />
             <Route path="/case-study/themeaningsoflife" element={<CaseStudyMeanings />} />
