@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Linkedin, Twitter } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 const Footer = () => {
@@ -15,9 +15,9 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: Github, label: 'GitHub' },
-    { icon: Linkedin, label: 'LinkedIn' },
-    { icon: Twitter, label: 'Twitter' }
+    { icon: Mail, label: 'Email', url: 'mailto:jeremy@ochai.dev' },
+    { icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/in/jeremy-och-ai-full-stack' },
+    { icon: Twitter, label: 'Twitter', url: 'https://x.com/@OchAI_fullstack' }
   ];
 
   return (
@@ -35,6 +35,8 @@ const Footer = () => {
             <img 
               src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/logo1.webp" 
               alt="Logo" 
+              width={64}
+              height={64}
               className="h-16 w-auto drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]"
             />
           </motion.div>
@@ -49,7 +51,20 @@ const Footer = () => {
           >
             {socialLinks.map((social, index) => {
               const Icon = social.icon;
-              return (
+              return social.url ? (
+                <motion.a
+                  key={index}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-10 h-10 bg-slate-800/50 hover:bg-cyan-500/20 border border-slate-700 hover:border-cyan-500/50 rounded-full flex items-center justify-center transition-all duration-300"
+                  aria-label={social.label}
+                >
+                  <Icon className="w-5 h-5 text-slate-300 hover:text-cyan-400 transition-colors" />
+                </motion.a>
+              ) : (
                 <motion.button
                   key={index}
                   onClick={handleSocialClick}

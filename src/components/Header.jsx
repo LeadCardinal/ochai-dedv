@@ -75,6 +75,8 @@ const Header = () => {
           <img
             src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/HEADER_LOGO_SMALL.webp"
             alt="Jeremy Och Portfolio"
+            width={250}
+            height={50}
             className="h-[50px] w-[250px] object-contain"
           />
         </Link>

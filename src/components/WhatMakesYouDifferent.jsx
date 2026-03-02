@@ -40,15 +40,7 @@ const WhatMakesYouDifferent = () => {
 
   return (
     <section id="differentiation" className="py-24 bg-slate-900 relative overflow-hidden">
-      {/* Abstract Background Accent */}
-      <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
-        <img 
-          src="https://images.unsplash.com/photo-1643101807331-21a4a3f081d5?auto=format&fit=crop&q=80" 
-          alt="Abstract Network" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-slate-900 to-slate-900" />
-      </div>
+
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto mb-16 text-center">
