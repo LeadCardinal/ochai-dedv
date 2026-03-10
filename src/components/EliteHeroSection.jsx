@@ -170,15 +170,15 @@ const EliteHeroSection = () => {
               {/* Hero Image with AVIF + WebP Fallback */}
               <picture>
                 <source
-                  srcSet="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_V3.avif?v=2"
+                  srcSet="/images/Hero_V3.avif"
                   type="image/avif"
                 />
                 <source
-                  srcSet="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_V3.webp?v=2"
+                  srcSet="/images/Hero_V3.webp"
                   type="image/webp"
                 />
                 <img
-                  src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_V3.webp?v=2"
+                  src="/images/Hero_V3.webp"
                   alt="Jeremy Och - OCH AI DEV - Top .05% AI Implementation Specialist Worldwide"
                   width="800"
                   height="600"

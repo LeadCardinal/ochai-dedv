@@ -12,7 +12,7 @@ const Projects = () => {
         'A masterpiece of optimization. Achieving perfect 100/100 scores in Accessibility and SEO with 95 Performance, this site defines the modern "Top 1%" standard.',
       // Replaced with Supabase URL
       image:
-        "https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/ProjectMeanings.avif",
+        "/images/ProjectMeanings.avif",
       tags: ["React", "Top 1% Global", "Perfect SEO"],
       link: "/case-study/themeaningsoflife",
       liveUrl: "https://themeaningsoflife.com",
@@ -25,7 +25,7 @@ const Projects = () => {
         "A high-performance e-commerce experience showcasing delicate bonsai trees with rich media without sacrificing load speeds.",
       // Replaced with Supabase URL
       image:
-        "https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/ProjectBonsai.avif",
+        "/images/ProjectBonsai.avif",
       tags: ["E-Commerce", "Performance", "UX Design"],
       link: "/case-study/reallivebonsai",
       liveUrl: "https://reallivebonsai.us",
@@ -38,7 +38,7 @@ const Projects = () => {
         "Professional drone photography portfolio featuring high-resolution galleries optimized for instant viewing on mobile networks.",
       // Replaced with Supabase URL
       image:
-        "https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/ProjectDrone.avif",
+        "/images/ProjectDrone.avif",
       tags: ["Media Heavy", "Optimization", "Gallery"],
       link: "/case-study/hsvdrone",
       liveUrl: "https://hsvdrone.com",

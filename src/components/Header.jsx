@@ -73,7 +73,7 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center">
           <img
-            src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/HEADER_LOGO_SMALL.webp"
+            src="/images/HEADER_LOGO_SMALL.webp"
             alt="Jeremy Och Portfolio"
             width={250}
             height={50}
@@ -143,7 +143,7 @@ const Header = () => {
             className="ml-4 px-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg group"
           >
             <a
-              href="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/JeremyOch_Resume.pdf"
+              href="/images/JeremyOch_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2"
@@ -225,7 +225,7 @@ const Header = () => {
                 className="mt-4 px-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg group"
               >
                 <a
-                  href="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/JeremyOch_Resume.pdf"
+                  href="/images/JeremyOch_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2"

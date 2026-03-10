@@ -1,7 +1,7 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, Suspense, lazy } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import PainPointSection from './PainPointSection';
+const PainPointSection = lazy(() => import('./PainPointSection'));
 
 const ParallaxHeroSection = () => {
   const containerRef = useRef(null);
@@ -82,7 +82,9 @@ const ParallaxHeroSection = () => {
 
       {/* Pain Points Section */}
       <div className="relative z-20">
-        <PainPointSection />
+        <Suspense fallback={null}>
+          <PainPointSection />
+        </Suspense>
       </div>
     </section>
   );

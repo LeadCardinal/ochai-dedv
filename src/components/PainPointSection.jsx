@@ -8,35 +8,35 @@ const painPointsData = [
     id: 1,
     heading: "Nobody Owns the Whole Thing",
     content: "Silos kill velocity. When frontend, backend, and infra are separate fiefdoms, projects stall. I bring a holistic 'systems thinking' approach—ensuring end-to-end ownership from the first line of code to the final production deployment. No more 'it works on my machine' excuses.",
-    image: "https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/1.webp",
+    image: "/images/1.webp",
     icon: BrainCircuit
   },
   {
     id: 2,
     heading: "Timelines Are Fiction",
     content: "Traditional estimation is a guessing game. I replace vague promises with evidence-based engineering. By utilizing rapid prototyping, modular architecture, and continuous feedback loops, I turn predictable friction into predictable delivery. I ship features, not excuses.",
-    image: "https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/2.avif",
+    image: "/images/2.avif",
     icon: Sparkles
   },
   {
     id: 3,
     heading: "Optimize for What, Exactly?",
     content: "Engineers love to optimize, but often for the wrong metrics. Saving 5ms on a query doesn't matter if the feature generates zero revenue. I practice 'Value-First Optimization'—aligning technical performance directly with business KPIs and user retention goals.",
-    image: "https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/3.webp",
+    image: "/images/3.webp",
     icon: Target
   },
   {
     id: 4,
     heading: "The Deployment Disaster Loop",
     content: "If releasing code is a high-stress event, the process is broken. I build robust, self-healing CI/CD pipelines that make deployment boring, frequent, and reliable. I move from 'Release Friday Scaries' to releasing multiple times a day with zero downtime.",
-    image: "https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/4.webp",
+    image: "/images/4.webp",
     icon: Rocket
   },
   {
     id: 5,
     heading: "Data Doesn't Drive Decisions",
     content: "Dashboards are often graveyards for data. I integrate actionable intelligence directly into application workflows. By building systems that adapt to user behavior in real-time, I turn passive statistics into active competitive advantages that drive strategy automatically.",
-    image: "https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/5.webp",
+    image: "/images/5.webp",
     icon: TrendingUp
   }
 ];

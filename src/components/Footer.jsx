@@ -33,7 +33,7 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <img 
-              src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/logo1.webp" 
+              src="/images/logo1.webp" 
               alt="Logo" 
               width={64}
               height={64}
