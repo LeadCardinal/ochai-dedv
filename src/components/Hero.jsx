@@ -35,6 +35,7 @@ const Hero = () => {
           src="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/Hero_v3.webp" 
           alt="Hero Background" 
           className="w-full h-full object-cover object-top opacity-100 block"
+          fetchpriority="high"
         />
         {/* 
           Overlay for readability 
