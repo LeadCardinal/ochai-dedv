@@ -57,12 +57,7 @@ const EliteHeroSection = () => {
             </motion.h1>
 
             {/* Hero Statement - The Money Shot */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed space-y-4"
-            >
+            <div className="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed space-y-4">
               <p>
                 <strong className="text-white">
                   Top .05% means I outperform 99.95% of technical professionals
@@ -93,7 +88,7 @@ const EliteHeroSection = () => {
                   call it baseline.
                 </span>
               </p>
-            </motion.div>
+            </div>
 
             {/* Differentiator Box */}
             <motion.div
