@@ -32,7 +32,7 @@ const Hero = () => {
       */}
       <div className="fixed top-20 bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] -z-10 pointer-events-none">
         <img 
-          src="/images/Hero_V3.webp" 
+          src="/images/Hero_V3.avif" 
           alt="Hero Background" 
           className="w-full h-full object-cover object-top opacity-100 block"
           fetchpriority="high"
