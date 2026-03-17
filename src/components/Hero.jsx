@@ -54,9 +54,40 @@ const Hero = () => {
             Jeremy C Och
           </h1>
           
-          <p className="text-xl md:text-2xl text-slate-200 mb-10 leading-relaxed drop-shadow-lg">
-            Self-taught anti-fragile operator who architects, optimizes, markets, and deploys proven enterprise-grade digital systems solo—thriving on constraints, eliminating coordination overhead, and delivering results at startup velocity.
-          </p>
+          <div className="space-y-6 mb-10">
+            <p className="text-xl md:text-2xl text-slate-200 leading-relaxed drop-shadow-lg">
+              Fewer than 1,000 developers worldwide execute the complete value chain solo at perfect technical standards.
+            </p>
+            
+            <div className="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm">
+              <div className="grid md:grid-cols-2 gap-4 text-left text-sm text-slate-300">
+                <div>
+                  <div className="text-cyan-400 font-semibold mb-2">What Others Do:</div>
+                  <ul className="space-y-1 text-slate-400">
+                    <li>• Static pages, minimal functionality</li>
+                    <li>• Team-driven optimization</li>
+                    <li>• Single-purpose demo sites</li>
+                  </ul>
+                </div>
+                <div>
+                  <div className="text-emerald-400 font-semibold mb-2">What I Deliver:</div>
+                  <ul className="space-y-1">
+                    <li>• React SPAs, real business logic</li>
+                    <li>• Solo architecture → deployment</li>
+                    <li>• Three perfect scores, three production sites</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="mt-4 pt-4 border-t border-slate-700/50 text-center">
+                <span className="text-xs text-slate-400">Top 0.05% globally</span>
+                <span className="mx-2 text-slate-600">•</span>
+                <span className="text-cyan-400 font-mono text-xs">100/100/100/100</span>
+                <span className="mx-2 text-slate-600">•</span>
+                <span className="text-xs text-slate-400">Zero coordination overhead</span>
+              </div>
+            </div>
+          </div>
           
           <div className="flex flex-col items-center justify-center gap-4">
             <Link to="/biography">
