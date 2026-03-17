@@ -14,9 +14,9 @@ export const lighthouseScores = [
     id: 'meanings',
     name: 'themeaningsoflife.com',
     url: 'https://themeaningsoflife.com',
-    performance: 100,
+    performance: 98,
     accessibility: 100,
-    bestPractices: 100,
+    bestPractices: 96,
     seo: 100,
     color: 'purple'
   },
@@ -26,8 +26,8 @@ export const lighthouseScores = [
     url: 'https://hsvdrone.com',
     performance: 100,
     accessibility: 100,
-    bestPractices: 96,
-    seo: 91,
+    bestPractices: 100,
+    seo: 100,
     color: 'blue'
   },
   {
