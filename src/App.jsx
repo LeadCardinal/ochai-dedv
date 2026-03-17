@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import LoadingOverlay from '@/components/LoadingOverlay';
 import { Toaster } from '@/components/ui/toaster';
 import Home from '@/pages/Home';
 import Biography from '@/pages/Biography';
@@ -24,6 +25,8 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      {/* Loading Overlay rendered at root level */}
+      <LoadingOverlay />
       
       {/* 
         Global Layout Container
