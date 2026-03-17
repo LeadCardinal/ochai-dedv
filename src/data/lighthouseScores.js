@@ -34,10 +34,10 @@ export const lighthouseScores = [
     id: 'ochai',
     name: 'ochai.dev',
     url: 'https://ochai.dev',
-    performance: 98,
-    accessibility: 96,
+    performance: 100,
+    accessibility: 100,
     bestPractices: 100,
-    seo: 92,
+    seo: 100,
     color: 'cyan'
   }
 ];
