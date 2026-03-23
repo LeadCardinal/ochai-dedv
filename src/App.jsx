@@ -11,6 +11,7 @@ import Security from '@/pages/Security';
 import CaseStudyBonsai from '@/pages/CaseStudyBonsai';
 import CaseStudyHsvDrone from '@/pages/CaseStudyHsvDrone';
 import CaseStudyMeanings from '@/pages/CaseStudyMeanings';
+import VideoPage from '@/pages/VideoPage';
 
 // ScrollToTop component to reset scroll on route change
 const ScrollToTop = () => {
@@ -53,6 +54,7 @@ function App() {
             <Route path="/case-study/reallivebonsai" element={<CaseStudyBonsai />} />
             <Route path="/case-study/hsvdrone" element={<CaseStudyHsvDrone />} />
             <Route path="/case-study/themeaningsoflife" element={<CaseStudyMeanings />} />
+            <Route path="/performance" element={<VideoPage />} />
           </Routes>
         </main>
         
