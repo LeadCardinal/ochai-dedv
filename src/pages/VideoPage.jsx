@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 // ─── SWAP THIS when video is uploaded to YouTube ───────────────────────────
-const YOUTUBE_VIDEO_ID = 'REPLACE_WITH_VIDEO_ID';
+const YOUTUBE_VIDEO_ID = 'yzqP5yHmJNs';
 // ───────────────────────────────────────────────────────────────────────────
 
 const VIDEO_TITLE = 'AI Implementation Solutions Architect Full Stack Digital Operator';
