@@ -656,9 +656,9 @@ const ResponsiveLineChart = ({
   
   return (
     <svg
-      className="w-full h-full overflow-hidden"
-      preserveAspectRatio="none"
-      viewBox="0 0 100 100"
+      className="w-full h-full overflow-visible"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 100 115"
     >
       <title>Line chart showing SEO performance metrics over time</title>
       {/* Grid Lines */}
@@ -760,9 +760,9 @@ const ResponsiveBarChart = ({ data, dataKey, color }) => {
   const maxVal = Math.max(...data.map((d) => d[dataKey]));
   return (
     <svg
-      className="w-full h-full overflow-hidden"
-      preserveAspectRatio="none"
-      viewBox="0 0 100 100"
+      className="w-full h-full overflow-visible"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 100 115"
     >
       <title>Bar chart showing hourly event distribution</title>
       {/* Bars */}
@@ -809,9 +809,9 @@ const TimelineChart = ({ data }) => {
 
   return (
     <svg
-      className="w-full h-full overflow-hidden"
-      preserveAspectRatio="none"
-      viewBox="0 0 100 100"
+      className="w-full h-full overflow-visible"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 100 115"
     >
       <title>Timeline chart showing clicks, impressions, and click-through rate over time</title>
       {/* Background Grid */}

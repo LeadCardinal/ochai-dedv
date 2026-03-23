@@ -415,8 +415,8 @@ const ResponsiveLineChart = ({
   return (
     <svg
       className="w-full h-full overflow-hidden"
-      preserveAspectRatio="none"
-      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 100 115"
     >
       <title>Line chart showing search position performance over time</title>
       {[0, 25, 50, 75, 100].map((y) => (
@@ -522,9 +522,9 @@ const ResponsiveLineChart = ({
 
 const ResponsiveSimpleLine = ({ data, color, maxY, reversed }) => (
   <svg
-    className="w-full h-full overflow-hidden"
-    preserveAspectRatio="none"
-    viewBox="0 0 100 100"
+    className="w-full h-full overflow-visible"
+    preserveAspectRatio="xMidYMid meet"
+    viewBox="0 0 100 115"
   >
     <title>Simplified line chart comparing website performance metrics</title>
     <motion.path
@@ -565,8 +565,8 @@ const ResponsiveBarChart = ({ data, dataKey, color }) => {
   return (
     <svg
       className="w-full h-full overflow-hidden"
-      preserveAspectRatio="none"
-      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 100 115"
     >
       <title>Bar chart displaying data distribution</title>
       {/* Bars */}
