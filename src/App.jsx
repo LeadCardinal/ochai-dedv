@@ -26,6 +26,26 @@ const ScrollToTop = () => {
 function App() {
   return (
     <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+const AppContent = () => {
+  const location = useLocation();
+  const isPreviewPage = location?.pathname === '/preview';
+
+  // Render preview page standalone without header/footer/loading overlay
+  if (isPreviewPage) {
+    return (
+      <Routes>
+        <Route path="/preview" element={<PreviewPage />} />
+      </Routes>
+    );
+  }
+
+  return (
+    <>
       <ScrollToTop />
       {/* Loading Overlay rendered at root level */}
       <LoadingOverlay />
@@ -63,8 +83,8 @@ function App() {
         <Footer />
         <Toaster />
       </div>
-    </Router>
+    </>
   );
-}
+};
 
 export default App;
