@@ -106,7 +106,7 @@ const VideoPage = () => {
                   controls
                   className="w-full h-full object-cover"
                 >
-                  <source src="/videos/Og_2__mobile.mp4" type="video/mp4" />
+                  <source src="/videos/_mobile.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
