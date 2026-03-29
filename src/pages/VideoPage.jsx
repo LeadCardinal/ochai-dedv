@@ -89,7 +89,7 @@ const VideoPage = () => {
                 controls
                 className="w-full h-full"
               >
-                <source src="/videos/performance_desktop.mp4" type="video/mp4" />
+                <source src="/videos/_desktop.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -106,7 +106,7 @@ const VideoPage = () => {
                   controls
                   className="w-full h-full object-cover"
                 >
-                  <source src="/videos/Og_2_.mp4" type="video/mp4" />
+                  <source src="/videos/Og_2__mobile.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
