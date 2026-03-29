@@ -78,18 +78,36 @@ const VideoPage = () => {
             <p className="text-slate-400 text-lg">{VIDEO_SUBTITLE}</p>
           </div>
 
-          {/* Video Embed — vertical video in a centered phone-width container */}
-          <div className="flex justify-center mb-10">
+          {/* Desktop: 16:9 Widescreen Self-Hosted Video */}
+          <div className="hidden md:block mb-10">
+            <div className="relative bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
+                className="w-full h-full"
+              >
+                <source src="/videos/performance_desktop.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          {/* Mobile/Tablet: 9:16 Vertical Self-Hosted Video */}
+          <div className="flex md:hidden justify-center mb-10">
             <div className="w-full max-w-sm rounded-2xl overflow-hidden border border-slate-700 shadow-[0_0_40px_rgba(6,182,212,0.15)]">
-              <div className="relative w-full" style={{ paddingTop: '177.78%' }}>
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src={`${EMBED_URL}?rel=0&modestbranding=1`}
-                  title={VIDEO_TITLE}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              <div className="relative aspect-[9/16] w-full">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls
+                  className="w-full h-full object-cover"
+                >
+                  <source src="/videos/Og_2_.mp4" type="video/mp4" />
+                </video>
               </div>
             </div>
           </div>
