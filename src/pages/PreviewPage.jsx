@@ -17,7 +17,7 @@ const PreviewPage = () => {
         <meta property="og:url" content="https://ochai.dev/preview" />
         <meta property="og:title" content="Jeremy Och - Elite AI Implementation Specialist" />
         <meta property="og:description" content="Top 0.05% AI operator. Three perfect Lighthouse scores across production sites. Complete value chain execution - solo." />
-        <meta property="og:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <meta property="og:image" content="https://ochai.dev/videos/introanimation.gif" />
         <meta property="og:video" content="https://ochai.dev/videos/Og_2_.mp4" />
         <meta property="og:video:type" content="video/mp4" />
         <meta property="og:video:width" content="1080" />
@@ -28,7 +28,7 @@ const PreviewPage = () => {
         <meta name="twitter:url" content="https://ochai.dev/preview" />
         <meta name="twitter:title" content="Jeremy Och - Top 0.05% AI Implementation Specialist" />
         <meta name="twitter:description" content="Three perfect Lighthouse scores. Complete value chain execution - solo." />
-        <meta name="twitter:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <meta name="twitter:image" content="https://ochai.dev/videos/introanimation.gif" />
       </Helmet>
 
       <div className="relative min-h-screen w-full overflow-hidden bg-black">
