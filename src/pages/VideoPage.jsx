@@ -89,7 +89,7 @@ const VideoPage = () => {
                 controls
                 className="w-full h-full"
               >
-                <source src="/videos/_desktop.mp4" type="video/mp4" />
+                <source src="/videos/_Desktop.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
