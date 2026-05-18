@@ -151,7 +151,7 @@ const EliteHeroSection = () => {
             </motion.div>
           </div>
 
-          {/* Right Column - Hero Image */}
+          {/* Right Column - Hero Video */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -159,29 +159,21 @@ const EliteHeroSection = () => {
             className="relative flex items-center justify-center lg:justify-end"
           >
             <div className="relative w-full max-w-xl">
-              {/* Glow Effect Behind Image */}
+              {/* Glow Effect Behind Video */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 blur-3xl rounded-full" />
 
-              {/* Hero Image with AVIF + WebP Fallback */}
-              <picture>
-                <source
-                  srcSet="/images/Hero_V3.avif"
-                  type="image/avif"
-                />
-                <source
-                  srcSet="/images/Hero_V3.webp"
-                  type="image/webp"
-                />
-                <img
-                  src="/images/Hero_V3.webp"
-                  alt="Jeremy Och - OCH AI DEV - Top .05% AI Implementation Specialist Worldwide"
-                  width="800"
-                  height="600"
-                  fetchpriority="high"
-                  decoding="async"
-                  className="relative z-10 w-full h-auto rounded-3xl shadow-2xl border border-cyan-500/20"
-                />
-              </picture>
+              {/* Hero Video */}
+              <video
+                src="/images/Hero_V3.webm"
+                alt="Jeremy Och - OCH AI DEV - Top .05% AI Implementation Specialist Worldwide"
+                width="800"
+                height="600"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="relative z-10 w-full h-auto rounded-3xl shadow-2xl border border-cyan-500/20"
+              />
             </div>
           </motion.div>
         </div>
