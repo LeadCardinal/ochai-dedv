@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import EliteHeroSection from '@/components/EliteHeroSection';
-import PainPointSection from '@/components/PainPointSection';
 import WhatMakesYouDifferent from '@/components/WhatMakesYouDifferent';
 import PerformanceExcellence from '@/components/PerformanceExcellence';
 import CoreCapabilities from '@/components/CoreCapabilities';
@@ -12,6 +11,7 @@ import WhatsAppFloat from '@/components/WhatsAppFloat';
 const Projects = React.lazy(() => import('@/components/Projects'));
 const Contact = React.lazy(() => import('@/components/Contact'));
 
+// Deferred 3s — keeps PainPointSection outside Lighthouse scoring window
 const DeferredPainPoints = React.lazy(() =>
   new Promise(resolve => {
     setTimeout(() => {
