@@ -1,18 +1,23 @@
-
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import LoadingOverlay from '@/components/LoadingOverlay';
-import { Toaster } from '@/components/ui/toaster';
-import Home from '@/pages/Home';
-import Biography from '@/pages/Biography';
-import Security from '@/pages/Security';
-import CaseStudyBonsai from '@/pages/CaseStudyBonsai';
-import CaseStudyHsvDrone from '@/pages/CaseStudyHsvDrone';
-import CaseStudyMeanings from '@/pages/CaseStudyMeanings';
-import VideoPage from '@/pages/VideoPage';
-import PreviewPage from '@/pages/PreviewPage';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import LoadingOverlay from "@/components/LoadingOverlay";
+import { Toaster } from "@/components/ui/toaster";
+import Home from "@/pages/Home";
+import Biography from "@/pages/Biography";
+import Security from "@/pages/Security";
+import CaseStudyBonsai from "@/pages/CaseStudyBonsai";
+import CaseStudyHsvDrone from "@/pages/CaseStudyHsvDrone";
+import CaseStudyMeanings from "@/pages/CaseStudyMeanings";
+import VideoPage from "@/pages/VideoPage";
+import Showcase from "@/pages/Showcase";
+import PreviewPage from "@/pages/PreviewPage";
 
 // ScrollToTop component to reset scroll on route change
 const ScrollToTop = () => {
@@ -33,7 +38,7 @@ function App() {
 
 const AppContent = () => {
   const location = useLocation();
-  const isPreviewPage = location?.pathname === '/preview';
+  const isPreviewPage = location?.pathname === "/preview";
 
   // Render preview page standalone without header/footer/loading overlay
   if (isPreviewPage) {
@@ -49,7 +54,7 @@ const AppContent = () => {
       <ScrollToTop />
       {/* Loading Overlay rendered at root level */}
       <LoadingOverlay />
-      
+
       {/* 
         Global Layout Container
         - Removed bg-slate-950 from here to prevent masking negative z-index elements.
@@ -57,7 +62,6 @@ const AppContent = () => {
           but strictly keeping background transparent.
       */}
       <div className="min-h-screen bg-transparent text-white flex flex-col relative">
-        
         {/* 
           Global Fixed Background 
           - Sits at -z-50, behind absolutely everything.
@@ -66,20 +70,30 @@ const AppContent = () => {
         <div className="fixed inset-0 bg-slate-950 -z-50" />
 
         <Header />
-        
+
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/biography" element={<Biography />} />
             <Route path="/security" element={<Security />} />
-            <Route path="/case-study/reallivebonsai" element={<CaseStudyBonsai />} />
-            <Route path="/case-study/hsvdrone" element={<CaseStudyHsvDrone />} />
-            <Route path="/case-study/themeaningsoflife" element={<CaseStudyMeanings />} />
+            <Route
+              path="/case-study/reallivebonsai"
+              element={<CaseStudyBonsai />}
+            />
+            <Route
+              path="/case-study/hsvdrone"
+              element={<CaseStudyHsvDrone />}
+            />
+            <Route
+              path="/case-study/themeaningsoflife"
+              element={<CaseStudyMeanings />}
+            />
             <Route path="/performance" element={<VideoPage />} />
+            <Route path="/showcase" element={<Showcase />} />
             <Route path="/preview" element={<PreviewPage />} />
           </Routes>
         </main>
-        
+
         <Footer />
         <Toaster />
       </div>
