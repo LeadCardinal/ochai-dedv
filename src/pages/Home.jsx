@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import EliteHeroSection from '@/components/EliteHeroSection';
 import WhatMakesYouDifferent from '@/components/WhatMakesYouDifferent';
@@ -8,23 +8,37 @@ import Technologies from '@/components/Technologies';
 import About from '@/components/About';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 
+const PainPointSection = React.lazy(() => import('@/components/PainPointSection'));
 const Projects = React.lazy(() => import('@/components/Projects'));
 const Contact = React.lazy(() => import('@/components/Contact'));
 
-// Deferred 3s — keeps PainPointSection outside Lighthouse scoring window
-const DeferredPainPoints = React.lazy(() =>
-  new Promise(resolve => {
-    setTimeout(() => {
-      resolve(import('@/components/PainPointSection'));
-    }, 3000);
-  })
+const SectionSkeleton = () => (
+  <div className="min-h-[50vh] w-full bg-slate-950" />
 );
 
-const SectionSkeleton = () => (
-  <div className="min-h-[50vh] w-full bg-slate-950 flex items-center justify-center">
-    <div className="w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-  </div>
-);
+// Only loads the children when the sentinel div scrolls into view
+const LazyOnScroll = ({ children, rootMargin = '400px' }) => {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (!ref.current) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { rootMargin }
+    );
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [rootMargin]);
+  return (
+    <div ref={ref}>
+      {visible ? (
+        <React.Suspense fallback={<SectionSkeleton />}>{children}</React.Suspense>
+      ) : (
+        <SectionSkeleton />
+      )}
+    </div>
+  );
+};
 
 const Home = () => {
   return (
@@ -64,9 +78,9 @@ const Home = () => {
 
       <EliteHeroSection />
 
-      <React.Suspense fallback={<SectionSkeleton />}>
-        <DeferredPainPoints />
-      </React.Suspense>
+      <LazyOnScroll>
+        <PainPointSection />
+      </LazyOnScroll>
 
       <WhatMakesYouDifferent />
       <PerformanceExcellence />
@@ -74,10 +88,10 @@ const Home = () => {
       <Technologies />
       <About />
 
-      <React.Suspense fallback={<SectionSkeleton />}>
+      <LazyOnScroll>
         <Projects />
         <Contact />
-      </React.Suspense>
+      </LazyOnScroll>
 
       <WhatsAppFloat />
     </>
