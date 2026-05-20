@@ -36,16 +36,13 @@ const Header = () => {
   const handleNavigation = (id) => {
     setIsMobileMenuOpen(false);
 
-    // If we are not on home page, navigate to home first
     if (location.pathname !== "/") {
       navigate("/");
-      // Wait for navigation to complete then scroll
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) element.scrollIntoView({ behavior: "smooth" });
       }, 100);
     } else {
-      // If we are already on home, just scroll
       const element = document.getElementById(id);
       if (element) element.scrollIntoView({ behavior: "smooth" });
     }
@@ -54,6 +51,7 @@ const Header = () => {
   const navItems = [
     { label: "About", id: "about" },
     { label: "Bio", route: "/biography" },
+    { label: "Showcase", route: "/showcase" },
     { label: "Contact", id: "contact" },
     { label: "Projects", id: "projects" },
     { label: "Technologies", id: "technologies" },
@@ -83,7 +81,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item, index) => 
+          {navItems.map((item, index) =>
             item.route ? (
               <Link key={item.route} to={item.route}>
                 <motion.span
@@ -107,7 +105,7 @@ const Header = () => {
               >
                 {item.label}
               </motion.button>
-            )
+            ),
           )}
 
           <DropdownMenu>
@@ -175,7 +173,7 @@ const Header = () => {
             className="absolute top-full left-0 right-0 bg-slate-950/98 backdrop-blur-md md:hidden min-h-screen shadow-2xl"
           >
             <div className="flex flex-col p-4 gap-4">
-              {navItems.map((item) => 
+              {navItems.map((item) =>
                 item.route ? (
                   <Link
                     key={item.route}
@@ -193,7 +191,7 @@ const Header = () => {
                   >
                     {item.label}
                   </button>
-                )
+                ),
               )}
               <div className="h-px bg-slate-800 my-2"></div>
               <p className="text-sm font-semibold text-slate-300 uppercase">
