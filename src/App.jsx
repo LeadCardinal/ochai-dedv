@@ -10,14 +10,14 @@ import Footer from "@/components/Footer";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
-import Biography from "@/pages/Biography";
-import Security from "@/pages/Security";
-import CaseStudyBonsai from "@/pages/CaseStudyBonsai";
-import CaseStudyHsvDrone from "@/pages/CaseStudyHsvDrone";
-import CaseStudyMeanings from "@/pages/CaseStudyMeanings";
-import VideoPage from "@/pages/VideoPage";
-import Showcase from "@/pages/Showcase";
-import PreviewPage from "@/pages/PreviewPage";
+const Biography = React.lazy(() => import("@/pages/Biography"));
+const Security = React.lazy(() => import("@/pages/Security"));
+const CaseStudyBonsai = React.lazy(() => import("@/pages/CaseStudyBonsai"));
+const CaseStudyHsvDrone = React.lazy(() => import("@/pages/CaseStudyHsvDrone"));
+const CaseStudyMeanings = React.lazy(() => import("@/pages/CaseStudyMeanings"));
+const VideoPage = React.lazy(() => import("@/pages/VideoPage"));
+const Showcase = React.lazy(() => import("@/pages/Showcase"));
+const PreviewPage = React.lazy(() => import("@/pages/PreviewPage"));
 
 // ScrollToTop component to reset scroll on route change
 const ScrollToTop = () => {
@@ -72,6 +72,7 @@ const AppContent = () => {
         <Header />
 
         <main className="flex-grow">
+          <React.Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/biography" element={<Biography />} />
@@ -92,6 +93,7 @@ const AppContent = () => {
             <Route path="/showcase" element={<Showcase />} />
             <Route path="/preview" element={<PreviewPage />} />
           </Routes>
+          </React.Suspense>
         </main>
 
         <Footer />
