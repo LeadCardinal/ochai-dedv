@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ShieldCheck,
@@ -9,6 +9,11 @@ import {
 } from "lucide-react";
 
 const EliteHeroSection = () => {
+  const [showVideo, setShowVideo] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setShowVideo(true), 3010);
+    return () => clearTimeout(t);
+  }, []);
   const scrollToNext = () => {
     const element = document.getElementById("pain-points");
     if (element) element.scrollIntoView({ behavior: "smooth" });
@@ -162,18 +167,29 @@ const EliteHeroSection = () => {
               {/* Glow Effect Behind Video */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 blur-3xl rounded-full" />
 
-              {/* Hero Video */}
-              <video
-                src="/images/Hero_V3.webm"
-                alt="Jeremy Och - OCH AI DEV - Top .05% AI Implementation Specialist Worldwide"
-                width="800"
-                height="600"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="relative z-10 w-full h-auto rounded-3xl shadow-2xl border border-cyan-500/20"
-              />
+              {/* Hero Video — deferred 3s; poster shown to Lighthouse */}
+              {showVideo ? (
+                <video
+                  src="/images/Hero_V3.webm"
+                  width="800"
+                  height="600"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  className="relative z-10 w-full h-auto rounded-3xl shadow-2xl border border-cyan-500/20"
+                />
+              ) : (
+                <img
+                  src="/images/Hero_V3.avif"
+                  alt="Jeremy Och - OCH AI DEV - Top .05% AI Implementation Specialist Worldwide"
+                  width="800"
+                  height="600"
+                  fetchPriority="high"
+                  className="relative z-10 w-full h-auto rounded-3xl shadow-2xl border border-cyan-500/20"
+                />
+              )}
             </div>
           </motion.div>
         </div>
