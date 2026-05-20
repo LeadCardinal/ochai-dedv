@@ -170,7 +170,7 @@ const EliteHeroSection = () => {
               {/* Hero Video — deferred 3s; poster shown to Lighthouse */}
               {showVideo ? (
                 <video
-                  src="/images/Hero_V3.webm"
+                  src={videoSrc}
                   width="800"
                   height="600"
                   autoPlay
@@ -182,7 +182,7 @@ const EliteHeroSection = () => {
                 />
               ) : (
                 <img
-                  src="/images/Hero_V3.avif"
+                  src={posterSrc}
                   alt="Jeremy Och - OCH AI DEV - Top .05% AI Implementation Specialist Worldwide"
                   width="800"
                   height="600"
