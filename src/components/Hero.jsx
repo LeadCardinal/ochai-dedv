@@ -30,19 +30,18 @@ const Hero = () => {
   return (
     <section className="relative min-h-[120vh] flex flex-col items-center justify-center">
       <div className="fixed top-20 bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] -z-10">
-        <Link to="/showcase" className="block w-full h-full">
-          <video
+        <video
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="none"
             poster={posterSrc}
             className="w-full h-full object-cover object-top opacity-100 block"
           >
             <source src={videoSrc} type="video/webm" />
           </video>
-        </Link>
+      
         <div className="absolute inset-0 bg-slate-950/85 pointer-events-none" />
       </div>
 
