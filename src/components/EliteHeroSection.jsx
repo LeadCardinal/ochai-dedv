@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ShieldCheck,
@@ -7,6 +7,10 @@ import {
   Sparkles,
   ChevronDown,
 } from "lucide-react";
+
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+const posterSrc = isMobile ? "/videos/hero_mobile_poster.avif" : "/videos/hero_desktop_poster.avif";
+const videoSrc = isMobile ? "/videos/hero_mobile.webm" : "/videos/hero_desktop.webm";
 
 const EliteHeroSection = () => {
   const [showVideo, setShowVideo] = useState(false);
