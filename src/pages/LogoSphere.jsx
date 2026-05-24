@@ -223,6 +223,8 @@ const LogoSphere = () => {
       stopPresentation();
       s.presentTimer = setInterval(() => {
         if (s.modalOpen) return;
+        const speed = Math.abs(s.rotVel.x) + Math.abs(s.rotVel.y);
+        if (s.isDragging || speed > 0.001) return;
         s.presentIdx = (s.presentIdx + 1) % LOGOS.length;
         openModal(s.tiles[s.presentIdx]);
         setTimeout(closeModal, PRESENT_INTERVAL * 0.72);
