@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import * as THREE from "three";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 
@@ -19,6 +18,19 @@ const LogoSphere = () => {
     let animId;
     const s = stateRef.current;
 
+    function loadThree() {
+      return new Promise((resolve) => {
+        if (window.THREE) { resolve(window.THREE); return; }
+        const script = document.createElement("script");
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+        script.crossOrigin = "anonymous";
+        document.head.appendChild(script);
+        const poll = setInterval(() => {
+          if (window.THREE) { clearInterval(poll); resolve(window.THREE); }
+        }, 50);
+      });
+    }
+
     function fibonacciSphere(n, radius) {
       const pts = [];
       const golden = Math.PI * (3 - Math.sqrt(5));
@@ -26,39 +38,41 @@ const LogoSphere = () => {
         const y = 1 - (i / (n - 1)) * 2;
         const r = Math.sqrt(1 - y * y);
         const theta = golden * i;
-        pts.push(new THREE.Vector3(Math.cos(theta) * r * radius, y * radius, Math.sin(theta) * r * radius));
+        pts.push(new window._THREE.Vector3(Math.cos(theta) * r * radius, y * radius, Math.sin(theta) * r * radius));
       }
       return pts;
     }
 
-    function init() {
+    async function init() {
+      const THREE = await loadThree();
+      window._THREE = THREE;
       const el = mountRef.current;
       if (!el) return;
 
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+      const renderer = new window._window._THREE.WebGLRenderer({ antialias: true, alpha: false });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(el.clientWidth, el.clientHeight);
       renderer.setClearColor(0x06070f, 1);
       el.appendChild(renderer.domElement);
       s.renderer = renderer;
 
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(52, el.clientWidth / el.clientHeight, 0.1, 100);
+      const scene = new window._window._THREE.Scene();
+      const camera = new window._window._THREE.PerspectiveCamera(52, el.clientWidth / el.clientHeight, 0.1, 100);
       camera.position.z = 9.5;
       s.camera = camera;
 
-      scene.add(new THREE.AmbientLight(0xffffff, 0.85));
-      const dir = new THREE.DirectionalLight(0x64d2ff, 0.6);
+      scene.add(new window._window._THREE.AmbientLight(0xffffff, 0.85));
+      const dir = new window._window._THREE.DirectionalLight(0x64d2ff, 0.6);
       dir.position.set(5, 8, 5);
       scene.add(dir);
 
-      const sphereGroup = new THREE.Group();
+      const sphereGroup = new window._window._THREE.Group();
       scene.add(sphereGroup);
       s.sphereGroup = sphereGroup;
 
-      const raycaster = new THREE.Raycaster();
+      const raycaster = new window._window._THREE.Raycaster();
       s.raycaster = raycaster;
-      s.mouse = new THREE.Vector2();
+      s.mouse = new window._window._THREE.Vector2();
       s.tiles = [];
       s.rotVel = { x: 0, y: 0 };
       s.isDragging = false;
@@ -66,21 +80,21 @@ const LogoSphere = () => {
       s.mode = "present";
       s.presentIdx = 0;
       s.modalOpen = false;
-      s.clock = new THREE.Clock();
+      s.clock = new window._window._THREE.Clock();
 
       const positions = fibonacciSphere(LOGOS.length, RADIUS);
-      const loader = new THREE.TextureLoader();
+      const loader = new window._window._THREE.TextureLoader();
 
       LOGOS.forEach((src, i) => {
-        const geo = new THREE.BoxGeometry(TILE_SIZE, TILE_SIZE, TILE_DEPTH);
-        const mat = new THREE.MeshStandardMaterial({ color: 0x1a2030, roughness: 0.4, metalness: 0.3, transparent: true, opacity: 0.92 });
-        const tile = new THREE.Mesh(geo, mat);
+        const geo = new window._window._THREE.BoxGeometry(TILE_SIZE, TILE_SIZE, TILE_DEPTH);
+        const mat = new window._window._window._THREE.MeshStandardMaterial({ color: 0x1a2030, roughness: 0.4, metalness: 0.3, transparent: true, opacity: 0.92 });
+        const tile = new window._window._THREE.Mesh(geo, mat);
         const pos = positions[i];
         tile.position.copy(pos);
         tile.lookAt(0, 0, 0);
         loader.load(src, (tex) => {
-          tex.colorSpace = THREE.SRGBColorSpace;
-          tile.material = new THREE.MeshStandardMaterial({ map: tex, transparent: true, roughness: 0.35, metalness: 0.15, alphaTest: 0.01 });
+          tex.colorSpace = window._THREE.SRGBColorSpace;
+          tile.material = new window._window._window._THREE.MeshStandardMaterial({ map: tex, transparent: true, roughness: 0.35, metalness: 0.15, alphaTest: 0.01 });
         });
         tile.userData = { idx: i, src, basePos: pos.clone(), normal: pos.clone().normalize(), lift: 0, targetLift: 0, wave: Math.random() * Math.PI * 2, waveSpeed: 0.4 + Math.random() * 0.3 };
         sphereGroup.add(tile);
@@ -109,7 +123,7 @@ const LogoSphere = () => {
         ud.lift += (ud.targetLift - ud.lift) * 0.12;
         const wave = Math.sin(t * ud.waveSpeed + ud.wave) * 0.025;
         tile.position.copy(ud.basePos).addScaledVector(ud.normal, ud.lift + wave);
-        const worldCenter = new THREE.Vector3(); s.sphereGroup.getWorldPosition(worldCenter); tile.lookAt(worldCenter);
+        const worldCenter = new window._window._THREE.Vector3(); s.sphereGroup.getWorldPosition(worldCenter); tile.lookAt(worldCenter);
       });
       s.renderer.render(s.scene, s.camera);
     }
