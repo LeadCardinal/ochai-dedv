@@ -17,6 +17,7 @@ const CaseStudyHsvDrone = React.lazy(() => import("@/pages/CaseStudyHsvDrone"));
 const CaseStudyMeanings = React.lazy(() => import("@/pages/CaseStudyMeanings"));
 const VideoPage = React.lazy(() => import("@/pages/VideoPage"));
 const Showcase = React.lazy(() => import("@/pages/Showcase"));
+const LogoSphere = React.lazy(() => import("@/pages/LogoSphere"));
 const PreviewPage = React.lazy(() => import("@/pages/PreviewPage"));
 
 // ScrollToTop component to reset scroll on route change
@@ -91,6 +92,7 @@ const AppContent = () => {
             />
             <Route path="/performance" element={<VideoPage />} />
             <Route path="/showcase" element={<Showcase />} />
+            <Route path="/logos" element={<LogoSphere />} />
             <Route path="/preview" element={<PreviewPage />} />
           </Routes>
           </React.Suspense>
