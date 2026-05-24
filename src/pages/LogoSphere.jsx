@@ -131,6 +131,7 @@ const LogoSphere = () => {
         s.isDragging = false;
         prevMouse = {x: e.clientX, y: e.clientY};
         s.rotVel = {x:0, y:0};
+        if (s.mode === "present") { stopPresentation(); if (s.idleTimer) clearTimeout(s.idleTimer); }
       });
       canvas.addEventListener("mousemove", e => {
         const dx = e.clientX - prevMouse.x, dy = e.clientY - prevMouse.y;
@@ -145,7 +146,10 @@ const LogoSphere = () => {
         s.mouse.set(((e.clientX - rect.left) / rect.width) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1);
         checkHover();
       });
-      canvas.addEventListener("mouseup", () => { s.isDragging = false; });
+      canvas.addEventListener("mouseup", () => {
+        s.isDragging = false;
+        if (s.mode === "present") { if (s.idleTimer) clearTimeout(s.idleTimer); s.idleTimer = setTimeout(() => startPresentation(), 5000); }
+      });
       canvas.addEventListener("click", e => {
         if (s.isDragging) return;
         const rect = canvas.getBoundingClientRect();
@@ -159,6 +163,7 @@ const LogoSphere = () => {
       canvas.addEventListener("touchstart", e => {
         touchStart = {x:e.touches[0].clientX, y:e.touches[0].clientY};
         s.isDragging = false; s.rotVel = {x:0,y:0};
+        if (s.mode === "present") { stopPresentation(); if (s.idleTimer) clearTimeout(s.idleTimer); }
       }, {passive:true});
       canvas.addEventListener("touchmove", e => {
         e.preventDefault();
@@ -179,6 +184,7 @@ const LogoSphere = () => {
           if (hits.length > 0) openModal(hits[0].object);
         }
         s.isDragging = false;
+        if (s.mode === "present") { if (s.idleTimer) clearTimeout(s.idleTimer); s.idleTimer = setTimeout(() => startPresentation(), 5000); }
       });
 
       window.addEventListener("resize", () => {
@@ -230,6 +236,7 @@ const LogoSphere = () => {
     return () => {
       cancelAnimationFrame(animId);
       if (s.presentTimer) clearInterval(s.presentTimer);
+      if (s.idleTimer) clearTimeout(s.idleTimer);
       if (s.renderer) {
         s.renderer.dispose();
         if (mountRef.current && s.renderer.domElement.parentNode === mountRef.current)
