@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import * as THREE from "three";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 
@@ -15,19 +16,8 @@ const LogoSphere = () => {
   const stateRef = useRef({});
 
   useEffect(() => {
-    let THREE;
     let animId;
     const s = stateRef.current;
-
-    function loadThree() {
-      return new Promise((resolve) => {
-        if (window.THREE) { resolve(window.THREE); return; }
-        const script = document.createElement("script");
-        script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
-        script.onload = () => resolve(window.THREE);
-        document.head.appendChild(script);
-      });
-    }
 
     function fibonacciSphere(n, radius) {
       const pts = [];
@@ -41,8 +31,7 @@ const LogoSphere = () => {
       return pts;
     }
 
-    async function init() {
-      THREE = await loadThree();
+    function init() {
       const el = mountRef.current;
       if (!el) return;
 

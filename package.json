@@ -30,7 +30,8 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "6.16.0",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@babel/generator": "^7.23.0",
