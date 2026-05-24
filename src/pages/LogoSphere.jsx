@@ -145,6 +145,7 @@ const LogoSphere = () => {
         const rect = canvas.getBoundingClientRect();
         s.mouse.set(((e.clientX - rect.left) / rect.width) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1);
         checkHover();
+        if (s.mode === "present") { if (s.idleTimer) clearTimeout(s.idleTimer); s.idleTimer = setTimeout(() => startPresentation(), 5000); }
       });
       canvas.addEventListener("mouseup", () => {
         s.isDragging = false;
