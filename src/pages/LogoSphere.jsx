@@ -120,7 +120,7 @@ const LogoSphere = () => {
         ud.lift += (ud.targetLift - ud.lift) * 0.12;
         const wave = Math.sin(t * ud.waveSpeed + ud.wave) * 0.025;
         tile.position.copy(ud.basePos).addScaledVector(ud.normal, ud.lift + wave);
-        tile.lookAt(s.sphereGroup.localToWorld(new s.renderer.domElement.constructor !== HTMLCanvasElement ? new window.THREE.Vector3(0,0,0) : new window.THREE.Vector3(0,0,0)));
+        const worldCenter = new THREE.Vector3(); s.sphereGroup.getWorldPosition(worldCenter); tile.lookAt(worldCenter);
       });
       s.renderer.render(s.scene, s.camera);
     }
