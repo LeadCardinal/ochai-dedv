@@ -118,17 +118,17 @@ const Header = () => {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
               >
-                About <ChevronDown className="w-4 h-4" />
+                More <ChevronDown className="w-4 h-4" />
               </motion.button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-slate-900 border-slate-800 text-white min-w-[180px]">
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <button onClick={() => handleNavigation("about")} className="w-full text-left">
+                <button onClick={() => handleNavigation("More")} className="w-full text-left">
                   About
                 </button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <Link to="/biography" className="w-full">Bio</Link>
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/biography"); }} className="w-full text-left">Bio</button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
                 <button onClick={() => handleNavigation("projects")} className="w-full text-left">
@@ -145,13 +145,13 @@ const Header = () => {
                 Case Studies
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <Link to="/case-study/reallivebonsai" className="w-full">reallivebonsai.us</Link>
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/case-study/reallivebonsai"); }} className="w-full text-left">reallivebonsai.us</button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <Link to="/case-study/hsvdrone" className="w-full">hsvdrone.com</Link>
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/case-study/hsvdrone"); }} className="w-full text-left">hsvdrone.com</button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <Link to="/case-study/themeaningsoflife" className="w-full">themeaningsoflife.com</Link>
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/case-study/themeaningsoflife"); }} className="w-full text-left">themeaningsoflife.com</button>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -214,9 +214,9 @@ const Header = () => {
                 Contact
               </button>
               <div className="h-px bg-slate-800 my-1" />
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">About</p>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">More</p>
               <button
-                onClick={() => handleNavigation("about")}
+                onClick={() => handleNavigation("More")}
                 className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
               >
                 About

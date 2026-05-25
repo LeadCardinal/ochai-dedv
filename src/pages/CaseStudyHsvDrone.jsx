@@ -603,3 +603,9 @@ const ResponsiveBarChart = ({ data, dataKey, color }) => {
 };
 
 export default CaseStudyHsvDrone;
+    </svg>
+    </div>
+  );
+};
+
+export default CaseStudyHsvDrone;
