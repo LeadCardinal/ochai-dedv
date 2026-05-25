@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ShieldCheck,
@@ -29,7 +29,7 @@ const EliteHeroSection = () => {
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950" />
 
       <div className="container relative z-10 mx-auto px-4 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-7xl mx-auto">
           {/* Left Column - Text Content */}
           <div className="text-center lg:text-left">
             {/* Badge */}
@@ -165,7 +165,7 @@ const EliteHeroSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="relative flex items-center justify-center lg:justify-end"
+            className="relative flex items-start justify-center lg:justify-end lg:pt-6"
           >
             <div className="relative w-full max-w-xl">
               {/* Glow Effect Behind Video */}
