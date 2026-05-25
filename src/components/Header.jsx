@@ -8,6 +8,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -35,7 +36,6 @@ const Header = () => {
 
   const handleNavigation = (id) => {
     setIsMobileMenuOpen(false);
-
     if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
@@ -47,15 +47,6 @@ const Header = () => {
       if (element) element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  const navItems = [
-    { label: "About", id: "about" },
-    { label: "Bio", route: "/biography" },
-    { label: "Showcase", route: "/showcase" },
-    { label: "Contact", id: "contact" },
-    { label: "Projects", id: "projects" },
-    { label: "Technologies", id: "technologies" },
-  ];
 
   return (
     <motion.header
@@ -81,61 +72,91 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item, index) =>
-            item.route ? (
-              <Link key={item.route} to={item.route}>
-                <motion.span
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-slate-300 hover:text-white transition-colors cursor-pointer inline-block"
-                >
-                  {item.label}
-                </motion.span>
-              </Link>
-            ) : (
-              <motion.button
-                key={item.id}
-                onClick={() => handleNavigation(item.id)}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="text-slate-300 hover:text-white transition-colors"
-              >
-                {item.label}
-              </motion.button>
-            ),
-          )}
 
+          {/* Showcase */}
+          <Link to="/showcase">
+            <motion.span
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-slate-300 hover:text-white transition-colors cursor-pointer inline-block"
+            >
+              Showcase
+            </motion.span>
+          </Link>
+
+          {/* Work — Global Media Portfolio sphere */}
+          <Link to="/logos">
+            <motion.span
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-slate-300 hover:text-white transition-colors cursor-pointer inline-block"
+            >
+              Work
+            </motion.span>
+          </Link>
+
+          {/* Contact */}
+          <motion.button
+            onClick={() => handleNavigation("contact")}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            className="text-slate-300 hover:text-white transition-colors"
+          >
+            Contact
+          </motion.button>
+
+          {/* About dropdown — consolidates Bio, Projects, Technologies, Case Studies */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 gap-2"
+              <motion.button
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
               >
-                Case Studies <ChevronDown className="w-4 h-4" />
-              </Button>
+                About <ChevronDown className="w-4 h-4" />
+              </motion.button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-slate-900 border-slate-800 text-white">
+            <DropdownMenuContent className="bg-slate-900 border-slate-800 text-white min-w-[180px]">
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <Link to="/case-study/reallivebonsai" className="w-full">
-                  reallivebonsai.us
-                </Link>
+                <button onClick={() => handleNavigation("about")} className="w-full text-left">
+                  About
+                </button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <Link to="/case-study/hsvdrone" className="w-full">
-                  hsvdrone.com
-                </Link>
+                <Link to="/biography" className="w-full">Bio</Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <Link to="/case-study/themeaningsoflife" className="w-full">
-                  themeaningsoflife.com
-                </Link>
+                <button onClick={() => handleNavigation("projects")} className="w-full text-left">
+                  Projects
+                </button>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
+                <button onClick={() => handleNavigation("technologies")} className="w-full text-left">
+                  Technologies
+                </button>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="bg-slate-800" />
+              <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer text-xs text-slate-500 pointer-events-none">
+                Case Studies
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
+                <Link to="/case-study/reallivebonsai" className="w-full">reallivebonsai.us</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
+                <Link to="/case-study/hsvdrone" className="w-full">hsvdrone.com</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
+                <Link to="/case-study/themeaningsoflife" className="w-full">themeaningsoflife.com</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
+          {/* Resume CTA */}
           <Button
             asChild
             className="ml-4 px-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg group"
@@ -146,8 +167,7 @@ const Header = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2"
             >
-              Resume{" "}
-              <Download className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              Resume <Download className="w-4 h-4 group-hover:scale-110 transition-transform" />
             </a>
           </Button>
         </div>
@@ -173,30 +193,55 @@ const Header = () => {
             className="absolute top-full left-0 right-0 bg-slate-950/98 backdrop-blur-md md:hidden min-h-screen shadow-2xl"
           >
             <div className="flex flex-col p-4 gap-4">
-              {navItems.map((item) =>
-                item.route ? (
-                  <Link
-                    key={item.route}
-                    to={item.route}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg"
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <button
-                    key={item.id}
-                    onClick={() => handleNavigation(item.id)}
-                    className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg"
-                  >
-                    {item.label}
-                  </button>
-                ),
-              )}
-              <div className="h-px bg-slate-800 my-2"></div>
-              <p className="text-sm font-semibold text-slate-300 uppercase">
-                Case Studies
-              </p>
+              <Link
+                to="/showcase"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg"
+              >
+                Showcase
+              </Link>
+              <Link
+                to="/logos"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg"
+              >
+                Work
+              </Link>
+              <button
+                onClick={() => handleNavigation("contact")}
+                className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg"
+              >
+                Contact
+              </button>
+              <div className="h-px bg-slate-800 my-1" />
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">About</p>
+              <button
+                onClick={() => handleNavigation("about")}
+                className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
+              >
+                About
+              </button>
+              <Link
+                to="/biography"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
+              >
+                Bio
+              </Link>
+              <button
+                onClick={() => handleNavigation("projects")}
+                className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => handleNavigation("technologies")}
+                className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
+              >
+                Technologies
+              </button>
+              <div className="h-px bg-slate-800 my-1" />
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Case Studies</p>
               <Link
                 to="/case-study/reallivebonsai"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -228,8 +273,7 @@ const Header = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2"
                 >
-                  Download Resume{" "}
-                  <Download className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                  Download Resume <Download className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 </a>
               </Button>
             </div>
