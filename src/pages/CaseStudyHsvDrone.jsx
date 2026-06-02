@@ -569,7 +569,6 @@ const ResponsiveBarChart = ({ data, dataKey, color }) => {
       viewBox="0 0 100 115"
     >
       <title>Bar chart displaying data distribution</title>
-      {/* Bars */}
       {data.map((d, i) => {
         const barWidth = 80 / data.length;
         const x = (i / data.length) * 100 + 10 / data.length;
@@ -594,17 +593,10 @@ const ResponsiveBarChart = ({ data, dataKey, color }) => {
         );
       })}
 
-      {/* Max label */}
       <text x="0" y="5" fill="#94a3b8" fontSize="4">
         Peak: {maxVal}
       </text>
     </svg>
-  );
-};
-
-export default CaseStudyHsvDrone;
-    </svg>
-    </div>
   );
 };
 
