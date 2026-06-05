@@ -31,7 +31,7 @@ const EliteHeroSection = () => {
       <div className="container relative z-10 mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-7xl mx-auto">
           {/* Left Column - Text Content */}
-          <div className="text-center lg:text-left">
+          <div className="text-center lg:text-left pt-16">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -76,7 +76,6 @@ const EliteHeroSection = () => {
                 Google's own Lighthouse benchmarks across my production
                 properties.
               </p>
-
               <p>
                 <strong className="text-cyan-400">
                   I execute the complete value chain solo as fewer than 1,000
@@ -87,7 +86,6 @@ const EliteHeroSection = () => {
                 at standards producing perfect technical scores and backed by
                 measurable revenue.
               </p>
-
               <p className="text-slate-200">
                 Most developers specialize. Agencies distribute across teams.{" "}
                 <span className="text-white font-semibold">
