@@ -62,10 +62,11 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center">
           <img
-            src="/images/header.avif"            alt="Jeremy Och Portfolio"
+            src="/images/newheaderlogo.webp"
+            alt="OchAI — Jeremy Och"
             width={250}
-            height={50}
-            className="h-[50px] w-[250px] object-contain"
+            height={75}
+            className="h-[75px] w-[250px] object-contain"
           />
         </Link>
 
