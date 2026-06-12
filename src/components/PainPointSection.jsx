@@ -62,7 +62,7 @@ const SinglePainPoint = ({ data, isLast }) => {
 
   return (
     <div ref={containerRef} className={`h-[250vh] relative z-10 ${!isLast ? 'border-b border-slate-900/50' : ''}`}>
-      <div className="sticky top-[108px] h-screen w-full overflow-hidden flex items-center justify-center">
+      <div className="sticky top-[73px] h-screen w-full overflow-hidden flex items-center justify-center">
         <div className="container mx-auto px-4 md:px-8 max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
             
