@@ -73,6 +73,18 @@ const Header = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
 
+          {/* Services — client funnel */}
+          <Link to="/services">
+            <motion.span
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors cursor-pointer inline-block"
+            >
+              Services
+            </motion.span>
+          </Link>
+
           {/* Showcase */}
           <Link to="/showcase">
             <motion.span
@@ -193,6 +205,13 @@ const Header = () => {
             className="absolute top-full left-0 right-0 bg-slate-950/98 backdrop-blur-md md:hidden min-h-screen shadow-2xl"
           >
             <div className="flex flex-col p-4 gap-4">
+              <Link
+                to="/services"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-emerald-400 hover:text-emerald-300 font-medium transition-colors py-2 text-lg"
+              >
+                Services
+              </Link>
               <Link
                 to="/showcase"
                 onClick={() => setIsMobileMenuOpen(false)}

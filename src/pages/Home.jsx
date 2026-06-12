@@ -44,26 +44,26 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Jeremy Och - Top 0.05% AI Implementation Specialist & Full-Stack Developer | Huntsville AL</title>
+        <title>Jeremy Och | AI Implementation Specialist & Full-Stack Developer | Huntsville AL</title>
         <link rel="canonical" href="https://ochai.dev/" />
-        <meta name="title" content="Jeremy Och - Top 0.05% AI Implementation Specialist & Full-Stack Developer" />
-        <meta name="description" content="Elite AI operator outperforming 99.95% of developers worldwide. Generative AI integration (Firefly, ElevenLabs, Claude API), perfect Lighthouse scores, proven business outcomes. Fewer than 1,000 people globally operate at this level." />
-        <meta name="keywords" content="AI implementation specialist, AI integration engineer, generative AI developer, AI solutions architect, prompt engineering expert, LLM integration, AI workflow automation, full-stack AI developer, Claude API integration, Adobe Firefly expert, ElevenLabs integration, perfect Lighthouse scores, top 0.05% performance, elite software engineer, AI business automation, remote AI developer, Huntsville Alabama AI talent, production AI systems, AI ROI specialist" />
+        <meta name="title" content="Jeremy Och | AI Implementation Specialist & Full-Stack Developer | Huntsville AL" />
+        <meta name="description" content="AI implementation specialist and full-stack developer with verifiable results: 100/100 Google Lighthouse scores across multiple production sites, 89% YoY organic traffic growth, Page 1 Google rankings in under 30 days. Claude API, Adobe Firefly, ElevenLabs integration. 37+ years hands-on. Huntsville, Alabama." />
+        <meta name="keywords" content="AI implementation specialist, AI integration engineer, generative AI developer, AI solutions architect, prompt engineering, LLM integration, AI workflow automation, full-stack AI developer, Claude API integration, Adobe Firefly integration, ElevenLabs integration, perfect Lighthouse scores, 100/100 Lighthouse, documented SEO results, organic traffic growth, AI business automation, remote AI developer, Huntsville Alabama AI talent, production AI systems" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/" />
-        <meta property="og:title" content="Jeremy Och - Elite AI Implementation Specialist" />
-        <meta property="og:description" content="Top 0.05% AI operator. Generative AI integration, full-stack development, perfect technical execution. Results that outperform 99.95% of developers worldwide. Less than 1000 people globally operate at this standard." />
+        <meta property="og:title" content="Jeremy Och | AI Implementation Specialist & Full-Stack Developer" />
+        <meta property="og:description" content="Verifiable results: 100/100 Lighthouse scores on production sites, 89% YoY organic growth, Page 1 rankings in under 30 days. Generative AI integration and full-stack development. Huntsville, AL." />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://ochai.dev/" />
-        <meta property="twitter:title" content="Jeremy Och - Top 0.05% AI Implementation Specialist" />
-        <meta property="twitter:description" content="Elite AI integration, perfect Lighthouse scores, proven business outcomes. Fewer than 1,000 worldwide at this performance level." />
+        <meta property="twitter:title" content="Jeremy Och | AI Implementation Specialist & Full-Stack Developer" />
+        <meta property="twitter:description" content="100/100 Lighthouse scores, 89% YoY organic growth, Page 1 rankings in under 30 days — all documented in on-site case studies. Huntsville, AL." />
         <script type="application/ld+json">
           {`{
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Jeremy Carter Och",
             "jobTitle": "AI Implementation Specialist & Full-Stack Developer",
-            "description": "Top 0.05% AI operator specializing in generative AI integration, full-stack development, and cloud deployment with proven business outcomes",
+            "description": "AI implementation specialist and full-stack developer with documented outcomes: 100/100 Google Lighthouse scores on production sites, 89% year-over-year organic traffic growth, and Page 1 Google rankings achieved in under 30 days",
             "url": "https://ochai.dev",
             "knowsAbout": ["Artificial Intelligence Integration","Generative AI Implementation","Claude API Development","Adobe Firefly Integration","ElevenLabs Voice Synthesis","LLM Orchestration","Prompt Engineering","Full-Stack Development","React Development","Cloud Infrastructure","Cloudflare Optimization","Perfect Lighthouse Scores","Server-Side Analytics","E-commerce Operations","AI Workflow Automation"],
             "address": {

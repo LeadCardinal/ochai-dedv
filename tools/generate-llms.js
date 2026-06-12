@@ -2,6 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { pathToFileURL } from 'url';
 
 const CLEAN_CONTENT_REGEX = {
   comments: /\/\*[\s\S]*?\*\/|\/\/.*$/gm,
@@ -18,9 +19,9 @@ const CLEAN_CONTENT_REGEX = {
 };
 
 const EXTRACTION_REGEX = {
-  route: /<Route\s+[^>]*>/g,
+  route: /<Route\b[\s\S]*?\/>/g,
   path: /path=["']([^"']+)["']/,
-  element: /element=\{<(\w+)[^}]*\/?\s*>\}/,
+  element: /element=\{\s*<(\w+)[^}]*\/?\s*>\s*\}/,
   helmet: /<Helmet[^>]*?>([\s\S]*?)<\/Helmet>/i,
   helmetTest: /<Helmet[\s\S]*?<\/Helmet>/i,
   title: /<title[^>]*?>\s*(.*?)\s*<\/title>/i,
@@ -53,24 +54,15 @@ function extractRoutes(appJsxPath) {
   try {
     const content = fs.readFileSync(appJsxPath, 'utf8');
     const routes = new Map();
-    const routeMatches = [...content.matchAll(EXTRACTION_REGEX.route)];
-    
-    for (const match of routeMatches) {
-      const routeTag = match[0];
-      const pathMatch = routeTag.match(EXTRACTION_REGEX.path);
-      const elementMatch = routeTag.match(EXTRACTION_REGEX.element);
-      const isIndex = routeTag.includes('index');
-      
-      if (elementMatch) {
-        const componentName = elementMatch[1];
-        let routePath;
-        
-        if (isIndex) {
-          routePath = '/';
-        } else if (pathMatch) {
-          routePath = pathMatch[1].startsWith('/') ? pathMatch[1] : `/${pathMatch[1]}`;
-        }
-        
+    // Captures path + component in one pass; tolerant of multi-line Route tags
+    const pairRegex = /<Route\b[^<]*?path=["']([^"']+)["'][\s\S]*?element=\{\s*<(\w+)/g;
+
+    for (const match of content.matchAll(pairRegex)) {
+      const rawPath = match[1];
+      const componentName = match[2];
+      const routePath = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
+      // First mapping wins (a component can appear in multiple routes)
+      if (!routes.has(componentName)) {
         routes.set(componentName, routePath);
       }
     }
@@ -103,7 +95,7 @@ function extractHelmetData(content, filePath, routes) {
   const description = cleanText(descMatch?.[1]);
   
   const fileName = path.basename(filePath, path.extname(filePath));
-  const url = routes.length && routes.has(fileName) 
+  const url = routes.size && routes.has(fileName) 
     ? routes.get(fileName) 
     : generateFallbackUrl(fileName);
   
@@ -175,7 +167,7 @@ function main() {
   fs.writeFileSync(outputPath, llmsTxtContent, 'utf8');
 }
 
-const isMainModule = import.meta.url === `file://${process.argv[1]}`;
+const isMainModule = import.meta.url === pathToFileURL(process.argv[1]).href;
 
 if (isMainModule) {
   main();

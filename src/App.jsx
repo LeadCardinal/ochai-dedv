@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import LoadingOverlay from "@/components/LoadingOverlay";
+import VideoIntro from "@/components/VideoIntro";
 import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
 const Biography = React.lazy(() => import("@/pages/Biography"));
@@ -19,6 +19,7 @@ const VideoPage = React.lazy(() => import("@/pages/VideoPage"));
 const Showcase = React.lazy(() => import("@/pages/Showcase"));
 const LogoSphere = React.lazy(() => import("@/pages/LogoSphere"));
 const PreviewPage = React.lazy(() => import("@/pages/PreviewPage"));
+const ServicesPage = React.lazy(() => import("@/pages/Services"));
 
 // ScrollToTop component to reset scroll on route change
 const ScrollToTop = () => {
@@ -53,8 +54,8 @@ const AppContent = () => {
   return (
     <>
       <ScrollToTop />
-      {/* Loading Overlay rendered at root level */}
-      <LoadingOverlay />
+      {/* Video intro — homepage first visits only; deep links are never interrupted */}
+      {location?.pathname === "/" && <VideoIntro />}
 
       {/* 
         Global Layout Container
@@ -76,6 +77,7 @@ const AppContent = () => {
           <React.Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/services" element={<ServicesPage />} />
             <Route path="/biography" element={<Biography />} />
             <Route path="/security" element={<Security />} />
             <Route

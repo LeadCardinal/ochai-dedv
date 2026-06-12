@@ -7,6 +7,24 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://ochai.dev/services</loc>
+    <lastmod>2026-06-12T12:00:00-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ochai.dev/showcase</loc>
+    <lastmod>2026-06-12T12:00:00-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ochai.dev/logos</loc>
+    <lastmod>2026-06-12T12:00:00-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://ochai.dev/biography</loc>
     <lastmod>2026-03-23T10:37:00-05:00</lastmod>
     <changefreq>monthly</changefreq>
