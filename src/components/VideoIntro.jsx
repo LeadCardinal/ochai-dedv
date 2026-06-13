@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SESSION_KEY = 'ochai_intro_seen';
-const PLAY_TIMEOUT_MS = 2500; // bail if video can't start fast — never hold visitors hostage
+const MAX_WAIT_MS = 8000; // hard ceiling: if playback never starts, give up — but do NOT mark as seen
 
 const VideoIntro = () => {
   const navigate = useNavigate();
@@ -33,8 +33,15 @@ const VideoIntro = () => {
     try { sessionStorage.setItem(SESSION_KEY, '1'); } catch { /* private mode */ }
   };
 
+  // User watched or chose — this counts as seen.
   const dismiss = () => {
     markSeen();
+    setIsVisible(false);
+  };
+
+  // Playback never started in time — bail WITHOUT marking seen, so a fast
+  // reload still gets a fair shot. A failure to load is not a viewing.
+  const bailWithoutPenalty = () => {
     setIsVisible(false);
   };
 
@@ -46,10 +53,10 @@ const VideoIntro = () => {
 
   useEffect(() => {
     if (!isVisible) return undefined;
-    // Safety valve: if playback hasn't begun in time, get out of the way
+    // Hard ceiling only. Cleared the instant playback begins (see onPlaying).
     playTimeoutRef.current = setTimeout(() => {
-      if (!videoReady) dismiss();
-    }, PLAY_TIMEOUT_MS);
+      if (!videoReady) bailWithoutPenalty();
+    }, MAX_WAIT_MS);
     return () => clearTimeout(playTimeoutRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible, videoReady]);
@@ -72,10 +79,23 @@ const VideoIntro = () => {
             playsInline
             autoPlay
             preload="auto"
-            onCanPlay={() => setVideoReady(true)}
-            onPlaying={() => setVideoReady(true)}
+            onCanPlay={() => {
+              // Belt-and-suspenders: some desktop browsers don't honor the
+              // autoPlay attribute on a dynamically-mounted element. Ask explicitly.
+              const v = videoRef.current;
+              if (v && v.paused) {
+                const p = v.play();
+                if (p && typeof p.catch === 'function') {
+                  p.catch(() => bailWithoutPenalty());
+                }
+              }
+            }}
+            onPlaying={() => {
+              setVideoReady(true);
+              clearTimeout(playTimeoutRef.current);
+            }}
             onEnded={() => setShowFork(true)}
-            onError={dismiss}
+            onError={bailWithoutPenalty}
             className={`max-w-[90vw] max-h-[70vh] md:max-h-[75vh] rounded-xl shadow-2xl transition-opacity duration-500 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
           />
 
