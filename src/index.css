@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Self-hosted Limelight (SIL OFL 1.1) — deco display face for the playbill system.
+ * font-display: swap → text paints instantly in fallback, upgrades when loaded.
+ * License: public/fonts/Limelight-OFL.txt */
+@font-face {
+  font-family: 'Limelight';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/limelight-400.woff2') format('woff2');
+}
+
 @layer base {
   * {
     @apply border-slate-800;
@@ -85,5 +96,80 @@
     line-height: 1.15 !important;
     padding-bottom: 0.15em;
     overflow: visible !important;
+  }
+
+  /* ─── Deco "playbill" system ────────────────────────────────────────────
+   * Shared 1920s vocabulary for Watch-the-Pitch button, hire-fork, /showcase.
+   * Pure CSS keyframes only (site runs under strict CSP — no JS-driven anim).
+   * Canonical gold #c9a84c. Tokens mirrored in src/lib/deco.js.
+   */
+  @keyframes decoShimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+  }
+  @keyframes decoPulseRing {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.45); }
+    50%      { box-shadow: 0 0 0 8px rgba(201,168,76,0); }
+  }
+
+  .deco-btn {
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    background: #111;
+    border: 2px solid #c9a84c;
+    border-radius: 4px;
+    padding: 18px 38px 18px 64px;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+  .deco-btn:hover { background: #161208; }
+  .deco-btn--motion:hover { animation: decoPulseRing 1.4s ease-out infinite; }
+
+  .deco-btn__tri {
+    position: absolute;
+    left: 26px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-left: 18px solid #c9a84c;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+  }
+  .deco-btn__col { display: flex; flex-direction: column; align-items: flex-start; }
+  .deco-btn__ttl {
+    font-family: "Limelight", Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    line-height: 1.3;
+  }
+  .deco-btn__sub {
+    font-family: Georgia, serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.55);
+    margin-top: 2px;
+  }
+  .deco-btn__art { display: flex; align-items: center; }
+
+  /* Title shimmer for /showcase — same engine, applied to the marquee headline */
+  .deco-title-shimmer {
+    font-family: "Limelight", Georgia, "Times New Roman", serif;
+    background-image: linear-gradient(90deg, #8a6820 0%, #f4e08c 25%, #c9a84c 50%, #f4e08c 75%, #8a6820 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: decoShimmer 5s linear infinite;
+  }
+  /* Motion-off: rich static gradient, no movement */
+  @media (prefers-reduced-motion: reduce) {
+    .deco-title-shimmer {
+      animation: none;
+      background-image: linear-gradient(135deg, #f0d060 0%, #c9a84c 25%, #ffe680 45%, #b8922e 65%, #e8c84a 80%, #c9a84c 100%);
+      background-size: 100% auto;
+    }
   }
 }

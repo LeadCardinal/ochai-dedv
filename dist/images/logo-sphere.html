@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCO — Logo Sphere</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#06070f;font-family:'Courier New',monospace;color:#e2e8f0}
+#canvas{display:block;width:100%;height:100%;cursor:grab}
+#canvas.dragging{cursor:grabbing}
+#overlay{position:fixed;inset:0;background:rgba(6,7,15,0.92);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .35s ease}
+#overlay.active{opacity:1;pointer-events:all}
+#modal{position:relative;max-width:520px;width:90%;background:#0d1117;border:1px solid rgba(100,210,255,0.2);border-radius:16px;padding:48px;display:flex;flex-direction:column;align-items:center;gap:24px}
+#modal-img{max-width:340px;max-height:340px;width:100%;height:auto;object-fit:contain;border-radius:8px}
+#modal-close{position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(226,232,240,0.5);font-size:28px;cursor:pointer;line-height:1;transition:color .2s}
+#modal-close:hover{color:#fff}
+#modal-label{font-size:13px;color:rgba(100,210,255,0.7);letter-spacing:.12em;text-transform:uppercase}
+#ui{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:50}
+.btn{background:rgba(255,255,255,0.05);border:1px solid rgba(100,210,255,0.2);color:rgba(226,232,240,0.8);padding:9px 20px;border-radius:999px;font-size:12px;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.btn:hover{background:rgba(100,210,255,0.1);border-color:rgba(100,210,255,0.5);color:#fff}
+.btn.active{background:rgba(100,210,255,0.15);border-color:rgba(100,210,255,0.6);color:#64d2ff}
+#hint{position:fixed;top:24px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.1em;color:rgba(226,232,240,0.25);text-transform:uppercase;pointer-events:none;transition:opacity 1s}
+#counter{position:fixed;top:24px;right:28px;font-size:11px;color:rgba(226,232,240,0.2);letter-spacing:.08em}
+</style>
+</head>
+<body>
+<h2 class="sr-only" style="position:absolute;left:-9999px">JCO Logo Portfolio — interactive 3D sphere of logo work</h2>
+<canvas id="canvas"></canvas>
+<div id="hint">drag to rotate &nbsp;·&nbsp; click tile to view &nbsp;·&nbsp; presentation mode auto-cycles</div>
+<div id="counter"></div>
+<div id="ui">
+  <button class="btn" id="btn-manual" onclick="setMode('manual')">Manual</button>
+  <button class="btn active" id="btn-present" onclick="setMode('present')">Presentation</button>
+</div>
+<div id="overlay">
+  <div id="modal">
+    <button id="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+    <img id="modal-img" src="" alt="Logo detail">
+    <div id="modal-label"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const LOGOS = [
+  'images/logo_001.avif','images/logo_002.avif','images/logo_003.avif','images/logo_004.avif',
+  'images/logo_005.avif','images/logo_006.avif','images/logo_007.avif','images/logo_008.avif',
+  'images/logo_009.avif','images/logo_010.avif','images/logo_011.avif','images/logo_012.avif',
+  'images/logo_013.avif','images/logo_014.avif','images/logo_015.avif','images/logo_016.avif',
+  'images/logo_017.avif','images/logo_018.avif','images/logo_019.avif','images/logo_020.avif',
+  'images/logo_021.avif','images/logo_022.avif','images/logo_023.avif','images/logo_024.avif',
+  'images/logo_025.avif','images/logo_026.avif','images/logo_027.avif','images/logo_028.avif',
+  'images/logo_029.avif','images/logo_030.avif','images/logo_031.avif','images/logo_032.avif',
+  'images/logo_033.avif','images/logo_034.avif','images/logo_035.avif','images/logo_036.avif',
+  'images/logo_037.avif','images/logo_038.avif','images/logo_039.avif','images/logo_040.avif',
+  'images/logo_041.avif','images/logo_042.avif','images/logo_043.avif','images/logo_044.avif',
+  'images/logo_045.avif','images/logo_046.avif','images/logo_047.avif','images/logo_048.avif',
+  'images/logo_049.avif','images/logo_050.avif','images/logo_051.avif','images/logo_052.avif',
+  'images/logo_053.avif','images/logo_054.avif','images/logo_055.avif','images/logo_056.avif',
+  'images/logo_057.avif','images/logo_058.avif','images/logo_059.avif','images/logo_060.avif',
+  'images/logo_061.avif','images/logo_062.avif','images/logo_063.avif','images/logo_064.avif',
+  'images/logo_065.avif','images/logo_066.avif','images/logo_067.avif','images/logo_068.avif',
+  'images/logo_069.avif','images/logo_070.avif'
+];
+
+const RADIUS = 4.2;
+const TILE_SIZE = 0.72;
+const TILE_DEPTH = 0.04;
+const HOVER_LIFT = 0.32;
+const PRESENT_INTERVAL = 3200;
+
+let scene, camera, renderer, tiles = [], raycaster, mouse;
+let isDragging = false, prevMouse = {x:0,y:0}, sphereGroup;
+let rotVel = {x:0, y:0};
+let mode = 'present';
+let presentTimer = null, presentIdx = 0;
+let hoveredTile = null, activeTile = null;
+let modalOpen = false;
+let clock;
+
+function init(){
+  const canvas = document.getElementById('canvas');
+  renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x06070f, 1);
+
+  scene = new THREE.Scene();
+  clock = new THREE.Clock();
+
+  camera = new THREE.PerspectiveCamera(52, window.innerWidth/window.innerHeight, 0.1, 100);
+  camera.position.z = 9.5;
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.85));
+  const dir = new THREE.DirectionalLight(0x64d2ff, 0.6);
+  dir.position.set(5,8,5);
+  scene.add(dir);
+
+  raycaster = new THREE.Raycaster();
+  mouse = new THREE.Vector2();
+
+  sphereGroup = new THREE.Group();
+  scene.add(sphereGroup);
+
+  buildSphere();
+  bindEvents();
+  updateCounter();
+  if(mode==='present') startPresentation();
+  animate();
+  setTimeout(()=>{ document.getElementById('hint').style.opacity='0'; }, 4000);
+}
+
+function fibonacciSphere(n, radius){
+  const pts = [];
+  const golden = Math.PI*(3 - Math.sqrt(5));
+  for(let i=0;i<n;i++){
+    const y = 1 - (i/(n-1))*2;
+    const r = Math.sqrt(1-y*y);
+    const theta = golden*i;
+    pts.push(new THREE.Vector3(Math.cos(theta)*r*radius, y*radius, Math.sin(theta)*r*radius));
+  }
+  return pts;
+}
+
+function buildSphere(){
+  const positions = fibonacciSphere(LOGOS.length, RADIUS);
+  const loader = new THREE.TextureLoader();
+
+  LOGOS.forEach((src, i)=>{
+    const geo = new THREE.BoxGeometry(TILE_SIZE, TILE_SIZE, TILE_DEPTH);
+    const mat = new THREE.MeshStandardMaterial({
+      color: 0x1a2030,
+      roughness:0.4,
+      metalness:0.3,
+      transparent:true,
+      opacity:0.92
+    });
+    const tile = new THREE.Mesh(geo, mat);
+    const pos = positions[i];
+    tile.position.copy(pos);
+    tile.lookAt(0,0,0);
+
+    loader.load(src, (tex)=>{
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tile.material = new THREE.MeshStandardMaterial({
+        map: tex,
+        transparent: true,
+        roughness:0.35,
+        metalness:0.15,
+        alphaTest: 0.01
+      });
+    });
+
+    tile.userData = {
+      idx: i,
+      src,
+      basePos: pos.clone(),
+      normal: pos.clone().normalize(),
+      lift: 0,
+      targetLift: 0,
+      wave: Math.random()*Math.PI*2,
+      waveSpeed: 0.4 + Math.random()*0.3
+    };
+    sphereGroup.add(tile);
+    tiles.push(tile);
+  });
+}
+
+function bindEvents(){
+  const canvas = document.getElementById('canvas');
+  canvas.addEventListener('mousedown', onDown);
+  canvas.addEventListener('mousemove', onMove);
+  canvas.addEventListener('mouseup', onUp);
+  canvas.addEventListener('mouseleave', onUp);
+  canvas.addEventListener('click', onClick);
+  canvas.addEventListener('touchstart', onTouchStart, {passive:true});
+  canvas.addEventListener('touchmove', onTouchMove, {passive:false});
+  canvas.addEventListener('touchend', onTouchEnd);
+  window.addEventListener('resize', onResize);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+}
+
+function onDown(e){
+  isDragging=false;
+  prevMouse={x:e.clientX, y:e.clientY};
+  document.getElementById('canvas').classList.add('dragging');
+  rotVel={x:0,y:0};
+}
+function onMove(e){
+  const dx=e.clientX-prevMouse.x, dy=e.clientY-prevMouse.y;
+  if(Math.abs(dx)>2||Math.abs(dy)>2) isDragging=true;
+  if(e.buttons===1 && isDragging){
+    sphereGroup.rotation.y += dx*0.007;
+    sphereGroup.rotation.x += dy*0.007;
+    rotVel.x = dy*0.007;
+    rotVel.y = dx*0.007;
+    prevMouse={x:e.clientX,y:e.clientY};
+  }
+  mouse.set((e.clientX/window.innerWidth)*2-1, -(e.clientY/window.innerHeight)*2+1);
+  checkHover();
+}
+function onUp(){
+  isDragging=false;
+  document.getElementById('canvas').classList.remove('dragging');
+}
+function onClick(e){
+  if(isDragging) return;
+  mouse.set((e.clientX/window.innerWidth)*2-1, -(e.clientY/window.innerHeight)*2+1);
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(tiles);
+  if(hits.length>0) openModal(hits[0].object);
+}
+
+let touchStart={x:0,y:0};
+function onTouchStart(e){
+  touchStart={x:e.touches[0].clientX, y:e.touches[0].clientY};
+  isDragging=false;
+  rotVel={x:0,y:0};
+}
+function onTouchMove(e){
+  e.preventDefault();
+  const dx=e.touches[0].clientX-touchStart.x, dy=e.touches[0].clientY-touchStart.y;
+  if(Math.abs(dx)>3||Math.abs(dy)>3) isDragging=true;
+  sphereGroup.rotation.y+=dx*0.006;
+  sphereGroup.rotation.x+=dy*0.006;
+  rotVel.x=dy*0.006; rotVel.y=dx*0.006;
+  touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+}
+function onTouchEnd(e){
+  if(!isDragging){
+    mouse.set((e.changedTouches[0].clientX/window.innerWidth)*2-1,-(e.changedTouches[0].clientY/window.innerHeight)*2+1);
+    raycaster.setFromCamera(mouse,camera);
+    const hits=raycaster.intersectObjects(tiles);
+    if(hits.length>0) openModal(hits[0].object);
+  }
+  isDragging=false;
+}
+function onResize(){
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth,window.innerHeight);
+}
+
+function checkHover(){
+  raycaster.setFromCamera(mouse,camera);
+  const hits=raycaster.intersectObjects(tiles);
+  const newHovered = hits.length>0 ? hits[0].object : null;
+  if(newHovered!==hoveredTile){
+    if(hoveredTile) hoveredTile.userData.targetLift=0;
+    hoveredTile=newHovered;
+    if(hoveredTile) hoveredTile.userData.targetLift=HOVER_LIFT;
+  }
+}
+
+function openModal(tile){
+  if(mode==='present') stopPresentation();
+  activeTile=tile;
+  document.getElementById('modal-img').src=tile.userData.src;
+  const n=tile.userData.idx+1;
+  document.getElementById('modal-label').textContent=`Logo ${String(n).padStart(3,'0')} of ${LOGOS.length}`;
+  document.getElementById('overlay').classList.add('active');
+  modalOpen=true;
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('active');
+  modalOpen=false;
+  activeTile=null;
+  if(mode==='present') startPresentation();
+}
+
+function setMode(m){
+  mode=m;
+  document.getElementById('btn-manual').classList.toggle('active',m==='manual');
+  document.getElementById('btn-present').classList.toggle('active',m==='present');
+  if(m==='present') startPresentation();
+  else stopPresentation();
+}
+
+function startPresentation(){
+  stopPresentation();
+  presentTimer=setInterval(()=>{
+    if(modalOpen) return;
+    presentIdx=(presentIdx+1)%LOGOS.length;
+    const tile=tiles[presentIdx];
+    openModal(tile);
+    setTimeout(closeModal, PRESENT_INTERVAL*0.72);
+  }, PRESENT_INTERVAL);
+}
+function stopPresentation(){
+  if(presentTimer){ clearInterval(presentTimer); presentTimer=null; }
+}
+
+function updateCounter(){
+  document.getElementById('counter').textContent=`${LOGOS.length} logos`;
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  const t=clock.getElapsedTime();
+  const dt=clock.getDelta();
+
+  if(!isDragging && !modalOpen){
+    rotVel.x*=0.92;
+    rotVel.y*=0.92;
+    sphereGroup.rotation.x+=rotVel.x;
+    sphereGroup.rotation.y+=rotVel.y;
+    sphereGroup.rotation.y+=0.0012;
+  }
+
+  tiles.forEach(tile=>{
+    const ud=tile.userData;
+    ud.lift+=(ud.targetLift-ud.lift)*0.12;
+    const wave=Math.sin(t*ud.waveSpeed+ud.wave)*0.025;
+    const totalLift=ud.lift+wave;
+    tile.position.copy(ud.basePos).addScaledVector(ud.normal, totalLift);
+    tile.lookAt(sphereGroup.localToWorld(new THREE.Vector3(0,0,0)));
+  });
+
+  renderer.render(scene,camera);
+}
+
+init();
+</script>
+</body>
+</html>

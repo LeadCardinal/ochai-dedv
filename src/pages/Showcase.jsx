@@ -160,13 +160,9 @@ const Showcase = () => (
             </p>
 
             <h1
-              className="text-3xl md:text-4xl font-bold leading-tight mb-2"
+              className="deco-title-shimmer text-3xl md:text-4xl font-bold leading-tight mb-2"
               style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
-                background: 'linear-gradient(135deg, #f0d060 0%, #c9a84c 25%, #ffe680 45%, #b8922e 65%, #e8c84a 80%, #c9a84c 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                letterSpacing: '2px',
                 filter: 'drop-shadow(0 1px 8px rgba(201,168,76,0.22))',
               }}
             >

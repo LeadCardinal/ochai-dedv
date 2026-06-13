@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import DecoButton from '@/components/DecoButton';
+import PitchPlayer from '@/components/PitchPlayer';
 
 const SESSION_KEY = 'ochai_intro_seen';
 const MAX_WAIT_MS = 8000; // hard ceiling: if playback never starts, give up — but do NOT mark as seen
@@ -28,6 +30,7 @@ const VideoIntro = () => {
   const [isVisible, setIsVisible] = useState(!alreadySeen);
   const [videoReady, setVideoReady] = useState(false);
   const [showFork, setShowFork] = useState(false);
+  const [showPitch, setShowPitch] = useState(false);
 
   const markSeen = () => {
     try { sessionStorage.setItem(SESSION_KEY, '1'); } catch { /* private mode */ }
@@ -64,6 +67,7 @@ const VideoIntro = () => {
   if (alreadySeen) return null;
 
   return (
+    <>
     <AnimatePresence>
       {isVisible && (
         <motion.div
@@ -136,6 +140,16 @@ const VideoIntro = () => {
                     I Need a Website — Services
                   </button>
                 </div>
+
+                {/* The showpiece — ragtime self-promo, plays with sound on click */}
+                <div className="mt-1">
+                  <DecoButton
+                    label="Watch the Pitch"
+                    subLabel="A Ragtime Presentation · 49s"
+                    onClick={() => setShowPitch(true)}
+                  />
+                </div>
+
                 <button
                   onClick={dismiss}
                   className="text-slate-500 hover:text-slate-300 text-xs transition-colors mt-1"
@@ -148,6 +162,8 @@ const VideoIntro = () => {
         </motion.div>
       )}
     </AnimatePresence>
+    <PitchPlayer open={showPitch} onClose={() => setShowPitch(false)} />
+    </>
   );
 };
 

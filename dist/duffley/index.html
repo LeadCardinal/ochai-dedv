@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeremy Carter Och — AI & Automation Implementer | Duffley Law PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #1a2540;
+  --navy-deep:  #111827;
+  --gold:       #D4A017;
+  --gold-light: #F0C040;
+  --cream:      #f8f5ef;
+  --cream-dark: #ede9e1;
+  --charcoal:   #2d3748;
+  --muted:      #6b7280;
+  --white:      #ffffff;
+  --black:      #000000;
+  --slate-950:  #030712;
+  --slate-900:  #0f172a;
+  --slate-800:  #1e293b;
+  --slate-700:  #334155;
+  --slate-300:  #cbd5e1;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+
+/* ── HEADER ── */
+.firm-header { background: var(--navy); position: relative; overflow: hidden; }
+.firm-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); }
+.header-inner { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem 2.2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.firm-name { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 500; color: var(--white); letter-spacing: 0.02em; line-height: 1.15; }
+.firm-name span { display: block; font-size: 0.72em; font-weight: 400; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; margin-top: 4px; }
+.header-tagline { font-size: 0.8rem; color: rgba(255,255,255,0.5); text-align: right; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.6; border-left: 1px solid rgba(212,160,23,0.35); padding-left: 1.5rem; }
+
+/* ── INTRO ── */
+.intro-section { background: var(--white); border-bottom: 1px solid var(--cream-dark); }
+.intro-inner { max-width: 900px; margin: 0 auto; padding: 3.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.intro-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+.intro-heading { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 500; color: var(--navy); line-height: 1.25; margin-bottom: 1rem; }
+.intro-body { font-size: 0.95rem; line-height: 1.75; color: var(--muted); }
+
+/* ── VIDEO ── */
+.video-section { background: var(--navy-deep); padding: 4rem 2rem; position: relative; }
+.video-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.video-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+.video-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.video-heading { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 3vw, 1.75rem); font-weight: 400; color: var(--white); margin-bottom: 2rem; line-height: 1.3; }
+.video-wrapper { position: relative; width: 100%; padding-top: 56.25%; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,160,23,0.25); border-radius: 6px; overflow: hidden; margin-bottom: 1.25rem; }
+.video-wrapper iframe, .video-wrapper video { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.video-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: rgba(255,255,255,0.35); font-size: 0.85rem; letter-spacing: 0.05em; }
+.play-icon { width: 60px; height: 60px; border: 2px solid rgba(212,160,23,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.play-icon::after { content: ''; width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent var(--gold); margin-left: 4px; }
+.video-note { font-size: 0.78rem; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; }
+
+/* ══════════════════════════════════════
+   PARALLAX PAIN POINTS
+   Mirrors PainPointSection.jsx exactly:
+   250vh per scene, sticky panel, JS-driven
+   title ← | image → | blurb ↑
+   ══════════════════════════════════════ */
+.pain-section { background: var(--slate-950); position: relative; z-index: 10; }
+
+.pain-header { padding: 5rem 2rem 3rem; text-align: center; }
+.pain-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+.pain-section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 500; color: var(--white); line-height: 1.3; margin-bottom: 0.75rem; }
+.pain-section-sub { font-size: 0.9rem; color: rgba(255,255,255,0.38); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+.pain-scene { height: 250vh; position: relative; z-index: 10; border-bottom: 1px solid rgba(51,65,85,0.35); }
+.pain-scene:last-child { border-bottom: none; }
+
+.pain-sticky { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+
+.pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; width: 100%; padding: 0 2rem; }
+
+.pain-left { display: flex; flex-direction: column; gap: 2rem; }
+
+.pain-title-card { background: rgba(15,23,42,0.85); backdrop-filter: blur(12px); border: 1px solid rgba(51,65,85,0.5); border-radius: 1rem; padding: 1.75rem 2rem; display: flex; align-items: center; gap: 1.5rem; will-change: opacity, transform; }
+.pain-icon-wrap { flex-shrink: 0; width: 52px; height: 52px; background: var(--slate-800); border: 1px solid var(--slate-700); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; }
+.pain-icon-wrap svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.pain-heading { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 2.2vw, 1.55rem); font-weight: 500; background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.3; }
+
+.pain-blurb-card { background: rgba(15,23,42,0.92); backdrop-filter: blur(12px); border: 1px solid rgba(51,65,85,0.5); border-radius: 1rem; padding: 2rem; will-change: opacity, transform; }
+.pain-blurb-text { font-size: 1rem; line-height: 1.8; color: var(--slate-300); font-weight: 300; margin-bottom: 1rem; }
+.pain-fix-tag { display: inline-block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em; color: var(--slate-950); background: var(--gold); padding: 0.4rem 1rem; border-radius: 2px; }
+
+.pain-image-wrap { position: relative; width: 100%; aspect-ratio: 4/3; border-radius: 1.5rem; overflow: hidden; border: 2px solid rgba(51,65,85,0.3); will-change: opacity, transform; }
+.pain-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; display: block; }
+.pain-image-wrap:hover img { transform: scale(1.04); }
+.pain-img-overlay { position: absolute; inset: 0; background: rgba(15,23,42,0.18); pointer-events: none; }
+.pain-img-tint { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,160,23,0.08), transparent); pointer-events: none; mix-blend-mode: overlay; }
+.pain-img-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; background: var(--slate-800); color: rgba(255,255,255,0.18); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ── CTA — BLACK ── */
+.cta-section { background: var(--black); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.cta-section::after { content: 'OCHAI.DEV'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Playfair Display', serif; font-size: clamp(4rem, 14vw, 11rem); font-weight: 600; color: rgba(212,160,23,0.04); white-space: nowrap; pointer-events: none; letter-spacing: 0.12em; }
+.cta-inner { max-width: 560px; margin: 0 auto; position: relative; z-index: 1; }
+.cta-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.cta-heading { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 400; color: var(--white); line-height: 1.3; margin-bottom: 1rem; }
+.cta-body { font-size: 0.9rem; color: rgba(255,255,255,0.38); line-height: 1.7; margin-bottom: 2.25rem; }
+.cta-btn { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 0.9rem 2.4rem; border-radius: 2px; text-decoration: none; transition: background 0.2s ease, transform 0.15s ease; }
+.cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+/* ── FOOTER ── */
+.site-footer { background: #000; border-top: 1px solid rgba(212,160,23,0.12); padding: 1.5rem 2rem; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+.site-footer a { color: rgba(212,160,23,0.5); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .pain-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .pain-image-wrap { aspect-ratio: 16/9; }
+  .pain-scene { height: 320vh; }
+  .header-tagline { display: none; }
+  .intro-inner { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="firm-header">
+  <div class="header-inner">
+    <div class="firm-name">
+      Duffley Law PLLC
+      <span>Texas Estate Planning &amp; Probate</span>
+    </div>
+    <div class="header-tagline">AI &amp; Automation<br>Implementer Submission</div>
+  </div>
+</header>
+
+<section class="intro-section">
+  <div class="intro-inner">
+    <div>
+      <p class="intro-label">Candidate Submission</p>
+      <h1 class="intro-heading">Jeremy Carter Och<br>ochai.dev</h1>
+      <p class="intro-body">37+ years building digital systems from the ground up. Today that means AI implementation — specifically the kind that makes a fast-growing law firm leaner, faster, and more profitable without adding headcount.</p>
+    </div>
+    <div>
+      <p class="intro-label">This page was built for you</p>
+      <p class="intro-body">Before recording a single frame, I researched Duffley Law, mapped your operational profile, and identified the three highest-leverage AI intervention points. What follows is my pitch — delivered the same way I'd deliver a Day 1 brief.</p>
+    </div>
+  </div>
+</section>
+
+<section class="video-section">
+  <div class="video-inner">
+    <p class="video-label">Two-Minute Introduction</p>
+    <h2 class="video-heading">Why I want this role — and why now.</h2>
+    <div class="video-wrapper">
+      <!--
+        SWAP PLACEHOLDER — choose one:
+        A) Google Drive:  <iframe src="https://drive.google.com/file/d/FILE_ID/preview" allowfullscreen></iframe>
+        B) Direct MP4:    <video controls playsinline><source src="URL.mp4" type="video/mp4"></video>
+      -->
+      <iframe src="https://www.youtube.com/embed/r0Lx8w-SvRE" allowfullscreen allow="autoplay"></iframe>
+        <span>Video — swap in embed after filming</span>
+      </div>
+    </div>
+    <p class="video-note">AI &amp; Automation Implementer &nbsp;·&nbsp; Jeremy Carter Och &nbsp;·&nbsp; careers@duffleylaw.com</p>
+  </div>
+</section>
+
+<!-- PARALLAX PAIN POINTS -->
+<section class="pain-section">
+
+  <div class="pain-header">
+    <p class="pain-eyebrow">What I found before this page existed</p>
+    <h2 class="pain-section-title">Three places Duffley Law is leaving efficiency on the table.</h2>
+    <p class="pain-section-sub">Publicly observable. Operationally fixable. High-ROI from day one.</p>
+  </div>
+
+  <!-- 01 -->
+  <div class="pain-scene">
+    <div class="pain-sticky">
+      <div class="pain-grid">
+        <div class="pain-left">
+          <div class="pain-title-card" data-el="title">
+            <div class="pain-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="pain-heading">Intake is running on five humans where one agent could carry the load.</h3>
+          </div>
+          <div class="pain-blurb-card" data-el="blurb">
+            <p class="pain-blurb-text">Five dedicated intake staff — 26% of total headcount — manually routing every inbound lead. No chatbot. No self-scheduling. After-hours inquiries hit a static form and wait. At $90K monthly revenue, every lead stalling in the queue is margin walking out the door.</p>
+            <span class="pain-fix-tag">Fix: AI intake agent — qualifies, schedules &amp; routes 24/7</span>
+          </div>
+        </div>
+        <div class="pain-image-wrap" data-el="image">
+          <img src="duffley-01.webp" alt="Five intake operators manually routing every lead — the bottleneck AI solves">
+          <div class="pain-img-overlay"></div>
+          <div class="pain-img-tint"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="pain-scene">
+    <div class="pain-sticky">
+      <div class="pain-grid">
+        <div class="pain-left">
+          <div class="pain-title-card" data-el="title">
+            <div class="pain-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <h3 class="pain-heading">Flat-fee volume + manual drafting = a margin problem that compounds daily.</h3>
+          </div>
+          <div class="pain-blurb-card" data-el="blurb">
+            <p class="pain-blurb-text">Flat-fee pricing is the right model for growth. But every estate plan drafted manually is time your attorneys can't bill elsewhere. A firm producing high-volume standardized documents — wills, trusts, POAs, TODDs — is leaving the single biggest AI efficiency gain untouched.</p>
+            <span class="pain-fix-tag">Fix: AI drafting layer — first drafts in minutes, attorney signs off in seconds</span>
+          </div>
+        </div>
+        <div class="pain-image-wrap" data-el="image">
+          <img src="duffley-02.webp" alt="Attorney presenting a stack of manually prepared documents — the drafting bottleneck AI eliminates">
+          <div class="pain-img-overlay"></div>
+          <div class="pain-img-tint"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="pain-scene">
+    <div class="pain-sticky">
+      <div class="pain-grid">
+        <div class="pain-left">
+          <div class="pain-title-card" data-el="title">
+            <div class="pain-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3 class="pain-heading">Client communication runs on ad-hoc group chats. That doesn't scale to 19 people.</h3>
+          </div>
+          <div class="pain-blurb-card" data-el="blurb">
+            <p class="pain-blurb-text">Google reviews reveal clients being coordinated via personal group texts — a workaround, not a system. No client portal, no structured status updates, no automated milestone notifications. At current growth velocity, that breaks publicly before long.</p>
+            <span class="pain-fix-tag">Fix: Automated client comms pipeline — status updates on autopilot</span>
+          </div>
+        </div>
+        <div class="pain-image-wrap" data-el="image">
+          <img src="duffley-03.webp" alt="AI routing client communications — replacing ad-hoc group texts with automated pipelines">
+          <div class="pain-img-overlay"></div>
+          <div class="pain-img-tint"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CTA — BLACK -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="cta-label">Ready to go deeper?</p>
+    <h2 class="cta-heading">This is how I approach every engagement — before I'm hired.</h2>
+    <p class="cta-body">The full picture — 37 years of systems thinking, six production websites, and a track record of building enterprise-grade digital infrastructure solo — lives at ochai.dev.</p>
+    <a href="https://ochai.dev" target="_blank" class="cta-btn">Review Full Portfolio &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  Built for Duffley Law PLLC by <a href="https://ochai.dev" target="_blank">Jeremy Carter Och / OchAI.dev</a>
+  &nbsp;·&nbsp; AI &amp; Automation Implementer Submission &nbsp;·&nbsp; 2026
+</footer>
+
+<script>
+(function () {
+  // Pure JS replication of PainPointSection.jsx framer-motion scroll logic.
+  // Each .pain-scene = 250vh. .pain-sticky locks at top: 0.
+  // Progress 0→1 = scene scrolling from "just entered" to "about to leave".
+  // Stagger: title (0.15-0.25) → image (0.30-0.45) → blurb (0.50-0.65)
+  // All fade out 0.85→1.00
+
+  var scenes = Array.from(document.querySelectorAll('.pain-scene'));
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  function rangeMap(v, a, b) {
+    return clamp((v - a) / (b - a), 0, 1);
+  }
+
+  function easeOut3(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function setEl(el, opacity, tx, ty) {
+    if (!el) return;
+    el.style.opacity = opacity;
+    el.style.transform = 'translate(' + tx + 'px,' + ty + 'px)';
+  }
+
+  function getProgress(scene) {
+    var rect = scene.getBoundingClientRect();
+    var scrollable = scene.offsetHeight - window.innerHeight;
+    return scrollable > 0 ? clamp(-rect.top / scrollable, 0, 1) : 0;
+  }
+
+  function frame() {
+    scenes.forEach(function (scene) {
+      var p = getProgress(scene);
+
+      var titleCard = scene.querySelector('[data-el="title"]');
+      var imageWrap = scene.querySelector('[data-el="image"]');
+      var blurbCard = scene.querySelector('[data-el="blurb"]');
+
+      var fadeOut = 1 - rangeMap(p, 0.85, 1.00);
+
+      // Title: slide from left
+      var tIn = easeOut3(rangeMap(p, 0.15, 0.25));
+      setEl(titleCard, Math.min(tIn, fadeOut), (1 - tIn) * -50, 0);
+
+      // Image: slide from right
+      var iIn = easeOut3(rangeMap(p, 0.30, 0.45));
+      setEl(imageWrap, Math.min(iIn, fadeOut), (1 - iIn) * 100, 0);
+
+      // Blurb: slide up
+      var bIn = easeOut3(rangeMap(p, 0.50, 0.65));
+      setEl(blurbCard, Math.min(bIn, fadeOut), 0, (1 - bIn) * 50);
+    });
+
+    requestAnimationFrame(frame);
+  }
+
+  // Init all to invisible, no CSS transition interference
+  document.querySelectorAll('[data-el]').forEach(function (el) {
+    el.style.cssText += ';transition:none;opacity:0;transform:translate(0,0);';
+  });
+
+  requestAnimationFrame(frame);
+}());
+</script>
+
+</body>
+</html>
