@@ -14,7 +14,7 @@ import { DECO } from '@/lib/deco';
 // is shown instead. The button is never hidden — motion-off users get full glory,
 // minus the movement. The pulse-ring hover is also gated on motion.
 
-const DecoButton = ({ label = 'Watch the Pitch', art = null, onClick, subLabel }) => {
+const DecoButton = ({ label = 'Watch the Pitch', art = null, onClick, subLabel, ghost = false }) => {
   const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const DecoButton = ({ label = 'Watch the Pitch', art = null, onClick, subLabel }
     <button
       type="button"
       onClick={onClick}
-      className={`deco-btn${reduceMotion ? '' : ' deco-btn--motion'}`}
+      className={`deco-btn${reduceMotion ? '' : ' deco-btn--motion'}${ghost ? ' deco-btn--ghost' : ''}`}
       aria-label={label}
     >
       <span className="deco-btn__tri" aria-hidden="true" />

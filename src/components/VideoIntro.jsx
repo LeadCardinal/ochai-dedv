@@ -74,7 +74,7 @@ const VideoIntro = () => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6 bg-slate-950 overflow-y-auto py-8"
         >
           <video
             ref={videoRef}
@@ -100,7 +100,7 @@ const VideoIntro = () => {
             }}
             onEnded={() => setShowFork(true)}
             onError={bailWithoutPenalty}
-            className={`max-w-[90vw] max-h-[70vh] md:max-h-[75vh] rounded-xl shadow-2xl transition-opacity duration-500 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
+            className={`w-auto max-w-[92vw] max-h-[58vh] rounded-xl shadow-2xl transition-opacity duration-500 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
           />
 
           {/* Skip — visible from frame one */}
@@ -114,46 +114,37 @@ const VideoIntro = () => {
             </button>
           )}
 
-          {/* The Fork — presented at video's end */}
+          {/* The Fork — all-deco, stacked below the full video frame (no overlap) */}
           <AnimatePresence>
             {showFork && (
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="absolute inset-x-0 bottom-0 pb-10 md:pb-16 px-4 flex flex-col items-center gap-4 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent pt-20"
+                className="flex flex-col items-center gap-5 px-4"
               >
-                <p className="text-slate-300 text-sm md:text-base tracking-wide">
-                  What brings you here?
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-                  <button
-                    onClick={dismiss}
-                    className="px-7 py-3.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-xl font-bold text-white transition-colors shadow-lg"
-                  >
-                    I'm Hiring — Show Me the Work
+                <p className="deco-q">What brings you here?</p>
+
+                {/* The two CTAs — embossed gold brass plaques, the spotlight */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button onClick={dismiss} className="deco-emboss">
+                    I'm Hiring
                   </button>
-                  <button
-                    onClick={goServices}
-                    className="px-7 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-xl font-bold text-white transition-colors shadow-lg"
-                  >
-                    I Need a Website — Services
+                  <button onClick={goServices} className="deco-emboss">
+                    I Need a Website
                   </button>
                 </div>
 
-                {/* The showpiece — ragtime self-promo, plays with sound on click */}
-                <div className="mt-1">
-                  <DecoButton
-                    label="Watch the Pitch"
-                    subLabel="A Ragtime Presentation · 49s"
-                    onClick={() => setShowPitch(true)}
-                  />
-                </div>
+                {/* The showpiece — demoted to ghost marquee, defers to the CTAs */}
+                <DecoButton
+                  ghost
+                  label="Watch the Pitch"
+                  subLabel="A Ragtime Presentation · 49s"
+                  onClick={() => setShowPitch(true)}
+                />
 
-                <button
-                  onClick={dismiss}
-                  className="text-slate-500 hover:text-slate-300 text-xs transition-colors mt-1"
-                >
+                {/* Fine print on the bill */}
+                <button onClick={dismiss} className="deco-fine">
                   Just looking around
                 </button>
               </motion.div>
