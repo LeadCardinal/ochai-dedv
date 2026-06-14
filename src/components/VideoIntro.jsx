@@ -13,6 +13,7 @@ const VideoIntro = () => {
   const playTimeoutRef = useRef(null);
 
   const [alreadySeen] = useState(() => {
+    if (typeof window === 'undefined') return true; // SSR — skip intro
     try {
       return sessionStorage.getItem(SESSION_KEY) === '1' ||
         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -21,11 +22,12 @@ const VideoIntro = () => {
     }
   });
 
-  const [src] = useState(() =>
-    window.matchMedia('(max-width: 767px)').matches
+  const [src] = useState(() => {
+    if (typeof window === 'undefined') return '/videos/intro-desktop.mp4';
+    return window.matchMedia('(max-width: 767px)').matches
       ? '/videos/intro-mobile.mp4'
-      : '/videos/intro-desktop.mp4'
-  );
+      : '/videos/intro-desktop.mp4';
+  });
 
   const [isVisible, setIsVisible] = useState(!alreadySeen);
   const [videoReady, setVideoReady] = useState(false);
