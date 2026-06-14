@@ -1,4 +1,5 @@
 
+
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { BrainCircuit, Sparkles, Target, Rocket, TrendingUp } from 'lucide-react';
@@ -62,7 +63,7 @@ const SinglePainPoint = ({ data, isLast }) => {
 
   return (
     <div ref={containerRef} className={`h-[250vh] relative z-10 ${!isLast ? 'border-b border-slate-900/50' : ''}`}>
-      <div className="sticky top-[73px] h-screen w-full overflow-hidden flex items-center justify-center">
+      <div className="sticky top-[108px] h-screen w-full overflow-hidden flex items-center justify-center">
         <div className="container mx-auto px-4 md:px-8 max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
             
@@ -108,11 +109,6 @@ const SinglePainPoint = ({ data, isLast }) => {
 
 const PainPointSection = () => {
   return (
-    /* 
-      Pain Point Container
-      - Z-index 30: Ensures it sits above everything else.
-      - bg-slate-950: Opaque background to cover the fixed hero image when scrolling over it.
-    */
     <div id="pain-points" className="w-full bg-slate-950 relative z-30">
       {painPointsData.map((painPoint, index) => (
         <SinglePainPoint 

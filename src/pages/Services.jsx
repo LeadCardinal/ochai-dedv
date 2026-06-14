@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, ArrowRight, Search, FileText, Hammer, LifeBuoy } from 'lucide-react';
+import { CalendarDays, Mail, ArrowRight, Search, FileText, Hammer, LifeBuoy } from 'lucide-react';
 import ServiceCards from '@/components/Services';
 
-const WHATSAPP_URL =
-  'https://wa.me/12563619056?text=' +
-  encodeURIComponent("Hi Jeremy, I'd like to book a free discovery call about my project.");
+const CAL_URL = 'https://cal.com/jeremy-ochai-dev';
 const EMAIL_URL =
   'mailto:jeremy@ochai.dev?subject=' +
   encodeURIComponent('Discovery Call Request') +
@@ -88,6 +86,45 @@ const servicesJsonLd = JSON.stringify({
   ],
 });
 
+// Inline cal.com embed — loads the Cal.com script once and initializes the embed
+const CalEmbed = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://app.cal.com/embed/embed.js';
+    script.async = true;
+    script.onload = () => {
+      if (window.Cal) {
+        window.Cal('init', 'jeremy-ochai-dev', { origin: 'https://cal.com' });
+        window.Cal.ns['jeremy-ochai-dev']('inline', {
+          elementOrSelector: '#cal-inline',
+          calLink: 'jeremy-ochai-dev',
+          layout: 'month_view',
+        });
+        window.Cal.ns['jeremy-ochai-dev']('ui', {
+          cssVarsPerTheme: {
+            light: { 'cal-brand': '#06b6d4' },
+            dark: { 'cal-brand': '#06b6d4' },
+          },
+          hideEventTypeDetails: false,
+          layout: 'month_view',
+        });
+      }
+    };
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return (
+    <div
+      id="cal-inline"
+      style={{ width: '100%', height: '700px', overflow: 'scroll' }}
+      className="rounded-2xl border border-slate-700/50 bg-slate-900/60"
+    />
+  );
+};
+
 const Services = () => {
   return (
     <>
@@ -134,12 +171,12 @@ const Services = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a
-              href={WHATSAPP_URL}
+              href={CAL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-600 hover:bg-green-500 rounded-xl font-bold text-white text-lg transition-colors shadow-lg"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-lg transition-colors shadow-lg"
             >
-              <Phone className="w-5 h-5" /> Book a Free Discovery Call
+              <CalendarDays className="w-5 h-5" /> Book a Free Discovery Call
             </a>
             <a
               href={EMAIL_URL}
@@ -218,6 +255,21 @@ const Services = () => {
         </div>
       </section>
 
+      {/* Inline booking embed */}
+      <section className="py-16 bg-slate-950">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Grab a Slot <span className="text-cyan-400">Right Now</span>
+            </h2>
+            <p className="text-slate-300 text-lg">
+              15 minutes or 30 — pick what fits. No forms, no friction.
+            </p>
+          </div>
+          <CalEmbed />
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="py-24 bg-gradient-to-b from-slate-900 to-slate-950 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
@@ -234,12 +286,12 @@ const Services = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={WHATSAPP_URL}
+              href={CAL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-600 hover:bg-green-500 rounded-xl font-bold text-white text-lg transition-colors shadow-lg"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-lg transition-colors shadow-lg"
             >
-              <Phone className="w-5 h-5" /> WhatsApp: 256-361-9056
+              <CalendarDays className="w-5 h-5" /> Schedule at cal.com
             </a>
             <a
               href={EMAIL_URL}
