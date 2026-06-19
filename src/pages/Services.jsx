@@ -320,7 +320,6 @@ const TierCard = ({ tier }) => (
 const Services = () => {
   const heroRef = useRef(null);
   const rocketRef = useRef(null);
-  const earthRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -330,10 +329,6 @@ const Services = () => {
       });
       gsap.to(rocketRef.current, {
         y: '+=18', x: '+=8', rotation: '+=3', duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1,
-      });
-      gsap.to(earthRef.current, {
-        y: '25vh', ease: 'none',
-        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: 3 },
       });
       ['#tier-splash-0', '#tier-splash-1', '#tier-splash-2'].forEach((sel) => {
         gsap.fromTo(sel,
@@ -372,23 +367,23 @@ const Services = () => {
         <style>{KEYFRAME_CSS}</style>
       </Helmet>
 
+      {/* EARTH VIDEO BACKDROP — fixed to true viewport top, behind everything, not part of scroll choreography */}
+      <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
+        <video
+          autoPlay loop muted playsInline
+          poster={ASSETS.earthAvif}
+          className="w-full h-full object-contain"
+        >
+          <source src={ASSETS.earthWebm} type="video/webm" />
+          <img src={ASSETS.earthAvif} alt="Earth from space" className="w-full h-full object-contain" />
+        </video>
+      </div>
+
       {/* HERO */}
-      <section ref={heroRef} className="relative min-h-[220vh] overflow-hidden bg-black">
-        <div ref={earthRef} className="absolute bottom-0 left-0 right-0 h-[22vh] overflow-hidden z-10 pointer-events-none">
-          <video
-            autoPlay loop muted playsInline
-            poster={ASSETS.earthAvif}
-            className="w-full h-full object-cover object-top"
-            style={{ transform: 'scale(1.1)' }}
-          >
-            <source src={ASSETS.earthWebm} type="video/webm" />
-            <img src={ASSETS.earthAvif} alt="Earth from space" className="w-full h-full object-cover" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent" />
-        </div>
+      <section ref={heroRef} className="relative min-h-[220vh] overflow-hidden bg-transparent">
         <div
           className="absolute inset-0 z-0"
-          style={{ background: 'radial-gradient(ellipse at center, #0a0a1a 0%, #000000 100%)' }}
+          style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}
         >
           <div
             className="absolute inset-0 opacity-60"
@@ -452,7 +447,7 @@ const Services = () => {
       </section>
 
       {/* PROOF STRIP */}
-      <section className="py-12 border-y border-slate-800/60 bg-slate-900/40">
+      <section className="relative z-10 py-12 border-y border-slate-800/60 bg-slate-900/40">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {proofPoints.map((p) => (
@@ -473,7 +468,7 @@ const Services = () => {
       </section>
 
       {/* WHY THE DIFFERENCE */}
-      <section className="py-24 bg-slate-950">
+      <section className="relative z-10 py-24 bg-slate-950">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
             Every build ships with what<br />
@@ -491,7 +486,7 @@ const Services = () => {
       </section>
 
       {/* TIERS */}
-      <section id="tiers" className="bg-black py-8">
+      <section id="tiers" className="relative z-10 bg-black py-8">
         <div className="container mx-auto px-4 text-center mb-16">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-4">Web Design and Development</p>
           <h2 className="text-4xl md:text-6xl font-black text-white">
@@ -522,7 +517,7 @@ const Services = () => {
       </section>
 
       {/* THE CLOSE */}
-      <section className="py-24 bg-slate-950 border-t border-slate-800">
+      <section className="relative z-10 py-24 bg-slate-950 border-t border-slate-800">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <p className="text-2xl md:text-4xl font-black text-white leading-tight mb-6">
             &ldquo;Anyone else will charge you more<br />
@@ -536,7 +531,7 @@ const Services = () => {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-24 bg-slate-900">
+      <section className="relative z-10 py-24 bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
@@ -564,7 +559,7 @@ const Services = () => {
       </section>
 
       {/* BROCHURE */}
-      <section className="py-16 bg-slate-950 border-y border-slate-800">
+      <section className="relative z-10 py-16 bg-slate-950 border-y border-slate-800">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <p className="text-xs uppercase tracking-widest text-slate-500 mb-4">Taking this to a boardroom?</p>
           <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Download the OchAI Service Brochure</h2>
@@ -583,7 +578,7 @@ const Services = () => {
       </section>
 
       {/* BOOKING */}
-      <section className="py-16 bg-slate-950">
+      <section className="relative z-10 py-16 bg-slate-950">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
@@ -596,7 +591,7 @@ const Services = () => {
       </section>
 
       {/* FINAL CTA */}
-      <section className="py-24 bg-gradient-to-b from-slate-900 to-black relative overflow-hidden">
+      <section className="relative z-10 py-24 bg-gradient-to-b from-slate-900 to-black relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <div className="absolute top-0 left-1/2 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl" />
