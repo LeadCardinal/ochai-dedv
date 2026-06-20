@@ -320,15 +320,24 @@ const TierCard = ({ tier }) => (
 const Services = () => {
   const heroRef = useRef(null);
   const rocketRef = useRef(null);
+  const subRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Force initial hidden state immediately, before any ScrollTrigger calc,
+      // so prerendered/hydrated HTML never flashes the full block.
+      gsap.set(subRef.current, { opacity: 0, y: 20 });
+
       gsap.to(rocketRef.current, {
-        x: '12vw', y: '-30vh', rotation: 15, ease: 'none',
+        x: '12vw', y: '-30vh', scale: 1.4, rotation: 15, ease: 'none',
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: 2 },
       });
       gsap.to(rocketRef.current, {
         y: '+=18', x: '+=8', rotation: '+=3', duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1,
+      });
+      gsap.to(subRef.current, {
+        opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=380%', scrub: false, toggleActions: 'play none none reverse' },
       });
       ['#tier-splash-0', '#tier-splash-1', '#tier-splash-2'].forEach((sel) => {
         gsap.fromTo(sel,
@@ -347,6 +356,13 @@ const Services = () => {
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } }
         );
+      });
+
+      // Force a hard recalculation after the layout has fully settled —
+      // critical on prerendered pages where hydration can leave stale
+      // ScrollTrigger measurements from the server-rendered markup.
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
       });
     }, heroRef);
     return () => ctx.revert();
@@ -380,7 +396,7 @@ const Services = () => {
       </div>
 
       {/* HERO */}
-      <section ref={heroRef} className="relative min-h-[220vh] overflow-hidden bg-transparent">
+      <section ref={heroRef} className="relative min-h-[460vh] overflow-hidden bg-transparent">
         <div
           className="absolute inset-0 z-0"
           style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}
@@ -409,38 +425,40 @@ const Services = () => {
         <div
           ref={rocketRef}
           className="absolute z-30 pointer-events-none"
-          style={{ bottom: '22vh', left: '15%', width: 140 }}
+          style={{ top: '55vh', left: '15%', width: 140 }}
         >
           <img src={ASSETS.rocket} alt="OchAI Gold Rocket" width={140} height={280} className="w-full h-auto" />
         </div>
         <div className="sticky top-0 h-screen flex items-center z-40 pointer-events-none">
-          <div className="w-full px-6 md:px-12 lg:px-20 text-left md:text-right pointer-events-auto md:ml-auto md:max-w-xl">
-            <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3 font-semibold">Orchestrating Your Digital Presence</p>
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-tight mb-4">
+          <div className="w-full px-6 md:px-12 lg:px-20 text-left md:text-right md:ml-auto md:max-w-xl">
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3 font-semibold pointer-events-auto">Orchestrating Your Digital Presence</p>
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-tight pointer-events-auto">
               Your Business,<br />
               <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
                 Built to Perform.
               </span>
             </h1>
-            <p className="text-sm md:text-base text-slate-300 mb-6 leading-relaxed">
-              Websites, AI integrations, and digital operations built by one person to elite standards on every project, every time. Guaranteed Lighthouse 100. No exceptions.
-            </p>
-            <div className="flex flex-col sm:flex-row md:justify-end gap-3">
-              <a
-                href={CAL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={playApplause}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-sm transition-all shadow-lg"
-              >
-                <CalendarDays className="w-4 h-4" /> Book a Free Discovery Call
-              </a>
-              <a
-                href="#tiers"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-slate-900/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-sm transition-colors backdrop-blur-sm"
-              >
-                See the Packages <ArrowRight className="w-4 h-4" />
-              </a>
+            <div ref={subRef} className="mt-4" style={{ opacity: 0 }}>
+              <p className="text-sm md:text-base text-slate-300 mb-6 leading-relaxed pointer-events-auto">
+                Websites, AI integrations, and digital operations built by one person to elite standards on every project, every time. Guaranteed Lighthouse 100. No exceptions.
+              </p>
+              <div className="flex flex-col sm:flex-row md:justify-end gap-3 pointer-events-auto">
+                <a
+                  href={CAL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={playApplause}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-sm transition-all shadow-lg"
+                >
+                  <CalendarDays className="w-4 h-4" /> Book a Free Discovery Call
+                </a>
+                <a
+                  href="#tiers"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-slate-900/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-sm transition-colors backdrop-blur-sm"
+                >
+                  See the Packages <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

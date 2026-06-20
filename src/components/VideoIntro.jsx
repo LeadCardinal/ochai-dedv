@@ -23,10 +23,10 @@ const VideoIntro = () => {
   });
 
   const [src] = useState(() => {
-    if (typeof window === 'undefined') return '/videos/intro-desktop.mp4';
+    if (typeof window === 'undefined') return '/videos/_desktop.mp4';
     return window.matchMedia('(max-width: 767px)').matches
       ? '/videos/intro-mobile.mp4'
-      : '/videos/intro-desktop.mp4';
+      : '/videos/_desktop.mp4';
   });
 
   const [isVisible, setIsVisible] = useState(!alreadySeen);
