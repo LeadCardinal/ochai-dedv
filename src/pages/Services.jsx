@@ -24,9 +24,9 @@ const ASSETS = {
   ai:            '/images/parallax/ai.svg',
   earthAvif:     '/images/parallax/earth.avif',
   earthWebm:     '/images/parallax/earth.webm',
-  zing:          '/images/parallax/zing.svg',
-  bamm:          '/images/parallax/bamm.svg',
-  zoom:          '/images/parallax/zoom.svg',
+  quartet:       '/images/parallax/thequartet.svg',
+  ensemble:      '/images/parallax/theensemble.svg',
+  symphony:      '/images/parallax/thesymphony.svg',
 };
 
 function playApplause() {
@@ -146,8 +146,8 @@ const processSteps = [
 const tiers = [
   {
     id: 'quartet',
-    splash: ASSETS.zing,
-    splashAlt: 'ZING!',
+    splash: ASSETS.quartet,
+    splashAlt: 'The Quartet',
     name: 'The Quartet',
     emoji: '🎻',
     price: 'Starting at $2,500',
@@ -175,8 +175,8 @@ const tiers = [
   },
   {
     id: 'ensemble',
-    splash: ASSETS.bamm,
-    splashAlt: 'BAMM!!',
+    splash: ASSETS.ensemble,
+    splashAlt: 'The Ensemble',
     name: 'The Ensemble',
     emoji: '🎺',
     price: 'Starting at $5,500',
@@ -202,8 +202,8 @@ const tiers = [
   },
   {
     id: 'symphony',
-    splash: ASSETS.zoom,
-    splashAlt: 'ZOOM!!!',
+    splash: ASSETS.symphony,
+    splashAlt: 'The Symphony',
     name: 'The Symphony',
     emoji: '🎼',
     price: 'Starting at $12,000',
