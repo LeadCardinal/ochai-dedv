@@ -16,7 +16,7 @@ const EMAIL_URL =
 
 const ASSETS = {
   rocket:        '/images/parallax/rocket.svg',
-  asteroid:      '/images/parallax/asteroid.svg',    // the 100% asteroid
+  asteroid:      '/images/parallax/asteroid.svg',
   asteroid2:     '/images/parallax/asteroid2.svg',
   asteroid3:     '/images/parallax/asteroid3.svg',
   asteroid4:     '/images/parallax/asteroid4.svg',
@@ -188,16 +188,16 @@ const tiers = [
   },
 ];
 
-// 4 lighthouse-labeled + 1 100%-asteroid + 3 plain rocks (varied sizes, spread pathTypes)
+// 4 lighthouse-labeled + 4 x 100%-asteroid (varied sizes, all three pathTypes represented)
 const asteroidDefs = [
   { src: 'performance',   size: 240, top: 15, left: 80, z: 30, pathType: 1 },
   { src: 'accessibility', size: 195, top: 55, left: 10, z: 25, pathType: 2 },
   { src: 'bestPractices', size: 165, top: 30, left: 60, z: 20, pathType: 0 },
   { src: 'seo',           size: 210, top: 70, left: 45, z: 28, pathType: 1 },
-  { src: 'asteroid',      size: 360, top: 20, left: 20, z: 35, pathType: 2 },  // the 100% one
-  { src: 'asteroid2',     size: 150, top: 45, left: 75, z: 22, pathType: 0 },  // small rock
-  { src: 'asteroid3',     size: 220, top: 65, left: 32, z: 18, pathType: 2 },  // large rock
-  { src: 'asteroid4',     size: 185, top: 10, left: 55, z: 15, pathType: 1 },  // medium rock
+  { src: 'asteroid',      size: 380, top: 20, left: 20, z: 35, pathType: 2 },
+  { src: 'asteroid2',     size: 140, top: 48, left: 72, z: 22, pathType: 0 },
+  { src: 'asteroid3',     size: 260, top: 62, left: 35, z: 18, pathType: 1 },
+  { src: 'asteroid4',     size: 195, top:  8, left: 55, z: 15, pathType: 2 },
 ];
 
 const AsteroidLayer = () => (
@@ -258,8 +258,8 @@ const TierCard = ({ tier }) => (
 
 const Services = () => {
   const heroRef     = useRef(null);
-  const rocketWrapRef = useRef(null); // outer wrapper — scroll arc tween
-  const rocketRef   = useRef(null);   // inner element — idle float tween (no x/y conflict)
+  const rocketWrapRef = useRef(null);
+  const rocketRef   = useRef(null);
   const subRef      = useRef(null);
   const h1PanelRef  = useRef(null);
 
@@ -268,8 +268,6 @@ const Services = () => {
       gsap.set(subRef.current, { opacity: 0, y: 20 });
 
       // ── Rocket ──
-      // Scroll arc on the outer wrapper; idle float on the inner element.
-      // Two separate elements = zero property conflict between the two tweens.
       gsap.to(rocketWrapRef.current, {
         x: '2vw', y: '-5vh', scale: 1.07, rotation: 2.5, ease: 'none',
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 2 },
@@ -377,7 +375,6 @@ const Services = () => {
         <div className="sticky top-0 h-screen overflow-hidden" style={{ zIndex: 10 }}>
           <AsteroidLayer />
 
-          {/* Rocket — outer wrapper takes scroll arc, inner div takes idle float */}
           <div ref={rocketWrapRef} className="absolute pointer-events-none"
             style={{ zIndex: 20, top: '55vh', left: '15%', width: 140 }}>
             <div ref={rocketRef}>
