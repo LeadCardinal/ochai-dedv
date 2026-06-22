@@ -235,22 +235,29 @@ const tiers = [
   },
 ];
 
+// pathType — scroll journey lane assigned per asteroid:
+//   0 = enters offscreen right  → exits bottom-left off screen
+//   1 = enters offscreen top-middle → exits bottom-right off screen
+//   2 = enters offscreen top-left  → passes middle-left → exits bottom-right off screen
 const asteroidDefs = [
-  { src: 'performance',   size: 80,  top: 15, left: 80, dur: 8,  delay: 0,   z: 30 },
-  { src: 'accessibility', size: 65,  top: 55, left: 10, dur: 11, delay: 2,   z: 25 },
-  { src: 'bestPractices', size: 55,  top: 30, left: 60, dur: 14, delay: 5,   z: 20 },
-  { src: 'seo',           size: 70,  top: 70, left: 45, dur: 9,  delay: 3,   z: 28 },
-  { src: 'asteroid',      size: 120, top: 20, left: 20, dur: 6,  delay: 1,   z: 35 },
-  { src: 'ai',            size: 45,  top: 45, left: 75, dur: 7,  delay: 0.5, z: 22 },
-  { src: 'ai',            size: 35,  top: 65, left: 30, dur: 9,  delay: 4,   z: 18 },
-  { src: 'ai',            size: 40,  top: 10, left: 50, dur: 12, delay: 6,   z: 15 },
+  { src: 'performance',   size: 80,  top: 15, left: 80, dur: 8,  delay: 0,   z: 30, pathType: 1 },
+  { src: 'accessibility', size: 65,  top: 55, left: 10, dur: 11, delay: 2,   z: 25, pathType: 2 },
+  { src: 'bestPractices', size: 55,  top: 30, left: 60, dur: 14, delay: 5,   z: 20, pathType: 0 },
+  { src: 'seo',           size: 70,  top: 70, left: 45, dur: 9,  delay: 3,   z: 28, pathType: 1 },
+  { src: 'asteroid',      size: 120, top: 20, left: 20, dur: 6,  delay: 1,   z: 35, pathType: 2 },
+  { src: 'ai',            size: 45,  top: 45, left: 75, dur: 7,  delay: 0.5, z: 22, pathType: 0 },
+  { src: 'ai',            size: 35,  top: 65, left: 30, dur: 9,  delay: 4,   z: 18, pathType: 1 },
+  { src: 'ai',            size: 40,  top: 10, left: 50, dur: 12, delay: 6,   z: 15, pathType: 0 },
 ];
 
+// CSS float animation removed — GSAP scroll journeys own the transform now
 const AsteroidLayer = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden">
     {asteroidDefs.map((a, i) => (
       <div
         key={i}
+        data-ast-idx={i}
+        data-path-type={a.pathType}
         className="absolute"
         style={{
           width: a.size,
@@ -258,7 +265,6 @@ const AsteroidLayer = () => (
           top: `${a.top}%`,
           left: `${a.left}%`,
           zIndex: a.z,
-          animation: `float-${i % 3} ${a.dur}s ease-in-out ${a.delay}s infinite`,
         }}
       >
         <img src={ASSETS[a.src]} alt="" width={a.size} height={a.size} className="w-full h-full object-contain" />
@@ -328,17 +334,20 @@ const Services = () => {
       // so prerendered/hydrated HTML never flashes the full block.
       gsap.set(subRef.current, { opacity: 0, y: 20 });
 
+      // Rocket — destination values halved from original
       gsap.to(rocketRef.current, {
-        x: '12vw', y: '-30vh', scale: 1.4, rotation: 15, ease: 'none',
+        x: '6vw', y: '-15vh', scale: 1.2, rotation: 7.5, ease: 'none',
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: 2 },
       });
       gsap.to(rocketRef.current, {
         y: '+=18', x: '+=8', rotation: '+=3', duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1,
       });
+
       gsap.to(subRef.current, {
         opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=380%', scrub: false, toggleActions: 'play none none reverse' },
       });
+
       ['#tier-splash-0', '#tier-splash-1', '#tier-splash-2'].forEach((sel) => {
         gsap.fromTo(sel,
           { opacity: 0, scale: 1.05 },
@@ -356,6 +365,40 @@ const Services = () => {
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } }
         );
+      });
+
+      // Asteroid scroll journeys
+      // pathType 0: enters offscreen right  → exits bottom-left off screen
+      // pathType 1: enters offscreen top-middle → exits bottom-right off screen
+      // pathType 2: enters offscreen top-left → passes middle-left → exits bottom-right off screen
+      heroRef.current.querySelectorAll('[data-path-type]').forEach((el) => {
+        const pathType = parseInt(el.dataset.pathType, 10);
+        if (pathType === 0) {
+          gsap.fromTo(el,
+            { x: '110vw', y: '0px' },
+            {
+              x: '-120vw', y: '110vh', ease: 'none',
+              scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
+            }
+          );
+        } else if (pathType === 1) {
+          gsap.fromTo(el,
+            { x: '0px', y: '-110vh' },
+            {
+              x: '120vw', y: '110vh', ease: 'none',
+              scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
+            }
+          );
+        } else {
+          // pathType 2: top-left → pause at middle-left → shoot to bottom-right
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
+          });
+          tl.fromTo(el,
+            { x: '-110vw', y: '-110vh' },
+            { x: '-95vw', y: '20vh', ease: 'none', duration: 0.4 }
+          ).to(el, { x: '120vw', y: '110vh', ease: 'none', duration: 0.6 });
+        }
       });
 
       // Force a hard recalculation after the layout has fully settled —
