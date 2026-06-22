@@ -16,12 +16,14 @@ const EMAIL_URL =
 
 const ASSETS = {
   rocket:        '/images/parallax/rocket.svg',
-  asteroid:      '/images/parallax/asteroid.svg',
+  asteroid:      '/images/parallax/asteroid.svg',    // the 100% asteroid
+  asteroid2:     '/images/parallax/asteroid2.svg',
+  asteroid3:     '/images/parallax/asteroid3.svg',
+  asteroid4:     '/images/parallax/asteroid4.svg',
   performance:   '/images/parallax/performance.svg',
   accessibility: '/images/parallax/accessibility.svg',
   bestPractices: '/images/parallax/best-practices.svg',
   seo:           '/images/parallax/seo.svg',
-  ai:            '/images/parallax/ai.svg',
   earthAvif:     '/images/parallax/earth.avif',
   earthWebm:     '/images/parallax/earth.webm',
   quartet:       '/images/parallax/thequartet.svg',
@@ -101,8 +103,7 @@ const CalEmbed = () => {
         window.Cal.ns['jeremy-ochai-dev']('inline', { elementOrSelector: '#cal-inline', calLink: 'jeremy-ochai-dev', layout: 'month_view' });
         window.Cal.ns['jeremy-ochai-dev']('ui', {
           cssVarsPerTheme: { light: { 'cal-brand': '#06b6d4' }, dark: { 'cal-brand': '#06b6d4' } },
-          hideEventTypeDetails: false,
-          layout: 'month_view',
+          hideEventTypeDetails: false, layout: 'month_view',
         });
       }
     };
@@ -131,8 +132,7 @@ const processSteps = [
 const tiers = [
   {
     id: 'quartet', splash: ASSETS.quartet, splashAlt: 'The Quartet', name: 'The Quartet', emoji: '🎻',
-    price: 'Starting at $2,500',
-    tagline: 'A complete, professional web presence — nothing missing, nothing wasted.',
+    price: 'Starting at $2,500', tagline: 'A complete, professional web presence — nothing missing, nothing wasted.',
     coverage: '40%', coverageLabel: 'of your conversion architecture',
     color: 'from-emerald-400 to-cyan-400', borderColor: 'border-emerald-500/40', glowColor: 'shadow-emerald-500/10',
     bestFor: 'Local service businesses, solo professionals, consultants, startups establishing their first real web presence.',
@@ -148,8 +148,7 @@ const tiers = [
   },
   {
     id: 'ensemble', splash: ASSETS.ensemble, splashAlt: 'The Ensemble', name: 'The Ensemble', emoji: '🎺',
-    price: 'Starting at $5,500',
-    tagline: 'More moving parts. More reach. Built for businesses that need their site to do real work.',
+    price: 'Starting at $5,500', tagline: 'More moving parts. More reach. Built for businesses that need their site to do real work.',
     coverage: '70%', coverageLabel: 'of your conversion architecture',
     color: 'from-cyan-400 to-blue-400', borderColor: 'border-cyan-500/40', glowColor: 'shadow-cyan-500/10',
     bestFor: 'Established small businesses, multi-service companies, growing brands that need to win on search.',
@@ -166,8 +165,7 @@ const tiers = [
   },
   {
     id: 'symphony', splash: ASSETS.symphony, splashAlt: 'The Symphony', name: 'The Symphony', emoji: '🎼',
-    price: 'Starting at $12,000',
-    tagline: 'Full orchestration. Every instrument in its place. Built to perform.',
+    price: 'Starting at $12,000', tagline: 'Full orchestration. Every instrument in its place. Built to perform.',
     coverage: null, coverageLabel: 'Full coverage. All instruments playing.',
     color: 'from-violet-400 to-fuchsia-400', borderColor: 'border-violet-500/40', glowColor: 'shadow-violet-500/20',
     bestFor: 'Defense/aerospace contractors, multi-location businesses, e-commerce, organizations where the website is a direct revenue or credibility instrument.',
@@ -190,29 +188,23 @@ const tiers = [
   },
 ];
 
-// sizes × 3 from originals; pathType controls scroll journey lane
+// 4 lighthouse-labeled + 1 100%-asteroid + 3 plain rocks (varied sizes, spread pathTypes)
 const asteroidDefs = [
   { src: 'performance',   size: 240, top: 15, left: 80, z: 30, pathType: 1 },
   { src: 'accessibility', size: 195, top: 55, left: 10, z: 25, pathType: 2 },
   { src: 'bestPractices', size: 165, top: 30, left: 60, z: 20, pathType: 0 },
   { src: 'seo',           size: 210, top: 70, left: 45, z: 28, pathType: 1 },
-  { src: 'asteroid',      size: 360, top: 20, left: 20, z: 35, pathType: 2 },
-  { src: 'ai',            size: 135, top: 45, left: 75, z: 22, pathType: 0 },
-  { src: 'ai',            size: 105, top: 65, left: 30, z: 18, pathType: 1 },
-  { src: 'ai',            size: 120, top: 10, left: 50, z: 15, pathType: 0 },
+  { src: 'asteroid',      size: 360, top: 20, left: 20, z: 35, pathType: 2 },  // the 100% one
+  { src: 'asteroid2',     size: 150, top: 45, left: 75, z: 22, pathType: 0 },  // small rock
+  { src: 'asteroid3',     size: 220, top: 65, left: 32, z: 18, pathType: 2 },  // large rock
+  { src: 'asteroid4',     size: 185, top: 10, left: 55, z: 15, pathType: 1 },  // medium rock
 ];
 
-// Rendered inside the sticky viewport layer — top/left % are viewport-relative
 const AsteroidLayer = () => (
   <>
     {asteroidDefs.map((a, i) => (
-      <div
-        key={i}
-        data-ast-idx={i}
-        data-path-type={a.pathType}
-        className="absolute pointer-events-none"
-        style={{ width: a.size, height: a.size, top: `${a.top}%`, left: `${a.left}%`, zIndex: a.z }}
-      >
+      <div key={i} data-ast-idx={i} data-path-type={a.pathType} className="absolute pointer-events-none"
+        style={{ width: a.size, height: a.size, top: `${a.top}%`, left: `${a.left}%`, zIndex: a.z }}>
         <img src={ASSETS[a.src]} alt="" width={a.size} height={a.size} className="w-full h-full object-contain" />
       </div>
     ))}
@@ -265,17 +257,20 @@ const TierCard = ({ tier }) => (
 );
 
 const Services = () => {
-  const heroRef    = useRef(null);
-  const rocketRef  = useRef(null);
-  const subRef     = useRef(null);
-  const h1PanelRef = useRef(null);
+  const heroRef     = useRef(null);
+  const rocketWrapRef = useRef(null); // outer wrapper — scroll arc tween
+  const rocketRef   = useRef(null);   // inner element — idle float tween (no x/y conflict)
+  const subRef      = useRef(null);
+  const h1PanelRef  = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(subRef.current, { opacity: 0, y: 20 });
 
-      // ── Rocket ── 1/3 destinations; lives inside the sticky viewport so no natural scroll fighting it
-      gsap.to(rocketRef.current, {
+      // ── Rocket ──
+      // Scroll arc on the outer wrapper; idle float on the inner element.
+      // Two separate elements = zero property conflict between the two tweens.
+      gsap.to(rocketWrapRef.current, {
         x: '2vw', y: '-5vh', scale: 1.07, rotation: 2.5, ease: 'none',
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 2 },
       });
@@ -286,17 +281,13 @@ const Services = () => {
       // ── Tagline / CTA sub-block ──
       gsap.to(subRef.current, {
         opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: {
-          trigger: heroRef.current, start: 'top top', end: '+=380%',
-          scrub: false, toggleActions: 'play none none reverse',
-        },
+        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=380%', scrub: false, toggleActions: 'play none none reverse' },
       });
 
       // ── Tier splash + card reveals ──
       ['#tier-splash-0', '#tier-splash-1', '#tier-splash-2'].forEach((sel) => {
         gsap.fromTo(sel, { opacity: 0, scale: 1.05 },
-          { opacity: 1, scale: 1, duration: 0.25,
-            scrollTrigger: { trigger: sel, start: 'top 80%', toggleActions: 'play none none reverse' } });
+          { opacity: 1, scale: 1, duration: 0.25, scrollTrigger: { trigger: sel, start: 'top 80%', toggleActions: 'play none none reverse' } });
       });
       gsap.utils.toArray('.tier-card').forEach((card, i) => {
         gsap.fromTo(card, { opacity: 0, y: 60 },
@@ -305,28 +296,18 @@ const Services = () => {
       });
       gsap.utils.toArray('.proof-point').forEach((el) => {
         gsap.fromTo(el, { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.6,
-            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
+          { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
       });
 
       // ── Asteroid scroll journeys ──
-      // All asteroids are inside the sticky viewport layer — no natural scroll conflict.
-      // They travel from their off-screen entry point across the viewport during
-      // 0 → 'bottom-=100vh bottom' (≈ 460vh of scroll on a 560vh hero).
-      // The final 100vh of hero scroll is the H1 center-stage window.
       heroRef.current.querySelectorAll('[data-path-type]').forEach((el) => {
         const pathType = parseInt(el.dataset.pathType, 10);
         const trigger  = { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 1 };
         if (pathType === 0) {
-          // right → bottom-left
-          gsap.fromTo(el, { x: '110vw', y: '0px' },
-            { x: '-120vw', y: '110vh', ease: 'none', scrollTrigger: trigger });
+          gsap.fromTo(el, { x: '110vw', y: '0px' }, { x: '-120vw', y: '110vh', ease: 'none', scrollTrigger: trigger });
         } else if (pathType === 1) {
-          // top-middle → bottom-right
-          gsap.fromTo(el, { x: '0px', y: '-110vh' },
-            { x: '120vw', y: '110vh', ease: 'none', scrollTrigger: trigger });
+          gsap.fromTo(el, { x: '0px', y: '-110vh' }, { x: '120vw', y: '110vh', ease: 'none', scrollTrigger: trigger });
         } else {
-          // top-left → middle-left → bottom-right
           const tl = gsap.timeline({ scrollTrigger: trigger });
           tl.fromTo(el, { x: '-110vw', y: '-110vh' }, { x: '-95vw', y: '20vh', ease: 'none', duration: 0.4 })
             .to(el, { x: '120vw', y: '110vh', ease: 'none', duration: 0.6 });
@@ -334,7 +315,6 @@ const Services = () => {
       });
 
       // ── H1 center-stage ──
-      // After asteroids complete, drift the panel to viewport center (desktop only).
       gsap.to(h1PanelRef.current, {
         x: () => {
           if (window.innerWidth < 768) return 0;
@@ -344,7 +324,6 @@ const Services = () => {
         ease: 'power2.inOut',
         scrollTrigger: { trigger: heroRef.current, start: 'bottom-=100vh bottom', end: 'bottom-=15vh bottom', scrub: 1 },
       });
-      // Fade out as proof strip collides from below
       gsap.to(h1PanelRef.current, {
         opacity: 0,
         scrollTrigger: { trigger: heroRef.current, start: 'bottom-=15vh bottom', end: 'bottom bottom', scrub: 1 },
@@ -370,7 +349,6 @@ const Services = () => {
         <style>{KEYFRAME_CSS}</style>
       </Helmet>
 
-      {/* Earth — fixed backdrop, truly behind everything */}
       <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
         <video autoPlay loop muted playsInline poster={ASSETS.earthAvif} className="w-full h-full object-contain">
           <source src={ASSETS.earthWebm} type="video/webm" />
@@ -378,15 +356,7 @@ const Services = () => {
         </video>
       </div>
 
-      {/* ─────────────────────────────────────────────────────────────────────────
-          HERO — 560vh total
-          Stars background is absolute (fills full height for depth).
-          ONE sticky viewport layer holds asteroids + rocket + H1 together.
-          Nothing absolute-scrolls out of view — GSAP owns all movement.
-      ──────────────────────────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-[560vh] bg-transparent">
-
-        {/* Star field — absolute across full hero height for depth texture */}
         <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}>
           <div className="absolute inset-0 opacity-60" style={{
             backgroundImage: [
@@ -404,32 +374,23 @@ const Services = () => {
           }} />
         </div>
 
-        {/* ── Sticky viewport layer ──
-            Everything that must stay visible during the 560vh scroll lives here.
-            overflow-hidden clips asteroids at viewport edges so GSAP entry/exit is clean. */}
         <div className="sticky top-0 h-screen overflow-hidden" style={{ zIndex: 10 }}>
-
-          {/* Asteroids — positioned by top/left % within 100vh sticky viewport */}
           <AsteroidLayer />
 
-          {/* Rocket */}
-          <div
-            ref={rocketRef}
-            className="absolute pointer-events-none"
-            style={{ zIndex: 20, top: '55vh', left: '15%', width: 140 }}
-          >
-            <img src={ASSETS.rocket} alt="OchAI Gold Rocket" width={140} height={280} className="w-full h-auto" />
+          {/* Rocket — outer wrapper takes scroll arc, inner div takes idle float */}
+          <div ref={rocketWrapRef} className="absolute pointer-events-none"
+            style={{ zIndex: 20, top: '55vh', left: '15%', width: 140 }}>
+            <div ref={rocketRef}>
+              <img src={ASSETS.rocket} alt="OchAI Gold Rocket" width={140} height={280} className="w-full h-auto" />
+            </div>
           </div>
 
-          {/* H1 panel */}
           <div className="absolute inset-0 flex items-center pointer-events-none" style={{ zIndex: 30 }}>
             <div ref={h1PanelRef} className="w-full px-6 md:px-12 lg:px-20 text-left md:text-right md:ml-auto md:max-w-xl">
               <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3 font-semibold pointer-events-auto">Orchestrating Your Digital Presence</p>
               <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-tight pointer-events-auto">
                 Your Business,<br />
-                <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
-                  Built to Perform.
-                </span>
+                <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">Built to Perform.</span>
               </h1>
               <div ref={subRef} className="mt-4" style={{ opacity: 0 }}>
                 <p className="text-sm md:text-base text-slate-300 mb-6 leading-relaxed pointer-events-auto">
@@ -448,11 +409,9 @@ const Services = () => {
               </div>
             </div>
           </div>
-
-        </div>{/* end sticky viewport layer */}
+        </div>
       </section>
 
-      {/* PROOF STRIP */}
       <section className="relative z-10 py-12 border-y border-slate-800/60 bg-slate-900/40">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -467,31 +426,18 @@ const Services = () => {
         </div>
       </section>
 
-      {/* WHY THE DIFFERENCE */}
       <section className="relative z-10 py-24 bg-slate-950">
         <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
-            Every build ships with what<br /><span className="text-cyan-400">others charge separately for.</span>
-          </h2>
-          <p className="text-lg text-slate-300 leading-relaxed mb-6">
-            Most shops separate technical SEO from the build because two different people are doing two different jobs.
-            A developer builds. An SEO person patches it after. That handoff has a gap — and you pay for both and the gap.
-          </p>
-          <p className="text-lg text-slate-300 leading-relaxed">
-            Every build I deliver closes that gap entirely. The SEO is not bolted on after delivery — it is{' '}
-            <strong className="text-white">architectural</strong>. Built in from line one. Not a discount. A structural advantage passed directly to you.
-          </p>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">Every build ships with what<br /><span className="text-cyan-400">others charge separately for.</span></h2>
+          <p className="text-lg text-slate-300 leading-relaxed mb-6">Most shops separate technical SEO from the build because two different people are doing two different jobs. A developer builds. An SEO person patches it after. That handoff has a gap — and you pay for both and the gap.</p>
+          <p className="text-lg text-slate-300 leading-relaxed">Every build I deliver closes that gap entirely. The SEO is not bolted on after delivery — it is <strong className="text-white">architectural</strong>. Built in from line one. Not a discount. A structural advantage passed directly to you.</p>
         </div>
       </section>
 
-      {/* TIERS */}
       <section id="tiers" className="relative z-10 bg-black py-8">
         <div className="container mx-auto px-4 text-center mb-16">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-4">Web Design and Development</p>
-          <h2 className="text-4xl md:text-6xl font-black text-white">
-            Choose Your{' '}
-            <span className="bg-gradient-to-r from-emerald-400 to-violet-400 bg-clip-text text-transparent">Performance Level</span>
-          </h2>
+          <h2 className="text-4xl md:text-6xl font-black text-white">Choose Your <span className="bg-gradient-to-r from-emerald-400 to-violet-400 bg-clip-text text-transparent">Performance Level</span></h2>
         </div>
         {tiers.map((tier, i) => (
           <div key={tier.id}>
@@ -503,19 +449,13 @@ const Services = () => {
         ))}
       </section>
 
-      {/* THE CLOSE */}
       <section className="relative z-10 py-24 bg-slate-950 border-t border-slate-800">
         <div className="container mx-auto px-4 max-w-3xl text-center">
-          <p className="text-2xl md:text-4xl font-black text-white leading-tight mb-6">
-            &ldquo;Anyone else will charge you more<br />
-            <span className="text-cyan-400">to deliver less</span> &mdash;<br />
-            and you will not know it until after.&rdquo;
-          </p>
+          <p className="text-2xl md:text-4xl font-black text-white leading-tight mb-6">&ldquo;Anyone else will charge you more<br /><span className="text-cyan-400">to deliver less</span> &mdash;<br />and you will not know it until after.&rdquo;</p>
           <p className="text-slate-400 text-base md:text-lg">One person. Every instrument. No handoffs, no gaps, no excuses.</p>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
       <section className="relative z-10 py-24 bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -537,14 +477,11 @@ const Services = () => {
         </div>
       </section>
 
-      {/* BROCHURE */}
       <section className="relative z-10 py-16 bg-slate-950 border-y border-slate-800">
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <p className="text-xs uppercase tracking-widest text-slate-500 mb-4">Taking this to a boardroom?</p>
           <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Download the OchAI Service Brochure</h2>
-          <p className="text-slate-300 text-base md:text-lg mb-8">
-            A designed, print-ready PDF with the full service breakdown. Built for the conversation that happens after someone asks, <em>where did you find this guy?</em>
-          </p>
+          <p className="text-slate-300 text-base md:text-lg mb-8">A designed, print-ready PDF with the full service breakdown. Built for the conversation that happens after someone asks, <em>where did you find this guy?</em></p>
           <a href="/OchAI-Services-Brochure.pdf" download
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors">
             <Download className="w-5 h-5" /> Download Brochure (PDF)
@@ -552,7 +489,6 @@ const Services = () => {
         </div>
       </section>
 
-      {/* BOOKING */}
       <section className="relative z-10 py-16 bg-slate-950">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-10">
@@ -563,7 +499,6 @@ const Services = () => {
         </div>
       </section>
 
-      {/* FINAL CTA */}
       <section className="relative z-10 py-24 bg-gradient-to-b from-slate-900 to-black relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <div className="absolute top-0 left-1/2 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl" />
@@ -571,10 +506,7 @@ const Services = () => {
         </div>
         <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">The Discovery Call Costs <span className="text-emerald-400">Nothing</span></h2>
-          <p className="text-lg text-slate-300 mb-10">
-            Worst case, you walk away with a clearer picture of what your project needs.
-            Best case, you get a fixed-price proposal and a builder who answers his own phone.
-          </p>
+          <p className="text-lg text-slate-300 mb-10">Worst case, you walk away with a clearer picture of what your project needs. Best case, you get a fixed-price proposal and a builder who answers his own phone.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-lg transition-all shadow-lg">
