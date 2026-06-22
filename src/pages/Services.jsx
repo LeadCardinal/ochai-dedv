@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { CalendarDays, Mail, ArrowRight, Search, FileText, Hammer, LifeBuoy, Download } from 'lucide-react';
-import { getCalApi } from '@calcom/embed-react';
+import Cal, { getCalApi } from '@calcom/embed-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -97,11 +97,6 @@ const CalEmbed = () => {
   useEffect(() => {
     (async () => {
       const cal = await getCalApi({ namespace: 'jeremy-ochai-dev' });
-      cal('inline', {
-        elementOrSelector: '#cal-inline',
-        calLink: 'jeremy-ochai-dev',
-        layout: 'month_view',
-      });
       cal('ui', {
         cssVarsPerTheme: { light: { 'cal-brand': '#06b6d4' }, dark: { 'cal-brand': '#06b6d4' } },
         hideEventTypeDetails: false,
@@ -110,8 +105,12 @@ const CalEmbed = () => {
     })();
   }, []);
   return (
-    <div id="cal-inline" style={{ width: '100%', height: '700px', overflow: 'scroll' }}
-      className="rounded-2xl border border-slate-700/50 bg-slate-900/60" />
+    <Cal
+      namespace="jeremy-ochai-dev"
+      calLink="jeremy-ochai-dev"
+      style={{ width: '100%', height: '700px', overflow: 'scroll' }}
+      config={{ layout: 'month_view' }}
+    />
   );
 };
 
@@ -266,10 +265,15 @@ const Services = () => {
     const ctx = gsap.context(() => {
       gsap.set(subRef.current, { opacity: 0, y: 20 });
 
-      // ── Rocket — scrub 1 = 2x speed ──
+      // ── Rocket — real travel arc across the stage, scrub 0.8 keeps it moving continuously ──
       gsap.to(rocketWrapRef.current, {
-        x: '2vw', y: '-5vh', scale: 1.07, rotation: 2.5, ease: 'none',
-        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 1 },
+        x: '18vw', y: '-22vh', scale: 1.12, rotation: 8, ease: 'none',
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: 'bottom-=200vh bottom',
+          scrub: 0.8,
+        },
       });
       gsap.to(rocketRef.current, {
         y: '+=18', x: '+=8', rotation: '+=3', duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1,
@@ -278,7 +282,7 @@ const Services = () => {
       // ── Tagline / CTA sub-block ──
       gsap.to(subRef.current, {
         opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=280%', scrub: false, toggleActions: 'play none none reverse' },
+        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=380%', scrub: false, toggleActions: 'play none none reverse' },
       });
 
       // ── Tier splash + card reveals ──
@@ -296,8 +300,8 @@ const Services = () => {
           { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
       });
 
-      // ── Asteroid scroll journeys ──
-      const triggerBase = { trigger: heroRef.current, start: 'top+=30px top', end: 'bottom-=200vh bottom' };
+      // ── Asteroid scroll journeys — fire early, finish by ~55% of scroll ──
+      const triggerBase = { trigger: heroRef.current, start: 'top+=30px top', end: 'bottom-=280vh bottom' };
       asteroidDefs.forEach((def, i) => {
         const el = heroRef.current.querySelector(`[data-ast-idx="${i}"]`);
         if (!el) return;
@@ -315,7 +319,7 @@ const Services = () => {
         }
       });
 
-      // ── H1 center-stage — holds long, fades late ──
+      // ── H1 center-stage — centers over 150vh window, holds, fades over final 100vh ──
       gsap.to(h1PanelRef.current, {
         x: () => {
           if (window.innerWidth < 768) return 0;
@@ -323,11 +327,11 @@ const Services = () => {
           return (window.innerWidth / 2) - (r.left + r.width / 2);
         },
         ease: 'power2.inOut',
-        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=100vh bottom', end: 'bottom-=50vh bottom', scrub: 1 },
+        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=200vh bottom', end: 'bottom-=100vh bottom', scrub: 1 },
       });
       gsap.to(h1PanelRef.current, {
         opacity: 0,
-        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=50vh bottom', end: 'bottom bottom', scrub: 1 },
+        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=100vh bottom', end: 'bottom bottom', scrub: 1 },
       });
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
@@ -357,7 +361,7 @@ const Services = () => {
         </video>
       </div>
 
-      <section ref={heroRef} className="relative min-h-[360vh] bg-transparent">
+      <section ref={heroRef} className="relative min-h-[540vh] bg-transparent">
         <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}>
           <div className="absolute inset-0 opacity-60" style={{
             backgroundImage: [
@@ -495,7 +499,9 @@ const Services = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Grab a Slot <span className="text-cyan-400">Right Now</span></h2>
             <p className="text-slate-300 text-lg">15 minutes or 30 — pick what fits. No forms, no friction.</p>
           </div>
-          <CalEmbed />
+          <div className="rounded-2xl border border-slate-700/50 bg-slate-900/60 overflow-hidden">
+            <CalEmbed />
+          </div>
         </div>
       </section>
 
