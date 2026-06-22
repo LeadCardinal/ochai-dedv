@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { CalendarDays, Mail, ArrowRight, Search, FileText, Hammer, LifeBuoy, Download } from 'lucide-react';
+import { getCalApi } from '@calcom/embed-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -94,21 +95,19 @@ const servicesJsonLd = JSON.stringify({
 
 const CalEmbed = () => {
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://app.cal.com/embed/embed.js';
-    script.async = true;
-    script.onload = () => {
-      if (window.Cal) {
-        window.Cal('init', 'jeremy-ochai-dev', { origin: 'https://cal.com' });
-        window.Cal.ns['jeremy-ochai-dev']('inline', { elementOrSelector: '#cal-inline', calLink: 'jeremy-ochai-dev', layout: 'month_view' });
-        window.Cal.ns['jeremy-ochai-dev']('ui', {
-          cssVarsPerTheme: { light: { 'cal-brand': '#06b6d4' }, dark: { 'cal-brand': '#06b6d4' } },
-          hideEventTypeDetails: false, layout: 'month_view',
-        });
-      }
-    };
-    document.body.appendChild(script);
-    return () => { document.body.removeChild(script); };
+    (async () => {
+      const cal = await getCalApi({ namespace: 'jeremy-ochai-dev' });
+      cal('inline', {
+        elementOrSelector: '#cal-inline',
+        calLink: 'jeremy-ochai-dev',
+        layout: 'month_view',
+      });
+      cal('ui', {
+        cssVarsPerTheme: { light: { 'cal-brand': '#06b6d4' }, dark: { 'cal-brand': '#06b6d4' } },
+        hideEventTypeDetails: false,
+        layout: 'month_view',
+      });
+    })();
   }, []);
   return (
     <div id="cal-inline" style={{ width: '100%', height: '700px', overflow: 'scroll' }}
@@ -188,17 +187,16 @@ const tiers = [
   },
 ];
 
-// origin: pathType 0 = right-mid, pathType 1 = top-center, pathType 2 = top-left corner
-// exit: each unique vector, scrub: each unique speed (medium-fast, no two the same)
+// z < 20 = behind rocket | scaleFrom: 0.25 = scales in 25%->100% along path
 const asteroidDefs = [
-  { src: 'performance',   size: 240, top: 15, left: 80, z: 30, pathType: 1, exitX: '-130vw', exitY:  '90vh', scrub: 0.6 },
-  { src: 'accessibility', size: 195, top: 55, left: 10, z: 25, pathType: 2, exitX:  '125vw', exitY:  '80vh', scrub: 0.9 },
-  { src: 'bestPractices', size: 165, top: 30, left: 60, z: 20, pathType: 0, exitX: '-115vw', exitY: '120vh', scrub: 0.5 },
+  { src: 'performance',   size: 240, top: 15, left: 80, z: 30, pathType: 1, exitX: '-130vw', exitY:  '90vh', scrub: 0.6  },
+  { src: 'accessibility', size: 195, top: 55, left: 10, z: 25, pathType: 2, exitX:  '125vw', exitY:  '80vh', scrub: 0.9  },
+  { src: 'bestPractices', size: 165, top: 30, left: 60, z: 15, pathType: 0, exitX: '-115vw', exitY: '120vh', scrub: 0.5,  scaleFrom: 0.25 },
   { src: 'seo',           size: 210, top: 70, left: 45, z: 28, pathType: 1, exitX:  '130vw', exitY:  '60vh', scrub: 0.75 },
-  { src: 'asteroid',      size: 380, top: 20, left: 20, z: 35, pathType: 2, exitX:  '120vw', exitY: '115vh', scrub: 0.4 },
-  { src: 'asteroid2',     size: 140, top: 48, left: 72, z: 22, pathType: 0, exitX: '-120vw', exitY:  '70vh', scrub: 0.65 },
-  { src: 'asteroid3',     size: 260, top: 62, left: 35, z: 18, pathType: 1, exitX: '-110vw', exitY: '105vh', scrub: 0.55 },
-  { src: 'asteroid4',     size: 195, top:  8, left: 55, z: 15, pathType: 2, exitX:  '115vw', exitY:  '95vh', scrub: 0.8 },
+  { src: 'asteroid',      size: 380, top: 20, left: 20, z: 35, pathType: 2, exitX:  '120vw', exitY: '115vh', scrub: 0.4,  scaleFrom: 0.25 },
+  { src: 'asteroid2',     size: 140, top: 48, left: 72, z: 12, pathType: 0, exitX: '-120vw', exitY:  '70vh', scrub: 0.65 },
+  { src: 'asteroid3',     size: 260, top: 62, left: 35, z: 18, pathType: 1, exitX: '-110vw', exitY: '105vh', scrub: 0.55, scaleFrom: 0.25 },
+  { src: 'asteroid4',     size: 195, top:  8, left: 55, z: 10, pathType: 2, exitX:  '115vw', exitY:  '95vh', scrub: 0.8  },
 ];
 
 const AsteroidLayer = () => (
@@ -268,7 +266,7 @@ const Services = () => {
     const ctx = gsap.context(() => {
       gsap.set(subRef.current, { opacity: 0, y: 20 });
 
-      // ── Rocket — scrub 1 = 2x speed vs previous scrub 2 ──
+      // ── Rocket — scrub 1 = 2x speed ──
       gsap.to(rocketWrapRef.current, {
         x: '2vw', y: '-5vh', scale: 1.07, rotation: 2.5, ease: 'none',
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 1 },
@@ -298,20 +296,22 @@ const Services = () => {
           { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
       });
 
-      // ── Asteroid scroll journeys — fire early, finish by 55% of scroll ──
-      // start: top+=30px top  = begins almost immediately on scroll
-      // end: bottom-=200vh bottom = completes well before section end
+      // ── Asteroid scroll journeys ──
       const triggerBase = { trigger: heroRef.current, start: 'top+=30px top', end: 'bottom-=200vh bottom' };
       asteroidDefs.forEach((def, i) => {
         const el = heroRef.current.querySelector(`[data-ast-idx="${i}"]`);
         if (!el) return;
+        const fromScale = def.scaleFrom ?? 1;
         const st = { ...triggerBase, scrub: def.scrub };
         if (def.pathType === 0) {
-          gsap.fromTo(el, { x: '110vw',  y: '0px'    }, { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
+          gsap.fromTo(el, { x: '110vw',  y: '0px',    scale: fromScale },
+                          { x: def.exitX, y: def.exitY, scale: 1, ease: 'none', scrollTrigger: st });
         } else if (def.pathType === 1) {
-          gsap.fromTo(el, { x: '0px',    y: '-110vh' }, { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
+          gsap.fromTo(el, { x: '0px',    y: '-110vh', scale: fromScale },
+                          { x: def.exitX, y: def.exitY, scale: 1, ease: 'none', scrollTrigger: st });
         } else {
-          gsap.fromTo(el, { x: '-110vw', y: '-110vh' }, { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
+          gsap.fromTo(el, { x: '-110vw', y: '-110vh', scale: fromScale },
+                          { x: def.exitX, y: def.exitY, scale: 1, ease: 'none', scrollTrigger: st });
         }
       });
 
