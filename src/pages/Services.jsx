@@ -235,22 +235,22 @@ const tiers = [
   },
 ];
 
-// pathType — scroll journey lane assigned per asteroid:
-//   0 = enters offscreen right  → exits bottom-left off screen
-//   1 = enters offscreen top-middle → exits bottom-right off screen
-//   2 = enters offscreen top-left  → passes middle-left → exits bottom-right off screen
+// pathType — scroll journey lane:
+//   0 = enters offscreen right  → exits bottom-left
+//   1 = enters offscreen top-middle → exits bottom-right
+//   2 = enters offscreen top-left  → passes middle-left → exits bottom-right
+// sizes tripled from original
 const asteroidDefs = [
-  { src: 'performance',   size: 80,  top: 15, left: 80, dur: 8,  delay: 0,   z: 30, pathType: 1 },
-  { src: 'accessibility', size: 65,  top: 55, left: 10, dur: 11, delay: 2,   z: 25, pathType: 2 },
-  { src: 'bestPractices', size: 55,  top: 30, left: 60, dur: 14, delay: 5,   z: 20, pathType: 0 },
-  { src: 'seo',           size: 70,  top: 70, left: 45, dur: 9,  delay: 3,   z: 28, pathType: 1 },
-  { src: 'asteroid',      size: 120, top: 20, left: 20, dur: 6,  delay: 1,   z: 35, pathType: 2 },
-  { src: 'ai',            size: 45,  top: 45, left: 75, dur: 7,  delay: 0.5, z: 22, pathType: 0 },
-  { src: 'ai',            size: 35,  top: 65, left: 30, dur: 9,  delay: 4,   z: 18, pathType: 1 },
-  { src: 'ai',            size: 40,  top: 10, left: 50, dur: 12, delay: 6,   z: 15, pathType: 0 },
+  { src: 'performance',   size: 240, top: 15, left: 80, dur: 8,  delay: 0,   z: 30, pathType: 1 },
+  { src: 'accessibility', size: 195, top: 55, left: 10, dur: 11, delay: 2,   z: 25, pathType: 2 },
+  { src: 'bestPractices', size: 165, top: 30, left: 60, dur: 14, delay: 5,   z: 20, pathType: 0 },
+  { src: 'seo',           size: 210, top: 70, left: 45, dur: 9,  delay: 3,   z: 28, pathType: 1 },
+  { src: 'asteroid',      size: 360, top: 20, left: 20, dur: 6,  delay: 1,   z: 35, pathType: 2 },
+  { src: 'ai',            size: 135, top: 45, left: 75, dur: 7,  delay: 0.5, z: 22, pathType: 0 },
+  { src: 'ai',            size: 105, top: 65, left: 30, dur: 9,  delay: 4,   z: 18, pathType: 1 },
+  { src: 'ai',            size: 120, top: 10, left: 50, dur: 12, delay: 6,   z: 15, pathType: 0 },
 ];
 
-// CSS float animation removed — GSAP scroll journeys own the transform now
 const AsteroidLayer = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden">
     {asteroidDefs.map((a, i) => (
@@ -324,76 +324,74 @@ const TierCard = ({ tier }) => (
 );
 
 const Services = () => {
-  const heroRef = useRef(null);
-  const rocketRef = useRef(null);
-  const subRef = useRef(null);
+  const heroRef    = useRef(null);
+  const rocketRef  = useRef(null);
+  const subRef     = useRef(null);
+  const h1PanelRef = useRef(null); // inner text panel — used for center-stage shift
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Force initial hidden state immediately, before any ScrollTrigger calc,
-      // so prerendered/hydrated HTML never flashes the full block.
       gsap.set(subRef.current, { opacity: 0, y: 20 });
 
-      // Rocket — destination values halved from original
+      // ── Rocket ── 1/3 of previous destinations
       gsap.to(rocketRef.current, {
-        x: '6vw', y: '-15vh', scale: 1.2, rotation: 7.5, ease: 'none',
+        x: '2vw', y: '-5vh', scale: 1.07, rotation: 2.5, ease: 'none',
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: 2 },
       });
       gsap.to(rocketRef.current, {
         y: '+=18', x: '+=8', rotation: '+=3', duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1,
       });
 
+      // ── Tagline / CTA sub-block ──
       gsap.to(subRef.current, {
         opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=380%', scrub: false, toggleActions: 'play none none reverse' },
+        scrollTrigger: {
+          trigger: heroRef.current, start: 'top top', end: '+=380%',
+          scrub: false, toggleActions: 'play none none reverse',
+        },
       });
 
+      // ── Tier splash + card reveals ──
       ['#tier-splash-0', '#tier-splash-1', '#tier-splash-2'].forEach((sel) => {
         gsap.fromTo(sel,
           { opacity: 0, scale: 1.05 },
-          { opacity: 1, scale: 1, duration: 0.25, scrollTrigger: { trigger: sel, start: 'top 80%', toggleActions: 'play none none reverse' } }
+          { opacity: 1, scale: 1, duration: 0.25,
+            scrollTrigger: { trigger: sel, start: 'top 80%', toggleActions: 'play none none reverse' } }
         );
       });
       gsap.utils.toArray('.tier-card').forEach((card, i) => {
         gsap.fromTo(card,
           { opacity: 0, y: 60 },
-          { opacity: 1, y: 0, duration: 0.8, delay: i * 0.1, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none none' } }
+          { opacity: 1, y: 0, duration: 0.8, delay: i * 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none none' } }
         );
       });
       gsap.utils.toArray('.proof-point').forEach((el) => {
         gsap.fromTo(el,
           { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } }
+          { opacity: 1, y: 0, duration: 0.6,
+            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } }
         );
       });
 
-      // Asteroid scroll journeys
-      // pathType 0: enters offscreen right  → exits bottom-left off screen
-      // pathType 1: enters offscreen top-middle → exits bottom-right off screen
-      // pathType 2: enters offscreen top-left → passes middle-left → exits bottom-right off screen
+      // ── Asteroid scroll journeys ──
+      // Hero is 560vh. Asteroids complete at the original 460vh scroll mark via
+      // end: 'bottom-=100vh bottom' — the last 100vh is the H1 center-stage window.
       heroRef.current.querySelectorAll('[data-path-type]').forEach((el) => {
         const pathType = parseInt(el.dataset.pathType, 10);
+        const trigger  = { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 1 };
         if (pathType === 0) {
           gsap.fromTo(el,
             { x: '110vw', y: '0px' },
-            {
-              x: '-120vw', y: '110vh', ease: 'none',
-              scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
-            }
+            { x: '-120vw', y: '110vh', ease: 'none', scrollTrigger: trigger }
           );
         } else if (pathType === 1) {
           gsap.fromTo(el,
             { x: '0px', y: '-110vh' },
-            {
-              x: '120vw', y: '110vh', ease: 'none',
-              scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
-            }
+            { x: '120vw', y: '110vh', ease: 'none', scrollTrigger: trigger }
           );
         } else {
-          // pathType 2: top-left → pause at middle-left → shoot to bottom-right
-          const tl = gsap.timeline({
-            scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
-          });
+          const tl = gsap.timeline({ scrollTrigger: trigger });
           tl.fromTo(el,
             { x: '-110vw', y: '-110vh' },
             { x: '-95vw', y: '20vh', ease: 'none', duration: 0.4 }
@@ -401,12 +399,36 @@ const Services = () => {
         }
       });
 
-      // Force a hard recalculation after the layout has fully settled —
-      // critical on prerendered pages where hydration can leave stale
-      // ScrollTrigger measurements from the server-rendered markup.
-      requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
+      // ── H1 center-stage ──
+      // After asteroids finish (scroll ~360vh) the panel drifts from right to true center.
+      // On mobile the panel is already full-width / left-aligned — skip the shift.
+      gsap.to(h1PanelRef.current, {
+        x: () => {
+          if (window.innerWidth < 768) return 0;
+          const r = h1PanelRef.current.getBoundingClientRect();
+          return (window.innerWidth / 2) - (r.left + r.width / 2);
+        },
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'bottom-=100vh bottom',
+          end:   'bottom-=15vh bottom',
+          scrub: 1,
+        },
       });
+
+      // Fade the panel out as the proof strip collides from below
+      gsap.to(h1PanelRef.current, {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'bottom-=15vh bottom',
+          end:   'bottom bottom',
+          scrub: 1,
+        },
+      });
+
+      requestAnimationFrame(() => { ScrollTrigger.refresh(); });
     }, heroRef);
     return () => ctx.revert();
   }, []);
@@ -426,20 +448,15 @@ const Services = () => {
         <style>{KEYFRAME_CSS}</style>
       </Helmet>
 
-      {/* EARTH VIDEO BACKDROP — fixed to true viewport top, behind everything, not part of scroll choreography */}
       <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
-        <video
-          autoPlay loop muted playsInline
-          poster={ASSETS.earthAvif}
-          className="w-full h-full object-contain"
-        >
+        <video autoPlay loop muted playsInline poster={ASSETS.earthAvif} className="w-full h-full object-contain">
           <source src={ASSETS.earthWebm} type="video/webm" />
           <img src={ASSETS.earthAvif} alt="Earth from space" className="w-full h-full object-contain" />
         </video>
       </div>
 
-      {/* HERO */}
-      <section ref={heroRef} className="relative min-h-[460vh] overflow-hidden bg-transparent">
+      {/* HERO — 560vh: 460vh asteroid journey + 100vh H1 center-stage window */}
+      <section ref={heroRef} className="relative min-h-[560vh] overflow-hidden bg-transparent">
         <div
           className="absolute inset-0 z-0"
           style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}
@@ -462,18 +479,13 @@ const Services = () => {
             }}
           />
         </div>
-        <div className="absolute inset-0 z-20">
-          <AsteroidLayer />
-        </div>
-        <div
-          ref={rocketRef}
-          className="absolute z-30 pointer-events-none"
-          style={{ top: '55vh', left: '15%', width: 140 }}
-        >
+        <div className="absolute inset-0 z-20"><AsteroidLayer /></div>
+        <div ref={rocketRef} className="absolute z-30 pointer-events-none" style={{ top: '55vh', left: '15%', width: 140 }}>
           <img src={ASSETS.rocket} alt="OchAI Gold Rocket" width={140} height={280} className="w-full h-auto" />
         </div>
         <div className="sticky top-0 h-screen flex items-center z-40 pointer-events-none">
-          <div className="w-full px-6 md:px-12 lg:px-20 text-left md:text-right md:ml-auto md:max-w-xl">
+          {/* h1PanelRef — GSAP shifts this div to center during the center-stage window */}
+          <div ref={h1PanelRef} className="w-full px-6 md:px-12 lg:px-20 text-left md:text-right md:ml-auto md:max-w-xl">
             <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3 font-semibold pointer-events-auto">Orchestrating Your Digital Presence</p>
             <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-tight pointer-events-auto">
               Your Business,<br />
@@ -487,10 +499,7 @@ const Services = () => {
               </p>
               <div className="flex flex-col sm:flex-row md:justify-end gap-3 pointer-events-auto">
                 <a
-                  href={CAL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onMouseEnter={playApplause}
+                  href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
                   className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-sm transition-all shadow-lg"
                 >
                   <CalendarDays className="w-4 h-4" /> Book a Free Discovery Call
@@ -512,11 +521,7 @@ const Services = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {proofPoints.map((p) => (
-              <Link
-                key={p.metric}
-                to={p.to}
-                className="proof-point block text-center p-6 rounded-xl hover:bg-slate-800/50 transition-colors group"
-              >
+              <Link key={p.metric} to={p.to} className="proof-point block text-center p-6 rounded-xl hover:bg-slate-800/50 transition-colors group">
                 <p className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-2">{p.metric}</p>
                 <p className="text-white font-semibold">{p.label}</p>
                 <p className="text-sm text-slate-400 mt-1 group-hover:text-cyan-400 transition-colors">
@@ -559,16 +564,8 @@ const Services = () => {
         </div>
         {tiers.map((tier, i) => (
           <div key={tier.id}>
-            <div
-              id={`tier-splash-${i}`}
-              className="w-full flex items-center justify-center py-4 bg-black"
-            >
-              <img
-                src={tier.splash}
-                alt={tier.splashAlt}
-                className="w-full max-w-[1376px] h-auto"
-                loading="lazy"
-              />
+            <div id={`tier-splash-${i}`} className="w-full flex items-center justify-center py-4 bg-black">
+              <img src={tier.splash} alt={tier.splashAlt} className="w-full max-w-[1376px] h-auto" loading="lazy" />
             </div>
             <div className="container mx-auto px-4 max-w-4xl py-16 tier-card">
               <TierCard tier={tier} />
@@ -585,9 +582,7 @@ const Services = () => {
             <span className="text-cyan-400">to deliver less</span> &mdash;<br />
             and you will not know it until after.&rdquo;
           </p>
-          <p className="text-slate-400 text-base md:text-lg">
-            One person. Every instrument. No handoffs, no gaps, no excuses.
-          </p>
+          <p className="text-slate-400 text-base md:text-lg">One person. Every instrument. No handoffs, no gaps, no excuses.</p>
         </div>
       </section>
 
@@ -629,8 +624,7 @@ const Services = () => {
             that happens after someone asks, <em>where did you find this guy?</em>
           </p>
           <a
-            href="/OchAI-Services-Brochure.pdf"
-            download
+            href="/OchAI-Services-Brochure.pdf" download
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors"
           >
             <Download className="w-5 h-5" /> Download Brochure (PDF)
@@ -667,10 +661,7 @@ const Services = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={CAL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onMouseEnter={playApplause}
+              href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-lg transition-all shadow-lg"
             >
               <CalendarDays className="w-5 h-5" /> Schedule at cal.com
