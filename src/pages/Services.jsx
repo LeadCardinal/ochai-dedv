@@ -188,16 +188,17 @@ const tiers = [
   },
 ];
 
-// 4 lighthouse-labeled + 4 x 100%-asteroid (varied sizes, all three pathTypes represented)
+// origin: pathType 0 = right-mid, pathType 1 = top-center, pathType 2 = top-left corner
+// exit: each unique vector, scrub: each unique speed (medium-fast, no two the same)
 const asteroidDefs = [
-  { src: 'performance',   size: 240, top: 15, left: 80, z: 30, pathType: 1 },
-  { src: 'accessibility', size: 195, top: 55, left: 10, z: 25, pathType: 2 },
-  { src: 'bestPractices', size: 165, top: 30, left: 60, z: 20, pathType: 0 },
-  { src: 'seo',           size: 210, top: 70, left: 45, z: 28, pathType: 1 },
-  { src: 'asteroid',      size: 380, top: 20, left: 20, z: 35, pathType: 2 },
-  { src: 'asteroid2',     size: 140, top: 48, left: 72, z: 22, pathType: 0 },
-  { src: 'asteroid3',     size: 260, top: 62, left: 35, z: 18, pathType: 1 },
-  { src: 'asteroid4',     size: 195, top:  8, left: 55, z: 15, pathType: 2 },
+  { src: 'performance',   size: 240, top: 15, left: 80, z: 30, pathType: 1, exitX: '-130vw', exitY:  '90vh', scrub: 0.6 },
+  { src: 'accessibility', size: 195, top: 55, left: 10, z: 25, pathType: 2, exitX:  '125vw', exitY:  '80vh', scrub: 0.9 },
+  { src: 'bestPractices', size: 165, top: 30, left: 60, z: 20, pathType: 0, exitX: '-115vw', exitY: '120vh', scrub: 0.5 },
+  { src: 'seo',           size: 210, top: 70, left: 45, z: 28, pathType: 1, exitX:  '130vw', exitY:  '60vh', scrub: 0.75 },
+  { src: 'asteroid',      size: 380, top: 20, left: 20, z: 35, pathType: 2, exitX:  '120vw', exitY: '115vh', scrub: 0.4 },
+  { src: 'asteroid2',     size: 140, top: 48, left: 72, z: 22, pathType: 0, exitX: '-120vw', exitY:  '70vh', scrub: 0.65 },
+  { src: 'asteroid3',     size: 260, top: 62, left: 35, z: 18, pathType: 1, exitX: '-110vw', exitY: '105vh', scrub: 0.55 },
+  { src: 'asteroid4',     size: 195, top:  8, left: 55, z: 15, pathType: 2, exitX:  '115vw', exitY:  '95vh', scrub: 0.8 },
 ];
 
 const AsteroidLayer = () => (
@@ -257,11 +258,11 @@ const TierCard = ({ tier }) => (
 );
 
 const Services = () => {
-  const heroRef     = useRef(null);
+  const heroRef       = useRef(null);
   const rocketWrapRef = useRef(null);
-  const rocketRef   = useRef(null);
-  const subRef      = useRef(null);
-  const h1PanelRef  = useRef(null);
+  const rocketRef     = useRef(null);
+  const subRef        = useRef(null);
+  const h1PanelRef    = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -279,7 +280,7 @@ const Services = () => {
       // ── Tagline / CTA sub-block ──
       gsap.to(subRef.current, {
         opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=380%', scrub: false, toggleActions: 'play none none reverse' },
+        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=280%', scrub: false, toggleActions: 'play none none reverse' },
       });
 
       // ── Tier splash + card reveals ──
@@ -297,18 +298,18 @@ const Services = () => {
           { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
       });
 
-      // ── Asteroid scroll journeys ──
-      heroRef.current.querySelectorAll('[data-path-type]').forEach((el) => {
-        const pathType = parseInt(el.dataset.pathType, 10);
-        const trigger  = { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 1 };
-        if (pathType === 0) {
-          gsap.fromTo(el, { x: '110vw', y: '0px' }, { x: '-120vw', y: '110vh', ease: 'none', scrollTrigger: trigger });
-        } else if (pathType === 1) {
-          gsap.fromTo(el, { x: '0px', y: '-110vh' }, { x: '120vw', y: '110vh', ease: 'none', scrollTrigger: trigger });
+      // ── Asteroid scroll journeys — each its own vector + scrub speed ──
+      const triggerBase = { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom' };
+      asteroidDefs.forEach((def, i) => {
+        const el = heroRef.current.querySelector(`[data-ast-idx="${i}"]`);
+        if (!el) return;
+        const st = { ...triggerBase, scrub: def.scrub };
+        if (def.pathType === 0) {
+          gsap.fromTo(el, { x: '110vw', y: '0px' },   { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
+        } else if (def.pathType === 1) {
+          gsap.fromTo(el, { x: '0px',   y: '-110vh' }, { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
         } else {
-          const tl = gsap.timeline({ scrollTrigger: trigger });
-          tl.fromTo(el, { x: '-110vw', y: '-110vh' }, { x: '-95vw', y: '20vh', ease: 'none', duration: 0.4 })
-            .to(el, { x: '120vw', y: '110vh', ease: 'none', duration: 0.6 });
+          gsap.fromTo(el, { x: '-110vw', y: '-110vh' }, { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
         }
       });
 
@@ -354,7 +355,7 @@ const Services = () => {
         </video>
       </div>
 
-      <section ref={heroRef} className="relative min-h-[560vh] bg-transparent">
+      <section ref={heroRef} className="relative min-h-[360vh] bg-transparent">
         <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}>
           <div className="absolute inset-0 opacity-60" style={{
             backgroundImage: [
