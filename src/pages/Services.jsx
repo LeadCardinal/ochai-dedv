@@ -79,18 +79,13 @@ const servicesJsonLd = JSON.stringify({
   email: 'jeremy@ochai.dev',
   telephone: '+1-256-361-9056',
   priceRange: '$$',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Huntsville',
-    addressRegion: 'AL',
-    addressCountry: 'US',
-  },
+  address: { '@type': 'PostalAddress', addressLocality: 'Huntsville', addressRegion: 'AL', addressCountry: 'US' },
   areaServed: ['Huntsville AL', 'Madison AL', 'North Alabama', 'Remote / United States'],
   makesOffer: [
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'The Quartet', description: 'Complete professional web presence. Lighthouse 100 guaranteed. Starting at $2,500.' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'The Quartet',  description: 'Complete professional web presence. Lighthouse 100 guaranteed. Starting at $2,500.' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'The Ensemble', description: 'Growth web platform with keyword strategy, local SEO, CMS. Starting at $5,500.' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'The Symphony', description: 'Full orchestration for enterprise and defense clients. AI integration, Cloudflare edge. Starting at $12,000.' } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Branding & Identity', description: 'Fresh brand creation and renewal including logo, color system, brand guidelines.' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Branding & Identity',         description: 'Fresh brand creation and renewal including logo, color system, brand guidelines.' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Video Production & Delivery', description: 'Web-optimized video served at edge speed. Lighthouse 100 intact.' } },
   ],
 });
@@ -103,16 +98,9 @@ const CalEmbed = () => {
     script.onload = () => {
       if (window.Cal) {
         window.Cal('init', 'jeremy-ochai-dev', { origin: 'https://cal.com' });
-        window.Cal.ns['jeremy-ochai-dev']('inline', {
-          elementOrSelector: '#cal-inline',
-          calLink: 'jeremy-ochai-dev',
-          layout: 'month_view',
-        });
+        window.Cal.ns['jeremy-ochai-dev']('inline', { elementOrSelector: '#cal-inline', calLink: 'jeremy-ochai-dev', layout: 'month_view' });
         window.Cal.ns['jeremy-ochai-dev']('ui', {
-          cssVarsPerTheme: {
-            light: { 'cal-brand': '#06b6d4' },
-            dark: { 'cal-brand': '#06b6d4' },
-          },
+          cssVarsPerTheme: { light: { 'cal-brand': '#06b6d4' }, dark: { 'cal-brand': '#06b6d4' } },
           hideEventTypeDetails: false,
           layout: 'month_view',
         });
@@ -122,11 +110,8 @@ const CalEmbed = () => {
     return () => { document.body.removeChild(script); };
   }, []);
   return (
-    <div
-      id="cal-inline"
-      style={{ width: '100%', height: '700px', overflow: 'scroll' }}
-      className="rounded-2xl border border-slate-700/50 bg-slate-900/60"
-    />
+    <div id="cal-inline" style={{ width: '100%', height: '700px', overflow: 'scroll' }}
+      className="rounded-2xl border border-slate-700/50 bg-slate-900/60" />
   );
 };
 
@@ -145,78 +130,49 @@ const processSteps = [
 
 const tiers = [
   {
-    id: 'quartet',
-    splash: ASSETS.quartet,
-    splashAlt: 'The Quartet',
-    name: 'The Quartet',
-    emoji: '🎻',
+    id: 'quartet', splash: ASSETS.quartet, splashAlt: 'The Quartet', name: 'The Quartet', emoji: '🎻',
     price: 'Starting at $2,500',
     tagline: 'A complete, professional web presence — nothing missing, nothing wasted.',
-    coverage: '40%',
-    coverageLabel: 'of your conversion architecture',
-    color: 'from-emerald-400 to-cyan-400',
-    borderColor: 'border-emerald-500/40',
-    glowColor: 'shadow-emerald-500/10',
+    coverage: '40%', coverageLabel: 'of your conversion architecture',
+    color: 'from-emerald-400 to-cyan-400', borderColor: 'border-emerald-500/40', glowColor: 'shadow-emerald-500/10',
     bestFor: 'Local service businesses, solo professionals, consultants, startups establishing their first real web presence.',
     includes: [
-      'Discovery & brand alignment session',
-      'Custom design — no templates',
-      'Scope-based build (no arbitrary page limits)',
-      'Lighthouse 100 — guaranteed contractually',
+      'Discovery & brand alignment session', 'Custom design — no templates',
+      'Scope-based build (no arbitrary page limits)', 'Lighthouse 100 — guaranteed contractually',
       'Full on-page SEO foundation (built in, not bolted on)',
-      'Meta titles, descriptions, schema, sitemap, GSC submission',
-      'Google Analytics / GA4 integration',
+      'Meta titles, descriptions, schema, sitemap, GSC submission', 'Google Analytics / GA4 integration',
       'Cloudflare Pages deployment + initial infrastructure setup',
-      'SSL, mobile-first, cross-browser QA tested',
-      '30-day post-launch support',
-      '1 round of design revisions',
+      'SSL, mobile-first, cross-browser QA tested', '30-day post-launch support', '1 round of design revisions',
     ],
     addOns: 'E-commerce, blog/CMS, booking integration, additional content pages',
   },
   {
-    id: 'ensemble',
-    splash: ASSETS.ensemble,
-    splashAlt: 'The Ensemble',
-    name: 'The Ensemble',
-    emoji: '🎺',
+    id: 'ensemble', splash: ASSETS.ensemble, splashAlt: 'The Ensemble', name: 'The Ensemble', emoji: '🎺',
     price: 'Starting at $5,500',
     tagline: 'More moving parts. More reach. Built for businesses that need their site to do real work.',
-    coverage: '70%',
-    coverageLabel: 'of your conversion architecture',
-    color: 'from-cyan-400 to-blue-400',
-    borderColor: 'border-cyan-500/40',
-    glowColor: 'shadow-cyan-500/10',
+    coverage: '70%', coverageLabel: 'of your conversion architecture',
+    color: 'from-cyan-400 to-blue-400', borderColor: 'border-cyan-500/40', glowColor: 'shadow-cyan-500/10',
     bestFor: 'Established small businesses, multi-service companies, growing brands that need to win on search.',
     includes: [
       'Everything in The Quartet, plus:',
       'Keyword research — up to 10 target terms mapped to site structure',
       'On-page content optimization around target terms',
       'Google Business Profile setup & optimization (Local SEO)',
-      'Blog or resource section with CMS',
-      'Lead generation optimization (CTAs, conversion flow review)',
+      'Blog or resource section with CMS', 'Lead generation optimization (CTAs, conversion flow review)',
       'Social media meta integration (OG tags, Twitter/X cards)',
-      'Basic competitor visibility analysis',
-      '2 rounds of design revisions',
+      'Basic competitor visibility analysis', '2 rounds of design revisions',
     ],
     addOns: 'E-commerce, advanced schema, monthly SEO retainer, Cloudflare edge maintenance',
   },
   {
-    id: 'symphony',
-    splash: ASSETS.symphony,
-    splashAlt: 'The Symphony',
-    name: 'The Symphony',
-    emoji: '🎼',
+    id: 'symphony', splash: ASSETS.symphony, splashAlt: 'The Symphony', name: 'The Symphony', emoji: '🎼',
     price: 'Starting at $12,000',
     tagline: 'Full orchestration. Every instrument in its place. Built to perform.',
-    coverage: null,
-    coverageLabel: 'Full coverage. All instruments playing.',
-    color: 'from-violet-400 to-fuchsia-400',
-    borderColor: 'border-violet-500/40',
-    glowColor: 'shadow-violet-500/20',
+    coverage: null, coverageLabel: 'Full coverage. All instruments playing.',
+    color: 'from-violet-400 to-fuchsia-400', borderColor: 'border-violet-500/40', glowColor: 'shadow-violet-500/20',
     bestFor: 'Defense/aerospace contractors, multi-location businesses, e-commerce, organizations where the website is a direct revenue or credibility instrument.',
     includes: [
-      'Everything in The Ensemble, plus:',
-      'Full site architecture & UX strategy session',
+      'Everything in The Ensemble, plus:', 'Full site architecture & UX strategy session',
       'Unlimited pages within agreed project scope',
       'Comprehensive keyword strategy (20+ terms, cluster mapping)',
       'Full content optimization across all pages',
@@ -227,50 +183,40 @@ const tiers = [
       'Custom Cloudflare Workers / edge logic as needed',
       'Cloudflare Zaraz setup (analytics orchestration, tag management)',
       'Priority delivery & dedicated project communication',
-      '60-day post-launch support',
-      '3 rounds of design revisions',
+      '60-day post-launch support', '3 rounds of design revisions',
       'Anything you can dream up — if you can imagine it, it goes on the table.',
     ],
     addOns: null,
   },
 ];
 
-// pathType — scroll journey lane:
-//   0 = enters offscreen right  → exits bottom-left
-//   1 = enters offscreen top-middle → exits bottom-right
-//   2 = enters offscreen top-left  → passes middle-left → exits bottom-right
-// sizes tripled from original
+// sizes × 3 from originals; pathType controls scroll journey lane
 const asteroidDefs = [
-  { src: 'performance',   size: 240, top: 15, left: 80, dur: 8,  delay: 0,   z: 30, pathType: 1 },
-  { src: 'accessibility', size: 195, top: 55, left: 10, dur: 11, delay: 2,   z: 25, pathType: 2 },
-  { src: 'bestPractices', size: 165, top: 30, left: 60, dur: 14, delay: 5,   z: 20, pathType: 0 },
-  { src: 'seo',           size: 210, top: 70, left: 45, dur: 9,  delay: 3,   z: 28, pathType: 1 },
-  { src: 'asteroid',      size: 360, top: 20, left: 20, dur: 6,  delay: 1,   z: 35, pathType: 2 },
-  { src: 'ai',            size: 135, top: 45, left: 75, dur: 7,  delay: 0.5, z: 22, pathType: 0 },
-  { src: 'ai',            size: 105, top: 65, left: 30, dur: 9,  delay: 4,   z: 18, pathType: 1 },
-  { src: 'ai',            size: 120, top: 10, left: 50, dur: 12, delay: 6,   z: 15, pathType: 0 },
+  { src: 'performance',   size: 240, top: 15, left: 80, z: 30, pathType: 1 },
+  { src: 'accessibility', size: 195, top: 55, left: 10, z: 25, pathType: 2 },
+  { src: 'bestPractices', size: 165, top: 30, left: 60, z: 20, pathType: 0 },
+  { src: 'seo',           size: 210, top: 70, left: 45, z: 28, pathType: 1 },
+  { src: 'asteroid',      size: 360, top: 20, left: 20, z: 35, pathType: 2 },
+  { src: 'ai',            size: 135, top: 45, left: 75, z: 22, pathType: 0 },
+  { src: 'ai',            size: 105, top: 65, left: 30, z: 18, pathType: 1 },
+  { src: 'ai',            size: 120, top: 10, left: 50, z: 15, pathType: 0 },
 ];
 
+// Rendered inside the sticky viewport layer — top/left % are viewport-relative
 const AsteroidLayer = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+  <>
     {asteroidDefs.map((a, i) => (
       <div
         key={i}
         data-ast-idx={i}
         data-path-type={a.pathType}
-        className="absolute"
-        style={{
-          width: a.size,
-          height: a.size,
-          top: `${a.top}%`,
-          left: `${a.left}%`,
-          zIndex: a.z,
-        }}
+        className="absolute pointer-events-none"
+        style={{ width: a.size, height: a.size, top: `${a.top}%`, left: `${a.left}%`, zIndex: a.z }}
       >
         <img src={ASSETS[a.src]} alt="" width={a.size} height={a.size} className="w-full h-full object-contain" />
       </div>
     ))}
-  </div>
+  </>
 );
 
 const TierCard = ({ tier }) => (
@@ -310,13 +256,8 @@ const TierCard = ({ tier }) => (
       </p>
     )}
     <div className="mt-8">
-      <a
-        href={CAL_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        onMouseEnter={playApplause}
-        className={`w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white text-base transition-all duration-300 bg-gradient-to-r ${tier.color} hover:opacity-90 hover:shadow-lg`}
-      >
+      <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
+        className={`w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white text-base transition-all duration-300 bg-gradient-to-r ${tier.color} hover:opacity-90 hover:shadow-lg`}>
         <CalendarDays className="w-5 h-5" /> Book a Discovery Call
       </a>
     </div>
@@ -327,16 +268,16 @@ const Services = () => {
   const heroRef    = useRef(null);
   const rocketRef  = useRef(null);
   const subRef     = useRef(null);
-  const h1PanelRef = useRef(null); // inner text panel — used for center-stage shift
+  const h1PanelRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(subRef.current, { opacity: 0, y: 20 });
 
-      // ── Rocket ── 1/3 of previous destinations
+      // ── Rocket ── 1/3 destinations; lives inside the sticky viewport so no natural scroll fighting it
       gsap.to(rocketRef.current, {
         x: '2vw', y: '-5vh', scale: 1.07, rotation: 2.5, ease: 'none',
-        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: 2 },
+        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 2 },
       });
       gsap.to(rocketRef.current, {
         y: '+=18', x: '+=8', rotation: '+=3', duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1,
@@ -353,55 +294,47 @@ const Services = () => {
 
       // ── Tier splash + card reveals ──
       ['#tier-splash-0', '#tier-splash-1', '#tier-splash-2'].forEach((sel) => {
-        gsap.fromTo(sel,
-          { opacity: 0, scale: 1.05 },
+        gsap.fromTo(sel, { opacity: 0, scale: 1.05 },
           { opacity: 1, scale: 1, duration: 0.25,
-            scrollTrigger: { trigger: sel, start: 'top 80%', toggleActions: 'play none none reverse' } }
-        );
+            scrollTrigger: { trigger: sel, start: 'top 80%', toggleActions: 'play none none reverse' } });
       });
       gsap.utils.toArray('.tier-card').forEach((card, i) => {
-        gsap.fromTo(card,
-          { opacity: 0, y: 60 },
+        gsap.fromTo(card, { opacity: 0, y: 60 },
           { opacity: 1, y: 0, duration: 0.8, delay: i * 0.1, ease: 'power3.out',
-            scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none none' } }
-        );
+            scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none none' } });
       });
       gsap.utils.toArray('.proof-point').forEach((el) => {
-        gsap.fromTo(el,
-          { opacity: 0, y: 30 },
+        gsap.fromTo(el, { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.6,
-            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } }
-        );
+            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
       });
 
       // ── Asteroid scroll journeys ──
-      // Hero is 560vh. Asteroids complete at the original 460vh scroll mark via
-      // end: 'bottom-=100vh bottom' — the last 100vh is the H1 center-stage window.
+      // All asteroids are inside the sticky viewport layer — no natural scroll conflict.
+      // They travel from their off-screen entry point across the viewport during
+      // 0 → 'bottom-=100vh bottom' (≈ 460vh of scroll on a 560vh hero).
+      // The final 100vh of hero scroll is the H1 center-stage window.
       heroRef.current.querySelectorAll('[data-path-type]').forEach((el) => {
         const pathType = parseInt(el.dataset.pathType, 10);
         const trigger  = { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 1 };
         if (pathType === 0) {
-          gsap.fromTo(el,
-            { x: '110vw', y: '0px' },
-            { x: '-120vw', y: '110vh', ease: 'none', scrollTrigger: trigger }
-          );
+          // right → bottom-left
+          gsap.fromTo(el, { x: '110vw', y: '0px' },
+            { x: '-120vw', y: '110vh', ease: 'none', scrollTrigger: trigger });
         } else if (pathType === 1) {
-          gsap.fromTo(el,
-            { x: '0px', y: '-110vh' },
-            { x: '120vw', y: '110vh', ease: 'none', scrollTrigger: trigger }
-          );
+          // top-middle → bottom-right
+          gsap.fromTo(el, { x: '0px', y: '-110vh' },
+            { x: '120vw', y: '110vh', ease: 'none', scrollTrigger: trigger });
         } else {
+          // top-left → middle-left → bottom-right
           const tl = gsap.timeline({ scrollTrigger: trigger });
-          tl.fromTo(el,
-            { x: '-110vw', y: '-110vh' },
-            { x: '-95vw', y: '20vh', ease: 'none', duration: 0.4 }
-          ).to(el, { x: '120vw', y: '110vh', ease: 'none', duration: 0.6 });
+          tl.fromTo(el, { x: '-110vw', y: '-110vh' }, { x: '-95vw', y: '20vh', ease: 'none', duration: 0.4 })
+            .to(el, { x: '120vw', y: '110vh', ease: 'none', duration: 0.6 });
         }
       });
 
       // ── H1 center-stage ──
-      // After asteroids finish (scroll ~360vh) the panel drifts from right to true center.
-      // On mobile the panel is already full-width / left-aligned — skip the shift.
+      // After asteroids complete, drift the panel to viewport center (desktop only).
       gsap.to(h1PanelRef.current, {
         x: () => {
           if (window.innerWidth < 768) return 0;
@@ -409,23 +342,12 @@ const Services = () => {
           return (window.innerWidth / 2) - (r.left + r.width / 2);
         },
         ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'bottom-=100vh bottom',
-          end:   'bottom-=15vh bottom',
-          scrub: 1,
-        },
+        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=100vh bottom', end: 'bottom-=15vh bottom', scrub: 1 },
       });
-
-      // Fade the panel out as the proof strip collides from below
+      // Fade out as proof strip collides from below
       gsap.to(h1PanelRef.current, {
         opacity: 0,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'bottom-=15vh bottom',
-          end:   'bottom bottom',
-          scrub: 1,
-        },
+        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=15vh bottom', end: 'bottom bottom', scrub: 1 },
       });
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
@@ -448,6 +370,7 @@ const Services = () => {
         <style>{KEYFRAME_CSS}</style>
       </Helmet>
 
+      {/* Earth — fixed backdrop, truly behind everything */}
       <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
         <video autoPlay loop muted playsInline poster={ASSETS.earthAvif} className="w-full h-full object-contain">
           <source src={ASSETS.earthWebm} type="video/webm" />
@@ -455,65 +378,78 @@ const Services = () => {
         </video>
       </div>
 
-      {/* HERO — 560vh: 460vh asteroid journey + 100vh H1 center-stage window */}
-      <section ref={heroRef} className="relative min-h-[560vh] overflow-hidden bg-transparent">
-        <div
-          className="absolute inset-0 z-0"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}
-        >
+      {/* ─────────────────────────────────────────────────────────────────────────
+          HERO — 560vh total
+          Stars background is absolute (fills full height for depth).
+          ONE sticky viewport layer holds asteroids + rocket + H1 together.
+          Nothing absolute-scrolls out of view — GSAP owns all movement.
+      ──────────────────────────────────────────────────────────────────────── */}
+      <section ref={heroRef} className="relative min-h-[560vh] bg-transparent">
+
+        {/* Star field — absolute across full hero height for depth texture */}
+        <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}>
+          <div className="absolute inset-0 opacity-60" style={{
+            backgroundImage: [
+              'radial-gradient(1px 1px at 10% 15%, white, transparent)',
+              'radial-gradient(1px 1px at 25% 45%, white, transparent)',
+              'radial-gradient(1px 1px at 40% 10%, white, transparent)',
+              'radial-gradient(1px 1px at 55% 70%, white, transparent)',
+              'radial-gradient(1px 1px at 70% 30%, white, transparent)',
+              'radial-gradient(1px 1px at 85% 55%, white, transparent)',
+              'radial-gradient(1px 1px at 15% 80%, white, transparent)',
+              'radial-gradient(2px 2px at 60% 20%, rgba(255,255,255,0.5), transparent)',
+              'radial-gradient(1px 1px at 90% 10%, white, transparent)',
+              'radial-gradient(1px 1px at 35% 90%, white, transparent)',
+            ].join(','),
+          }} />
+        </div>
+
+        {/* ── Sticky viewport layer ──
+            Everything that must stay visible during the 560vh scroll lives here.
+            overflow-hidden clips asteroids at viewport edges so GSAP entry/exit is clean. */}
+        <div className="sticky top-0 h-screen overflow-hidden" style={{ zIndex: 10 }}>
+
+          {/* Asteroids — positioned by top/left % within 100vh sticky viewport */}
+          <AsteroidLayer />
+
+          {/* Rocket */}
           <div
-            className="absolute inset-0 opacity-60"
-            style={{
-              backgroundImage: [
-                'radial-gradient(1px 1px at 10% 15%, white, transparent)',
-                'radial-gradient(1px 1px at 25% 45%, white, transparent)',
-                'radial-gradient(1px 1px at 40% 10%, white, transparent)',
-                'radial-gradient(1px 1px at 55% 70%, white, transparent)',
-                'radial-gradient(1px 1px at 70% 30%, white, transparent)',
-                'radial-gradient(1px 1px at 85% 55%, white, transparent)',
-                'radial-gradient(1px 1px at 15% 80%, white, transparent)',
-                'radial-gradient(2px 2px at 60% 20%, rgba(255,255,255,0.5), transparent)',
-                'radial-gradient(1px 1px at 90% 10%, white, transparent)',
-                'radial-gradient(1px 1px at 35% 90%, white, transparent)',
-              ].join(','),
-            }}
-          />
-        </div>
-        <div className="absolute inset-0 z-20"><AsteroidLayer /></div>
-        <div ref={rocketRef} className="absolute z-30 pointer-events-none" style={{ top: '55vh', left: '15%', width: 140 }}>
-          <img src={ASSETS.rocket} alt="OchAI Gold Rocket" width={140} height={280} className="w-full h-auto" />
-        </div>
-        <div className="sticky top-0 h-screen flex items-center z-40 pointer-events-none">
-          {/* h1PanelRef — GSAP shifts this div to center during the center-stage window */}
-          <div ref={h1PanelRef} className="w-full px-6 md:px-12 lg:px-20 text-left md:text-right md:ml-auto md:max-w-xl">
-            <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3 font-semibold pointer-events-auto">Orchestrating Your Digital Presence</p>
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-tight pointer-events-auto">
-              Your Business,<br />
-              <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
-                Built to Perform.
-              </span>
-            </h1>
-            <div ref={subRef} className="mt-4" style={{ opacity: 0 }}>
-              <p className="text-sm md:text-base text-slate-300 mb-6 leading-relaxed pointer-events-auto">
-                Websites, AI integrations, and digital operations built by one person to elite standards on every project, every time. Guaranteed Lighthouse 100. No exceptions.
-              </p>
-              <div className="flex flex-col sm:flex-row md:justify-end gap-3 pointer-events-auto">
-                <a
-                  href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-sm transition-all shadow-lg"
-                >
-                  <CalendarDays className="w-4 h-4" /> Book a Free Discovery Call
-                </a>
-                <a
-                  href="#tiers"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-slate-900/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-sm transition-colors backdrop-blur-sm"
-                >
-                  See the Packages <ArrowRight className="w-4 h-4" />
-                </a>
+            ref={rocketRef}
+            className="absolute pointer-events-none"
+            style={{ zIndex: 20, top: '55vh', left: '15%', width: 140 }}
+          >
+            <img src={ASSETS.rocket} alt="OchAI Gold Rocket" width={140} height={280} className="w-full h-auto" />
+          </div>
+
+          {/* H1 panel */}
+          <div className="absolute inset-0 flex items-center pointer-events-none" style={{ zIndex: 30 }}>
+            <div ref={h1PanelRef} className="w-full px-6 md:px-12 lg:px-20 text-left md:text-right md:ml-auto md:max-w-xl">
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3 font-semibold pointer-events-auto">Orchestrating Your Digital Presence</p>
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-tight pointer-events-auto">
+                Your Business,<br />
+                <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
+                  Built to Perform.
+                </span>
+              </h1>
+              <div ref={subRef} className="mt-4" style={{ opacity: 0 }}>
+                <p className="text-sm md:text-base text-slate-300 mb-6 leading-relaxed pointer-events-auto">
+                  Websites, AI integrations, and digital operations built by one person to elite standards on every project, every time. Guaranteed Lighthouse 100. No exceptions.
+                </p>
+                <div className="flex flex-col sm:flex-row md:justify-end gap-3 pointer-events-auto">
+                  <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-sm transition-all shadow-lg">
+                    <CalendarDays className="w-4 h-4" /> Book a Free Discovery Call
+                  </a>
+                  <a href="#tiers"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-slate-900/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-sm transition-colors backdrop-blur-sm">
+                    See the Packages <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+
+        </div>{/* end sticky viewport layer */}
       </section>
 
       {/* PROOF STRIP */}
@@ -524,9 +460,7 @@ const Services = () => {
               <Link key={p.metric} to={p.to} className="proof-point block text-center p-6 rounded-xl hover:bg-slate-800/50 transition-colors group">
                 <p className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-2">{p.metric}</p>
                 <p className="text-white font-semibold">{p.label}</p>
-                <p className="text-sm text-slate-400 mt-1 group-hover:text-cyan-400 transition-colors">
-                  {p.detail} <ArrowRight className="w-3 h-3 inline" />
-                </p>
+                <p className="text-sm text-slate-400 mt-1 group-hover:text-cyan-400 transition-colors">{p.detail} <ArrowRight className="w-3 h-3 inline" /></p>
               </Link>
             ))}
           </div>
@@ -537,8 +471,7 @@ const Services = () => {
       <section className="relative z-10 py-24 bg-slate-950">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
-            Every build ships with what<br />
-            <span className="text-cyan-400">others charge separately for.</span>
+            Every build ships with what<br /><span className="text-cyan-400">others charge separately for.</span>
           </h2>
           <p className="text-lg text-slate-300 leading-relaxed mb-6">
             Most shops separate technical SEO from the build because two different people are doing two different jobs.
@@ -557,9 +490,7 @@ const Services = () => {
           <p className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-4">Web Design and Development</p>
           <h2 className="text-4xl md:text-6xl font-black text-white">
             Choose Your{' '}
-            <span className="bg-gradient-to-r from-emerald-400 to-violet-400 bg-clip-text text-transparent">
-              Performance Level
-            </span>
+            <span className="bg-gradient-to-r from-emerald-400 to-violet-400 bg-clip-text text-transparent">Performance Level</span>
           </h2>
         </div>
         {tiers.map((tier, i) => (
@@ -567,9 +498,7 @@ const Services = () => {
             <div id={`tier-splash-${i}`} className="w-full flex items-center justify-center py-4 bg-black">
               <img src={tier.splash} alt={tier.splashAlt} className="w-full max-w-[1376px] h-auto" loading="lazy" />
             </div>
-            <div className="container mx-auto px-4 max-w-4xl py-16 tier-card">
-              <TierCard tier={tier} />
-            </div>
+            <div className="container mx-auto px-4 max-w-4xl py-16 tier-card"><TierCard tier={tier} /></div>
           </div>
         ))}
       </section>
@@ -590,20 +519,14 @@ const Services = () => {
       <section className="relative z-10 py-24 bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
-              From First Call to <span className="text-cyan-400">Launch</span>
-            </h2>
-            <p className="text-lg text-slate-300">
-              No retainers to start. No commitments before the proposal. You know exactly what you are buying before you spend a dollar.
-            </p>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">From First Call to <span className="text-cyan-400">Launch</span></h2>
+            <p className="text-lg text-slate-300">No retainers to start. No commitments before the proposal. You know exactly what you are buying before you spend a dollar.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {processSteps.map((s) => (
               <div key={s.step} className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors">
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
-                    <s.icon className="w-6 h-6" />
-                  </div>
+                  <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center"><s.icon className="w-6 h-6" /></div>
                   <span className="text-3xl font-bold text-slate-700">{s.step}</span>
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
@@ -620,13 +543,10 @@ const Services = () => {
           <p className="text-xs uppercase tracking-widest text-slate-500 mb-4">Taking this to a boardroom?</p>
           <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Download the OchAI Service Brochure</h2>
           <p className="text-slate-300 text-base md:text-lg mb-8">
-            A designed, print-ready PDF with the full service breakdown. Built for the conversation
-            that happens after someone asks, <em>where did you find this guy?</em>
+            A designed, print-ready PDF with the full service breakdown. Built for the conversation that happens after someone asks, <em>where did you find this guy?</em>
           </p>
-          <a
-            href="/OchAI-Services-Brochure.pdf" download
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors"
-          >
+          <a href="/OchAI-Services-Brochure.pdf" download
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors">
             <Download className="w-5 h-5" /> Download Brochure (PDF)
           </a>
         </div>
@@ -636,9 +556,7 @@ const Services = () => {
       <section className="relative z-10 py-16 bg-slate-950">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Grab a Slot <span className="text-cyan-400">Right Now</span>
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Grab a Slot <span className="text-cyan-400">Right Now</span></h2>
             <p className="text-slate-300 text-lg">15 minutes or 30 — pick what fits. No forms, no friction.</p>
           </div>
           <CalEmbed />
@@ -652,24 +570,18 @@ const Services = () => {
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl" />
         </div>
         <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
-            The Discovery Call Costs <span className="text-emerald-400">Nothing</span>
-          </h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">The Discovery Call Costs <span className="text-emerald-400">Nothing</span></h2>
           <p className="text-lg text-slate-300 mb-10">
             Worst case, you walk away with a clearer picture of what your project needs.
             Best case, you get a fixed-price proposal and a builder who answers his own phone.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-lg transition-all shadow-lg"
-            >
+            <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-lg transition-all shadow-lg">
               <CalendarDays className="w-5 h-5" /> Schedule at cal.com
             </a>
-            <a
-              href={EMAIL_URL}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors"
-            >
+            <a href={EMAIL_URL}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors">
               <Mail className="w-5 h-5" /> jeremy@ochai.dev
             </a>
           </div>
