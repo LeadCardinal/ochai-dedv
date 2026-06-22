@@ -268,10 +268,10 @@ const Services = () => {
     const ctx = gsap.context(() => {
       gsap.set(subRef.current, { opacity: 0, y: 20 });
 
-      // ── Rocket ──
+      // ── Rocket — scrub 1 = 2x speed vs previous scrub 2 ──
       gsap.to(rocketWrapRef.current, {
         x: '2vw', y: '-5vh', scale: 1.07, rotation: 2.5, ease: 'none',
-        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 2 },
+        scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom', scrub: 1 },
       });
       gsap.to(rocketRef.current, {
         y: '+=18', x: '+=8', rotation: '+=3', duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1,
@@ -298,22 +298,24 @@ const Services = () => {
           { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
       });
 
-      // ── Asteroid scroll journeys — each its own vector + scrub speed ──
-      const triggerBase = { trigger: heroRef.current, start: 'top top', end: 'bottom-=100vh bottom' };
+      // ── Asteroid scroll journeys — fire early, finish by 55% of scroll ──
+      // start: top+=30px top  = begins almost immediately on scroll
+      // end: bottom-=200vh bottom = completes well before section end
+      const triggerBase = { trigger: heroRef.current, start: 'top+=30px top', end: 'bottom-=200vh bottom' };
       asteroidDefs.forEach((def, i) => {
         const el = heroRef.current.querySelector(`[data-ast-idx="${i}"]`);
         if (!el) return;
         const st = { ...triggerBase, scrub: def.scrub };
         if (def.pathType === 0) {
-          gsap.fromTo(el, { x: '110vw', y: '0px' },   { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
+          gsap.fromTo(el, { x: '110vw',  y: '0px'    }, { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
         } else if (def.pathType === 1) {
-          gsap.fromTo(el, { x: '0px',   y: '-110vh' }, { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
+          gsap.fromTo(el, { x: '0px',    y: '-110vh' }, { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
         } else {
           gsap.fromTo(el, { x: '-110vw', y: '-110vh' }, { x: def.exitX, y: def.exitY, ease: 'none', scrollTrigger: st });
         }
       });
 
-      // ── H1 center-stage ──
+      // ── H1 center-stage — holds long, fades late ──
       gsap.to(h1PanelRef.current, {
         x: () => {
           if (window.innerWidth < 768) return 0;
@@ -321,11 +323,11 @@ const Services = () => {
           return (window.innerWidth / 2) - (r.left + r.width / 2);
         },
         ease: 'power2.inOut',
-        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=100vh bottom', end: 'bottom-=15vh bottom', scrub: 1 },
+        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=100vh bottom', end: 'bottom-=50vh bottom', scrub: 1 },
       });
       gsap.to(h1PanelRef.current, {
         opacity: 0,
-        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=15vh bottom', end: 'bottom bottom', scrub: 1 },
+        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=50vh bottom', end: 'bottom bottom', scrub: 1 },
       });
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
