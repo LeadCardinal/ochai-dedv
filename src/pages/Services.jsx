@@ -27,6 +27,7 @@ const ASSETS = {
   seo:           '/images/parallax/seo.svg',
   earthAvif:     '/images/parallax/earth.avif',
   earthWebm:     '/images/parallax/earth.webm',
+  ai:            '/images/parallax/ai.svg',
   quartet:       '/images/parallax/thequartet2.svg',
   ensemble:      '/images/parallax/theensemble2.svg',
   symphony:      '/images/parallax/thesymphony2.svg',
@@ -186,22 +187,60 @@ const tiers = [
   },
 ];
 
-// z < 20 = behind rocket | scaleFrom: 0.25 = scales in 25%->100% along path
+// z < 20 = behind rocket | scaleFrom/scaleTo = scale range during scroll
+// All x ranges clamped to ±60vw max — keeps travel arcs visible on desktop
+// Every entry has unique path origin + scrub speed — no two share both
 const asteroidDefs = [
-  { src: 'performance',   size: 240, top: 15, left: 80, z: 30, pathType: 1, exitX: '-130vw', exitY:  '90vh', scrub: 0.6  },
-  { src: 'accessibility', size: 195, top: 55, left: 10, z: 25, pathType: 2, exitX:  '125vw', exitY:  '80vh', scrub: 0.9  },
-  { src: 'bestPractices', size: 165, top: 30, left: 60, z: 15, pathType: 0, exitX: '-115vw', exitY: '120vh', scrub: 0.5,  scaleFrom: 0.25 },
-  { src: 'seo',           size: 210, top: 70, left: 45, z: 28, pathType: 1, exitX:  '130vw', exitY:  '60vh', scrub: 0.75 },
-  { src: 'asteroid',      size: 380, top: 20, left: 20, z: 35, pathType: 2, exitX:  '120vw', exitY: '115vh', scrub: 0.4,  scaleFrom: 0.25 },
-  { src: 'asteroid2',     size: 140, top: 48, left: 72, z: 12, pathType: 0, exitX: '-120vw', exitY:  '70vh', scrub: 0.65 },
-  { src: 'asteroid3',     size: 260, top: 62, left: 35, z: 18, pathType: 1, exitX: '-110vw', exitY: '105vh', scrub: 0.55, scaleFrom: 0.25 },
-  { src: 'asteroid4',     size: 195, top:  8, left: 55, z: 10, pathType: 2, exitX:  '115vw', exitY:  '95vh', scrub: 0.8  },
+  // performance — enters top-right, drifts diagonally down-left, stays on screen longer
+  { src: 'performance',   size: 240, top: 12, left: 72, z: 30,
+    fromX:  '62vw',  fromY: '-30vh',
+    exitX: '-55vw',  exitY:  '75vh', scrub: 0.7  },
+
+  // accessibility — own origin top-center-left, steeper diagonal, unique speed
+  { src: 'accessibility', size: 195, top: 50, left: 18, z: 25,
+    fromX: '-58vw',  fromY:  '15vh',
+    exitX:  '52vw',  exitY:  '85vh', scrub: 1.1  },
+
+  // bestPractices — smallest badge, grows 1→2 while crossing so text becomes legible
+  { src: 'bestPractices', size: 165, top: 35, left: 52, z: 15,
+    fromX:  '55vw',  fromY:  '60vh',
+    exitX: '-50vw',  exitY: '-25vh', scrub: 0.45, scaleFrom: 1, scaleTo: 2.0 },
+
+  // seo — enters bottom-left, travels up-right at shallow angle
+  { src: 'seo',           size: 210, top: 65, left: 38, z: 28,
+    fromX: '-60vw',  fromY:  '55vh',
+    exitX:  '58vw',  exitY: '-20vh', scrub: 0.8  },
+
+  // asteroid (large) — enters top-left, sweeps down-right, big slow presence
+  { src: 'asteroid',      size: 380, top: 18, left: 15, z: 35,
+    fromX: '-55vw',  fromY: '-40vh',
+    exitX:  '60vw',  exitY:  '80vh', scrub: 0.35, scaleFrom: 0.6, scaleTo: 1 },
+
+  // asteroid2 — enters right-center, cuts left and downward
+  { src: 'asteroid2',     size: 140, top: 44, left: 68, z: 12,
+    fromX:  '58vw',  fromY:  '20vh',
+    exitX: '-52vw',  exitY:  '65vh', scrub: 0.6  },
+
+  // asteroid3 — enters bottom-right, travels up-left at steep angle
+  { src: 'asteroid3',     size: 260, top: 58, left: 30, z: 18,
+    fromX:  '60vw',  fromY:  '70vh',
+    exitX: '-55vw',  exitY: '-30vh', scrub: 0.5, scaleFrom: 0.7, scaleTo: 1 },
+
+  // asteroid4 — enters top-center-right, drops down-left gradually
+  { src: 'asteroid4',     size: 195, top:  6, left: 50, z: 10,
+    fromX:  '20vw',  fromY: '-55vh',
+    exitX: '-58vw',  exitY:  '60vh', scrub: 0.95 },
+
+  // ai sparkles — enters bottom-center, drifts up-right, own speed, no path shared
+  { src: 'ai',            size: 180, top: 72, left: 42, z: 22,
+    fromX: '-15vw',  fromY:  '65vh',
+    exitX:  '56vw',  exitY: '-45vh', scrub: 0.72 },
 ];
 
 const AsteroidLayer = () => (
   <>
     {asteroidDefs.map((a, i) => (
-      <div key={i} data-ast-idx={i} data-path-type={a.pathType} className="absolute pointer-events-none"
+      <div key={i} data-ast-idx={i} className="absolute pointer-events-none"
         style={{ width: a.size, height: a.size, top: `${a.top}%`, left: `${a.left}%`, zIndex: a.z }}>
         <img src={ASSETS[a.src]} alt="" width={a.size} height={a.size} className="w-full h-full object-contain" />
       </div>
@@ -300,23 +339,18 @@ const Services = () => {
           { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
       });
 
-      // ── Asteroid scroll journeys — fire early, finish by ~55% of scroll ──
+      // ── Asteroid scroll journeys ──
       const triggerBase = { trigger: heroRef.current, start: 'top+=30px top', end: 'bottom-=280vh bottom' };
       asteroidDefs.forEach((def, i) => {
         const el = heroRef.current.querySelector(`[data-ast-idx="${i}"]`);
         if (!el) return;
         const fromScale = def.scaleFrom ?? 1;
-        const st = { ...triggerBase, scrub: def.scrub };
-        if (def.pathType === 0) {
-          gsap.fromTo(el, { x: '110vw',  y: '0px',    scale: fromScale },
-                          { x: def.exitX, y: def.exitY, scale: 1, ease: 'none', scrollTrigger: st });
-        } else if (def.pathType === 1) {
-          gsap.fromTo(el, { x: '0px',    y: '-110vh', scale: fromScale },
-                          { x: def.exitX, y: def.exitY, scale: 1, ease: 'none', scrollTrigger: st });
-        } else {
-          gsap.fromTo(el, { x: '-110vw', y: '-110vh', scale: fromScale },
-                          { x: def.exitX, y: def.exitY, scale: 1, ease: 'none', scrollTrigger: st });
-        }
+        const toScale   = def.scaleTo   ?? 1;
+        gsap.fromTo(el,
+          { x: def.fromX, y: def.fromY, scale: fromScale },
+          { x: def.exitX, y: def.exitY, scale: toScale,   ease: 'none',
+            scrollTrigger: { ...triggerBase, scrub: def.scrub } }
+        );
       });
 
       // ── H1 center-stage — centers over 150vh window, holds, fades over final 100vh ──
