@@ -304,6 +304,8 @@ const Services = () => {
   const cinemaRef     = useRef(null);
   const shipLogoRef   = useRef(null);
   const acronymRef    = useRef(null);
+  const tierRefs      = useRef([]);  // array of { section, splash, card }
+  tierRefs.current    = tiers.map((_, i) => tierRefs.current[i] ?? { section: null, splash: null, card: null });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -329,16 +331,35 @@ const Services = () => {
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=380%', scrub: false, toggleActions: 'play none none reverse' },
       });
 
-      // ── Tier splash + card reveals ──
-      ['#tier-splash-0', '#tier-splash-1', '#tier-splash-2'].forEach((sel) => {
-        gsap.fromTo(sel, { opacity: 0, scale: 1.05 },
-          { opacity: 1, scale: 1, duration: 0.25, scrollTrigger: { trigger: sel, start: 'top 80%', toggleActions: 'play none none reverse' } });
+      // ── Tier iris wipe sequence — each tier pinned, splash holds then wipes outward ──
+      tierRefs.current.forEach(({ section, splash, card }) => {
+        if (!section || !splash || !card) return;
+        // set initial clip — fully visible circle covering screen
+        gsap.set(splash, { clipPath: 'circle(150% at 50% 50%)' });
+        gsap.set(card, { opacity: 0 });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.2,
+          },
+        });
+
+        // 0–30%  : splash holds static (pause)
+        // 30–75% : iris wipes outward — circle shrinks to 0 exposing card behind
+        // 75–100%: card fades in fully
+        tl.to(splash,
+          { clipPath: 'circle(0% at 50% 50%)', ease: 'power2.inOut' },
+          0.30
+        );
+        tl.to(card,
+          { opacity: 1, ease: 'power2.out' },
+          0.70
+        );
       });
-      gsap.utils.toArray('.tier-card').forEach((card, i) => {
-        gsap.fromTo(card, { opacity: 0, y: 60 },
-          { opacity: 1, y: 0, duration: 0.8, delay: i * 0.1, ease: 'power3.out',
-            scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none none' } });
-      });
+
       gsap.utils.toArray('.proof-point').forEach((el) => {
         gsap.fromTo(el, { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
@@ -386,12 +407,12 @@ const Services = () => {
           0.10  // starts at 10% of section scroll
         );
 
-        // acronym hold is implicit 40–60% (nothing in timeline)
+        // acronym hold is implicit 40–75% (nothing in timeline = pause)
 
-        // acronym slides down at 60%
+        // acronym slides down at 75%
         tl.to(acronymRef.current,
           { y: '100vh', ease: 'power2.in' },
-          0.60
+          0.75
         );
       }
 
@@ -494,7 +515,7 @@ const Services = () => {
 
       {/* ── Cinematic reveal sequence ── */}
       <section ref={cinemaRef} className="relative z-10 bg-slate-950" style={{ height: '500vh' }}>
-        <div className="sticky top-0 h-screen overflow-hidden" style={{ paddingTop: '50px' }}>
+        <div className="sticky top-0 overflow-hidden" style={{ height: 'calc(100vh - 50px)', marginTop: '50px' }}>
 
           {/* Layer 1 — acronym (behind) — full-screen, revealed when ship slides right */}
           <div ref={acronymRef} className="absolute inset-0 z-10 w-full h-full">
@@ -533,12 +554,42 @@ const Services = () => {
           <h2 className="text-4xl md:text-6xl font-black text-white">Choose Your <span className="bg-gradient-to-r from-emerald-400 to-violet-400 bg-clip-text text-transparent">Performance Level</span></h2>
         </div>
         {tiers.map((tier, i) => (
-          <div key={tier.id}>
-            <div id={`tier-splash-${i}`} className="w-full flex items-center justify-center py-4 bg-black" style={{ height: 'calc(100vh - 50px)' }}>
-              <img src={tier.splash} alt={tier.splashAlt} className="max-w-full max-h-full object-contain" loading="lazy" />
+          <section
+            key={tier.id}
+            ref={el => { if (el) tierRefs.current[i].section = el; }}
+            className="relative bg-black"
+            style={{ height: '350vh' }}
+          >
+            <div className="sticky top-0 overflow-hidden bg-black" style={{ height: 'calc(100vh - 50px)', marginTop: '50px' }}>
+
+              {/* Card behind — revealed by iris wipe */}
+              <div
+                ref={el => { if (el) tierRefs.current[i].card = el; }}
+                className="absolute inset-0 z-10 overflow-y-auto"
+                style={{ opacity: 0 }}
+              >
+                <div className="container mx-auto px-4 max-w-4xl py-16">
+                  <TierCard tier={tier} />
+                </div>
+              </div>
+
+              {/* Splash on top — iris wipes to reveal card */}
+              <div
+                ref={el => { if (el) tierRefs.current[i].splash = el; }}
+                className="absolute inset-0 z-20 w-full h-full"
+                style={{ willChange: 'clip-path' }}
+              >
+                <img
+                  src={tier.splash}
+                  alt={tier.splashAlt}
+                  className="w-full h-full object-contain"
+                  style={{ display: 'block' }}
+                  loading="lazy"
+                />
+              </div>
+
             </div>
-            <div className="container mx-auto px-4 max-w-4xl py-16 tier-card"><TierCard tier={tier} /></div>
-          </div>
+          </section>
         ))}
       </section>
 
