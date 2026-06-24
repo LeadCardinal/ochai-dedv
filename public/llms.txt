@@ -1,3 +1,5 @@
+# OchAI — Jeremy Och | AI Implementation Specialist & Full-Stack Web Developer | Huntsville, AL
+
 ## Pages
 - [Case Study: hsvdrone.com SEO | Page 1 Rankings in 30 Days](/case-study/hsvdrone): SEO case study for hsvdrone.com showcasing rapid growth to Google Page 1 rankings (Position 9.0) in less than 30 days.
 - [Case Study: themeaningsoflife.com | Top 1% Global Performance](/case-study/themeaningsoflife): Technical analysis of a top 1% globally ranked website achieving perfect 100/100 Accessibility & SEO scores and 95/100 Performance on Google Lighthouse.
