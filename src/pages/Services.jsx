@@ -515,7 +515,7 @@ const Services = () => {
 
       {/* ── Cinematic reveal sequence ── */}
       <section ref={cinemaRef} className="relative z-10 bg-slate-950" style={{ height: '500vh' }}>
-        <div className="sticky top-0 overflow-hidden" style={{ height: 'calc(100vh - 50px)', marginTop: '50px' }}>
+        <div className="sticky top-[50px] overflow-hidden bg-slate-950" style={{ height: 'calc(100vh - 50px)' }}>
 
           {/* Layer 1 — acronym (behind) — full-screen, revealed when ship slides right */}
           <div ref={acronymRef} className="absolute inset-0 z-10 w-full h-full">
@@ -560,7 +560,7 @@ const Services = () => {
             className="relative bg-black"
             style={{ height: '350vh' }}
           >
-            <div className="sticky top-0 overflow-hidden bg-black" style={{ height: 'calc(100vh - 50px)', marginTop: '50px' }}>
+            <div className="sticky top-[50px] overflow-hidden bg-black" style={{ height: 'calc(100vh - 50px)' }}>
 
               {/* Card behind — revealed by iris wipe */}
               <div
