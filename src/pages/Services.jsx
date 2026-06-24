@@ -28,6 +28,8 @@ const ASSETS = {
   earthAvif:     '/images/parallax/earth.avif',
   earthWebm:     '/images/parallax/earth.webm',
   ai:            '/images/parallax/ai.svg',
+  shipLogo:      '/images/parallax/ship-logo.svg',
+  acronymLogo:   '/images/parallax/acronym-after--logo.svg',
   quartet:       '/images/parallax/thequartet2.svg',
   ensemble:      '/images/parallax/theensemble2.svg',
   symphony:      '/images/parallax/thesymphony2.svg',
@@ -299,6 +301,9 @@ const Services = () => {
   const rocketRef     = useRef(null);
   const subRef        = useRef(null);
   const h1PanelRef    = useRef(null);
+  const cinemaRef     = useRef(null);
+  const shipLogoRef   = useRef(null);
+  const acronymRef    = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -367,6 +372,45 @@ const Services = () => {
         opacity: 0,
         scrollTrigger: { trigger: heroRef.current, start: 'bottom-=100vh bottom', end: 'bottom bottom', scrub: 1 },
       });
+
+      // ── Cinematic sequence — ship-logo rises, holds, slides right, acronym holds, slides down ──
+      if (cinemaRef.current && shipLogoRef.current && acronymRef.current) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: cinemaRef.current,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.2,
+            pin: false,
+          },
+        });
+
+        // Phase 1 — ship-logo enters from bottom (0–20% of section scroll)
+        tl.fromTo(shipLogoRef.current,
+          { y: '100vh', opacity: 1 },
+          { y: '0vh',   opacity: 1, ease: 'power2.out' },
+          0
+        );
+
+        // Phase 2 — ship-logo holds (20–45% of section scroll) — gap in timeline = hold
+        tl.to(shipLogoRef.current, { y: '0vh', ease: 'none' }, 0.25);
+
+        // Phase 3 — ship-logo exits right (45–65%)
+        tl.to(shipLogoRef.current,
+          { x: '110vw', ease: 'power2.in' },
+          0.45
+        );
+
+        // Phase 4 — acronym was already behind — hold (acronym starts visible via CSS z-index)
+        // Hold is implicit — acronym doesn't move 65–80%
+
+        // Phase 5 — acronym slides down (80–100%)
+        tl.fromTo(acronymRef.current,
+          { y: '0vh' },
+          { y: '100vh', ease: 'power2.in' },
+          0.80
+        );
+      }
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
     }, heroRef);
@@ -447,6 +491,31 @@ const Services = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Cinematic reveal sequence ── */}
+      <section ref={cinemaRef} className="relative z-10 bg-slate-950" style={{ height: '500vh' }}>
+        <div className="sticky top-0 h-screen overflow-hidden">
+
+          {/* Layer 1 — acronym (behind) — already in place, revealed when ship slides right */}
+          <div ref={acronymRef} className="absolute inset-0 z-10">
+            <img
+              src={ASSETS.acronymLogo}
+              alt="OchAI — Oniony. Authoritative. Deliberate."
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Layer 2 — ship-logo (front) — enters from bottom, holds, slides right */}
+          <div ref={shipLogoRef} className="absolute inset-0 z-20" style={{ willChange: 'transform' }}>
+            <img
+              src={ASSETS.shipLogo}
+              alt="OchAI — Input. Process. Output."
+              className="w-full h-full object-cover"
+            />
+          </div>
+
         </div>
       </section>
 
