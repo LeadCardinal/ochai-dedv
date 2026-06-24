@@ -501,7 +501,7 @@ const Services = () => {
             <img
               src={ASSETS.acronymLogo}
               alt="OchAI — Oniony. Authoritative. Deliberate."
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               style={{ display: 'block' }}
             />
           </div>
@@ -511,7 +511,7 @@ const Services = () => {
             <img
               src={ASSETS.shipLogo}
               alt="OchAI — Input. Process. Output."
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               style={{ display: 'block' }}
             />
           </div>
@@ -534,8 +534,8 @@ const Services = () => {
         </div>
         {tiers.map((tier, i) => (
           <div key={tier.id}>
-            <div id={`tier-splash-${i}`} className="w-full flex items-center justify-center py-4 bg-black">
-              <img src={tier.splash} alt={tier.splashAlt} className="w-full max-w-[1376px] h-auto" loading="lazy" />
+            <div id={`tier-splash-${i}`} className="w-full flex items-center justify-center py-4 bg-black" style={{ height: 'calc(100vh - 50px)' }}>
+              <img src={tier.splash} alt={tier.splashAlt} className="max-w-full max-h-full object-contain" loading="lazy" />
             </div>
             <div className="container mx-auto px-4 max-w-4xl py-16 tier-card"><TierCard tier={tier} /></div>
           </div>
