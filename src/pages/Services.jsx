@@ -29,7 +29,7 @@ const ASSETS = {
   earthWebm:     '/images/parallax/earth.webm',
   ai:            '/images/parallax/ai.svg',
   shipLogo:      '/images/parallax/ship-logo.svg',
-  acronymLogo:   '/images/parallax/acronym-after--logo.svg',
+  acronymLogo:   '/images/parallax/acronym-after-logo.svg',
   quartet:       '/images/parallax/thequartet2.svg',
   ensemble:      '/images/parallax/theensemble2.svg',
   symphony:      '/images/parallax/thesymphony2.svg',
