@@ -358,17 +358,7 @@ const Services = () => {
         );
       });
 
-      // ── H1 center-stage — slides to center, holds 2 scroll lengths, then fades ──
-      gsap.to(h1PanelRef.current, {
-        x: () => {
-          if (window.innerWidth < 768) return 0;
-          const r = h1PanelRef.current.getBoundingClientRect();
-          return (window.innerWidth / 2) - (r.left + r.width / 2);
-        },
-        ease: 'power2.inOut',
-        scrollTrigger: { trigger: heroRef.current, start: 'bottom-=300vh bottom', end: 'bottom-=200vh bottom', scrub: 1 },
-      });
-      // hold is implicit — nothing animates between bottom-=200vh and bottom-=100vh
+      // ── H1 panel — stays right, holds, then fades ──
       gsap.to(h1PanelRef.current, {
         opacity: 0,
         scrollTrigger: { trigger: heroRef.current, start: 'bottom-=100vh bottom', end: 'bottom-=20vh bottom', scrub: 1 },

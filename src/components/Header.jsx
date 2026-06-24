@@ -64,9 +64,9 @@ const Header = () => {
           <img
             src="/images/ochai-header-logo.avif"
             alt="OchAI — Jeremy Och"
-            width={250}
-            height={75}
-            className="h-[75px] w-[250px] object-contain"
+            width={167}
+            height={50}
+            className="h-[50px] w-[167px] object-contain"
           />
         </Link>
 
