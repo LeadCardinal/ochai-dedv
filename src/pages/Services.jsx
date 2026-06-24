@@ -191,8 +191,8 @@ const tiers = [
 // All x ranges clamped to ±60vw max — keeps travel arcs visible on desktop
 // Every entry has unique path origin + scrub speed — no two share both
 const asteroidDefs = [
-  // performance — enters top-right, drifts diagonally down-left, stays on screen longer
-  { src: 'performance',   size: 240, top: 12, left: 72, z: 30,
+  // performance — z dropped to 18, now behind rocket; drifts diagonally down-left
+  { src: 'performance',   size: 240, top: 12, left: 72, z: 18,
     fromX:  '62vw',  fromY: '-30vh',
     exitX: '-55vw',  exitY:  '75vh', scrub: 0.7  },
 
@@ -201,18 +201,18 @@ const asteroidDefs = [
     fromX: '-58vw',  fromY:  '15vh',
     exitX:  '52vw',  exitY:  '85vh', scrub: 1.1  },
 
-  // bestPractices — smallest badge, grows 1→2 while crossing so text becomes legible
+  // bestPractices — grows 1→2 while crossing so text becomes legible
   { src: 'bestPractices', size: 165, top: 35, left: 52, z: 15,
     fromX:  '55vw',  fromY:  '60vh',
     exitX: '-50vw',  exitY: '-25vh', scrub: 0.45, scaleFrom: 1, scaleTo: 2.0 },
 
-  // seo — enters bottom-left, travels up-right at shallow angle
-  { src: 'seo',           size: 210, top: 65, left: 38, z: 28,
+  // seo — enters center-left (nudged up from 65), grows 0.5→1 as it rises up-right
+  { src: 'seo',           size: 210, top: 48, left: 38, z: 28,
     fromX: '-60vw',  fromY:  '55vh',
-    exitX:  '58vw',  exitY: '-20vh', scrub: 0.8  },
+    exitX:  '58vw',  exitY: '-20vh', scrub: 0.8, scaleFrom: 0.5, scaleTo: 1 },
 
-  // asteroid (large) — enters top-left, sweeps down-right, big slow presence
-  { src: 'asteroid',      size: 380, top: 18, left: 15, z: 35,
+  // asteroid (large) — z dropped to 16, now behind rocket; slow sweeping presence
+  { src: 'asteroid',      size: 380, top: 18, left: 15, z: 16,
     fromX: '-55vw',  fromY: '-40vh',
     exitX:  '60vw',  exitY:  '80vh', scrub: 0.35, scaleFrom: 0.6, scaleTo: 1 },
 
@@ -226,13 +226,13 @@ const asteroidDefs = [
     fromX:  '60vw',  fromY:  '70vh',
     exitX: '-55vw',  exitY: '-30vh', scrub: 0.5, scaleFrom: 0.7, scaleTo: 1 },
 
-  // asteroid4 — enters top-center-right, drops down-left gradually
+  // asteroid4 — drops down-left, slight overshoot scale 0.7→1.1
   { src: 'asteroid4',     size: 195, top:  6, left: 50, z: 10,
     fromX:  '20vw',  fromY: '-55vh',
-    exitX: '-58vw',  exitY:  '60vh', scrub: 0.95 },
+    exitX: '-58vw',  exitY:  '60vh', scrub: 0.95, scaleFrom: 0.7, scaleTo: 1.1 },
 
-  // ai sparkles — enters bottom-center, drifts up-right, own speed, no path shared
-  { src: 'ai',            size: 180, top: 72, left: 42, z: 22,
+  // ai sparkles — nudged up from 72 to 50, drifts up-right, own speed
+  { src: 'ai',            size: 180, top: 50, left: 42, z: 22,
     fromX: '-15vw',  fromY:  '65vh',
     exitX:  '56vw',  exitY: '-45vh', scrub: 0.72 },
 ];
@@ -395,7 +395,7 @@ const Services = () => {
         </video>
       </div>
 
-      <section ref={heroRef} className="relative min-h-[540vh] bg-transparent">
+      <section ref={heroRef} className="relative min-h-[640vh] bg-transparent">
         <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}>
           <div className="absolute inset-0 opacity-60" style={{
             backgroundImage: [
