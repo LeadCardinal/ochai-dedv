@@ -304,8 +304,7 @@ const Services = () => {
   const cinemaRef     = useRef(null);
   const shipLogoRef   = useRef(null);
   const acronymRef    = useRef(null);
-  const tierRefs      = useRef([]);  // array of { section, splash, card }
-  tierRefs.current    = tiers.map((_, i) => tierRefs.current[i] ?? { section: null, splash: null, card: null });
+  const tierRefs = useRef(tiers.map(() => ({ section: null, splash: null, card: null })));
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -331,12 +330,10 @@ const Services = () => {
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=380%', scrub: false, toggleActions: 'play none none reverse' },
       });
 
-      // ── Tier iris wipe sequence — each tier pinned, splash holds then wipes outward ──
+      // ── Tier iris wipe sequence ──
+      // Card starts clipped to zero at center, expands outward over splash image
       tierRefs.current.forEach(({ section, splash, card }) => {
         if (!section || !splash || !card) return;
-        // set initial clip — card hidden (circle at 0), splash fully visible
-        gsap.set(splash, { clipPath: 'none' });
-        gsap.set(card, { opacity: 1, clipPath: 'circle(0% at 50% 50%)' });
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -347,10 +344,10 @@ const Services = () => {
           },
         });
 
-        // 0–30%  : splash holds static (pause)
-        // 30–75% : card iris expands outward from center, revealing card over splash
-        // 75–100%: card fully revealed
-        tl.to(card,
+        // 0–30%  : splash holds static (drama/pause)
+        // 30–100%: card iris expands from center outward over splash
+        tl.fromTo(card,
+          { clipPath: 'circle(0% at 50% 50%)' },
           { clipPath: 'circle(150% at 50% 50%)', ease: 'power2.inOut' },
           0.30
         );
@@ -558,22 +555,21 @@ const Services = () => {
           >
             <div className="sticky top-[50px] overflow-hidden bg-black" style={{ height: 'calc(100vh - 50px)' }}>
 
-              {/* Card behind — revealed by iris wipe */}
+              {/* Card — starts clipped to zero, iris expands outward over splash */}
               <div
                 ref={el => { if (el) tierRefs.current[i].card = el; }}
-                className="absolute inset-0 z-10 overflow-y-auto"
-                style={{ opacity: 0 }}
+                className="absolute inset-0 z-20 overflow-y-auto bg-black"
+                style={{ clipPath: 'circle(0% at 50% 50%)' }}
               >
                 <div className="container mx-auto px-4 max-w-4xl py-16">
                   <TierCard tier={tier} />
                 </div>
               </div>
 
-              {/* Splash on top — iris wipes to reveal card */}
+              {/* Splash underneath — static, iris wipe reveals card on top */}
               <div
                 ref={el => { if (el) tierRefs.current[i].splash = el; }}
-                className="absolute inset-0 z-20 w-full h-full"
-                style={{ willChange: 'clip-path' }}
+                className="absolute inset-0 z-10 w-full h-full"
               >
                 <img
                   src={tier.splash}
