@@ -27,9 +27,9 @@ const ASSETS = {
   seo:           '/images/parallax/seo.svg',
   earthAvif:     '/images/parallax/earth.avif',
   earthWebm:     '/images/parallax/earth.webm',
-  quartet:       '/images/parallax/thequartet.svg',
-  ensemble:      '/images/parallax/theensemble.svg',
-  symphony:      '/images/parallax/thesymphony.svg',
+  quartet:       '/images/parallax/thequartet2.svg',
+  ensemble:      '/images/parallax/theensemble2.svg',
+  symphony:      '/images/parallax/thesymphony2.svg',
 };
 
 function playApplause() {
