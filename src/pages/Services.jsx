@@ -334,9 +334,9 @@ const Services = () => {
       // ── Tier iris wipe sequence — each tier pinned, splash holds then wipes outward ──
       tierRefs.current.forEach(({ section, splash, card }) => {
         if (!section || !splash || !card) return;
-        // set initial clip — fully visible circle covering screen
-        gsap.set(splash, { clipPath: 'circle(150% at 50% 50%)' });
-        gsap.set(card, { opacity: 0 });
+        // set initial clip — card hidden (circle at 0), splash fully visible
+        gsap.set(splash, { clipPath: 'none' });
+        gsap.set(card, { opacity: 1, clipPath: 'circle(0% at 50% 50%)' });
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -348,15 +348,11 @@ const Services = () => {
         });
 
         // 0–30%  : splash holds static (pause)
-        // 30–75% : iris wipes outward — circle shrinks to 0 exposing card behind
-        // 75–100%: card fades in fully
-        tl.to(splash,
-          { clipPath: 'circle(0% at 50% 50%)', ease: 'power2.inOut' },
-          0.30
-        );
+        // 30–75% : card iris expands outward from center, revealing card over splash
+        // 75–100%: card fully revealed
         tl.to(card,
-          { opacity: 1, ease: 'power2.out' },
-          0.70
+          { clipPath: 'circle(150% at 50% 50%)', ease: 'power2.inOut' },
+          0.30
         );
       });
 
@@ -515,7 +511,7 @@ const Services = () => {
 
       {/* ── Cinematic reveal sequence ── */}
       <section ref={cinemaRef} className="relative z-10 bg-slate-950" style={{ height: '500vh' }}>
-        <div className="sticky top-[50px] overflow-hidden bg-slate-950" style={{ height: 'calc(100vh - 50px)' }}>
+        <div className="sticky top-[70px] overflow-hidden bg-slate-950" style={{ height: 'calc(100vh - 70px)' }}>
 
           {/* Layer 1 — acronym (behind) — full-screen, revealed when ship slides right */}
           <div ref={acronymRef} className="absolute inset-0 z-10 w-full h-full">
