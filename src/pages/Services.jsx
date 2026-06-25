@@ -303,7 +303,8 @@ const Services = () => {
   const h1PanelRef    = useRef(null);
   const cinemaRef     = useRef(null);
   const shipLogoRef   = useRef(null);
-  const acronymRef    = useRef(null);
+
+  const everyBuildRef = useRef(null);
   const tierRefs = useRef(tiers.map(() => ({ section: null, splash: null, card: null })));
 
   useEffect(() => {
@@ -407,6 +408,22 @@ const Services = () => {
           { y: '100vh', ease: 'power2.in' },
           0.75
         );
+
+        // every-build section fades in as acronym exits (75-100% of cinema scroll)
+        if (everyBuildRef.current) {
+          gsap.fromTo(everyBuildRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.6, ease: 'power2.out',
+              scrollTrigger: {
+                trigger: cinemaRef.current,
+                start: '75% top',
+                end: 'bottom bottom',
+                scrub: false,
+                toggleActions: 'play none none reverse',
+              },
+            }
+          );
+        }
       }
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
@@ -533,7 +550,7 @@ const Services = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-24 bg-slate-950">
+      <section ref={everyBuildRef} className="relative z-10 py-24 bg-slate-950" style={{ opacity: 0 }}>
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">Every build ships with what<br /><span className="text-cyan-400">others charge separately for.</span></h2>
           <p className="text-lg text-slate-300 leading-relaxed mb-6">Most shops separate technical SEO from the build because two different people are doing two different jobs. A developer builds. An SEO person patches it after. That handoff has a gap — and you pay for both and the gap.</p>
