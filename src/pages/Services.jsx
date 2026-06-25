@@ -107,6 +107,7 @@ const CalEmbed = () => {
       });
     })();
   }, []);
+
   return (
     <Cal
       namespace="jeremy-ochai-dev"
@@ -409,29 +410,25 @@ const Services = () => {
           0.75
         );
 
-        // set initial opacity via GSAP (safer than inline style)
-        gsap.set(everyBuildRef.current, { opacity: 0 });
-
-        // every-build section fades in as acronym exits (75-100% of cinema scroll)
-        if (everyBuildRef.current) {
-          gsap.fromTo(everyBuildRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.6, ease: 'power2.out',
-              scrollTrigger: {
-                trigger: cinemaRef.current,
-                start: '75% top',
-                end: 'bottom bottom',
-                scrub: false,
-                toggleActions: 'play none none reverse',
-              },
-            }
-          );
-        }
       }
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
     }, heroRef);
     return () => ctx.revert();
+  }, []);
+
+  // Separate effect: fade-in every-build section tied to cinema scroll exit
+  useEffect(() => {
+    if (!cinemaRef.current || !everyBuildRef.current) return;
+    gsap.set(everyBuildRef.current, { opacity: 0 });
+    const st = ScrollTrigger.create({
+      trigger: cinemaRef.current,
+      start: 'bottom-=25% top',
+      end: 'bottom top',
+      onEnter: () => gsap.to(everyBuildRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }),
+      onLeaveBack: () => gsap.to(everyBuildRef.current, { opacity: 0, duration: 0.3 }),
+    });
+    return () => st.kill();
   }, []);
 
   return (
