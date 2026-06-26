@@ -570,7 +570,7 @@ const Services = () => {
             className="relative bg-black"
             style={{ height: '350vh' }}
           >
-            <div className="sticky top-[50px] overflow-hidden bg-black" style={{ height: 'calc(100vh - 50px)' }}>
+            <div className="sticky top-[50px] overflow-visible bg-black" style={{ height: 'calc(100vh - 50px)' }}>
 
               {/* Card — starts clipped to zero, iris expands outward over splash */}
               <div
