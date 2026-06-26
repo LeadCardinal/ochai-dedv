@@ -304,6 +304,7 @@ const Services = () => {
   const h1PanelRef    = useRef(null);
   const cinemaRef     = useRef(null);
   const shipLogoRef   = useRef(null);
+  const acronymRef    = useRef(null);
 
   const everyBuildRef = useRef(null);
   const tierRefs = useRef(tiers.map(() => ({ section: null, splash: null, card: null })));
