@@ -410,6 +410,18 @@ const Services = () => {
           0.75
         );
 
+        // every-build section fades in as acronym exits
+        if (everyBuildRef.current) {
+          gsap.set(everyBuildRef.current, { opacity: 0 });
+          ScrollTrigger.create({
+            trigger: cinemaRef.current,
+            start: 'bottom-=30% top',
+            end: 'bottom top',
+            onEnter: () => gsap.to(everyBuildRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }),
+            onLeaveBack: () => gsap.to(everyBuildRef.current, { opacity: 0, duration: 0.3 }),
+          });
+        }
+
       }
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
@@ -417,19 +429,6 @@ const Services = () => {
     return () => ctx.revert();
   }, []);
 
-  // Separate effect: fade-in every-build section tied to cinema scroll exit
-  useEffect(() => {
-    if (!cinemaRef.current || !everyBuildRef.current) return;
-    gsap.set(everyBuildRef.current, { opacity: 0 });
-    const st = ScrollTrigger.create({
-      trigger: cinemaRef.current,
-      start: 'bottom-=25% top',
-      end: 'bottom top',
-      onEnter: () => gsap.to(everyBuildRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }),
-      onLeaveBack: () => gsap.to(everyBuildRef.current, { opacity: 0, duration: 0.3 }),
-    });
-    return () => st.kill();
-  }, []);
 
   return (
     <>
