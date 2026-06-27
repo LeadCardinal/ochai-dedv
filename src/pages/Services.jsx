@@ -657,10 +657,19 @@ const Services = () => {
           <p className="text-xs uppercase tracking-widest text-slate-500 mb-4">Taking this to a boardroom?</p>
           <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Download the OchAI Service Brochure</h2>
           <p className="text-slate-300 text-base md:text-lg mb-8">A designed, print-ready PDF with the full service breakdown. Built for the conversation that happens after someone asks, <em>where did you find this guy?</em></p>
-          <a href="/OchAI-Services-Brochure.pdf" download
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors">
-            <Download className="w-5 h-5" /> Download Brochure (PDF)
-          </a>
+          <div className="relative inline-block group">
+            <a href="/OchAI-Services-Brochure.pdf" download
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors">
+              <Download className="w-5 h-5" /> Download Brochure (PDF)
+            </a>
+            {/* Brochure thumbnail tooltip */}
+            <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+              <div className="rounded-xl overflow-hidden shadow-2xl border border-slate-700 rotate-1 hover:rotate-0 transition-transform duration-300" style={{ width: '200px' }}>
+                <img src="/OchAI-Services-Brochure-thumb.avif" alt="OchAI Services Brochure preview" width="200" height="283" className="block" />
+              </div>
+              <div className="w-3 h-3 bg-slate-800 border-r border-b border-slate-700 rotate-45 mx-auto -mt-1.5" />
+            </div>
+          </div>
         </div>
       </section>
 
