@@ -422,34 +422,48 @@ const Services = () => {
         outerSTs.push(st);
       });
 
-      // Process steps — viewport entry fires each card independently
-      // Cards stacked vertically so only one is in view at a time
-      // Dead scroll between them = natural gap from mb-[40vh] spacing
-      // Travel distance + duration grow card 1→4 (distance illusion)
-      const stepCards = Array.from(document.querySelectorAll('[data-step-card]'));
+      // Process steps — sticky 4-across grid, each card fires at its own scroll depth
+      // Wrapper is 600vh tall, sticky inner holds cards in view
+      // Each card fires when the wrapper scroll progress hits its threshold
+      // Dead scroll gap between cards = distance between thresholds
+      const stepWrapper = document.querySelector('[data-step-wrapper]');
+      const stepCards   = Array.from(document.querySelectorAll('[data-step-card]'));
 
-      stepCards.forEach((card, i) => {
-        if (!card) return;
+      if (stepWrapper && stepCards.length === 4) {
 
-        const startX  = `${-130 - i * 25}vw`;
-        const animDur = 0.7 + i * 0.18;
-        const startScale = 0.78 + i * 0.055;
-
-        gsap.set(card, { x: startX, opacity: 0, scale: startScale });
-
-        const st = ScrollTrigger.create({
-          trigger: card,
-          start: 'top 75%',
-          onEnter: () => {
-            gsap.to(card, { x: 0, opacity: 1, scale: 1, duration: animDur, ease: 'power3.out' });
-          },
-          onLeaveBack: () => {
-            gsap.to(card, { x: startX, opacity: 0, scale: startScale, duration: 0.35, ease: 'power2.in' });
-          },
+        // All cards start off-screen left
+        stepCards.forEach((card, i) => {
+          gsap.set(card, { x: `${-140 - i * 25}vw`, opacity: 0, scale: 0.78 + i * 0.055 });
         });
 
-        outerSTs.push(st);
-      });
+        // Fire each card at a different scroll progress point on the wrapper
+        // 0–16%: dead scroll entering section
+        // 17%: card 1 fires  |  33%: card 2  |  50%: card 3  |  67%: card 4
+        // remaining scroll = read time after last card lands
+        const thresholds = [ 0.17, 0.33, 0.50, 0.67 ];
+        const totalVh = 600;
+
+        stepCards.forEach((card, i) => {
+          const startX     = `${-140 - i * 25}vw`;
+          const animDur    = 0.7 + i * 0.18;
+          const startScale = 0.78 + i * 0.055;
+          const triggerPct = thresholds[i];
+
+          // Each card gets its own ScrollTrigger keyed to wrapper scroll progress
+          const st = ScrollTrigger.create({
+            trigger: stepWrapper,
+            start: `top+=${triggerPct * totalVh}vh top`,
+            onEnter: () => {
+              gsap.to(card, { x: 0, opacity: 1, scale: 1, duration: animDur, ease: 'power3.out' });
+            },
+            onLeaveBack: () => {
+              gsap.to(card, { x: startX, opacity: 0, scale: startScale, duration: 0.35, ease: 'power2.in' });
+            },
+          });
+
+          outerSTs.push(st);
+        });
+      }
 
       ScrollTrigger.refresh();
     }, 100);
@@ -648,27 +662,35 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Step cards — stacked vertically, large gap between each so only one fires at a time */}
-      <div className="relative z-10 bg-slate-900 overflow-x-hidden">
-        <div className="container mx-auto px-4 max-w-2xl">
-          {processSteps.map((s, i) => (
-            <div
-              key={s.step}
-              data-step-card={i}
-              className={`p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors${i < processSteps.length - 1 ? ' mb-[50vh]' : ' mb-24'}`}
-            >
-              <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
-                  <s.icon className="w-6 h-6" />
+      {/* Step cards — 4-across grid, each slides in from left on its own scroll depth */}
+      <section
+        data-step-wrapper
+        className="relative z-10 bg-slate-900 overflow-hidden"
+        style={{ height: '600vh' }}
+      >
+        <div className="sticky top-[50px] flex items-center" style={{ height: 'calc(100vh - 50px)' }}>
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              {processSteps.map((s, i) => (
+                <div
+                  key={s.step}
+                  data-step-card={i}
+                  className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
+                      <s.icon className="w-6 h-6" />
+                    </div>
+                    <span className="text-3xl font-bold text-slate-700">{s.step}</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
                 </div>
-                <span className="text-3xl font-bold text-slate-700">{s.step}</span>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
-              <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      </section>
 
       <section className="relative z-10 py-16 bg-slate-950 border-y border-slate-800">
         <div className="container mx-auto px-4 max-w-3xl text-center">
