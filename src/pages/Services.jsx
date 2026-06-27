@@ -398,7 +398,7 @@ const Services = () => {
         tierRefs.current.forEach(({ section, splash, card }) => {
           if (!section || !splash || !card) return;
 
-          gsap.set(card, { overflow: 'hidden' });
+          gsap.set(card, { clipPath: 'circle(0% at 50% 50%)', overflow: 'hidden' });
 
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -592,11 +592,11 @@ const Services = () => {
           >
             <div className="sticky top-[50px] overflow-visible bg-black" style={{ height: 'calc(100vh - 50px)' }}>
 
-              {/* Card — starts clipped to zero, iris expands outward over splash */}
+              {/* Card — clipped to zero by GSAP on mount, iris expands outward over splash */}
               <div
                 ref={el => { if (el) tierRefs.current[i].card = el; }}
-                className="absolute inset-0 z-20 overflow-y-auto bg-black"
-                style={{ clipPath: 'circle(0% at 50% 50%)' }}
+                className="absolute inset-0 z-20 bg-black"
+                style={{ overflow: 'hidden' }}
               >
                 <div className="container mx-auto px-4 max-w-4xl py-16">
                   <TierCard tier={tier} />
