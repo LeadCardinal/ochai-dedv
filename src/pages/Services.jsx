@@ -602,7 +602,7 @@ const Services = () => {
             key={tier.id}
             ref={el => { if (el) tierRefs.current[i].section = el; }}
             className="relative bg-black"
-            style={{ height: ${tier.scrollVh}vh }}
+            style={{ height: `${tier.scrollVh}vh` }}
           >
             <div className="sticky top-[50px] overflow-visible bg-black" style={{ height: 'calc(100vh - 50px)' }}>
 
