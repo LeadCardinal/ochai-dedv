@@ -117,7 +117,7 @@ const processSteps = [
 
 const tiers = [
   {
-    id: 'quartet', scrollVh: 520, splash: ASSETS.quartet, splashAlt: 'The Quartet', name: 'The Quartet', emoji: '🎻',
+    id: 'quartet', splash: ASSETS.quartet, splashAlt: 'The Quartet', name: 'The Quartet', emoji: '🎻',
     price: 'Starting at $2,500', tagline: 'A complete, professional web presence — nothing missing, nothing wasted.',
     coverage: '40%', coverageLabel: 'of your conversion architecture',
     color: 'from-emerald-400 to-cyan-400', borderColor: 'border-emerald-500/40', glowColor: 'shadow-emerald-500/10',
@@ -133,7 +133,7 @@ const tiers = [
     addOns: 'E-commerce, blog/CMS, booking integration, additional content pages',
   },
   {
-    id: 'ensemble', scrollVh: 460, splash: ASSETS.ensemble, splashAlt: 'The Ensemble', name: 'The Ensemble', emoji: '🎺',
+    id: 'ensemble', splash: ASSETS.ensemble, splashAlt: 'The Ensemble', name: 'The Ensemble', emoji: '🎺',
     price: 'Starting at $5,500', tagline: 'More moving parts. More reach. Built for businesses that need their site to do real work.',
     coverage: '70%', coverageLabel: 'of your conversion architecture',
     color: 'from-cyan-400 to-blue-400', borderColor: 'border-cyan-500/40', glowColor: 'shadow-cyan-500/10',
@@ -150,7 +150,7 @@ const tiers = [
     addOns: 'E-commerce, advanced schema, monthly SEO retainer, Cloudflare edge maintenance',
   },
   {
-    id: 'symphony', scrollVh: 540, splash: ASSETS.symphony, splashAlt: 'The Symphony', name: 'The Symphony', emoji: '🎼',
+    id: 'symphony', splash: ASSETS.symphony, splashAlt: 'The Symphony', name: 'The Symphony', emoji: '🎼',
     price: 'Starting at $12,000', tagline: 'Full orchestration. Every instrument in its place. Built to perform.',
     coverage: null, coverageLabel: 'Full coverage. All instruments playing.',
     color: 'from-violet-400 to-fuchsia-400', borderColor: 'border-violet-500/40', glowColor: 'shadow-violet-500/20',
@@ -287,11 +287,8 @@ const Services = () => {
   const shipLogoRef   = useRef(null);
   const acronymRef    = useRef(null);
 
-  const everyBuildRef  = useRef(null);
-  const tierRefs      = useRef(tiers.map(() => ({ section: null, splash: null, card: null })));
-  const stepSectionRef  = useRef(null);
-  const stepSectionRefs = useRef([]);
-  const stepRefs        = useRef([]);
+  const everyBuildRef = useRef(null);
+  const tierRefs = useRef(tiers.map(() => ({ section: null, splash: null, card: null })));
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -315,6 +312,29 @@ const Services = () => {
       gsap.to(subRef.current, {
         opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: '+=380%', scrub: false, toggleActions: 'play none none reverse' },
+      });
+
+      // ── Tier iris wipe sequence ──
+      // Card starts clipped to zero at center, expands outward over splash image
+      tierRefs.current.forEach(({ section, splash, card }) => {
+        if (!section || !splash || !card) return;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.2,
+          },
+        });
+
+        // 0–30%  : splash holds static (drama/pause)
+        // 30–100%: card iris expands from center outward over splash
+        tl.fromTo(card,
+          { clipPath: 'circle(0% at 50% 50%)' },
+          { clipPath: 'circle(150% at 50% 50%)', ease: 'power2.inOut' },
+          0.30
+        );
       });
 
       gsap.utils.toArray('.proof-point').forEach((el) => {
@@ -388,91 +408,7 @@ const Services = () => {
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
     }, heroRef);
-
-    // ── Tier iris wipe + step cascade — plain setTimeout, no nested context ──
-    const outerSTs = [];
-
-    const timerID = setTimeout(() => {
-
-      // Tier iris wipes
-      tierRefs.current.forEach(({ section, splash, card }) => {
-        if (!section || !splash || !card) return;
-
-        gsap.set(card, { clipPath: 'circle(0% at 50% 50%)', overflow: 'hidden' });
-
-        const tl = gsap.timeline({
-          onComplete: () => { card.style.overflow = 'auto'; },
-        });
-
-        tl.fromTo(card,
-          { clipPath: 'circle(0% at 50% 50%)' },
-          { clipPath: 'circle(142% at 50% 50%)', ease: 'power2.inOut' },
-          0.35
-        );
-
-        const st = ScrollTrigger.create({
-          trigger: section,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 1.2,
-          animation: tl,
-          onLeaveBack: () => { card.style.overflow = 'hidden'; },
-        });
-
-        outerSTs.push(st);
-      });
-
-      // Process steps — sticky 4-across grid, each card fires at its own scroll depth
-      // Wrapper is 600vh tall, sticky inner holds cards in view
-      // Each card fires when the wrapper scroll progress hits its threshold
-      // Dead scroll gap between cards = distance between thresholds
-      const stepWrapper = document.querySelector('[data-step-wrapper]');
-      const stepCards   = Array.from(document.querySelectorAll('[data-step-card]'));
-
-      if (stepWrapper && stepCards.length === 4) {
-
-        // All cards start off-screen left
-        stepCards.forEach((card, i) => {
-          gsap.set(card, { x: `${-140 - i * 25}vw`, opacity: 0, scale: 0.78 + i * 0.055 });
-        });
-
-        // Fire each card at a different scroll progress point on the wrapper
-        // 0–16%: dead scroll entering section
-        // 17%: card 1 fires  |  33%: card 2  |  50%: card 3  |  67%: card 4
-        // remaining scroll = read time after last card lands
-        const thresholds = [ 0.17, 0.33, 0.50, 0.67 ];
-        const totalVh = 600;
-
-        stepCards.forEach((card, i) => {
-          const startX     = `${-140 - i * 25}vw`;
-          const animDur    = 0.7 + i * 0.18;
-          const startScale = 0.78 + i * 0.055;
-          const triggerPct = thresholds[i];
-
-          // Each card gets its own ScrollTrigger keyed to wrapper scroll progress
-          const st = ScrollTrigger.create({
-            trigger: stepWrapper,
-            start: `top+=${triggerPct * totalVh}vh top`,
-            onEnter: () => {
-              gsap.to(card, { x: 0, opacity: 1, scale: 1, duration: animDur, ease: 'power3.out' });
-            },
-            onLeaveBack: () => {
-              gsap.to(card, { x: startX, opacity: 0, scale: startScale, duration: 0.35, ease: 'power2.in' });
-            },
-          });
-
-          outerSTs.push(st);
-        });
-      }
-
-      ScrollTrigger.refresh();
-    }, 100);
-
-    return () => {
-      clearTimeout(timerID);
-      outerSTs.forEach(st => st.kill());
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
 
@@ -603,7 +539,7 @@ const Services = () => {
         </div>
       </section>
 
-      <section id="tiers" className="relative z-10 bg-black py-8" style={{ isolation: 'isolate', overflow: 'hidden' }}>
+      <section id="tiers" className="relative z-10 bg-black py-8">
         <div className="container mx-auto px-4 text-center mb-16">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-4">Web Design and Development</p>
           <h2 className="text-4xl md:text-6xl font-black text-white">Choose Your <span className="bg-gradient-to-r from-emerald-400 to-violet-400 bg-clip-text text-transparent">Performance Level</span></h2>
@@ -613,15 +549,15 @@ const Services = () => {
             key={tier.id}
             ref={el => { if (el) tierRefs.current[i].section = el; }}
             className="relative bg-black"
-            style={{ height: `${tier.scrollVh}vh` }}
+            style={{ height: '350vh' }}
           >
             <div className="sticky top-[50px] overflow-visible bg-black" style={{ height: 'calc(100vh - 50px)' }}>
 
-              {/* Card — clipped to zero by GSAP on mount, iris expands outward over splash */}
+              {/* Card — starts clipped to zero, iris expands outward over splash */}
               <div
                 ref={el => { if (el) tierRefs.current[i].card = el; }}
-                className="absolute inset-0 z-20 bg-black"
-                style={{ overflow: 'hidden' }}
+                className="absolute inset-0 z-20 overflow-y-auto bg-black"
+                style={{ clipPath: 'circle(0% at 50% 50%)' }}
               >
                 <div className="container mx-auto px-4 max-w-4xl py-16">
                   <TierCard tier={tier} />
@@ -654,40 +590,23 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Step header — static, sits above the pinned card sections */}
-      <section ref={stepSectionRef} className="relative z-10 bg-slate-900 py-24">
-        <div className="container mx-auto px-4 text-center max-w-3xl">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">From First Call to <span className="text-cyan-400">Launch</span></h2>
-          <p className="text-lg text-slate-300">No retainers to start. No commitments before the proposal. You know exactly what you are buying before you spend a dollar.</p>
-        </div>
-      </section>
-
-      {/* Step cards — 4-across grid, each slides in from left on its own scroll depth */}
-      <section
-        data-step-wrapper
-        className="relative z-10 bg-slate-900 overflow-hidden"
-        style={{ height: '600vh' }}
-      >
-        <div className="sticky top-[50px] flex items-center" style={{ height: 'calc(100vh - 50px)' }}>
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-              {processSteps.map((s, i) => (
-                <div
-                  key={s.step}
-                  data-step-card={i}
-                  className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors"
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
-                      <s.icon className="w-6 h-6" />
-                    </div>
-                    <span className="text-3xl font-bold text-slate-700">{s.step}</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
-                  <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
+      <section className="relative z-10 py-24 bg-slate-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">From First Call to <span className="text-cyan-400">Launch</span></h2>
+            <p className="text-lg text-slate-300">No retainers to start. No commitments before the proposal. You know exactly what you are buying before you spend a dollar.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {processSteps.map((s) => (
+              <div key={s.step} className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center"><s.icon className="w-6 h-6" /></div>
+                  <span className="text-3xl font-bold text-slate-700">{s.step}</span>
                 </div>
-              ))}
-            </div>
+                <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
+                <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
