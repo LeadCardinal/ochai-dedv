@@ -409,7 +409,11 @@ const Services = () => {
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
     }, heroRef);
 
-    // ── Step cards — slide in L→R one at a time, accumulate in grid ──
+    // ── Step cards ──
+    // Section is pinned by ScrollTrigger for its full scroll budget.
+    // One scrubbed timeline — cards enter one at a time with large gaps between.
+    // Cards never leave once they arrive. All 4 sit together at the end.
+    // Pin releases naturally when scroll budget is exhausted.
     const outerSTs = [];
     const timerID  = setTimeout(() => {
 
@@ -418,31 +422,51 @@ const Services = () => {
 
       if (stepsOuter && stepCards.length === 4) {
 
+        // All cards start off-screen left
         stepCards.forEach((card, i) => {
-          gsap.set(card, { x: `${-110 - i * 20}vw`, opacity: 0 });
+          gsap.set(card, { x: `${-120 - i * 20}vw`, opacity: 0 });
         });
 
-        // Fires at 100vh, 300vh, 500vh, 700vh into the 1200vh outer section
-        // Cards fire AFTER sticky lock — start keyed to 50px (navbar height)
-        // 200vh of dead scroll before card 1, 250vh between each subsequent card
-        // Triggers: 200, 450, 700, 950 into 1200vh section
-        // 250vh sit-and-read after card 4 before section releases
-        const triggerVh = [200, 450, 700, 950];
+        // Timeline: 5 acts
+        // 0–10%   : dead scroll — section locks, heading settles
+        // 10–22%  : card 1 slides in
+        // 22–35%  : hold — read card 1
+        // 35–47%  : card 2 slides in
+        // 47–57%  : hold
+        // 57–69%  : card 3 slides in
+        // 69–79%  : hold
+        // 79–91%  : card 4 slides in
+        // 91–100% : hold — all 4 visible together, then pin releases
+        const tl = gsap.timeline();
+
+        const entries = [
+          { start: 0.10, end: 0.22 },
+          { start: 0.35, end: 0.47 },
+          { start: 0.57, end: 0.69 },
+          { start: 0.79, end: 0.91 },
+        ];
 
         stepCards.forEach((card, i) => {
-          const startX  = `${-110 - i * 20}vw`;
-          const animDur = 1.6 + i * 0.3;   // 1.6, 1.9, 2.2, 2.5s
-
-          const st = ScrollTrigger.create({
-            trigger: stepsOuter,
-            start: `top+=${triggerVh[i]}vh 50px`,
-            onEnter:     () => gsap.to(card, { x: 0,      opacity: 1, duration: animDur, ease: 'power2.out' }),
-            onLeaveBack: () => gsap.to(card, { x: startX, opacity: 0, duration: 0.5,     ease: 'power2.in'  }),
-          });
-
-          outerSTs.push(st);
+          const startX = `${-120 - i * 20}vw`;
+          tl.fromTo(card,
+            { x: startX, opacity: 0 },
+            { x: 0, opacity: 1, ease: 'power2.out', immediateRender: false },
+            entries[i].start
+          );
         });
 
+        const pinST = ScrollTrigger.create({
+          trigger: stepsOuter,
+          start: 'top 50px',
+          end: '+=2000px',
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
+          scrub: 2,
+          animation: tl,
+        });
+
+        outerSTs.push(pinST);
         ScrollTrigger.refresh();
       }
 
@@ -635,9 +659,8 @@ const Services = () => {
       </section>
 
       {/* Steps — 600vh sticky section. Header always in view. Cards slide in L→R one at a time. */}
-      <section data-steps-outer className="relative z-10 bg-slate-900 overflow-x-hidden" style={{ height: '1200vh' }}>
-        <div className="sticky top-[50px] overflow-hidden" style={{ height: 'calc(100vh - 50px)' }}>
-          <div className="flex flex-col justify-center h-full px-4">
+      <section data-steps-outer className="relative z-10 bg-slate-900 overflow-x-hidden">
+        <div className="flex flex-col justify-center min-h-screen px-4">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">From First Call to <span className="text-cyan-400">Launch</span></h2>
               <p className="text-lg text-slate-300">No retainers to start. No commitments before the proposal. You know exactly what you are buying before you spend a dollar.</p>
