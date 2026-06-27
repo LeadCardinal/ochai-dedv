@@ -695,10 +695,12 @@ const Services = () => {
           <p className="text-lg text-slate-300 mb-10">Worst case, you walk away with a clearer picture of what your project needs. Best case, you get a fixed-price proposal and a builder who answers his own phone.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
+              data-cta-left
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-lg transition-all shadow-lg">
               <CalendarDays className="w-5 h-5" /> Schedule at cal.com
             </a>
             <a href={EMAIL_URL}
+              data-cta-right
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors">
               <Mail className="w-5 h-5" /> jeremy@ochai.dev
             </a>
