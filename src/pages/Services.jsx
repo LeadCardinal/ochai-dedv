@@ -117,7 +117,7 @@ const processSteps = [
 
 const tiers = [
   {
-    id: 'quartet', splash: ASSETS.quartet, splashAlt: 'The Quartet', name: 'The Quartet', emoji: '🎻',
+    id: 'quartet', splash: ASSETS.quartet, splashMobile: ASSETS.quartetMobile, splashAlt: 'The Quartet', name: 'The Quartet', emoji: '🎻',
     price: 'Starting at $2,500', tagline: 'A complete, professional web presence — nothing missing, nothing wasted.',
     coverage: '40%', coverageLabel: 'of your conversion architecture',
     color: 'from-emerald-400 to-cyan-400', borderColor: 'border-emerald-500/40', glowColor: 'shadow-emerald-500/10',
@@ -133,7 +133,7 @@ const tiers = [
     addOns: 'E-commerce, blog/CMS, booking integration, additional content pages',
   },
   {
-    id: 'ensemble', splash: ASSETS.ensemble, splashAlt: 'The Ensemble', name: 'The Ensemble', emoji: '🎺',
+    id: 'ensemble', splash: ASSETS.ensemble, splashMobile: ASSETS.ensembleMobile, splashAlt: 'The Ensemble', name: 'The Ensemble', emoji: '🎺',
     price: 'Starting at $5,500', tagline: 'More moving parts. More reach. Built for businesses that need their site to do real work.',
     coverage: '70%', coverageLabel: 'of your conversion architecture',
     color: 'from-cyan-400 to-blue-400', borderColor: 'border-cyan-500/40', glowColor: 'shadow-cyan-500/10',
@@ -150,7 +150,7 @@ const tiers = [
     addOns: 'E-commerce, advanced schema, monthly SEO retainer, Cloudflare edge maintenance',
   },
   {
-    id: 'symphony', splash: ASSETS.symphony, splashAlt: 'The Symphony', name: 'The Symphony', emoji: '🎼',
+    id: 'symphony', splash: ASSETS.symphony, splashMobile: ASSETS.symphonyMobile, splashAlt: 'The Symphony', name: 'The Symphony', emoji: '🎼',
     price: 'Starting at $12,000', tagline: 'Full orchestration. Every instrument in its place. Built to perform.',
     coverage: null, coverageLabel: 'Full coverage. All instruments playing.',
     color: 'from-violet-400 to-fuchsia-400', borderColor: 'border-violet-500/40', glowColor: 'shadow-violet-500/20',
@@ -578,22 +578,28 @@ const Services = () => {
 
           {/* Layer 1 — acronym (behind) — full-screen, revealed when ship slides right */}
           <div ref={acronymRef} className="absolute inset-0 z-10 w-full h-full">
-            <img
-              src={ASSETS.acronymLogo}
-              alt="OchAI — Oniony. Authoritative. Deliberate."
-              className="w-full h-full object-contain"
-              style={{ display: 'block' }}
-            />
+            <picture>
+              <source srcSet={ASSETS.acronymMobile} media="(max-width: 768px)" type="image/avif" />
+              <img
+                src={ASSETS.acronymLogo}
+                alt="OchAI — Oniony. Authoritative. Deliberate."
+                className="w-full h-full object-contain"
+                style={{ display: 'block' }}
+              />
+            </picture>
           </div>
 
           {/* Layer 2 — ship-logo (front) — static full-screen, exits right on scroll */}
           <div ref={shipLogoRef} className="absolute inset-0 z-20 w-full h-full" style={{ willChange: 'transform' }}>
-            <img
-              src={ASSETS.shipLogo}
-              alt="OchAI — Input. Process. Output."
-              className="w-full h-full object-contain"
-              style={{ display: 'block' }}
-            />
+            <picture>
+              <source srcSet={ASSETS.logoMobile} media="(max-width: 768px)" type="image/avif" />
+              <img
+                src={ASSETS.shipLogo}
+                alt="OchAI — Input. Process. Output."
+                className="w-full h-full object-contain"
+                style={{ display: 'block' }}
+              />
+            </picture>
           </div>
 
         </div>
