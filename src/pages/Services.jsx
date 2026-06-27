@@ -422,56 +422,34 @@ const Services = () => {
         outerSTs.push(st);
       });
 
-      // Process steps — pinned section, scrubbed timeline with dead-scroll gaps
-      // Section pins for full duration. Cards enter one at a time with read gaps between.
-      // Each card travels further left and takes longer — distance illusion card 1→4.
-      const stepWrapper = document.querySelector('[data-step-wrapper]');
-      const stepCards   = Array.from(document.querySelectorAll('[data-step-card]'));
+      // Process steps — viewport entry fires each card independently
+      // Cards stacked vertically so only one is in view at a time
+      // Dead scroll between them = natural gap from mb-[40vh] spacing
+      // Travel distance + duration grow card 1→4 (distance illusion)
+      const stepCards = Array.from(document.querySelectorAll('[data-step-card]'));
 
-      if (stepWrapper && stepCards.length === 4) {
+      stepCards.forEach((card, i) => {
+        if (!card) return;
 
-        // Set all cards off-screen left before anything runs
-        stepCards.forEach((card, i) => {
-          gsap.set(card, { x: `${-130 - i * 25}vw`, opacity: 0, scale: 0.78 + i * 0.055 });
+        const startX  = `${-130 - i * 25}vw`;
+        const animDur = 0.7 + i * 0.18;
+        const startScale = 0.78 + i * 0.055;
+
+        gsap.set(card, { x: startX, opacity: 0, scale: startScale });
+
+        const st = ScrollTrigger.create({
+          trigger: card,
+          start: 'top 75%',
+          onEnter: () => {
+            gsap.to(card, { x: 0, opacity: 1, scale: 1, duration: animDur, ease: 'power3.out' });
+          },
+          onLeaveBack: () => {
+            gsap.to(card, { x: startX, opacity: 0, scale: startScale, duration: 0.35, ease: 'power2.in' });
+          },
         });
 
-        // Total scroll budget:
-        // Each card gets ~15% of timeline to animate in
-        // Each gap (dead scroll) is ~10% between cards
-        // Layout: [gap 5%] [card1 15%] [gap 10%] [card2 15%] [gap 10%] [card3 15%] [gap 10%] [card4 15%] [tail 5%]
-        const totalVh = 600;
-        const tl = gsap.timeline();
-
-        const slots = [
-          { start: 0.05, end: 0.20 },
-          { start: 0.30, end: 0.45 },
-          { start: 0.55, end: 0.70 },
-          { start: 0.80, end: 0.95 },
-        ];
-
-        stepCards.forEach((card, i) => {
-          const { start, end } = slots[i];
-          const startX = `${-130 - i * 25}vw`;
-          tl.fromTo(card,
-            { x: startX, opacity: 0, scale: 0.78 + i * 0.055 },
-            { x: 0, opacity: 1, scale: 1, ease: 'power3.out', duration: end - start },
-            start
-          );
-        });
-
-        const pinST = ScrollTrigger.create({
-          trigger: stepWrapper,
-          start: 'top 50px',
-          end: `+=${totalVh}vh`,
-          pin: true,
-          pinSpacing: true,
-          anticipatePin: 1,
-          scrub: 1.5,
-          animation: tl,
-        });
-
-        outerSTs.push(pinST);
-      }
+        outerSTs.push(st);
+      });
 
       ScrollTrigger.refresh();
     }, 100);
@@ -670,27 +648,25 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Step cards — single pinned wrapper, grid layout, cards animate in via scrubbed timeline */}
-      <div data-step-wrapper className="relative z-10 bg-slate-900 overflow-hidden">
-        <div className="container mx-auto px-4 py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {processSteps.map((s, i) => (
-              <div
-                key={s.step}
-                data-step-card={i}
-                className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors"
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
-                    <s.icon className="w-6 h-6" />
-                  </div>
-                  <span className="text-3xl font-bold text-slate-700">{s.step}</span>
+      {/* Step cards — stacked vertically, large gap between each so only one fires at a time */}
+      <div className="relative z-10 bg-slate-900 overflow-x-hidden">
+        <div className="container mx-auto px-4 max-w-2xl">
+          {processSteps.map((s, i) => (
+            <div
+              key={s.step}
+              data-step-card={i}
+              className={`p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors${i < processSteps.length - 1 ? ' mb-[50vh]' : ' mb-24'}`}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
+                  <s.icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
-                <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
+                <span className="text-3xl font-bold text-slate-700">{s.step}</span>
               </div>
-            ))}
-          </div>
+              <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
+              <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
+            </div>
+          ))}
         </div>
       </div>
 
