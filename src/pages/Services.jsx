@@ -423,19 +423,21 @@ const Services = () => {
         });
 
         // Fires at 100vh, 300vh, 500vh, 700vh into the 1200vh outer section
-        // ~200vh dead scroll between each = comfortable read time
-        // 500vh of dead scroll after card 4 lands before section exits
-        const triggerVh = [100, 300, 500, 700];
+        // Cards fire AFTER sticky lock — start keyed to 50px (navbar height)
+        // 200vh of dead scroll before card 1, 250vh between each subsequent card
+        // Triggers: 200, 450, 700, 950 into 1200vh section
+        // 250vh sit-and-read after card 4 before section releases
+        const triggerVh = [200, 450, 700, 950];
 
         stepCards.forEach((card, i) => {
           const startX  = `${-110 - i * 20}vw`;
-          const animDur = 1.2 + i * 0.25;
+          const animDur = 1.6 + i * 0.3;   // 1.6, 1.9, 2.2, 2.5s
 
           const st = ScrollTrigger.create({
             trigger: stepsOuter,
-            start: `top+=${triggerVh[i]}vh top`,
-            onEnter:     () => gsap.to(card, { x: 0,       opacity: 1, duration: animDur, ease: 'power3.out' }),
-            onLeaveBack: () => gsap.to(card, { x: startX,  opacity: 0, duration: 0.3,     ease: 'power2.in'  }),
+            start: `top+=${triggerVh[i]}vh 50px`,
+            onEnter:     () => gsap.to(card, { x: 0,      opacity: 1, duration: animDur, ease: 'power2.out' }),
+            onLeaveBack: () => gsap.to(card, { x: startX, opacity: 0, duration: 0.5,     ease: 'power2.in'  }),
           });
 
           outerSTs.push(st);
