@@ -25,14 +25,22 @@ const ASSETS = {
   accessibility: '/images/parallax/accessibility.svg',
   bestPractices: '/images/parallax/best-practices.svg',
   seo:           '/images/parallax/seo.svg',
-  earthAvif:     '/images/parallax/earth.avif',
-  earthWebm:     '/images/parallax/earth.webm',
+  earthAvif:        '/images/parallax/earth.avif',
+  earthWebm:        '/images/parallax/earth.webm',
+  earthMobileAvif:  '/earth-mobile.avif',
+  earthMobileMp4:   '/earth-mobile.mp4',
+  earthMobileWebm:  '/videos/hero_mobile.webm',
+  logoMobile:       '/logo-mobile.avif',
+  acronymMobile:    '/acronym-mobile.avif',
   ai:            '/images/parallax/ai.svg',
   shipLogo:      '/images/parallax/ship-logo.svg',
   acronymLogo:   '/images/parallax/acronym-after-logo2.svg',
-  quartet:       '/images/parallax/thequartet2.svg',
-  ensemble:      '/images/parallax/theensemble2.svg',
-  symphony:      '/images/parallax/thesymphony2.svg',
+  quartet:          '/images/parallax/thequartet2.svg',
+  ensemble:         '/images/parallax/theensemble2.svg',
+  symphony:         '/images/parallax/thesymphony2.svg',
+  quartetMobile:    '/thequartet-mobile.avif',
+  ensembleMobile:   '/ensemble-mobile.avif',
+  symphonyMobile:   '/symphony-mobile.avif',
 };
 
 const applauseAudio = typeof window !== 'undefined' ? new Audio('/audio/applause.mp3') : null;
@@ -496,8 +504,17 @@ const Services = () => {
       </Helmet>
 
       <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
-        <video autoPlay loop muted playsInline poster={ASSETS.earthAvif} className="w-full h-full object-contain">
-          <source src={ASSETS.earthWebm} type="video/webm" />
+        <picture className="w-full h-full" style={{ display: 'contents' }}>
+          {/* Mobile poster swap */}
+        </picture>
+        <video
+          autoPlay loop muted playsInline
+          poster={ASSETS.earthAvif}
+          className="w-full h-full object-contain"
+        >
+          <source src={ASSETS.earthMobileWebm} type="video/webm" media="(max-width: 768px)" />
+          <source src={ASSETS.earthMobileMp4}  type="video/mp4"  media="(max-width: 768px)" />
+          <source src={ASSETS.earthWebm}        type="video/webm" />
           <img src={ASSETS.earthAvif} alt="Earth from space" className="w-full h-full object-contain" />
         </video>
       </div>
