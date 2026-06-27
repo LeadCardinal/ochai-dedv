@@ -408,7 +408,48 @@ const Services = () => {
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
     }, heroRef);
-    return () => ctx.revert();
+
+    // ── Step cards — slide in L→R one at a time, accumulate in grid ──
+    const outerSTs = [];
+    const timerID  = setTimeout(() => {
+
+      const stepsOuter = document.querySelector('[data-steps-outer]');
+      const stepCards  = Array.from(document.querySelectorAll('[data-step-card]'));
+
+      if (stepsOuter && stepCards.length === 4) {
+
+        stepCards.forEach((card, i) => {
+          gsap.set(card, { x: `${-110 - i * 20}vw`, opacity: 0 });
+        });
+
+        // Fires at 50vh, 150vh, 250vh, 350vh into the 600vh outer section
+        // ~100vh dead scroll between each = read time
+        const triggerVh = [50, 150, 250, 350];
+
+        stepCards.forEach((card, i) => {
+          const startX  = `${-110 - i * 20}vw`;
+          const animDur = 0.65 + i * 0.15;
+
+          const st = ScrollTrigger.create({
+            trigger: stepsOuter,
+            start: `top+=${triggerVh[i]}vh top`,
+            onEnter:     () => gsap.to(card, { x: 0,       opacity: 1, duration: animDur, ease: 'power3.out' }),
+            onLeaveBack: () => gsap.to(card, { x: startX,  opacity: 0, duration: 0.3,     ease: 'power2.in'  }),
+          });
+
+          outerSTs.push(st);
+        });
+
+        ScrollTrigger.refresh();
+      }
+
+    }, 150);
+
+    return () => {
+      clearTimeout(timerID);
+      outerSTs.forEach(st => st.kill());
+      ctx.revert();
+    };
   }, []);
 
 
