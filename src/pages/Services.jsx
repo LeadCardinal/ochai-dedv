@@ -335,12 +335,13 @@ const Services = () => {
           onComplete: () => { card.style.overflow = 'auto'; },
         });
 
-        // 0–30%  : splash holds static (drama/pause)
-        // 30–100%: card iris expands from center outward over splash
+        // 0–35%  : splash holds static (drama/pause — longer hold before wipe)
+        // 35–85% : card iris expands from center outward — wipe completes at 85%
+        // 85–100%: card sits fully revealed, section scrolls away cleanly
         tl.fromTo(card,
           { clipPath: 'circle(0% at 50% 50%)' },
-          { clipPath: 'circle(150% at 50% 50%)', ease: 'power2.inOut' },
-          0.30
+          { clipPath: 'circle(142% at 50% 50%)', ease: 'power2.inOut' },
+          0.35
         );
       });
 
@@ -611,7 +612,7 @@ const Services = () => {
             key={tier.id}
             ref={el => { if (el) tierRefs.current[i].section = el; }}
             className="relative bg-black"
-            style={{ height: '350vh' }}
+            style={{ height: '450vh' }}
           >
             <div className="sticky top-[50px] overflow-visible bg-black" style={{ height: 'calc(100vh - 50px)' }}>
 
