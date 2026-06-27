@@ -422,13 +422,14 @@ const Services = () => {
           gsap.set(card, { x: `${-110 - i * 20}vw`, opacity: 0 });
         });
 
-        // Fires at 50vh, 150vh, 250vh, 350vh into the 600vh outer section
-        // ~100vh dead scroll between each = read time
-        const triggerVh = [50, 150, 250, 350];
+        // Fires at 100vh, 300vh, 500vh, 700vh into the 1200vh outer section
+        // ~200vh dead scroll between each = comfortable read time
+        // 500vh of dead scroll after card 4 lands before section exits
+        const triggerVh = [100, 300, 500, 700];
 
         stepCards.forEach((card, i) => {
           const startX  = `${-110 - i * 20}vw`;
-          const animDur = 0.65 + i * 0.15;
+          const animDur = 1.2 + i * 0.25;
 
           const st = ScrollTrigger.create({
             trigger: stepsOuter,
@@ -632,7 +633,7 @@ const Services = () => {
       </section>
 
       {/* Steps — 600vh sticky section. Header always in view. Cards slide in L→R one at a time. */}
-      <section data-steps-outer className="relative z-10 bg-slate-900 overflow-x-hidden" style={{ height: '600vh' }}>
+      <section data-steps-outer className="relative z-10 bg-slate-900 overflow-x-hidden" style={{ height: '1200vh' }}>
         <div className="sticky top-[50px] overflow-hidden" style={{ height: 'calc(100vh - 50px)' }}>
           <div className="flex flex-col justify-center h-full px-4">
             <div className="text-center max-w-3xl mx-auto mb-16">
