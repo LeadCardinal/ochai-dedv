@@ -422,54 +422,56 @@ const Services = () => {
         outerSTs.push(st);
       });
 
-      // Process steps — pin section, animate inner card independently
-      // Section pins to hold the viewport; card slides in from left within it
-      // Navbar is 50px — start offset accounts for it
-      const stepSections = Array.from(document.querySelectorAll('[data-step-section]'));
-      const stepCards    = Array.from(document.querySelectorAll('[data-step-card]'));
+      // Process steps — pinned section, scrubbed timeline with dead-scroll gaps
+      // Section pins for full duration. Cards enter one at a time with read gaps between.
+      // Each card travels further left and takes longer — distance illusion card 1→4.
+      const stepWrapper = document.querySelector('[data-step-wrapper]');
+      const stepCards   = Array.from(document.querySelectorAll('[data-step-card]'));
 
-      stepCards.forEach((card, i) => {
-        const section = stepSections[i];
-        if (!card || !section) return;
+      if (stepWrapper && stepCards.length === 4) {
 
-        const startX  = `${-130 - i * 20}vw`;
-        const animDur = 0.8 + i * 0.2;
-        const holdVh  = 200 + i * 20;
+        // Set all cards off-screen left before anything runs
+        stepCards.forEach((card, i) => {
+          gsap.set(card, { x: `${-130 - i * 25}vw`, opacity: 0, scale: 0.78 + i * 0.055 });
+        });
 
-        // Set card off-screen immediately — GSAP owns position
-        gsap.set(card, { x: startX, opacity: 0, scale: 0.78 + i * 0.055, clearProps: 'none' });
+        // Total scroll budget:
+        // Each card gets ~15% of timeline to animate in
+        // Each gap (dead scroll) is ~10% between cards
+        // Layout: [gap 5%] [card1 15%] [gap 10%] [card2 15%] [gap 10%] [card3 15%] [gap 10%] [card4 15%] [tail 5%]
+        const totalVh = 600;
+        const tl = gsap.timeline();
 
-        // Pin the section container — no transform applied to section itself
+        const slots = [
+          { start: 0.05, end: 0.20 },
+          { start: 0.30, end: 0.45 },
+          { start: 0.55, end: 0.70 },
+          { start: 0.80, end: 0.95 },
+        ];
+
+        stepCards.forEach((card, i) => {
+          const { start, end } = slots[i];
+          const startX = `${-130 - i * 25}vw`;
+          tl.fromTo(card,
+            { x: startX, opacity: 0, scale: 0.78 + i * 0.055 },
+            { x: 0, opacity: 1, scale: 1, ease: 'power3.out', duration: end - start },
+            start
+          );
+        });
+
         const pinST = ScrollTrigger.create({
-          trigger: section,
+          trigger: stepWrapper,
           start: 'top 50px',
-          end: `+=${holdVh}vh`,
-          pin: section,
+          end: `+=${totalVh}vh`,
+          pin: true,
           pinSpacing: true,
           anticipatePin: 1,
+          scrub: 1.5,
+          animation: tl,
         });
 
-        // Separate ScrollTrigger fires card animation on entry — no pin conflict
-        const enterST = ScrollTrigger.create({
-          trigger: section,
-          start: 'top 50px',
-          toggleActions: 'play none none reverse',
-          onEnter: () => {
-            gsap.to(card, {
-              x: '0vw', opacity: 1, scale: 1,
-              duration: animDur, ease: 'power3.out',
-            });
-          },
-          onLeaveBack: () => {
-            gsap.to(card, {
-              x: startX, opacity: 0, scale: 0.78 + i * 0.055,
-              duration: 0.35, ease: 'power2.in',
-            });
-          },
-        });
-
-        outerSTs.push(pinST, enterST);
-      });
+        outerSTs.push(pinST);
+      }
 
       ScrollTrigger.refresh();
     }, 100);
@@ -668,31 +670,29 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Step cards — each in its own pinned section, fires on independent scroll depth */}
-      {processSteps.map((s, i) => (
-        <section
-          key={s.step}
-          ref={el => { stepSectionRefs.current[i] = el; }}
-          data-step-section={i}
-          className="relative z-10 bg-slate-900 overflow-hidden flex items-center justify-center"
-          style={{ minHeight: '100vh' }}
-        >
-          <div
-            ref={el => { stepRefs.current[i] = el; }}
-            data-step-card={i}
-            className="w-full max-w-xl mx-auto px-6 p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <div className="w-14 h-14 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
-                <s.icon className="w-7 h-7" />
+      {/* Step cards — single pinned wrapper, grid layout, cards animate in via scrubbed timeline */}
+      <div data-step-wrapper className="relative z-10 bg-slate-900 overflow-hidden">
+        <div className="container mx-auto px-4 py-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {processSteps.map((s, i) => (
+              <div
+                key={s.step}
+                data-step-card={i}
+                className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
+                    <s.icon className="w-6 h-6" />
+                  </div>
+                  <span className="text-3xl font-bold text-slate-700">{s.step}</span>
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
+                <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
               </div>
-              <span className="text-5xl font-bold text-slate-700">{s.step}</span>
-            </div>
-            <h3 className="text-2xl font-bold mb-4 text-white">{s.title}</h3>
-            <p className="text-slate-300 text-base leading-relaxed">{s.text}</p>
+            ))}
           </div>
-        </section>
-      ))}
+        </div>
+      </div>
 
       <section className="relative z-10 py-16 bg-slate-950 border-y border-slate-800">
         <div className="container mx-auto px-4 max-w-3xl text-center">
