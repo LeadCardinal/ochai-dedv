@@ -422,7 +422,9 @@ const Services = () => {
         outerSTs.push(st);
       });
 
-      // Process steps — DOM query by data-step attribute, no ref dependency
+      // Process steps — pin section, animate inner card independently
+      // Section pins to hold the viewport; card slides in from left within it
+      // Navbar is 50px — start offset accounts for it
       const stepSections = Array.from(document.querySelectorAll('[data-step-section]'));
       const stepCards    = Array.from(document.querySelectorAll('[data-step-card]'));
 
@@ -432,17 +434,26 @@ const Services = () => {
 
         const startX  = `${-130 - i * 20}vw`;
         const animDur = 0.8 + i * 0.2;
-        const holdVh  = 180 + i * 20;
+        const holdVh  = 200 + i * 20;
 
-        gsap.set(card, { x: startX, opacity: 0, scale: 0.78 + i * 0.055 });
+        // Set card off-screen immediately — GSAP owns position
+        gsap.set(card, { x: startX, opacity: 0, scale: 0.78 + i * 0.055, clearProps: 'none' });
 
+        // Pin the section container — no transform applied to section itself
         const pinST = ScrollTrigger.create({
           trigger: section,
-          start: 'top top',
+          start: 'top 50px',
           end: `+=${holdVh}vh`,
-          pin: true,
+          pin: section,
           pinSpacing: true,
           anticipatePin: 1,
+        });
+
+        // Separate ScrollTrigger fires card animation on entry — no pin conflict
+        const enterST = ScrollTrigger.create({
+          trigger: section,
+          start: 'top 50px',
+          toggleActions: 'play none none reverse',
           onEnter: () => {
             gsap.to(card, {
               x: '0vw', opacity: 1, scale: 1,
@@ -457,7 +468,7 @@ const Services = () => {
           },
         });
 
-        outerSTs.push(pinST);
+        outerSTs.push(pinST, enterST);
       });
 
       ScrollTrigger.refresh();
