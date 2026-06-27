@@ -35,29 +35,13 @@ const ASSETS = {
   symphony:      '/images/parallax/thesymphony2.svg',
 };
 
+const applauseAudio = typeof window !== 'undefined' ? new Audio('/audio/applause.mp3') : null;
+
 function playApplause() {
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const duration = 2.5;
-    const bufferSize = ctx.sampleRate * duration;
-    const buffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
-    for (let c = 0; c < 2; c++) {
-      const data = buffer.getChannelData(c);
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = (Math.random() * 2 - 1) * Math.pow(Math.sin(i / bufferSize * Math.PI), 0.4) * 0.3;
-      }
-    }
-    const source = ctx.createBufferSource();
-    source.buffer = buffer;
-    const gainNode = ctx.createGain();
-    gainNode.gain.setValueAtTime(0, ctx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.3);
-    gainNode.gain.linearRampToValueAtTime(0.8, ctx.currentTime + 0.8);
-    gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
-    source.connect(gainNode);
-    gainNode.connect(ctx.destination);
-    source.start();
-  } catch (e) {}
+  if (!applauseAudio) return;
+  applauseAudio.currentTime = 0;
+  applauseAudio.volume = 0.7;
+  applauseAudio.play().catch(() => {});
 }
 
 const KEYFRAME_CSS = `
@@ -209,6 +193,7 @@ const asteroidDefs = [
     fromX:  '55vw',  fromY:  '60vh',
     exitX: '-50vw',  exitY: '-25vh', scrub: 0.45, scaleFrom: 1, scaleTo: 2.0 },
 
+
   // seo — enters center-left (nudged up from 65), grows 0.5→1 as it rises up-right
   { src: 'seo',           size: 210, top: 48, left: 38, z: 28,
     fromX: '-60vw',  fromY:  '55vh',
@@ -224,10 +209,6 @@ const asteroidDefs = [
     fromX:  '58vw',  fromY:  '20vh',
     exitX: '-52vw',  exitY:  '65vh', scrub: 0.6  },
 
-  // asteroid3 — enters bottom-right, travels up-left at steep angle
-  { src: 'asteroid3',     size: 260, top: 58, left: 30, z: 18,
-    fromX:  '60vw',  fromY:  '70vh',
-    exitX: '-55vw',  exitY: '-30vh', scrub: 0.5, scaleFrom: 0.7, scaleTo: 1 },
 
   // asteroid4 — drops down-left, slight overshoot scale 0.7→1.1
   { src: 'asteroid4',     size: 195, top:  6, left: 50, z: 10,
