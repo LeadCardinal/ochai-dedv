@@ -631,23 +631,30 @@ const Services = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-24 bg-slate-900">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">From First Call to <span className="text-cyan-400">Launch</span></h2>
-            <p className="text-lg text-slate-300">No retainers to start. No commitments before the proposal. You know exactly what you are buying before you spend a dollar.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {processSteps.map((s) => (
-              <div key={s.step} className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center"><s.icon className="w-6 h-6" /></div>
-                  <span className="text-3xl font-bold text-slate-700">{s.step}</span>
+      {/* Steps — 600vh sticky section. Header always in view. Cards slide in L→R one at a time. */}
+      <section data-steps-outer className="relative z-10 bg-slate-900 overflow-x-hidden" style={{ height: '600vh' }}>
+        <div className="sticky top-[50px] overflow-hidden" style={{ height: 'calc(100vh - 50px)' }}>
+          <div className="flex flex-col justify-center h-full px-4">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">From First Call to <span className="text-cyan-400">Launch</span></h2>
+              <p className="text-lg text-slate-300">No retainers to start. No commitments before the proposal. You know exactly what you are buying before you spend a dollar.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto w-full">
+              {processSteps.map((s, i) => (
+                <div
+                  key={s.step}
+                  data-step-card={i}
+                  className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-12 h-12 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center"><s.icon className="w-6 h-6" /></div>
+                    <span className="text-3xl font-bold text-slate-700">{s.step}</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
-                <p className="text-slate-300 text-sm leading-relaxed">{s.text}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
