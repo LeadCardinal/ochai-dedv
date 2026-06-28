@@ -521,6 +521,7 @@ const Services = () => {
         return (
           <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
             <video
+              key={isMobile ? 'mobile' : 'desktop'}
               autoPlay loop muted playsInline
               poster={isMobile ? ASSETS.earthMobileAvif : ASSETS.earthAvif}
               className="w-full h-full object-contain"
