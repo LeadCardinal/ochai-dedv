@@ -504,7 +504,7 @@ const Services = () => {
       </Helmet>
 
       {(() => {
-        const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+        const isMobile = useMatchMedia('(max-width: 768px)');
         return (
           <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
             <video
@@ -668,7 +668,7 @@ const Services = () => {
                 className="absolute inset-0 z-10 w-full h-full"
               >
                 <img
-                  src={tier.splash}
+                  src={isMobile ? tier.splashMobile : tier.splash}
                   alt={tier.splashAlt}
                   className="w-full h-full object-contain"
                   style={{ display: 'block' }}
