@@ -503,21 +503,28 @@ const Services = () => {
         <style>{KEYFRAME_CSS}</style>
       </Helmet>
 
-      <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
-        <picture className="w-full h-full" style={{ display: 'contents' }}>
-          {/* Mobile poster swap */}
-        </picture>
-        <video
-          autoPlay loop muted playsInline
-          poster={ASSETS.earthAvif}
-          className="w-full h-full object-contain"
-        >
-          <source src={ASSETS.earthMobileWebm} type="video/webm" media="(max-width: 768px)" />
-          <source src={ASSETS.earthMobileMp4}  type="video/mp4"  media="(max-width: 768px)" />
-          <source src={ASSETS.earthWebm}        type="video/webm" />
-          <img src={ASSETS.earthAvif} alt="Earth from space" className="w-full h-full object-contain" />
-        </video>
-      </div>
+      {(() => {
+        const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+        return (
+          <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
+            <video
+              autoPlay loop muted playsInline
+              poster={isMobile ? ASSETS.earthMobileAvif : ASSETS.earthAvif}
+              className="w-full h-full object-contain"
+            >
+              {isMobile ? (
+                <>
+                  <source src={ASSETS.earthMobileWebm} type="video/webm" />
+                  <source src={ASSETS.earthMobileMp4}  type="video/mp4" />
+                </>
+              ) : (
+                <source src={ASSETS.earthWebm} type="video/webm" />
+              )}
+              <img src={isMobile ? ASSETS.earthMobileAvif : ASSETS.earthAvif} alt="Earth from space" className="w-full h-full object-contain" />
+            </video>
+          </div>
+        );
+      })()}
 
       <section ref={heroRef} className="relative min-h-[640vh] bg-transparent">
         <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at center, rgba(10,10,26,0.4) 0%, rgba(0,0,0,0.7) 100%)' }}>
