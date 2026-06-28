@@ -285,6 +285,19 @@ const TierCard = ({ tier }) => (
   </div>
 );
 
+function useMatchMedia(query) {
+  const [matches, setMatches] = React.useState(
+    () => typeof window !== 'undefined' && window.matchMedia(query).matches
+  );
+  React.useEffect(() => {
+    const mql = window.matchMedia(query);
+    const handler = (e) => setMatches(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, [query]);
+  return matches;
+}
+
 const Services = () => {
   const heroRef       = useRef(null);
   const rocketWrapRef = useRef(null);
@@ -297,6 +310,7 @@ const Services = () => {
 
   const everyBuildRef = useRef(null);
   const tierRefs = useRef(tiers.map(() => ({ section: null, splash: null, card: null })));
+  const isMobile = useMatchMedia('(max-width: 768px)');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -504,7 +518,6 @@ const Services = () => {
       </Helmet>
 
       {(() => {
-        const isMobile = useMatchMedia('(max-width: 768px)');
         return (
           <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
             <video
