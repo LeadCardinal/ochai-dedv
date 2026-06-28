@@ -38,9 +38,9 @@ const ASSETS = {
   quartet:          '/images/parallax/thequartet2.svg',
   ensemble:         '/images/parallax/theensemble2.svg',
   symphony:         '/images/parallax/thesymphony2.svg',
-  quartetMobile:    '/thequartet-mobile.avif',
-  ensembleMobile:   '/ensemble-mobile.avif',
-  symphonyMobile:   '/symphony-mobile.avif',
+  quartetMobile:    '/quartet-10802000.avif',
+  ensembleMobile:   '/ensemble-10802000.avif',
+  symphonyMobile:   '/symphony-10802000.avif',
 };
 
 const applauseAudio = typeof window !== 'undefined' ? new Audio('/audio/applause.mp3') : null;
