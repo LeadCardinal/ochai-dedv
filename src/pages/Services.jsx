@@ -48,7 +48,7 @@ const applauseAudio = typeof window !== 'undefined' ? new Audio('/audio/applause
 function playApplause() {
   if (!applauseAudio) return;
   applauseAudio.currentTime = 0;
-  applauseAudio.volume = 0.7;
+  applauseAudio.volume = 0.35;
   applauseAudio.play().catch(() => {});
 }
 
@@ -310,6 +310,10 @@ const Services = () => {
   const acronymRef    = useRef(null);
 
   const everyBuildRef = useRef(null);
+  const ctaRef = useRef(null);
+  const ctaQuoteRef = useRef(null);
+  const ctaLeftRef = useRef(null);
+  const ctaRightRef = useRef(null);
   const tierRefs = useRef(tiers.map(() => ({ section: null, splash: null, card: null })));
   const isMobile = useMatchMedia('(max-width: 768px)');
 
@@ -430,6 +434,26 @@ const Services = () => {
       }
 
       requestAnimationFrame(() => { ScrollTrigger.refresh(); });
+
+      // CTA quote fade-up
+      if (ctaQuoteRef.current) {
+        gsap.to(ctaQuoteRef.current, {
+          opacity: 1, y: 0, ease: 'power2.out',
+          scrollTrigger: { trigger: ctaQuoteRef.current, start: 'top 85%', end: 'top 40%', scrub: 1 },
+        });
+      }
+
+      // CTA buttons slide in
+      if (ctaLeftRef.current && ctaRightRef.current) {
+        gsap.to(ctaLeftRef.current, {
+          x: 0, ease: 'power2.out',
+          scrollTrigger: { trigger: ctaRef.current, start: 'top 75%', end: 'top 30%', scrub: 1 },
+        });
+        gsap.to(ctaRightRef.current, {
+          x: 0, ease: 'power2.out',
+          scrollTrigger: { trigger: ctaRef.current, start: 'top 70%', end: 'top 25%', scrub: 1 },
+        });
+      }
     }, heroRef);
 
     // ── Step cards ──
@@ -696,12 +720,7 @@ const Services = () => {
         ))}
       </section>
 
-      <section className="relative z-10 py-24 bg-slate-950 border-t border-slate-800">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
-          <p className="text-2xl md:text-4xl font-black text-white leading-tight mb-6">&ldquo;Anyone else will charge you more<br /><span className="text-cyan-400">to deliver less</span> &mdash;<br />and you will not know it until after.&rdquo;</p>
-          <p className="text-slate-400 text-base md:text-lg">One person. Every instrument. No handoffs, no gaps, no excuses.</p>
-        </div>
-      </section>
+      
 
       {/* Steps — 600vh sticky section. Header always in view. Cards slide in L→R one at a time. */}
       <section data-steps-outer className="relative z-10 bg-slate-900 overflow-x-hidden">
@@ -762,22 +781,27 @@ const Services = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-24 bg-gradient-to-b from-slate-900 to-black relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div className="absolute top-0 left-1/2 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl" />
-        </div>
-        <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">The Discovery Call Costs <span className="text-emerald-400">Nothing</span></h2>
+      <section ref={ctaRef} className="relative z-10 py-32 overflow-hidden">
+        <div className="absolute inset-0" style={{background: 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(220,220,230,0.13) 0%, transparent 70%), radial-gradient(ellipse 30% 25% at 48% 48%, rgba(200,200,215,0.09) 0%, transparent 60%), radial-gradient(ellipse 45% 35% at 53% 52%, rgba(180,180,200,0.07) 0%, transparent 65%), radial-gradient(ellipse 20% 18% at 46% 50%, rgba(240,240,250,0.06) 0%, transparent 55%), radial-gradient(ellipse 70% 60% at 50% 50%, rgba(150,150,170,0.05) 0%, transparent 75%), linear-gradient(to bottom, #0a0a0f 0%, #0d0d18 40%, #0a0a0f 100%)'}} />
+        <div className="relative z-10 container mx-auto px-4 max-w-3xl text-center">
+          <div ref={ctaQuoteRef} style={{ opacity: 0, transform: 'translateY(40px)' }}>
+            <p className="text-3xl md:text-5xl font-black text-white leading-tight mb-4">&ldquo;Anyone else will charge you more<br /><span className="text-cyan-400">to deliver less</span> &mdash;<br />and you will not know it until after.&rdquo;</p>
+            <p className="text-slate-400 text-base md:text-lg mb-16">One person. Every instrument. No handoffs, no gaps, no excuses.</p>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">The Discovery Call Costs <span className="text-emerald-400">Nothing</span></h2>
           <p className="text-lg text-slate-300 mb-10">Worst case, you walk away with a clearer picture of what your project needs. Best case, you get a fixed-price proposal and a builder who answers his own phone.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center overflow-hidden">
             <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
+              ref={ctaLeftRef}
               data-cta-left
+              style={{ transform: 'translateX(-100vw)' }}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-lg transition-all shadow-lg">
               <CalendarDays className="w-5 h-5" /> Schedule at cal.com
             </a>
             <a href={EMAIL_URL}
+              ref={ctaRightRef}
               data-cta-right
+              style={{ transform: 'translateX(100vw)' }}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-cyan-500/50 rounded-xl font-bold text-white text-lg transition-colors">
               <Mail className="w-5 h-5" /> jeremy@ochai.dev
             </a>
