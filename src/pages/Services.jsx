@@ -445,13 +445,19 @@ const Services = () => {
 
       // CTA buttons slide in
       if (ctaLeftRef.current && ctaRightRef.current) {
+        gsap.set(ctaLeftRef.current, { pointerEvents: 'none' });
+        gsap.set(ctaRightRef.current, { pointerEvents: 'none' });
         gsap.to(ctaLeftRef.current, {
           x: 0, ease: 'power2.out',
-          scrollTrigger: { trigger: ctaRef.current, start: 'top 75%', end: 'top 30%', scrub: 1 },
+          scrollTrigger: { trigger: ctaRef.current, start: 'top 75%', end: 'top 30%', scrub: 1,
+            onEnterBack: () => gsap.set(ctaLeftRef.current, { pointerEvents: 'none' }),
+            onLeave: () => gsap.set(ctaLeftRef.current, { pointerEvents: 'auto' }) },
         });
         gsap.to(ctaRightRef.current, {
           x: 0, ease: 'power2.out',
-          scrollTrigger: { trigger: ctaRef.current, start: 'top 70%', end: 'top 25%', scrub: 1 },
+          scrollTrigger: { trigger: ctaRef.current, start: 'top 70%', end: 'top 25%', scrub: 1,
+            onEnterBack: () => gsap.set(ctaRightRef.current, { pointerEvents: 'none' }),
+            onLeave: () => gsap.set(ctaRightRef.current, { pointerEvents: 'auto' }) },
         });
       }
     }, heroRef);
