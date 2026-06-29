@@ -229,12 +229,12 @@ const asteroidDefs = [
     exitX:  '56vw',  exitY: '-45vh', scrub: 0.72 },
 ];
 
-const AsteroidLayer = () => (
+const AsteroidLayer = () => { const isMobileAst = useMatchMedia('(max-width: 768px)'); const sz = n => isMobileAst ? Math.round(n * 0.5) : n; return (
   <>
     {asteroidDefs.map((a, i) => (
       <div key={i} data-ast-idx={i} className="absolute pointer-events-none"
-        style={{ width: a.size, height: a.size, top: `${a.top}%`, left: `${a.left}%`, zIndex: a.z }}>
-        <img src={ASSETS[a.src]} alt="" width={a.size} height={a.size} className="w-full h-full object-contain" />
+        style={{ width: sz(a.size), height: sz(a.size), top: `${a.top}%`, left: `${a.left}%`, zIndex: a.z }}>
+        <img src={ASSETS[a.src]} alt="" width={sz(a.size)} height={sz(a.size)} className="w-full h-full object-contain" />
       </div>
     ))}
   </>
