@@ -238,7 +238,8 @@ const AsteroidLayer = () => { const isMobileAst = useMatchMedia('(max-width: 768
       </div>
     ))}
   </>
-);
+  );
+};
 
 const TierCard = ({ tier }) => (
   <div className={`relative rounded-3xl border ${tier.borderColor} bg-slate-900/80 backdrop-blur-sm p-8 md:p-10 shadow-2xl transition-all duration-500 hover:scale-[1.01]`}>
