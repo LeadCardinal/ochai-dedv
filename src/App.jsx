@@ -35,7 +35,9 @@ const LazyBrowserRouter = React.lazy(() =>
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   React.useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
   return null;
 };
