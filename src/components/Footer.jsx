@@ -13,7 +13,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800 py-12">
+    <footer className="bg-slate-950 border-t border-slate-800 py-12 relative" style={{ zIndex: 50 }}>
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-8">
           
