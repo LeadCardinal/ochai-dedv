@@ -2,17 +2,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Twitter } from 'lucide-react';
-import { useToast } from '@/components/ui/use-toast';
 
 const Footer = () => {
-  const { toast } = useToast();
   const currentYear = new Date().getFullYear();
-
-  const handleSocialClick = () => {
-    toast({
-      title: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
-  };
 
   const socialLinks = [
     { icon: Mail, label: 'Email', url: 'mailto:jeremy@ochai.dev' },
@@ -51,7 +43,7 @@ const Footer = () => {
           >
             {socialLinks.map((social, index) => {
               const Icon = social.icon;
-              return social.url ? (
+              return (
                 <motion.a
                   key={index}
                   href={social.url}
@@ -64,19 +56,21 @@ const Footer = () => {
                 >
                   <Icon className="w-5 h-5 text-slate-300 hover:text-cyan-400 transition-colors" />
                 </motion.a>
-              ) : (
-                <motion.button
-                  key={index}
-                  onClick={handleSocialClick}
-                  whileHover={{ scale: 1.1, y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 bg-slate-800/50 hover:bg-cyan-500/20 border border-slate-700 hover:border-cyan-500/50 rounded-full flex items-center justify-center transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <Icon className="w-5 h-5 text-slate-300 hover:text-cyan-400 transition-colors" />
-                </motion.button>
               );
             })}
+          </motion.div>
+
+          {/* Proof link */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <a href="/#case-studies" className="text-slate-500 hover:text-cyan-400 text-sm transition-colors">
+              The work speaks first if you need it to &rarr;
+            </a>
           </motion.div>
 
           {/* Copyright */}
@@ -87,7 +81,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-slate-300 text-sm"
           >
-            © {currentYear} AI Portfolio. All rights reserved.
+            © {currentYear} OchAI — Jeremy Och. All rights reserved.
           </motion.p>
         </div>
       </div>

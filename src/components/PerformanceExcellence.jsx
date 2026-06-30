@@ -71,7 +71,7 @@ const ScoreRing = ({ score, label, color, delay }) => {
 
 const PerformanceExcellence = () => {
   return (
-    <section className="pt-0 pb-16 bg-slate-900/50 border-b border-slate-800">
+    <section id="case-studies" className="pt-0 pb-16 bg-slate-900/50 border-b border-slate-800">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center mb-16 pt-12 md:pt-16">
           <div className="flex items-center gap-2 mb-4">
