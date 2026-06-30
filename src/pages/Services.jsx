@@ -439,7 +439,7 @@ const Services = () => {
       if (ctaQuoteRef.current) {
         gsap.to(ctaQuoteRef.current, {
           opacity: 1, y: 0, ease: 'power2.out',
-          scrollTrigger: { trigger: ctaQuoteRef.current, start: 'top 85%', end: 'top 40%', scrub: 1 },
+          scrollTrigger: { trigger: ctaQuoteRef.current, start: 'top 90%', end: 'center 50%', scrub: 1.5 },
         });
       }
 
@@ -449,13 +449,13 @@ const Services = () => {
         gsap.set(ctaRightRef.current, { pointerEvents: 'none' });
         gsap.to(ctaLeftRef.current, {
           x: 0, ease: 'power2.out',
-          scrollTrigger: { trigger: ctaRef.current, start: 'top 75%', end: 'top 30%', scrub: 1,
+          scrollTrigger: { trigger: ctaRef.current, start: 'center 90%', end: 'center 50%', scrub: 1,
             onEnterBack: () => gsap.set(ctaLeftRef.current, { pointerEvents: 'none' }),
             onLeave: () => gsap.set(ctaLeftRef.current, { pointerEvents: 'auto' }) },
         });
         gsap.to(ctaRightRef.current, {
           x: 0, ease: 'power2.out',
-          scrollTrigger: { trigger: ctaRef.current, start: 'top 70%', end: 'top 25%', scrub: 1,
+          scrollTrigger: { trigger: ctaRef.current, start: 'center 85%', end: 'center 45%', scrub: 1,
             onEnterBack: () => gsap.set(ctaRightRef.current, { pointerEvents: 'none' }),
             onLeave: () => gsap.set(ctaRightRef.current, { pointerEvents: 'auto' }) },
         });
