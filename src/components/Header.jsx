@@ -12,12 +12,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+// Routes where the header is meant to introduce itself, then leave.
+// Apps.jsx listens for the exit and reclaims the space it was holding open.
+const SELF_DISMISSING_ROUTES = ["/apps"];
+const HEADER_VISIBLE_MS = 1400;
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [headerHidden, setHeaderHidden] = useState(false);
   const { toast } = useToast();
   const location = useLocation();
   const navigate = useNavigate();
+  const isSelfDismissing = SELF_DISMISSING_ROUTES.includes(location.pathname);
 
   useEffect(() => {
     let ticking = false;
@@ -33,6 +40,22 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // On self-dismissing routes: show the header briefly (so it registers as
+  // real navigation, not a missing one), then slide it out and tell the
+  // page it's gone. Leaving the route snaps it back instantly — no reason
+  // to make someone wait on the way back to a normal page.
+  useEffect(() => {
+    if (!isSelfDismissing) {
+      setHeaderHidden(false);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setHeaderHidden(true);
+      window.dispatchEvent(new CustomEvent("ochai:header-hidden"));
+    }, HEADER_VISIBLE_MS);
+    return () => clearTimeout(timer);
+  }, [isSelfDismissing, location.pathname]);
 
   const handleNavigation = (id) => {
     setIsMobileMenuOpen(false);
@@ -51,9 +74,11 @@ const Header = () => {
   return (
     <motion.header
       initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
+      animate={{ y: headerHidden ? "-120%" : 0, opacity: headerHidden ? 0 : 1 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        headerHidden ? "pointer-events-none" : ""
+      } ${
         isScrolled
           ? "bg-slate-950/95 backdrop-blur-md shadow-lg"
           : "bg-transparent"

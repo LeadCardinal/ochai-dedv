@@ -232,19 +232,25 @@ const GenieSidebar = ({ tier, onClose, phoneRef }) => {
 };
 
 // PhoneMockup — bezel + screen, desktop only
+// Sized in dvh, not raw px, so it scales itself down before it ever has to
+// go begging the container for room it doesn't have.
 const PhoneMockup = ({ children }) => (
-  <div className="relative flex-shrink-0 w-[280px] h-[560px]"
-    style={{ filter: 'drop-shadow(0 32px 64px rgba(0,0,0,0.7))' }}>
+  <div className="relative flex-shrink-0"
+    style={{
+      width: 'clamp(200px, 27dvh, 260px)',
+      height: 'clamp(400px, 54dvh, 520px)',
+      filter: 'drop-shadow(0 32px 64px rgba(0,0,0,0.7))',
+    }}>
     {/* Outer bezel */}
     <div className="absolute inset-0 rounded-[44px] bg-[#111118] border-2 border-[#2a2a35]" />
-    {/* Side buttons */}
-    <div className="absolute -left-[3px] top-24 w-[3px] h-8 rounded-l-sm bg-[#2a2a35]" />
-    <div className="absolute -left-[3px] top-36 w-[3px] h-12 rounded-l-sm bg-[#2a2a35]" />
-    <div className="absolute -right-[3px] top-28 w-[3px] h-14 rounded-r-sm bg-[#2a2a35]" />
+    {/* Side buttons — positioned by %, so they track the bezel instead of drifting off it as it shrinks */}
+    <div className="absolute -left-[3px] top-[17%] w-[3px] h-[6%] rounded-l-sm bg-[#2a2a35]" />
+    <div className="absolute -left-[3px] top-[26%] w-[3px] h-[9%] rounded-l-sm bg-[#2a2a35]" />
+    <div className="absolute -right-[3px] top-[20%] w-[3px] h-[10%] rounded-r-sm bg-[#2a2a35]" />
     {/* Speaker notch */}
-    <div className="absolute top-4 left-1/2 -translate-x-1/2 w-16 h-1.5 rounded-full bg-[#1a1a25]" />
+    <div className="absolute top-[3%] left-1/2 -translate-x-1/2 w-16 h-1.5 rounded-full bg-[#1a1a25]" />
     {/* Home indicator */}
-    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-20 h-1 rounded-full bg-white/20" />
+    <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-20 h-1 rounded-full bg-white/20" />
     {/* Screen */}
     <div className="absolute inset-[10px] rounded-[36px] overflow-hidden bg-[#080810]">
       {children}
@@ -304,6 +310,17 @@ const Apps = () => {
   const [activeTier, setActiveTier] = useState(null);
   const phoneRef = useRef(null);
 
+  // Header.jsx shows itself briefly then slides out on this route, and
+  // fires this event on its way out. Once it's gone, the top clearance
+  // this page was holding open for it is dead weight — drop it so the
+  // app rises to fill the space the header just vacated.
+  const [headerCleared, setHeaderCleared] = useState(false);
+  useEffect(() => {
+    const handler = () => setHeaderCleared(true);
+    window.addEventListener('ochai:header-hidden', handler);
+    return () => window.removeEventListener('ochai:header-hidden', handler);
+  }, []);
+
   const handleUnlock = () => setPhase('unlocked');
 
   const handleSelectTier = (key, source) => {
@@ -331,8 +348,12 @@ const Apps = () => {
           <meta name="twitter:card" content="summary_large_image" />
           <script type="application/ld+json">{appsJsonLd}</script>
         </Helmet>
-        <div className="relative flex items-start bg-[#0a0a0f] pl-16 pt-[75px]"
-          style={{ height: '100dvh' }}>
+        <div className="relative flex items-start bg-[#0a0a0f] pl-16"
+          style={{
+            minHeight: '100dvh',
+            paddingTop: headerCleared ? '0px' : '75px',
+            transition: 'padding-top 600ms ease',
+          }}>
           {/* Phone mockup — left, vertically centered */}
           <div ref={phoneRef} className="relative flex-shrink-0">
             <PhoneMockup>
@@ -374,9 +395,14 @@ const Apps = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{appsJsonLd}</script>
       </Helmet>
-      {/* Full-screen — sits under the site header via pt-safe */}
+      {/* Full-screen — the same brief header visibility applies here too;
+          it was silently sitting on top of this content before, not "under" it. */}
       <div className="relative overflow-hidden bg-[#0a0a0f]"
-        style={{ height: '100dvh', paddingTop: 'env(safe-area-inset-top)' }}>
+        style={{
+          height: '100dvh',
+          paddingTop: headerCleared ? 'env(safe-area-inset-top)' : 'calc(env(safe-area-inset-top) + 75px)',
+          transition: 'padding-top 600ms ease',
+        }}>
         {phase === 'locked' && (
           <div className="w-full h-full">
             <LockScreen onUnlock={handleUnlock} />
