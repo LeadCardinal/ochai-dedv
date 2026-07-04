@@ -255,7 +255,7 @@ const AppFrame = ({ isMobile }) => {
           ref={interiorRef}
           className={[
             'h-full overflow-y-auto p-4 gap-4',
-            isMobile ? 'flex flex-col' : 'grid grid-cols-3',
+            isMobile ? 'flex flex-col' : 'grid grid-cols-3 items-start',
           ].join(' ')}
           style={!isMobile ? { width: 800 } : undefined}
         >
