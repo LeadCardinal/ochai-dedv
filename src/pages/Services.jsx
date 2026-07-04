@@ -43,13 +43,23 @@ const ASSETS = {
   symphonyMobile:   '/symphony-10802000.avif',
 };
 
-const applauseAudio = typeof window !== 'undefined' ? new Audio('/audio/applause.mp3') : null;
+// Lazy — SSR/prerender workers stub `window` but never define `Audio`,
+// so a module-scope `new Audio(...)` throws ReferenceError during SSG
+// and poisons every route's prerender (Services is statically imported
+// by App.jsx, so this ran on every page, not just this one).
+let applauseAudio = null;
+function getApplauseAudio() {
+  if (typeof window === 'undefined' || typeof Audio === 'undefined') return null;
+  if (!applauseAudio) applauseAudio = new Audio('/audio/applause.mp3');
+  return applauseAudio;
+}
 
 function playApplause() {
-  if (!applauseAudio) return;
-  applauseAudio.currentTime = 0;
-  applauseAudio.volume = 0.35;
-  applauseAudio.play().catch(() => {});
+  const audio = getApplauseAudio();
+  if (!audio) return;
+  audio.currentTime = 0;
+  audio.volume = 0.35;
+  audio.play().catch(() => {});
 }
 
 const KEYFRAME_CSS = `
