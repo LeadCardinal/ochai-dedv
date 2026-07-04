@@ -16,7 +16,7 @@ const TIERS = [
     tagline: 'One builder, one clear scope.',
     description: 'Fastest path from idea to something real. Full-stack build, startup branding included.',
     features: ['Single-purpose app build', 'Startup branding included', 'Direct line to the builder'],
-    image: ASSETS.soloist,
+    image: ASSETS.collective,
   },
   {
     key: 'accompaniment', label: 'Accompaniment', name: 'The Accompaniment', price: '$14,500',
@@ -30,7 +30,7 @@ const TIERS = [
     priceSuffix: '+ $500/mo', tagline: 'The full arrangement, maintained.',
     description: 'Architecture, integration, retainer. Keeps working after launch instead of quietly rotting.',
     features: ['Full-scope custom app', 'Ongoing $500/mo retainer', 'Priority response window'],
-    image: ASSETS.collective,
+    image: ASSETS.soloist,
   },
 ];
 
@@ -304,7 +304,7 @@ const Apps = () => {
           <meta name="twitter:card" content="summary_large_image" />
           <script type="application/ld+json">{appsJsonLd}</script>
         </Helmet>
-        <div className="relative flex items-center overflow-hidden bg-[#0a0a0f] pl-16"
+        <div className="relative flex items-start overflow-hidden bg-[#0a0a0f] pl-16 pt-[75px]"
           style={{ height: '100dvh' }}>
           {/* Phone mockup — left, vertically centered */}
           <div ref={phoneRef} className="relative flex-shrink-0">
