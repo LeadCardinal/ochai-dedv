@@ -13,6 +13,7 @@ import { Toaster } from "@/components/ui/toaster";
 // Static imports — these routes are prerendered; lazy = Suspense fallback in SSG output
 import Home from "@/pages/Home";
 import ServicesPage from "@/pages/Services";
+import AppsPage from "@/pages/Apps";
 import Biography from "@/pages/Biography";
 import Security from "@/pages/Security";
 import CaseStudyBonsai from "@/pages/CaseStudyBonsai";
@@ -86,6 +87,7 @@ const AppContent = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<ServicesPage />} />
+              <Route path="/apps" element={<AppsPage />} />
               <Route path="/biography" element={<Biography />} />
               <Route path="/security" element={<Security />} />
               <Route path="/case-study/reallivebonsai" element={<CaseStudyBonsai />} />
