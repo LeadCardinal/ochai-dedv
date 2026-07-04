@@ -8,14 +8,19 @@ import { gsap } from 'gsap';
  *
  * Locked spec (see planning thread):
  * - Chrome dark #0a0a0f shell, brassy gold/amber accents, site-native.
- * - App-frame EXTERIOR: black device bezel, rounded corners.
+ * - App-frame EXTERIOR: black device bezel, rounded corners, PORTRAIT,
+ *   positioned far left on desktop — not centered, not landscape.
  *   Resting state: thin horizontal pill (atmosphere) + fingerprint icon,
  *   bottom-third, centered (mechanism).
- * - Click/tap fingerprint -> GSAP snap-unlock -> frame reveals interior.
- * - App-frame INTERIOR: white/light, mainstream-app register.
- * - Desktop reveal: horizontal, sidebar extends right.
- * - Mobile reveal: vertical, bottom sheet rises.
+ * - Click/tap fingerprint -> GSAP snap-unlock -> a separate reveal panel
+ *   extends from the device's edge. The device itself does NOT grow into
+ *   a landscape rectangle — it stays a fixed portrait shape.
+ * - Desktop reveal: horizontal — panel extends RIGHT of the device.
+ * - Mobile reveal: vertical — panel rises BELOW the device (bottom sheet).
+ * - Panel interior: white/light, mainstream-app register.
  * - Viewport floors: 1440x900 desktop / 360x780 mobile, zero-scroll via dvh.
+ *   Panel is sized explicitly (not intrinsic content width) so three cards
+ *   never force a horizontal scrollbar inside the frame.
  * - Tiers: Soloist $4,500 / Accompaniment $14,500 / Collective $38,500+$500mo,
  *   all "+/- final scope dependent."
  * - Tier visuals: busker photo set (solo / duo / four-piece), warm/neutral,
@@ -128,7 +133,7 @@ const AppFrame = ({ isMobile }) => {
   const [unlocked, setUnlocked] = useState(false);
   const [activeTier, setActiveTier] = useState(null);
   const fingerprintRef = useRef(null);
-  const frameRef = useRef(null);
+  const panelRef = useRef(null);
   const interiorRef = useRef(null);
 
   const handleUnlock = () => {
@@ -136,7 +141,7 @@ const AppFrame = ({ isMobile }) => {
 
     const tl = gsap.timeline();
 
-    // Snap — the fingerprint reads the touch before the frame reacts.
+    // Snap — the fingerprint reads the touch before the panel reacts.
     tl.to(fingerprintRef.current, {
       scale: 0.82,
       duration: 0.09,
@@ -152,96 +157,107 @@ const AppFrame = ({ isMobile }) => {
       ease: 'power1.in',
     });
 
-    // Unlock — frame reveals interior. Direction is set in CSS (below) via
-    // the .frame--mobile / .frame--desktop modifier; GSAP just drives the
-    // shared state + interior stagger so both directions share one timeline.
-    tl.add(() => setUnlocked(true))
-      .fromTo(
-        interiorRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.35, ease: 'power1.out' },
+    // Unlock — the device stays put; the panel extends from its edge.
+    // Desktop: rightward (width 0 -> 800). Mobile: rises (height 0 -> 460).
+    tl.add(() => setUnlocked(true));
+
+    if (isMobile) {
+      tl.fromTo(
+        panelRef.current,
+        { height: 0, opacity: 0 },
+        { height: 460, opacity: 1, duration: 0.5, ease: 'power2.out' },
         '+=0.05'
-      )
-      .from(
-        interiorRef.current.querySelectorAll('[data-tier-card]'),
-        {
-          opacity: 0,
-          y: isMobile ? 18 : 0,
-          x: isMobile ? 0 : 18,
-          duration: 0.4,
-          stagger: 0.08,
-          ease: 'power2.out',
-        },
-        '-=0.15'
       );
+    } else {
+      tl.fromTo(
+        panelRef.current,
+        { width: 0, opacity: 0 },
+        { width: 800, opacity: 1, duration: 0.5, ease: 'power2.out' },
+        '+=0.05'
+      );
+    }
+
+    tl.from(
+      interiorRef.current?.querySelectorAll('[data-tier-card]') || [],
+      {
+        opacity: 0,
+        y: isMobile ? 18 : 0,
+        x: isMobile ? 0 : 18,
+        duration: 0.4,
+        stagger: 0.08,
+        ease: 'power2.out',
+      },
+      '-=0.15'
+    );
   };
 
   return (
-    <div
-      ref={frameRef}
-      className={[
-        'relative mx-auto overflow-hidden transition-[width,height] duration-500 ease-out',
-        'bg-[#0a0a0f] border border-amber-500/20 shadow-[0_0_60px_rgba(0,0,0,0.6)]',
-        unlocked
-          ? isMobile
-            ? 'w-full max-w-[340px] h-[560px] rounded-[28px]'
-            : 'w-full max-w-[1100px] h-[620px] rounded-[24px]'
-          : isMobile
-            ? 'w-[220px] h-[64px] rounded-full'
-            : 'w-[280px] h-[72px] rounded-full',
-      ].join(' ')}
-    >
-      {/* Resting state — pill + fingerprint mechanism */}
-      {!unlocked && (
-        <button
-          type="button"
-          onClick={handleUnlock}
-          aria-label="Unlock app tiers"
-          className="absolute inset-0 flex items-center justify-center group cursor-pointer"
-        >
-          <span
-            ref={fingerprintRef}
-            className="flex items-center justify-center w-11 h-11 rounded-full bg-amber-400/10 border border-amber-400/40 group-hover:border-amber-400/70 transition-colors"
-          >
-            <Fingerprint className="w-6 h-6 text-amber-400" strokeWidth={1.5} />
-          </span>
-        </button>
-      )}
-
-      {/* Interior — white/light, mainstream-app register */}
+    <div className={isMobile ? 'flex flex-col items-center' : 'flex flex-row items-start'}>
+      {/* Device — portrait bezel. Fixed shape, stays put; never grows into
+          a landscape rectangle. This is the far-left, regular-portrait
+          piece — the panel below is what extends, not this. */}
       <div
-        ref={interiorRef}
         className={[
-          'absolute inset-0 bg-[#fafaf8] text-slate-900',
-          unlocked ? 'block' : 'hidden',
-          isMobile ? 'flex flex-col' : 'flex flex-row',
+          'relative flex-shrink-0 overflow-hidden bg-[#0a0a0f] border border-amber-500/20',
+          'shadow-[0_0_60px_rgba(0,0,0,0.6)] transition-[border-radius] duration-500',
+          isMobile
+            ? 'w-[220px] h-[64px] rounded-full'
+            : unlocked
+              ? 'w-[240px] h-[520px] rounded-[24px]'
+              : 'w-[240px] h-[64px] rounded-full',
         ].join(' ')}
       >
-        {/* Nav rail / top bar */}
-        <div
-          className={[
-            'flex-shrink-0 border-amber-900/10 flex items-center px-5 gap-2',
-            isMobile
-              ? 'h-14 border-b flex-row justify-between'
-              : 'w-[240px] border-r flex-col items-start py-6 gap-4',
-          ].join(' ')}
-        >
-          <span className="text-sm font-semibold tracking-tight text-slate-800">
-            Three tiers.
-          </span>
-          {!isMobile && (
+        {!unlocked && (
+          <button
+            type="button"
+            onClick={handleUnlock}
+            aria-label="Unlock app tiers"
+            className="absolute inset-0 flex items-center justify-center group cursor-pointer"
+          >
+            <span
+              ref={fingerprintRef}
+              className="flex items-center justify-center w-11 h-11 rounded-full bg-amber-400/10 border border-amber-400/40 group-hover:border-amber-400/70 transition-colors"
+            >
+              <Fingerprint className="w-6 h-6 text-amber-400" strokeWidth={1.5} />
+            </span>
+          </button>
+        )}
+
+        {/* Unlocked, desktop only — device becomes the persistent nav
+            rail, still portrait, same footprint. Mobile carries everything
+            in the sheet below instead. */}
+        {unlocked && !isMobile && (
+          <div className="absolute inset-0 bg-[#fafaf8] text-slate-900 flex flex-col items-start py-6 px-5 gap-2">
+            <span className="text-sm font-semibold tracking-tight text-slate-800">
+              Three tiers.
+            </span>
             <span className="text-xs text-slate-500 leading-snug">
               Real numbers. One builder.
             </span>
-          )}
-        </div>
+          </div>
+        )}
+      </div>
 
-        {/* Tier cards */}
+      {/* Reveal panel — extends RIGHT of the device on desktop (0 -> 800px,
+          sized to fit three cards, no intrinsic overflow), rises BELOW it
+          on mobile (0 -> 460px). Explicit dimensions on purpose — this is
+          what caused the horizontal scrollbar last round when the whole
+          frame was one growing box instead of two elements. */}
+      <div
+        ref={panelRef}
+        className={[
+          'overflow-hidden bg-[#fafaf8] text-slate-900',
+          isMobile ? 'w-[220px] rounded-b-[24px]' : 'ml-3 rounded-[24px]',
+        ].join(' ')}
+        style={isMobile ? { height: 0 } : { width: 0, height: 520 }}
+      >
         <div
+          ref={interiorRef}
           className={[
-            'flex-1 overflow-y-auto p-4 gap-4',
+            'h-full overflow-y-auto p-4 gap-4',
             isMobile ? 'flex flex-col' : 'grid grid-cols-3',
           ].join(' ')}
+          style={!isMobile ? { width: 800 } : undefined}
         >
           {TIERS.map((tier) => (
             <button
@@ -256,37 +272,34 @@ const AppFrame = ({ isMobile }) => {
                   : 'border-slate-200',
               ].join(' ')}
             >
-              {/* Warm/neutral busker photo — gold-neutral bridge between shell and interior */}
               <div
-                className="h-28 w-full bg-gradient-to-br from-amber-200 via-amber-100 to-stone-100"
+                className="h-24 w-full bg-gradient-to-br from-amber-200 via-amber-100 to-stone-100"
                 style={{
                   backgroundImage: `url(${tier.image})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
               />
-              <div className="p-4">
-                <div className="flex items-baseline justify-between gap-2">
-                  <h3 className="font-bold text-slate-900">{tier.name}</h3>
-                </div>
-                <p className="text-lg font-black text-amber-600 mt-1">
+              <div className="p-3">
+                <h3 className="font-bold text-slate-900 text-sm">{tier.name}</h3>
+                <p className="text-base font-black text-amber-600 mt-1">
                   {tier.price}
                   {tier.priceSuffix && (
-                    <span className="text-xs font-medium text-slate-500 ml-1">
+                    <span className="text-[10px] font-medium text-slate-500 ml-1">
                       {tier.priceSuffix}
                     </span>
                   )}
                 </p>
-                <p className="text-xs text-slate-400 mt-0.5">+/- final scope dependent</p>
-                <p className="text-sm text-slate-600 mt-3">{tier.tagline}</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">+/- final scope dependent</p>
+                <p className="text-xs text-slate-600 mt-2">{tier.tagline}</p>
 
                 {activeTier === tier.key && (
-                  <div className="mt-3 pt-3 border-t border-slate-100">
-                    <p className="text-sm text-slate-600 mb-2">{tier.description}</p>
+                  <div className="mt-2 pt-2 border-t border-slate-100">
+                    <p className="text-xs text-slate-600 mb-1.5">{tier.description}</p>
                     <ul className="space-y-1">
                       {tier.features.map((f) => (
-                        <li key={f} className="flex items-start gap-1.5 text-xs text-slate-600">
-                          <Check className="w-3.5 h-3.5 text-amber-500 mt-0.5 flex-shrink-0" />
+                        <li key={f} className="flex items-start gap-1.5 text-[10px] text-slate-600">
+                          <Check className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />
                           {f}
                         </li>
                       ))}
@@ -328,25 +341,28 @@ const Apps = () => {
 
       {/*
         Zero-scroll shell. Floors: 1440x900 desktop / 360x780 mobile.
-        100dvh (not vh) so mobile browser chrome doesn't create a scrollbar
-        at the floor viewport; safe-area padding keeps the pill clear of
-        notches/home-indicators on the resting state.
+        H1 stays centered regardless of device position below it.
       */}
       <div
-        className="relative flex flex-col items-center justify-center overflow-hidden bg-[#0a0a0f] px-4"
+        className="relative flex flex-col items-center overflow-hidden bg-[#0a0a0f] px-4 pt-16"
         style={{
           height: '100dvh',
           minHeight: '100dvh',
           paddingBottom: 'env(safe-area-inset-bottom)',
         }}
       >
-        <h1 className="text-2xl md:text-3xl font-bold text-white text-center mb-10 tracking-tight">
+        <h1 className="w-full text-2xl md:text-3xl font-bold text-white text-center mb-10 tracking-tight">
           Deliberate Pricing, <span className="text-amber-400">Expert Build.</span>
         </h1>
 
-        <AppFrame isMobile={isMobile} />
+        {/* Device + panel row. Centered on mobile; pinned far left on
+            desktop with fixed padding instead of mx-auto centering —
+            that's the actual fix for "regular portrait, far left." */}
+        <div className="w-full flex-1 flex flex-col items-center md:flex-row md:items-start md:justify-start md:pl-16">
+          <AppFrame isMobile={isMobile} />
+        </div>
 
-        <p className="text-slate-500 text-xs mt-8 text-center max-w-xs">
+        <p className="text-slate-500 text-xs mt-4 text-center max-w-xs">
           Tap the fingerprint to see all three tiers.
         </p>
       </div>
