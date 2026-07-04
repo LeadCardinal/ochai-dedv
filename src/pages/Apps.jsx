@@ -101,9 +101,9 @@ const LockScreen = ({ onUnlock }) => {
   );
 };
 
-// AppInterior — light app, logo top bar, tier content, bottom tabs
+// AppInterior — light app, logo top bar, tier content or home screen, bottom tabs
 const AppInterior = ({ activeTier, onSelectTier }) => {
-  const tier = TIERS.find(t => t.key === activeTier) || TIERS[0];
+  const tier = TIERS.find(t => t.key === activeTier);
   return (
     <div className="flex flex-col w-full h-full bg-[#fafaf8] overflow-hidden">
       {/* Top bar */}
@@ -111,33 +111,59 @@ const AppInterior = ({ activeTier, onSelectTier }) => {
         <img src={LOGO} alt="OchAI" className="w-6 h-6 object-contain" />
         <span className="text-xs font-bold text-slate-800 tracking-tight">OchAI Dev</span>
       </div>
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto p-4 min-h-0">
-        <div className="h-24 w-full rounded-xl mb-3 bg-gradient-to-br from-amber-100 to-stone-100"
-          style={{ backgroundImage: `url(${tier.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        <p className="text-[10px] text-amber-600 font-black">{tier.price}
-          {tier.priceSuffix && <span className="text-slate-400 font-normal ml-1">{tier.priceSuffix}</span>}
-        </p>
-        <p className="text-[9px] text-slate-400">+/- final scope dependent</p>
-        <h3 className="text-sm font-bold text-slate-900 mt-1">{tier.name}</h3>
-        <p className="text-[11px] text-slate-500 mt-1 leading-snug">{tier.tagline}</p>
-        <p className="text-[10px] text-slate-400 mt-2 leading-relaxed">{tier.description}</p>
-        <ul className="mt-3 space-y-1.5">
-          {tier.features.map(f => (
-            <li key={f} className="flex items-start gap-1.5 text-[10px] text-slate-600">
-              <Check className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />{f}
-            </li>
-          ))}
-        </ul>
-        <button onClick={() => onSelectTier(tier.key)}
-          className="mt-4 w-full flex items-center justify-center gap-1.5 py-2 rounded-lg bg-amber-400 text-[11px] font-bold text-slate-900 hover:bg-amber-300 transition-colors">
-          Explore this tier <ChevronRight className="w-3 h-3" />
-        </button>
+
+      {/* Content — home screen when no tier selected, tier detail otherwise */}
+      <div className="flex-1 overflow-y-auto min-h-0">
+        {!tier ? (
+          // Home screen — 3 CTA buttons
+          <div className="flex flex-col gap-3 p-4">
+            <p className="text-[10px] text-slate-400 text-center mb-1 uppercase tracking-widest">Choose your tier</p>
+            {TIERS.map(t => (
+              <button key={t.key} onClick={() => onSelectTier(t.key)}
+                className="w-full text-left rounded-xl border border-slate-200 bg-white hover:border-amber-400 hover:shadow-md transition-all overflow-hidden">
+                <div className="h-16 w-full bg-gradient-to-br from-amber-100 to-stone-100"
+                  style={{ backgroundImage: `url(${t.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                <div className="px-3 py-2">
+                  <div className="flex items-baseline justify-between">
+                    <span className="text-xs font-bold text-slate-900">{t.name}</span>
+                    <span className="text-xs font-black text-amber-600">{t.price}</span>
+                  </div>
+                  <p className="text-[10px] text-slate-400 mt-0.5">{t.tagline}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        ) : (
+          // Tier detail
+          <div className="p-4">
+            <div className="h-24 w-full rounded-xl mb-3 bg-gradient-to-br from-amber-100 to-stone-100"
+              style={{ backgroundImage: `url(${tier.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+            <p className="text-[10px] font-black text-amber-600">{tier.price}
+              {tier.priceSuffix && <span className="text-slate-400 font-normal ml-1">{tier.priceSuffix}</span>}
+            </p>
+            <p className="text-[9px] text-slate-400">+/- final scope dependent</p>
+            <h3 className="text-sm font-bold text-slate-900 mt-1">{tier.name}</h3>
+            <p className="text-[11px] text-slate-500 mt-1 leading-snug">{tier.tagline}</p>
+            <p className="text-[10px] text-slate-400 mt-2 leading-relaxed">{tier.description}</p>
+            <ul className="mt-3 space-y-1.5">
+              {tier.features.map(f => (
+                <li key={f} className="flex items-start gap-1.5 text-[10px] text-slate-600">
+                  <Check className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />{f}
+                </li>
+              ))}
+            </ul>
+            <button onClick={() => onSelectTier(tier.key)}
+              className="mt-4 w-full flex items-center justify-center gap-1.5 py-2 rounded-lg bg-amber-400 text-[11px] font-bold text-slate-900 hover:bg-amber-300 transition-colors">
+              Explore this tier <ChevronRight className="w-3 h-3" />
+            </button>
+          </div>
+        )}
       </div>
-      {/* Bottom tab bar */}
+
+      {/* Bottom tab bar — always present after unlock */}
       <div className="flex border-t border-slate-100 bg-white flex-shrink-0">
         {TIERS.map(t => (
-          <button key={t.key} onClick={() => onSelectTier && onSelectTier(t.key, 'tab')}
+          <button key={t.key} onClick={() => onSelectTier(t.key, 'tab')}
             className={['flex-1 flex flex-col items-center py-2 gap-0.5 transition-colors text-[9px]',
               activeTier === t.key ? 'text-amber-500' : 'text-slate-400'].join(' ')}>
             <div className={['w-1 h-1 rounded-full mb-0.5', activeTier === t.key ? 'bg-amber-400' : 'bg-transparent'].join(' ')} />
@@ -275,15 +301,16 @@ const Apps = () => {
   const isMobile = useMatchMedia('(max-width: 768px)');
   // phase: 'locked' | 'unlocked' | 'expanded'
   const [phase, setPhase] = useState('locked');
-  const [activeTier, setActiveTier] = useState('soloist');
+  const [activeTier, setActiveTier] = useState(null);
   const phoneRef = useRef(null);
 
   const handleUnlock = () => setPhase('unlocked');
 
   const handleSelectTier = (key, source) => {
     setActiveTier(key);
-    // Tab tap just switches content. "Explore" button triggers genie/expand.
-    if (source !== 'tab') setPhase('expanded');
+    // Tab tap from within an already-active tier just switches content.
+    // Anything else — home screen CTA, Explore button — triggers the expand.
+    if (source !== 'tab' || activeTier === null) setPhase('expanded');
   };
 
   const handleClose = () => setPhase('unlocked');
@@ -304,7 +331,7 @@ const Apps = () => {
           <meta name="twitter:card" content="summary_large_image" />
           <script type="application/ld+json">{appsJsonLd}</script>
         </Helmet>
-        <div className="relative flex items-start overflow-hidden bg-[#0a0a0f] pl-16 pt-[75px]"
+        <div className="relative flex items-start bg-[#0a0a0f] pl-16 pt-[75px]"
           style={{ height: '100dvh' }}>
           {/* Phone mockup — left, vertically centered */}
           <div ref={phoneRef} className="relative flex-shrink-0">
