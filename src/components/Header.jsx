@@ -24,7 +24,14 @@ const Header = () => {
   const { toast } = useToast();
   const location = useLocation();
   const navigate = useNavigate();
-  const isSelfDismissing = SELF_DISMISSING_ROUTES.includes(location.pathname);
+  // SSG output serves this as /apps/index.html, so the real pathname the
+  // browser hands back is "/apps/" — trailing slash and all. Strip it
+  // before comparing, or this check silently never fires again.
+  const normalizedPath =
+    location.pathname.length > 1 && location.pathname.endsWith("/")
+      ? location.pathname.slice(0, -1)
+      : location.pathname;
+  const isSelfDismissing = SELF_DISMISSING_ROUTES.includes(normalizedPath);
 
   useEffect(() => {
     let ticking = false;

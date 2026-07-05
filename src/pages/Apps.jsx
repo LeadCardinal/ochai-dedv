@@ -234,25 +234,33 @@ const GenieSidebar = ({ tier, onClose, phoneRef }) => {
 // PhoneMockup — bezel + screen, desktop only
 // Sized in dvh, not raw px, so it scales itself down before it ever has to
 // go begging the container for room it doesn't have.
+// Bezel/inset/radius are tuned for THIS size range, not inherited from the
+// old 280×560 case — a thick collar that read fine on a bigger phone reads
+// like a 2008 handset once the case shrinks around it.
 const PhoneMockup = ({ children }) => (
   <div className="relative flex-shrink-0"
     style={{
-      width: 'clamp(200px, 27dvh, 260px)',
-      height: 'clamp(400px, 54dvh, 520px)',
+      // Height drives the size, aspectRatio derives width from it — one
+      // source of truth instead of two clamp() curves that can drift out
+      // of sync with each other (which is exactly how the last version
+      // ended up squat). 9:19.5 is current-gen phone proportions, not
+      // the 1:2 slab this used to be.
+      height: 'clamp(460px, 64dvh, 680px)',
+      aspectRatio: '9 / 19.5',
       filter: 'drop-shadow(0 32px 64px rgba(0,0,0,0.7))',
     }}>
-    {/* Outer bezel */}
-    <div className="absolute inset-0 rounded-[44px] bg-[#111118] border-2 border-[#2a2a35]" />
+    {/* Outer bezel — thinner border, tighter radius, modern proportions */}
+    <div className="absolute inset-0 rounded-[40px] bg-[#111118] border border-[#2a2a35]" />
     {/* Side buttons — positioned by %, so they track the bezel instead of drifting off it as it shrinks */}
-    <div className="absolute -left-[3px] top-[17%] w-[3px] h-[6%] rounded-l-sm bg-[#2a2a35]" />
-    <div className="absolute -left-[3px] top-[26%] w-[3px] h-[9%] rounded-l-sm bg-[#2a2a35]" />
-    <div className="absolute -right-[3px] top-[20%] w-[3px] h-[10%] rounded-r-sm bg-[#2a2a35]" />
-    {/* Speaker notch */}
-    <div className="absolute top-[3%] left-1/2 -translate-x-1/2 w-16 h-1.5 rounded-full bg-[#1a1a25]" />
-    {/* Home indicator */}
-    <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-20 h-1 rounded-full bg-white/20" />
-    {/* Screen */}
-    <div className="absolute inset-[10px] rounded-[36px] overflow-hidden bg-[#080810]">
+    <div className="absolute -left-[2px] top-[17%] w-[2px] h-[6%] rounded-l-sm bg-[#2a2a35]" />
+    <div className="absolute -left-[2px] top-[26%] w-[2px] h-[9%] rounded-l-sm bg-[#2a2a35]" />
+    <div className="absolute -right-[2px] top-[20%] w-[2px] h-[10%] rounded-r-sm bg-[#2a2a35]" />
+    {/* Speaker notch — scaled down to a modern pill, not a 2008 grille */}
+    <div className="absolute top-[2.5%] left-1/2 -translate-x-1/2 w-10 h-1 rounded-full bg-[#1a1a25]" />
+    {/* Home indicator — likewise */}
+    <div className="absolute bottom-[1.5%] left-1/2 -translate-x-1/2 w-10 h-1 rounded-full bg-white/20" />
+    {/* Screen — thin bezel margin instead of a thick 10px collar */}
+    <div className="absolute inset-[5px] rounded-[35px] overflow-hidden bg-[#080810]">
       {children}
     </div>
   </div>
