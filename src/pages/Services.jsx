@@ -549,11 +549,12 @@ const Services = () => {
         <title>Web Development & AI Integration Services | Huntsville, AL | OchAI</title>
         <link rel="canonical" href="https://ochai.dev/services" />
         <meta name="description" content="Custom web development, AI integration, and SEO in Huntsville AL. Guaranteed Lighthouse 100. Free discovery call." />
-        <meta name="keywords" content="web development Huntsville AL, website developer Huntsville Alabama, small business website Huntsville, AI integration, Lighthouse 100, local SEO Huntsville, React developer, custom web design North Alabama" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/services" />
         <meta property="og:title" content="Web Development & AI Integration Services | Huntsville AL | OchAI" />
         <meta property="og:description" content="Fast, measurable, maintainable websites. Guaranteed Lighthouse 100. Free discovery call." />
+        <meta property="og:image" content="https://ochai.dev/images/parallax/earth.avif" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{servicesJsonLd}</script>
         <style>{KEYFRAME_CSS}</style>
       </Helmet>

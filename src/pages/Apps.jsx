@@ -9,6 +9,13 @@ const ASSETS = {
   accompaniment: '/images/accompaniment.avif',
   collective: '/images/collective.avif',
 };
+// Wordmark art, transparent background — feeds AppInterior (inside the
+// phone) exclusively. GenieSidebar keeps the photographic ASSETS above.
+const TEXT_ASSETS = {
+  soloist: '/images/soloist-text.avif',
+  accompaniment: '/images/accompaniment-text.avif',
+  collective: '/images/collective-text.avif',
+};
 
 const TIERS = [
   {
@@ -16,24 +23,26 @@ const TIERS = [
     tagline: 'One builder, one clear scope.',
     description: 'Fastest path from idea to something real. Full-stack build, startup branding included.',
     features: ['Single-purpose app build', 'Startup branding included', 'Direct line to the builder'],
-    image: ASSETS.collective,
+    image: ASSETS.soloist, textImage: TEXT_ASSETS.soloist,
   },
   {
     key: 'accompaniment', label: 'Accompaniment', name: 'The Accompaniment', price: '$14,500',
     tagline: 'Built together, not handed off.',
     description: 'Real workflows, more surface area, still one person answering the phone.',
     features: ['Multi-feature app build', 'Workflow / API integrations', 'AI where it earns its keep'],
-    image: ASSETS.accompaniment,
+    image: ASSETS.accompaniment, textImage: TEXT_ASSETS.accompaniment,
   },
   {
     key: 'collective', label: 'Collective', name: 'The Collective', price: '$38,500',
     priceSuffix: '+ $500/mo', tagline: 'The full arrangement, maintained.',
     description: 'Architecture, integration, retainer. Keeps working after launch instead of quietly rotting.',
     features: ['Full-scope custom app', 'Ongoing $500/mo retainer', 'Priority response window'],
-    image: ASSETS.soloist,
+    image: ASSETS.collective, textImage: TEXT_ASSETS.collective,
   },
 ];
 
+// Derived from TIERS, not hand-duplicated — prices/descriptions here can't
+// drift out of sync with the actual page content, because it's the same data.
 const appsJsonLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'Service',
   serviceType: 'Custom App Development',
@@ -41,17 +50,18 @@ const appsJsonLd = JSON.stringify({
   url: 'https://ochai.dev/apps',
   hasOfferCatalog: {
     '@type': 'OfferCatalog', name: 'App Development Tiers',
-    itemListElement: [
-      { '@type': 'Offer', name: 'The Soloist',
-        priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '4500', priceCurrency: 'USD' } },
-      { '@type': 'Offer', name: 'The Accompaniment',
-        priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '14500', priceCurrency: 'USD' } },
-      { '@type': 'Offer', name: 'The Collective',
-        priceSpecification: [
-          { '@type': 'UnitPriceSpecification', minPrice: '38500', priceCurrency: 'USD' },
-          { '@type': 'PaymentChargeSpecification', price: '500', priceCurrency: 'USD', billingIncrement: 'P1M' },
-        ] },
-    ],
+    itemListElement: TIERS.map(t => {
+      const priceSpecification = t.priceSuffix
+        ? [
+            { '@type': 'UnitPriceSpecification', minPrice: t.price.replace(/\D/g, ''), priceCurrency: 'USD' },
+            { '@type': 'PaymentChargeSpecification', price: t.priceSuffix.replace(/\D/g, ''), priceCurrency: 'USD', billingIncrement: 'P1M' },
+          ]
+        : { '@type': 'UnitPriceSpecification', minPrice: t.price.replace(/\D/g, ''), priceCurrency: 'USD' };
+      return {
+        '@type': 'Offer', name: t.name, description: `${t.tagline} ${t.description}`,
+        image: `https://ochai.dev${t.image}`, priceSpecification,
+      };
+    }),
   },
 });
 
@@ -122,11 +132,11 @@ const AppInterior = ({ activeTier, onSelectTier }) => {
               <button key={t.key} onClick={() => onSelectTier(t.key)}
                 className="w-full text-left rounded-xl border border-slate-200 bg-white hover:border-amber-400 hover:shadow-md transition-all overflow-hidden">
                 <div className="px-3 py-2.5">
-                  <div className="flex items-baseline justify-between">
-                    <span className="text-xs font-bold text-slate-900">{t.name}</span>
-                    <span className="text-xs font-black text-amber-600">{t.price}</span>
+                  <div className="flex items-center justify-between gap-2">
+                    <img src={t.textImage} alt={t.name} className="h-4 w-auto object-contain" />
+                    <span className="text-xs font-black text-amber-600 flex-shrink-0">{t.price}</span>
                   </div>
-                  <p className="text-[10px] text-slate-400 mt-0.5">{t.tagline}</p>
+                  <p className="text-[10px] text-slate-400 mt-1">{t.tagline}</p>
                 </div>
               </button>
             ))}
@@ -134,13 +144,13 @@ const AppInterior = ({ activeTier, onSelectTier }) => {
         ) : (
           // Tier detail
           <div className="p-4">
-            <div className="h-24 w-full rounded-xl mb-3 bg-gradient-to-br from-amber-100 to-stone-100"
-              style={{ backgroundImage: `url(${tier.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+            <div className="h-16 w-full rounded-xl mb-3 bg-gradient-to-br from-amber-50 to-stone-50 flex items-center justify-center">
+              <img src={tier.textImage} alt={tier.name} className="h-10 w-auto object-contain" />
+            </div>
             <p className="text-[10px] font-black text-amber-600">{tier.price}
               {tier.priceSuffix && <span className="text-slate-400 font-normal ml-1">{tier.priceSuffix}</span>}
             </p>
             <p className="text-[9px] text-slate-400">+/- final scope dependent</p>
-            <h3 className="text-sm font-bold text-slate-900 mt-1">{tier.name}</h3>
             <p className="text-[11px] text-slate-500 mt-1 leading-snug">{tier.tagline}</p>
             <p className="text-[10px] text-slate-400 mt-2 leading-relaxed">{tier.description}</p>
             <ul className="mt-3 space-y-1.5">
@@ -381,6 +391,23 @@ const Apps = () => {
           <h1 className="absolute top-8 left-1/2 text-white/70 text-lg font-bold tracking-tight pointer-events-none select-none">
             Deliberate Pricing, Expert Build.
           </h1>
+          {/* Full pitch, always in the DOM regardless of phase/activeTier.
+              The real copy — tagline, description, features — otherwise
+              only exists behind a fingerprint tap and a tier click, which
+              no crawler is going to perform. This is the fallback that
+              guarantees it's indexable on first paint either way. */}
+          <div className="sr-only">
+            {TIERS.map(t => (
+              <section key={t.key}>
+                <h2>{t.name} — {t.price}{t.priceSuffix ? ` ${t.priceSuffix}` : ''}</h2>
+                <p>{t.tagline}</p>
+                <p>{t.description}</p>
+                <ul>
+                  {t.features.map(f => <li key={f}>{f}</li>)}
+                </ul>
+              </section>
+            ))}
+          </div>
         </div>
       </>
     );
@@ -426,6 +453,18 @@ const Apps = () => {
           />
         )}
         <h1 className="sr-only">Deliberate Pricing, Expert Build.</h1>
+        <div className="sr-only">
+          {TIERS.map(t => (
+            <section key={t.key}>
+              <h2>{t.name} — {t.price}{t.priceSuffix ? ` ${t.priceSuffix}` : ''}</h2>
+              <p>{t.tagline}</p>
+              <p>{t.description}</p>
+              <ul>
+                {t.features.map(f => <li key={f}>{f}</li>)}
+              </ul>
+            </section>
+          ))}
+        </div>
       </div>
     </>
   );
