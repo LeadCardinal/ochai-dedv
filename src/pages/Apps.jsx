@@ -132,9 +132,13 @@ const AppInterior = ({ activeTier, onSelectTier }) => {
               <button key={t.key} onClick={() => onSelectTier(t.key)}
                 className="w-full text-left rounded-xl border border-slate-200 bg-white hover:border-amber-400 hover:shadow-md transition-all overflow-hidden">
                 <div className="px-3 py-2.5">
-                  <div className="flex items-center justify-between gap-2">
-                    <img src={t.textImage} alt={t.name} className="h-4 w-auto object-contain" />
-                    <span className="text-xs font-black text-amber-600 flex-shrink-0">{t.price}</span>
+                  {/* Full width of the device's own screen — same rule whether
+                      that screen is the small desktop mockup or the real
+                      viewport on an actual phone. It's the same component
+                      either way, so no breakpoint split belongs here. */}
+                  <div className="flex flex-col gap-1">
+                    <img src={t.textImage} alt={t.name} className="w-full h-auto object-contain" />
+                    <span className="text-xs font-black text-amber-600">{t.price}</span>
                   </div>
                   <p className="text-[10px] text-slate-400 mt-1">{t.tagline}</p>
                 </div>
@@ -144,8 +148,8 @@ const AppInterior = ({ activeTier, onSelectTier }) => {
         ) : (
           // Tier detail
           <div className="p-4">
-            <div className="h-16 w-full rounded-xl mb-3 bg-gradient-to-br from-amber-50 to-stone-50 flex items-center justify-center">
-              <img src={tier.textImage} alt={tier.name} className="h-10 w-auto object-contain" />
+            <div className="w-full rounded-xl mb-3 bg-gradient-to-br from-amber-50 to-stone-50 flex items-center justify-center overflow-hidden">
+              <img src={tier.textImage} alt={tier.name} className="w-full h-auto object-contain" />
             </div>
             <p className="text-[10px] font-black text-amber-600">{tier.price}
               {tier.priceSuffix && <span className="text-slate-400 font-normal ml-1">{tier.priceSuffix}</span>}
@@ -200,7 +204,7 @@ const GenieSidebar = ({ tier, onClose, phoneRef }) => {
     });
   };
   return (
-    <div ref={sidebarRef} className="absolute top-1/2 -translate-y-1/2 left-full ml-2 w-[560px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100 z-10">
+    <div ref={sidebarRef} className="absolute top-1/2 -translate-y-1/2 left-full ml-2 w-[760px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100 z-10">
       <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
         <div className="flex items-center gap-3">
           <img src={LOGO} alt="OchAI" className="w-7 h-7 object-contain" />
@@ -213,10 +217,13 @@ const GenieSidebar = ({ tier, onClose, phoneRef }) => {
           <X className="w-5 h-5" />
         </button>
       </div>
-      <div className="grid grid-cols-2 gap-0">
+      {/* grid-cols-[420px_1fr]: image column sized to its actual asset (750×448,
+          ~1.67:1), not an arbitrary 50/50 split — that's what let the old box
+          crop the photo instead of showing what you widened it to show. */}
+      <div className="grid grid-cols-[420px_1fr] gap-0">
         <div className="p-6 border-r border-slate-100">
-          <div className="h-48 rounded-xl mb-4 bg-gradient-to-br from-amber-100 to-stone-100"
-            style={{ backgroundImage: `url(${tier.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          <img src={tier.image} alt={tier.name}
+            className="w-full aspect-[750/448] object-cover rounded-xl mb-4" />
           <p className="text-2xl font-black text-amber-600">{tier.price}
             {tier.priceSuffix && <span className="text-sm font-normal text-slate-400 ml-1">{tier.priceSuffix}</span>}
           </p>
