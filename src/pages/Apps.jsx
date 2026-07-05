@@ -161,11 +161,11 @@ const AppInterior = ({ activeTier, onSelectTier }) => {
       </div>
 
       {/* Bottom tab bar — always present after unlock */}
-      <div className="flex border-t border-slate-100 bg-white flex-shrink-0">
+      <div className="flex border-t border-black/80 bg-black flex-shrink-0">
         {TIERS.map(t => (
           <button key={t.key} onClick={() => onSelectTier(t.key, 'tab')}
             className={['flex-1 flex flex-col items-center py-2 gap-0.5 transition-colors text-[9px]',
-              activeTier === t.key ? 'text-amber-500' : 'text-slate-400'].join(' ')}>
+              activeTier === t.key ? 'text-amber-400' : 'text-white'].join(' ')}>
             <div className={['w-1 h-1 rounded-full mb-0.5', activeTier === t.key ? 'bg-amber-400' : 'bg-transparent'].join(' ')} />
             {t.label}
           </button>
