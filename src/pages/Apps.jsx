@@ -394,6 +394,20 @@ const Apps = () => {
               />
             )}
           </div>
+          {/* Ambient backdrop — a normal flex sibling taking whatever space
+              is left after the phone, not an absolutely-positioned box with
+              hand-measured coordinates. That means it never needs updating
+              again if the phone or GenieSidebar's width changes later —
+              flexbox does the math this time, not me. self-stretch fills
+              the full container height (the flex row itself uses
+              items-start, so height doesn't come for free otherwise);
+              object-contain keeps the flowchart intact at any width instead
+              of cropping it to fit. GenieSidebar (z-10) paints over this
+              when a tier's open, same as you described. */}
+          <div className="flex-1 self-stretch flex items-center justify-center overflow-hidden">
+            <img src="/images/app-flow-beige.avif" alt=""
+              className="max-w-full max-h-full object-contain opacity-80 pointer-events-none select-none" />
+          </div>
           {/* H1 visible to crawlers, visually positioned top-left of dark space */}
           <h1 className="absolute top-8 left-1/2 text-white/70 text-lg font-bold tracking-tight pointer-events-none select-none">
             Deliberate Pricing, Expert Build.
