@@ -121,9 +121,7 @@ const AppInterior = ({ activeTier, onSelectTier }) => {
             {TIERS.map(t => (
               <button key={t.key} onClick={() => onSelectTier(t.key)}
                 className="w-full text-left rounded-xl border border-slate-200 bg-white hover:border-amber-400 hover:shadow-md transition-all overflow-hidden">
-                <div className="h-16 w-full bg-gradient-to-br from-amber-100 to-stone-100"
-                  style={{ backgroundImage: `url(${t.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-                <div className="px-3 py-2">
+                <div className="px-3 py-2.5">
                   <div className="flex items-baseline justify-between">
                     <span className="text-xs font-bold text-slate-900">{t.name}</span>
                     <span className="text-xs font-black text-amber-600">{t.price}</span>
@@ -359,7 +357,7 @@ const Apps = () => {
         <div className="relative flex items-start bg-[#0a0a0f] pl-16"
           style={{
             minHeight: '100dvh',
-            paddingTop: headerCleared ? '0px' : '75px',
+            paddingTop: headerCleared ? '24px' : '75px',
             transition: 'padding-top 600ms ease',
           }}>
           {/* Phone mockup — left, vertically centered */}
@@ -380,7 +378,7 @@ const Apps = () => {
             )}
           </div>
           {/* H1 visible to crawlers, visually positioned top-left of dark space */}
-          <h1 className="absolute top-8 left-1/2 text-white/10 text-lg font-bold tracking-tight pointer-events-none select-none">
+          <h1 className="absolute top-8 left-1/2 text-white/70 text-lg font-bold tracking-tight pointer-events-none select-none">
             Deliberate Pricing, Expert Build.
           </h1>
         </div>
