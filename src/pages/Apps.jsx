@@ -404,7 +404,7 @@ const Apps = () => {
               object-contain keeps the flowchart intact at any width instead
               of cropping it to fit. GenieSidebar (z-10) paints over this
               when a tier's open, same as you described. */}
-          <div className="flex-1 self-stretch flex items-center justify-center overflow-hidden">
+          <div className="flex-1 self-stretch min-h-0 flex items-center justify-center overflow-hidden">
             <img src="/images/app-flow-beige.avif" alt=""
               className="max-w-full max-h-full object-contain opacity-80 pointer-events-none select-none" />
           </div>
