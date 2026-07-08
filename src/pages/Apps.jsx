@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Fingerprint, Check, X, ChevronRight } from 'lucide-react';
+import { Fingerprint, Check, X, ChevronRight, Signal, BatteryFull, MessageSquare, MessageCircle } from 'lucide-react';
 import { gsap } from 'gsap';
 
 const LOGO = '/images/ochai-header-logo.avif';
@@ -78,8 +78,26 @@ function useMatchMedia(query) {
   return matches;
 }
 
+// Real time, tuned to the minute rather than the second — a status bar
+// clock earns nothing from re-rendering 60x more often than it visibly changes.
+function useLiveClock() {
+  const [time, setTime] = useState(() => new Date());
+  useEffect(() => {
+    const msToNextMinute = (60 - new Date().getSeconds()) * 1000;
+    const aligner = setTimeout(() => {
+      setTime(new Date());
+    }, msToNextMinute);
+    const interval = setInterval(() => setTime(new Date()), 60000);
+    return () => { clearTimeout(aligner); clearInterval(interval); };
+  }, []);
+  let hours = time.getHours() % 12;
+  if (hours === 0) hours = 12;
+  return `${hours}:${String(time.getMinutes()).padStart(2, '0')}`;
+}
+
 // LockScreen — dark glass, logo centered, fingerprint bottom-third
 const LockScreen = ({ onUnlock }) => {
+  const clock = useLiveClock();
   const fpRef = useRef(null);
   const handleTap = () => {
     const tl = gsap.timeline({ onComplete: onUnlock });
@@ -89,9 +107,19 @@ const LockScreen = ({ onUnlock }) => {
   };
   return (
     <div className="relative flex flex-col items-center justify-between w-full h-full bg-[#080810] select-none">
-      {/* Status bar simulation */}
-      <div className="w-full flex justify-between items-center px-5 pt-3 text-[10px] text-white/40 flex-shrink-0">
-        <span>9:41</span><span>●●●</span>
+      {/* Status bar simulation — real clock, iOS-style glyphs */}
+      <div className="w-full flex justify-between items-center px-5 pt-3 text-white/40 flex-shrink-0">
+        <span className="text-[10px] font-medium tracking-wide">{clock}</span>
+        <div className="flex items-center gap-1.5">
+          <MessageSquare className="w-3 h-3" strokeWidth={2} />
+          <span className="relative">
+            <MessageCircle className="w-3 h-3" strokeWidth={2} />
+            <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-amber-400" />
+          </span>
+          <Signal className="w-3 h-3" strokeWidth={2} />
+          <span className="text-[8px] font-bold leading-none">5G<sup className="text-[6px]">UW</sup></span>
+          <BatteryFull className="w-3.5 h-3.5" strokeWidth={1.5} />
+        </div>
       </div>
       {/* Branding */}
       <div className="flex flex-col items-center gap-2 flex-1 justify-center">
