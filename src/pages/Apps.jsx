@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Fingerprint, Check, X, ChevronRight, Signal, BatteryFull, MessageSquare, MessageCircle } from 'lucide-react';
+import { Fingerprint, Check, X, Signal, BatteryFull, MessageSquare, MessageCircle } from 'lucide-react';
 import { gsap } from 'gsap';
 
 const LOGO = '/images/ochai-header-logo.avif';
@@ -13,7 +14,7 @@ const ASSETS = {
 // phone) exclusively. GenieSidebar keeps the photographic ASSETS above.
 const TEXT_ASSETS = {
   soloist: '/images/soloist-text.avif',
-  accompaniment: '/images/accompaniment-text.avif',
+  accompaniment: '/images/accompaniment-text-2.avif',
   collective: '/images/collective-text.avif',
 };
 
@@ -122,8 +123,15 @@ const LockScreen = ({ onUnlock }) => {
         </div>
       </div>
       {/* Branding */}
-      <div className="flex flex-col items-center gap-2 flex-1 justify-center">
-        <img src={LOGO} alt="OchAI" className="w-16 h-16 object-contain drop-shadow-lg" />
+      <div className="flex flex-col items-center gap-2 flex-1 justify-center w-full text-center">
+        <img src={LOGO} alt="OchAI" className="w-48 h-48 object-contain drop-shadow-lg mx-auto"
+          style={{ transform: 'translateX(-18px)' }} />
+        {/* translateX above is a stopgap: pixel-measured from a screenshot,
+            the text and fingerprint button below both land exactly on the
+            phone's true center — this logo file's own artwork sits ~9% of
+            its box right-of-center inside its own canvas. That's a source-
+            asset issue (asymmetric transparent padding), not a layout bug.
+            Re-export the logo centered in its canvas and remove this line. */}
         <span className="text-white/70 text-xs tracking-widest uppercase">OchAI Dev</span>
         <span className="text-white/30 text-[10px] mt-1">Tap to unlock</span>
       </div>
@@ -140,21 +148,24 @@ const LockScreen = ({ onUnlock }) => {
 };
 
 // AppInterior — light app, logo top bar, tier content or home screen, bottom tabs
-const AppInterior = ({ activeTier, onSelectTier }) => {
+const AppInterior = ({ activeTier, onSelectTier, onGoHome }) => {
   const tier = TIERS.find(t => t.key === activeTier);
   return (
     <div className="flex flex-col w-full h-full bg-[#fafaf8] overflow-hidden">
-      {/* Top bar */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-100 flex-shrink-0 bg-white">
-        <img src={LOGO} alt="OchAI" className="w-6 h-6 object-contain" />
-        <span className="text-xs font-bold text-slate-800 tracking-tight">OchAI Dev</span>
-      </div>
+      {/* Top bar — doubles as a home link back to the tier menu, since
+          the tab bar and Explore actions only ever moved you deeper in,
+          never back out. */}
+      <button type="button" onClick={onGoHome}
+        className="flex items-center gap-2 px-4 py-1 border-b border-slate-100 flex-shrink-0 bg-white text-left hover:bg-slate-50 transition-colors">
+        <img src={LOGO} alt="OchAI" className="w-5 h-5 object-contain" />
+        <span className="text-[11px] font-bold text-slate-800 tracking-tight">OchAI Dev</span>
+      </button>
 
       {/* Content — home screen when no tier selected, tier detail otherwise */}
       <div className="flex-1 overflow-y-auto min-h-0">
         {!tier ? (
           // Home screen — 3 CTA buttons
-          <div className="flex flex-col gap-3 p-4">
+          <div className="flex flex-col gap-3 px-4 pb-4 pt-1.5">
             <p className="text-[10px] text-slate-400 text-center mb-1 uppercase tracking-widest">Choose your tier</p>
             {TIERS.map(t => (
               <button key={t.key} onClick={() => onSelectTier(t.key)}
@@ -192,21 +203,21 @@ const AppInterior = ({ activeTier, onSelectTier }) => {
                 </li>
               ))}
             </ul>
-            <button onClick={() => onSelectTier(tier.key)}
-              className="mt-4 w-full flex items-center justify-center gap-1.5 py-2 rounded-lg bg-amber-400 text-[11px] font-bold text-slate-900 hover:bg-amber-300 transition-colors">
-              Explore this tier <ChevronRight className="w-3 h-3" />
-            </button>
           </div>
         )}
       </div>
 
-      {/* Bottom tab bar — always present after unlock */}
-      <div className="flex border-t border-black/80 bg-black flex-shrink-0">
+      {/* Bottom tab bar — tight pills instead of a full-bleed stacked bar.
+          flex-1 + min-w-0 + truncate on each pill so all three always
+          divide the available width exactly; justify-center with
+          natural-width pills was what let the outer two run past the
+          phone's screen edge and get clipped. No background bar — pills
+          float directly on AppInterior's own #fafaf8. */}
+      <div className="flex items-center gap-1 px-2 py-1.5 flex-shrink-0">
         {TIERS.map(t => (
           <button key={t.key} onClick={() => onSelectTier(t.key, 'tab')}
-            className={['flex-1 flex flex-col items-center py-2 gap-0.5 transition-colors text-[9px]',
-              activeTier === t.key ? 'text-amber-400' : 'text-white'].join(' ')}>
-            <div className={['w-1 h-1 rounded-full mb-0.5', activeTier === t.key ? 'bg-amber-400' : 'bg-transparent'].join(' ')} />
+            className={['flex-1 min-w-0 px-1 py-1 rounded-full text-[9px] font-bold text-center truncate transition-colors',
+              activeTier === t.key ? 'bg-amber-400 text-slate-900' : 'bg-slate-200 text-slate-500 hover:bg-slate-300'].join(' ')}>
             {t.label}
           </button>
         ))}
@@ -353,6 +364,21 @@ const MobileExpanded = ({ tier, onClose }) => {
   );
 };
 
+// HomeLink — small always-on escape hatch back to the main site. Fixed to
+// the viewport rather than living inside the phone or the ambient layout,
+// so it renders identically on the desktop mockup and the mobile
+// full-screen layout — zero coordination needed with Header.jsx's own
+// separate mobile/desktop nav logic, and it survives every phase
+// (locked, unlocked, expanded) since it's outside all of that state.
+const HomeLink = () => (
+  <Link
+    to="/"
+    className="fixed top-4 left-4 z-50 text-white/40 hover:text-white/70 text-[10px] font-bold tracking-[0.25em] uppercase transition-colors"
+  >
+    Home
+  </Link>
+);
+
 // Main page component
 const Apps = () => {
   const isMobile = useMatchMedia('(max-width: 768px)');
@@ -377,11 +403,18 @@ const Apps = () => {
   const handleSelectTier = (key, source) => {
     setActiveTier(key);
     // Tab tap from within an already-active tier just switches content.
-    // Anything else — home screen CTA, Explore button — triggers the expand.
+    // Anything else — home screen CTA tap — triggers the expand.
     if (source !== 'tab' || activeTier === null) setPhase('expanded');
   };
 
   const handleClose = () => setPhase('unlocked');
+
+  // The only way back to the three-tier menu — tabs and Explore only
+  // ever moved deeper (tier detail, then expanded), never out.
+  const handleGoHome = () => {
+    setActiveTier(null);
+    setPhase('unlocked');
+  };
 
   // Desktop layout
   if (!isMobile) {
@@ -399,6 +432,7 @@ const Apps = () => {
           <meta name="twitter:card" content="summary_large_image" />
           <script type="application/ld+json">{appsJsonLd}</script>
         </Helmet>
+        <HomeLink />
         <div className="relative flex items-start bg-[#0a0a0f] pl-16"
           style={{
             minHeight: '100dvh',
@@ -410,7 +444,7 @@ const Apps = () => {
             <PhoneMockup>
               {phase === 'locked' && <LockScreen onUnlock={handleUnlock} />}
               {(phase === 'unlocked' || phase === 'expanded') && (
-                <AppInterior activeTier={activeTier} onSelectTier={handleSelectTier} />
+                <AppInterior activeTier={activeTier} onSelectTier={handleSelectTier} onGoHome={handleGoHome} />
               )}
             </PhoneMockup>
             {/* Genie sidebar — absolute to phone, appears right of it */}
@@ -426,15 +460,23 @@ const Apps = () => {
               is left after the phone, not an absolutely-positioned box with
               hand-measured coordinates. That means it never needs updating
               again if the phone or GenieSidebar's width changes later —
-              flexbox does the math this time, not me. self-stretch fills
-              the full container height (the flex row itself uses
-              items-start, so height doesn't come for free otherwise);
-              object-contain keeps the flowchart intact at any width instead
-              of cropping it to fit. GenieSidebar (z-10) paints over this
-              when a tier's open, same as you described. */}
-          <div className="flex-1 self-stretch min-h-0 flex items-center justify-center overflow-hidden">
-            <img src="/images/app-flow-beige.avif" alt=""
-              className="max-w-full max-h-full object-contain opacity-80 pointer-events-none select-none" />
+              flexbox does the math this time, not me. GenieSidebar (z-10)
+              paints over this when a tier's open, same as you described. */}
+          <div className="flex-1 flex items-center justify-center overflow-hidden">
+            {/* Same height clamp() as PhoneMockup, and the image's own
+                aspect ratio (900/475) as the box's aspect-ratio — so
+                object-cover has nothing to crop, it just fills exactly.
+                Matching height + matching corner radius is what makes
+                this read as a matched pair instead of two unrelated
+                shapes sharing a room. */}
+            <div className="relative flex-shrink-0 rounded-[40px] overflow-hidden opacity-80"
+              style={{
+                height: 'clamp(460px, 64dvh, 680px)',
+                aspectRatio: '900 / 475',
+              }}>
+              <img src="/images/app-flow-3.avif" alt=""
+                className="w-full h-full object-cover pointer-events-none select-none" />
+            </div>
           </div>
           {/* H1 visible to crawlers, visually positioned top-left of dark space */}
           <h1 className="absolute top-8 left-1/2 text-white/70 text-lg font-bold tracking-tight pointer-events-none select-none">
@@ -477,6 +519,7 @@ const Apps = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{appsJsonLd}</script>
       </Helmet>
+      <HomeLink />
       {/* Full-screen — the same brief header visibility applies here too;
           it was silently sitting on top of this content before, not "under" it. */}
       <div className="relative overflow-hidden bg-[#0a0a0f]"
@@ -492,7 +535,7 @@ const Apps = () => {
         )}
         {(phase === 'unlocked' || phase === 'expanded') && (
           <div className="w-full h-full bg-[#fafaf8]">
-            <AppInterior activeTier={activeTier} onSelectTier={handleSelectTier} />
+            <AppInterior activeTier={activeTier} onSelectTier={handleSelectTier} onGoHome={handleGoHome} />
           </div>
         )}
         {phase === 'expanded' && (

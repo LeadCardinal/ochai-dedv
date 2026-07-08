@@ -105,17 +105,27 @@ const Header = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
 
-          {/* Services — client funnel */}
-          <Link to="/services">
-            <motion.span
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors cursor-pointer inline-block"
-            >
-              Services
-            </motion.span>
-          </Link>
+          {/* Services — dropdown: website vs app development funnels */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <motion.button
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.05 }}
+                className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
+              >
+                Services <ChevronDown className="w-4 h-4" />
+              </motion.button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-slate-900 border-slate-800 text-white min-w-[200px]">
+              <DropdownMenuItem className="focus:bg-slate-800 focus:text-emerald-400 cursor-pointer" asChild>
+                <Link to="/services" className="w-full text-left">Website Development</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-800 focus:text-emerald-400 cursor-pointer" asChild>
+                <Link to="/apps" className="w-full text-left">App Development</Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           {/* Showcase */}
           <Link to="/showcase">
@@ -237,12 +247,20 @@ const Header = () => {
             className="absolute top-full left-0 right-0 bg-slate-950/98 backdrop-blur-md md:hidden min-h-screen shadow-2xl"
           >
             <div className="flex flex-col p-4 gap-4">
+              <p className="text-xs font-semibold text-emerald-400/70 uppercase tracking-widest">Services</p>
               <Link
                 to="/services"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-left text-emerald-400 hover:text-emerald-300 font-medium transition-colors py-2 text-lg"
+                className="text-left text-emerald-400 hover:text-emerald-300 font-medium transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800 hover:border-emerald-500"
               >
-                Services
+                Website Development
+              </Link>
+              <Link
+                to="/apps"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-emerald-400 hover:text-emerald-300 font-medium transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800 hover:border-emerald-500"
+              >
+                App Development
               </Link>
               <Link
                 to="/showcase"
