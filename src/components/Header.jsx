@@ -24,6 +24,19 @@ const Header = () => {
   const { toast } = useToast();
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Without this, scrolling the (very long) mobile menu list scrolled the
+  // real page underneath it instead — the menu panel would grow taller
+  // than min-h-screen, body scroll kicked in, and backdrop-blur ended up
+  // blurring the wrong thing relative to where the panel actually sat.
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
   // SSG output serves this as /apps/index.html, so the real pathname the
   // browser hands back is "/apps/" — trailing slash and all. Strip it
   // before comparing, or this check silently never fires again.
@@ -64,17 +77,27 @@ const Header = () => {
     return () => clearTimeout(timer);
   }, [isSelfDismissing, location.pathname]);
 
+  // A flat setTimeout here was a race — 100ms was a guess at how long
+  // Home would take to render the target section after navigate("/"),
+  // and when it guessed wrong the scroll silently no-op'd. This retries
+  // every 50ms (up to 2s) until the element actually exists, so it works
+  // regardless of how long that render actually takes.
+  const scrollToId = (id, attempt = 0) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    } else if (attempt < 40) {
+      setTimeout(() => scrollToId(id, attempt + 1), 50);
+    }
+  };
+
   const handleNavigation = (id) => {
     setIsMobileMenuOpen(false);
     if (location.pathname !== "/") {
       navigate("/");
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) element.scrollIntoView({ behavior: "smooth" });
-      }, 100);
+      scrollToId(id);
     } else {
-      const element = document.getElementById(id);
-      if (element) element.scrollIntoView({ behavior: "smooth" });
+      scrollToId(id);
     }
   };
 
@@ -244,7 +267,7 @@ const Header = () => {
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 300 }}
-            className="absolute top-full left-0 right-0 bg-slate-950/98 backdrop-blur-md md:hidden min-h-screen shadow-2xl"
+            className="fixed top-[82px] left-0 right-0 bottom-0 bg-slate-950/98 backdrop-blur-md md:hidden overflow-y-auto shadow-2xl"
           >
             <div className="flex flex-col p-4 gap-4">
               <p className="text-xs font-semibold text-emerald-400/70 uppercase tracking-widest">Services</p>
