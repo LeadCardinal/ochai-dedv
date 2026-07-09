@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Fingerprint, Check, X, Signal, BatteryFull, MessageSquare, MessageCircle } from 'lucide-react';
+import { Fingerprint, Check, X, Signal, BatteryFull, MessageSquare, MessageCircle, Home } from 'lucide-react';
 import { gsap } from 'gsap';
 
 const LOGO = '/images/ochai-header-logo.avif';
@@ -152,14 +152,22 @@ const AppInterior = ({ activeTier, onSelectTier, onGoHome }) => {
   const tier = TIERS.find(t => t.key === activeTier);
   return (
     <div className="flex flex-col w-full h-full bg-[#fafaf8] overflow-hidden">
-      {/* Top bar — doubles as a home link back to the tier menu, since
-          the tab bar and Explore actions only ever moved you deeper in,
-          never back out. */}
-      <button type="button" onClick={onGoHome}
-        className="flex items-center gap-2 px-4 py-1 border-b border-slate-100 flex-shrink-0 bg-white text-left hover:bg-slate-50 transition-colors">
-        <img src={LOGO} alt="OchAI" className="w-5 h-5 object-contain" />
-        <span className="text-[11px] font-bold text-slate-800 tracking-tight">OchAI Dev</span>
-      </button>
+      {/* Top bar — logo/text on the left resets to the app's own tier
+          menu (internal "home"). The house icon on the right is a
+          different thing entirely: it leaves the mockup and goes to the
+          real ochai.dev homepage. Two distinct actions, kept visually
+          distinct so neither reads as doing the other's job. */}
+      <div className="flex items-center justify-between px-4 py-1 border-b border-slate-100 flex-shrink-0 bg-white">
+        <button type="button" onClick={onGoHome}
+          className="flex items-center gap-2 text-left hover:opacity-70 transition-opacity">
+          <img src={LOGO} alt="OchAI" className="w-5 h-5 object-contain" />
+          <span className="text-[11px] font-bold text-slate-800 tracking-tight">OchAI Dev</span>
+        </button>
+        <Link to="/" aria-label="Back to ochai.dev homepage"
+          className="text-slate-900 hover:opacity-60 transition-opacity">
+          <Home className="w-4 h-4" strokeWidth={2.25} />
+        </Link>
+      </div>
 
       {/* Content — home screen when no tier selected, tier detail otherwise */}
       <div className="flex-1 overflow-y-auto min-h-0">
@@ -344,8 +352,13 @@ const MobileExpanded = ({ tier, onClose }) => {
         <button onClick={handleClose}><X className="w-5 h-5 text-slate-400" /></button>
       </div>
       <div className="p-5">
-        <div className="h-40 rounded-xl mb-4 bg-gradient-to-br from-amber-100 to-stone-100"
-          style={{ backgroundImage: `url(${tier.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        {/* Same aspect-[750/448] technique GenieSidebar uses on desktop —
+            matching the box's shape to the image's own native ratio means
+            object-cover has nothing to crop. The old h-40 fixed-height
+            box forced a wider-than-tall container onto a taller-than-wide
+            image, cropping top and bottom to force the fit. */}
+        <img src={tier.image} alt={tier.name}
+          className="w-full aspect-[750/448] object-cover rounded-xl mb-4" />
         <p className="text-2xl font-black text-amber-600">{tier.price}
           {tier.priceSuffix && <span className="text-sm font-normal text-slate-400 ml-1">{tier.priceSuffix}</span>}
         </p>
@@ -363,21 +376,6 @@ const MobileExpanded = ({ tier, onClose }) => {
     </div>
   );
 };
-
-// HomeLink — small always-on escape hatch back to the main site. Fixed to
-// the viewport rather than living inside the phone or the ambient layout,
-// so it renders identically on the desktop mockup and the mobile
-// full-screen layout — zero coordination needed with Header.jsx's own
-// separate mobile/desktop nav logic, and it survives every phase
-// (locked, unlocked, expanded) since it's outside all of that state.
-const HomeLink = () => (
-  <Link
-    to="/"
-    className="fixed top-4 left-4 z-50 text-white/40 hover:text-white/70 text-[10px] font-bold tracking-[0.25em] uppercase transition-colors"
-  >
-    Home
-  </Link>
-);
 
 // Main page component
 const Apps = () => {
@@ -432,7 +430,6 @@ const Apps = () => {
           <meta name="twitter:card" content="summary_large_image" />
           <script type="application/ld+json">{appsJsonLd}</script>
         </Helmet>
-        <HomeLink />
         <div className="relative flex items-start bg-[#0a0a0f] pl-16"
           style={{
             minHeight: '100dvh',
@@ -519,7 +516,6 @@ const Apps = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{appsJsonLd}</script>
       </Helmet>
-      <HomeLink />
       {/* Full-screen — the same brief header visibility applies here too;
           it was silently sitting on top of this content before, not "under" it. */}
       <div className="relative overflow-hidden bg-[#0a0a0f]"
