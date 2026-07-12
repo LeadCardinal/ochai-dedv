@@ -14,3 +14,10 @@
 
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
+
+# Catch-all for documents served via clean URLs (e.g. /apps/, /services/) —
+# the /*.html rule above only matches literal .html paths, which this site
+# never actually requests, so without this, HTML silently fell through to
+# Cloudflare Pages' default long-lived cache instead of revalidating.
+/*
+  Cache-Control: public, max-age=0, must-revalidate
