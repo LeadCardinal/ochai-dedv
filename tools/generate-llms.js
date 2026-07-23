@@ -24,8 +24,8 @@ const EXTRACTION_REGEX = {
   element: /element=\{\s*<(\w+)[^}]*\/?\s*>\s*\}/,
   helmet: /<Helmet[^>]*?>([\s\S]*?)<\/Helmet>/i,
   helmetTest: /<Helmet[\s\S]*?<\/Helmet>/i,
-  title: /<title[^>]*?>\s*(.*?)\s*<\/title>/i,
-  description: /<meta\s+name=["']description["']\s+content=["'](.*?)["']/i
+  title: /<title[^>]*?>([\s\S]*?)<\/title>/i,
+  description: /<meta\s+name=["']description["']\s+content=["']([\s\S]*?)["']/i
 };
 
 function cleanContent(content) {
@@ -45,6 +45,7 @@ function cleanText(text) {
     .replace(CLEAN_CONTENT_REGEX.htmlEntities.lt, '<')
     .replace(CLEAN_CONTENT_REGEX.htmlEntities.gt, '>')
     .replace(CLEAN_CONTENT_REGEX.htmlEntities.apos, "'")
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
@@ -111,13 +112,16 @@ function generateFallbackUrl(fileName) {
   return cleanName === 'app' ? '/' : `/${cleanName}`;
 }
 
+const SITE_NAME = 'OchAI';
+const SITE_TAGLINE = 'AI implementation specialist and full-stack developer based in Huntsville, Alabama — Claude API, Adobe Firefly, and ElevenLabs integration, with verifiable Lighthouse-score results across production sites.';
+
 function generateLlmsTxt(pages) {
   const sortedPages = pages.sort((a, b) => a.title.localeCompare(b.title));
   const pageEntries = sortedPages.map(page => 
     `- [${page.title}](${page.url}): ${page.description}`
   ).join('\n');
   
-  return `## Pages\n${pageEntries}`;
+  return `# ${SITE_NAME}\n\n> ${SITE_TAGLINE}\n\n## Pages\n${pageEntries}\n`;
 }
 
 function ensureDirectoryExists(dirPath) {
