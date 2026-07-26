@@ -247,6 +247,7 @@ const CaseStudyBonsai = () => {
           name="description"
           content="Comprehensive SEO case study for reallivebonsai.us showing 12-month organic growth: 1000+ clicks, 48k+ impressions, and 21.3 average search position without paid advertising."
         />
+        <link rel="canonical" href="https://ochai.dev/case-study/reallivebonsai" />
       </Helmet>
 
       <div className="container mx-auto px-4">

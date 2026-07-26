@@ -178,6 +178,7 @@ const CaseStudyHsvDrone = () => {
           name="description"
           content="SEO case study for hsvdrone.com showcasing rapid growth to Google Page 1 rankings (Position 9.0) in less than 30 days."
         />
+        <link rel="canonical" href="https://ochai.dev/case-study/hsvdrone" />
       </Helmet>
 
       <div className="container mx-auto px-4">

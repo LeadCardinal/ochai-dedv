@@ -79,6 +79,7 @@ const CaseStudyMeanings = () => {
           name="description"
           content="Technical analysis of a top 1% globally ranked website achieving perfect 100/100 Accessibility & SEO scores and 95/100 Performance on Google Lighthouse."
         />
+        <link rel="canonical" href="https://ochai.dev/case-study/themeaningsoflife" />
       </Helmet>
 
       <div className="container mx-auto px-4">
