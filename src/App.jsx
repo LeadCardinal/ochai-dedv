@@ -21,6 +21,31 @@ import CaseStudyHsvDrone from "@/pages/CaseStudyHsvDrone";
 import CaseStudyMeanings from "@/pages/CaseStudyMeanings";
 import Showcase from "@/pages/Showcase";
 
+// Minimal inline 404 — renders a noindex tag for any client-side navigation
+// to an unrecognized path. Cloudflare's public/404.html covers the direct-hit
+// (real HTTP 404) case; this covers crawlers/users hitting the path via the
+// already-loaded SPA shell.
+function NotFound() {
+  React.useEffect(() => {
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
+    document.head.appendChild(meta);
+    return () => document.head.removeChild(meta);
+  }, []);
+  return (
+    <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold mb-2">404</h1>
+        <p className="text-slate-400 mb-6">That page doesn't exist.</p>
+        <a href="/" className="border border-slate-600 rounded px-6 py-2 hover:border-slate-400 transition-colors">
+          Back to ochai.dev
+        </a>
+      </div>
+    </div>
+  );
+}
+
 // Lazy imports — not prerendered, fine to split
 const VideoPage = React.lazy(() => import("@/pages/VideoPage"));
 const LogoSphere = React.lazy(() => import("@/pages/LogoSphere"));
@@ -97,6 +122,7 @@ const AppContent = () => {
               <Route path="/showcase" element={<Showcase />} />
               <Route path="/logos" element={<LogoSphere />} />
               <Route path="/preview" element={<PreviewPage />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </React.Suspense>
         </main>
