@@ -11,6 +11,7 @@
 
 import { createServer } from 'vite';
 import { renderToStaticMarkup } from 'react-dom/server';
+
 import React from 'react';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
@@ -88,12 +89,28 @@ try {
   });
 
   const { default: App } = await vite.ssrLoadModule('/src/App.jsx');
+  // Must load react-helmet through the SAME Vite SSR module graph the app
+  // itself uses - a plain top-level `import` resolves to a *different*
+  // module instance, and react-helmet's side-effect state is a per-instance
+  // singleton, so a separately-imported copy never sees what the app
+  // registered during render. This was the actual bug.
+  const { Helmet } = await vite.ssrLoadModule('react-helmet');
 
   const html = renderToStaticMarkup(
     React.createElement(App, { ssrLocation: route })
   );
 
-  process.stdout.write(html);
+  // Helmet's side-effect model finishes collecting once render completes -
+  // renderStatic() must be called AFTER renderToStaticMarkup, not before.
+  const helmet = Helmet.renderStatic();
+  const head = {
+    title: helmet.title.toString(),
+    meta: helmet.meta.toString(),
+    link: helmet.link.toString(),
+    script: helmet.script.toString(),
+  };
+
+  process.stdout.write(JSON.stringify({ body: html, head }));
   await vite.close();
   process.exit(0);
 } catch (err) {

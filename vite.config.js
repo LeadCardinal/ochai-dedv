@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import prerenderPlugin from './plugins/vite-plugin-prerender.js';
 
 const PRERENDER_ROUTES = [
+  '/',
   '/services',
   '/apps',
   '/biography',

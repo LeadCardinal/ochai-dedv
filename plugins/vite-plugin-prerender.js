@@ -57,12 +57,51 @@ export default function prerenderPlugin(routes = []) {
           continue;
         }
 
-        const rendered = result.stdout.trim();
+        let parsed;
+        try {
+          parsed = JSON.parse(result.stdout.trim());
+        } catch (e) {
+          console.warn(`[prerender] WARN: ${route} - could not parse worker output as JSON, writing shell only`);
+          continue;
+        }
 
-        const out = shell.replace(
+        let out = shell.replace(
           '<div id="root"></div>',
-          `<div id="root">${rendered}</div>`
+          `<div id="root">${parsed.body}</div>`
         );
+
+        // Strip the shell's default page-specific tags so this route's own
+        // Helmet output replaces them instead of stacking duplicates.
+        out = out.replace(/<title>[\s\S]*?<\/title>/, '');
+        out = out.replace(/<meta name="description"[^>]*>\s*/, '');
+        out = out.replace(/<meta property="og:title"[^>]*>\s*/, '');
+        out = out.replace(/<meta property="og:description"[^>]*>\s*/, '');
+        out = out.replace(/<meta name="twitter:title"[^>]*>\s*/, '');
+        out = out.replace(/<meta name="twitter:description"[^>]*>\s*/, '');
+        out = out.replace(/<link rel="canonical"[^>]*>\s*/, '');
+
+        const canonicalUrl = route === '/' ? 'https://ochai.dev/' : `https://ochai.dev${route}/`;
+        const pageHasCanonical = parsed.head.link && parsed.head.link.includes('rel="canonical"');
+        const canonicalTag = pageHasCanonical ? '' : `<link rel="canonical" href="${canonicalUrl}" />`;
+        const helmetHead = [
+          parsed.head.title,
+          parsed.head.meta,
+          parsed.head.link,
+          canonicalTag,
+        ].filter(Boolean).join('\n\t\t');
+
+        if (out.includes('<!-- VideoObject Structured Data')) {
+          out = out.replace(
+            '<!-- VideoObject Structured Data',
+            `${helmetHead}\n\n\t\t<!-- VideoObject Structured Data`
+          );
+        } else {
+          out = out.replace('</head>', `${helmetHead}\n\t</head>`);
+        }
+
+        if (parsed.head.script) {
+          out = out.replace('</head>', `${parsed.head.script}\n\t</head>`);
+        }
 
         const routeDir = join(outDir, route.replace(/^\//, ''));
         mkdirSync(routeDir, { recursive: true });
