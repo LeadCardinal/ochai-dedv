@@ -62,6 +62,16 @@ const About = () => {
             deployment. This is what elite execution looks like when you refuse
             to compromise on either technical excellence or business outcomes.
           </p>
+          <p className="text-lg text-slate-300 leading-relaxed mt-6">
+            37 years of self-taught tech, one finance degree, and a habit of
+            actually shipping the thing instead of just diagramming it. OchAI
+            works as an AI implementation consultant across North Alabama —
+            not narrowly Huntsville, the whole corridor — helping businesses
+            move from &ldquo;we should probably use AI for that&rdquo; to a
+            system that is live and doing the work. No account manager, no
+            bloated retainer, no agency overhead standing between you and the
+            person actually writing the code.
+          </p>
         </motion.div>
 
         {/* Content Grid */}

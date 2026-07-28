@@ -98,6 +98,29 @@ const servicesJsonLd = JSON.stringify({
   ],
 });
 
+const servicesFaqJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What does AI workflow automation mean for a full stack project?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'It means the automation is built into the same codebase as your site or app - not a third-party plugin bolted on after launch. One developer, one system, fewer handoff failures.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I get custom Claude API integration instead of a generic chatbot?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes - custom Claude API integration is built to your actual workflow, not a bolt-on chat widget. It connects to the systems doing the work, not just a chat window on top of them.',
+      },
+    },
+  ],
+});
+
 const CalEmbed = () => {
   useEffect(() => {
     (async () => {
@@ -556,6 +579,7 @@ const Services = () => {
         <meta property="og:image" content="https://ochai.dev/images/parallax/earth.avif" />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{servicesJsonLd}</script>
+        <script type="application/ld+json">{servicesFaqJsonLd}</script>
         <style>{KEYFRAME_CSS}</style>
       </Helmet>
 
@@ -690,6 +714,14 @@ const Services = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">Every build ships with what<br /><span className="text-cyan-400">others charge separately for.</span></h2>
           <p className="text-lg text-slate-300 leading-relaxed mb-6">Most shops separate technical SEO from the build because two different people are doing two different jobs. A developer builds. An SEO person patches it after. That handoff has a gap — and you pay for both and the gap.</p>
           <p className="text-lg text-slate-300 leading-relaxed">Every build I deliver closes that gap entirely. The SEO is not bolted on after delivery — it is <strong className="text-white">architectural</strong>. Built in from line one. Not a discount. A structural advantage passed directly to you.</p>
+        </div>
+      </section>
+
+      <section className="relative z-10 py-24 bg-slate-950">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">AI Workflow Automation, Built by <span className="text-cyan-400">One Full Stack Developer</span></h2>
+          <p className="text-lg text-slate-300 leading-relaxed mb-6">Most agencies hand you off between a &ldquo;web team&rdquo; and an &ldquo;AI team.&rdquo; OchAI skips the handoff — one full stack developer building your site, your app logic, and the AI workflow automation stitching them together, so nothing gets lost in translation between departments that do not actually talk to each other.</p>
+          <p className="text-lg text-slate-300 leading-relaxed">That includes custom Claude API integration for workflow automation — not a chatbot bolted onto a homepage, but orchestration wired into the systems it is actually automating.</p>
         </div>
       </section>
 
