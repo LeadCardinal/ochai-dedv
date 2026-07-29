@@ -79,15 +79,23 @@ export default function prerenderPlugin(routes = []) {
         out = out.replace(/<meta name="twitter:title"[^>]*>\s*/, '');
         out = out.replace(/<meta name="twitter:description"[^>]*>\s*/, '');
         out = out.replace(/<link rel="canonical"[^>]*>\s*/, '');
+        out = out.replace(/<meta property="og:url"[^>]*>\s*/, '');
+        out = out.replace(/<meta property="og:video:height"[^>]*>\s*/, '');
+        out = out.replace(/<meta property="og:video:width"[^>]*>\s*/, '');
+        out = out.replace(/<meta property="og:video:type"[^>]*>\s*/, '');
+        out = out.replace(/<meta property="og:video"[^>]*>\s*/, '');
 
         const canonicalUrl = route === '/' ? 'https://ochai.dev/' : `https://ochai.dev${route}/`;
         const pageHasCanonical = parsed.head.link && parsed.head.link.includes('rel="canonical"');
+        const pageHasOgUrl = parsed.head.meta && parsed.head.meta.includes('property="og:url"');
+        const ogUrlTag = pageHasOgUrl ? '' : `<meta property="og:url" content="${canonicalUrl}" />`;
         const canonicalTag = pageHasCanonical ? '' : `<link rel="canonical" href="${canonicalUrl}" />`;
         const helmetHead = [
           parsed.head.title,
           parsed.head.meta,
           parsed.head.link,
           canonicalTag,
+          ogUrlTag,
         ].filter(Boolean).join('\n\t\t');
 
         if (out.includes('<!-- VideoObject Structured Data')) {
