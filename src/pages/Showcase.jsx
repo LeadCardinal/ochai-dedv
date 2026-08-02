@@ -27,6 +27,19 @@ const structuredData = {
   },
 };
 
+const serviceOfferStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Video Production & Delivery',
+  description: 'Web-optimized video served at edge speed. Lighthouse 100 intact.',
+  provider: {
+    '@type': 'Person',
+    name: 'Jeremy Carter Och',
+    url: 'https://ochai.dev',
+  },
+  areaServed: 'Remote / United States',
+};
+
 // ─── Ticket barcode decoration ───────────────────────────────────────────────
 const TicketBarcode = () => (
   <div className="flex gap-[2px] items-end h-9 opacity-40" aria-hidden="true">
@@ -117,6 +130,7 @@ const Showcase = () => (
       <meta name="twitter:image" content={THUMBNAIL_URL} />
       <meta name="twitter:player" content={EMBED_URL} />
       <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
+      <script type="application/ld+json">{JSON.stringify(serviceOfferStructuredData)}</script>
     </Helmet>
 
     <div className="min-h-screen bg-slate-950 pt-24 pb-20">

@@ -90,11 +90,9 @@ const servicesJsonLd = JSON.stringify({
   address: { '@type': 'PostalAddress', addressLocality: 'Huntsville', addressRegion: 'AL', addressCountry: 'US' },
   areaServed: ['Huntsville AL', 'Madison AL', 'North Alabama', 'Remote / United States'],
   makesOffer: [
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'The Quartet',  description: 'Complete professional web presence. Lighthouse 100 guaranteed. Starting at $2,500.' } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'The Ensemble', description: 'Growth web platform with keyword strategy, local SEO, CMS. Starting at $5,500.' } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'The Symphony', description: 'Full orchestration for enterprise and defense clients. AI integration, Cloudflare edge. Starting at $12,000.' } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Branding & Identity',         description: 'Fresh brand creation and renewal including logo, color system, brand guidelines.' } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Video Production & Delivery', description: 'Web-optimized video served at edge speed. Lighthouse 100 intact.' } },
+    { '@type': 'Offer', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '2500', priceCurrency: 'USD' }, itemOffered: { '@type': 'Service', name: 'The Quartet',  description: 'Complete professional web presence. Lighthouse 100 guaranteed. Starting at $2,500.' } },
+    { '@type': 'Offer', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '5500', priceCurrency: 'USD' }, itemOffered: { '@type': 'Service', name: 'The Ensemble', description: 'Growth web platform with keyword strategy, local SEO, CMS. Starting at $5,500.' } },
+    { '@type': 'Offer', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '12000', priceCurrency: 'USD' }, itemOffered: { '@type': 'Service', name: 'The Symphony', description: 'Full orchestration for enterprise and defense clients. AI integration, Cloudflare edge. Starting at $12,000.' } },
   ],
 });
 
@@ -279,7 +277,7 @@ const TierCard = ({ tier }) => (
     <div className="flex items-start justify-between mb-6">
       <div>
         <span className="text-3xl mr-3">{tier.emoji}</span>
-        <span className="text-2xl md:text-3xl font-black text-white">{tier.name}</span>
+        <h3 className="text-2xl md:text-3xl font-black text-white inline">{tier.name}</h3>
       </div>
       <p className={`text-xl md:text-2xl font-bold bg-gradient-to-r ${tier.color} bg-clip-text text-transparent`}>{tier.price}</p>
     </div>
