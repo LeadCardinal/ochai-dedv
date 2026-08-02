@@ -20,6 +20,9 @@ import CaseStudyBonsai from "@/pages/CaseStudyBonsai";
 import CaseStudyHsvDrone from "@/pages/CaseStudyHsvDrone";
 import CaseStudyMeanings from "@/pages/CaseStudyMeanings";
 import Showcase from "@/pages/Showcase";
+import VideoPage from "@/pages/VideoPage";
+import LogoSphere from "@/pages/LogoSphere";
+import PreviewPage from "@/pages/PreviewPage";
 
 // Minimal inline 404 — renders a noindex tag for any client-side navigation
 // to an unrecognized path. Cloudflare's public/404.html covers the direct-hit
@@ -45,11 +48,6 @@ function NotFound() {
     </div>
   );
 }
-
-// Lazy imports — not prerendered, fine to split
-const VideoPage = React.lazy(() => import("@/pages/VideoPage"));
-const LogoSphere = React.lazy(() => import("@/pages/LogoSphere"));
-const PreviewPage = React.lazy(() => import("@/pages/PreviewPage"));
 
 // BrowserRouter imported lazily so its CJS bundle never executes during SSR/SSG.
 // React Router calls createBrowserHistory() at module load time — blows up in Node

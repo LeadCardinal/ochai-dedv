@@ -13,6 +13,9 @@ const PRERENDER_ROUTES = [
   '/case-study/reallivebonsai',
   '/case-study/hsvdrone',
   '/case-study/themeaningsoflife',
+  '/performance',
+  '/logos',
+  '/preview',
 ];
 
 export default defineConfig({
