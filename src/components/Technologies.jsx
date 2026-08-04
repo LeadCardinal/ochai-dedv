@@ -127,7 +127,7 @@ const Technologies = () => {
           className="mt-16 text-center max-w-3xl mx-auto"
         >
           <p className="text-slate-300 leading-relaxed">
-            <span className="text-cyan-400 font-bold">27 years of continuous skill acquisition</span> across creative tools, development frameworks, cloud platforms, and AI systems. Not a résumé list—working production knowledge applied daily across multiple business operations.
+            <span className="text-cyan-400 font-bold">37 years of continuous skill acquisition</span> across creative tools, development frameworks, cloud platforms, and AI systems. Not a résumé list—working production knowledge applied daily across multiple business operations.
           </p>
         </motion.div>
       </div>

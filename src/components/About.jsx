@@ -163,7 +163,7 @@ const About = () => {
                   The Self-Taught Reality
                 </h4>
                 <p className="text-slate-300">
-                  No CS degree. No bootcamp certificates. 27 years of acquiring
+                  No CS degree. No bootcamp certificates. 37 years of acquiring
                   whatever skill the market demanded next, then executing at
                   levels that produce measurable results. Finance degree with
                   top 5% portfolio performance. Distinguished Expert

@@ -208,6 +208,9 @@ const Header = () => {
                 <button onClick={() => { setIsMobileMenuOpen(false); navigate("/biography"); }} className="w-full text-left">Bio</button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/performance"); }} className="w-full text-left">Performance</button>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
                 <button onClick={() => handleNavigation("projects")} className="w-full text-left">
                   Projects
                 </button>
@@ -319,6 +322,13 @@ const Header = () => {
                 className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
               >
                 Bio
+              </Link>
+              <Link
+                to="/performance"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
+              >
+                Performance
               </Link>
               <button
                 onClick={() => handleNavigation("projects")}

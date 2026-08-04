@@ -1,10 +1,20 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Shield, Mail, Clock, CheckCircle } from "lucide-react";
 
 const Security = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-white pt-24 pb-16">
+    <>
+      <Helmet>
+        <title>Security Disclosure Policy | OchAI</title>
+        <meta
+          name="description"
+          content="Responsible disclosure guidelines and safe harbor policy for security researchers reporting vulnerabilities found on ochai.dev."
+        />
+        <link rel="canonical" href="https://ochai.dev/security" />
+      </Helmet>
+      <div className="min-h-screen bg-slate-950 text-white pt-24 pb-16">
       <div className="container mx-auto px-4 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -99,7 +109,8 @@ const Security = () => {
           </div>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
