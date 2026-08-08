@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import prerenderPlugin from './plugins/vite-plugin-prerender.js';
 
+// trigger: forcing rebuild to verify /showcase + /logos prerender output on Cloudflare — 2026-08-08
 const PRERENDER_ROUTES = [
   '/',
   '/services',
