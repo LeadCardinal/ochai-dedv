@@ -419,15 +419,19 @@ const Apps = () => {
     return (
       <>
         <Helmet>
-          <title>Custom App Development, Real Pricing | OchAI</title>
+          <title>Custom App Development, Real Pricing | North Alabama | OchAI</title>
           <link rel="canonical" href="https://ochai.dev/apps" />
-          <meta name="description" content="Three tiers. Real prices. One builder — authoritative, deliberate, and expert about what it actually costs to build with me, whatever the scale." />
+          <meta name="description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
+          <meta name="keywords" content="custom app development pricing, fixed-price app development, app development cost, solo full-stack developer, AI app development pricing, app development quote North Alabama, hire app developer Huntsville, custom software development pricing, full-stack app development services" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://ochai.dev/apps" />
-          <meta property="og:title" content="Custom App Development, Real Pricing | OchAI" />
-          <meta property="og:description" content="Three tiers. Real prices. One builder — authoritative, deliberate, and expert about what it actually costs to build with me, whatever the scale." />
-          <meta property="og:image" content="/images/accompaniment.avif" />
+          <meta property="og:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
+          <meta property="og:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
+          <meta property="og:image" content="https://ochai.dev/images/accompaniment.avif" />
           <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:url" content="https://ochai.dev/apps" />
+          <meta name="twitter:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
+          <meta name="twitter:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
           <script type="application/ld+json">{appsJsonLd}</script>
         </Helmet>
         <div className="relative flex items-start bg-[#0a0a0f] pl-16"
@@ -505,15 +509,19 @@ const Apps = () => {
   return (
     <>
       <Helmet>
-        <title>Custom App Development, Real Pricing | OchAI</title>
+        <title>Custom App Development, Real Pricing | North Alabama | OchAI</title>
         <link rel="canonical" href="https://ochai.dev/apps" />
-        <meta name="description" content="Three tiers. Real prices. One builder — authoritative, deliberate, and expert about what it actually costs to build with me, whatever the scale." />
+        <meta name="description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
+        <meta name="keywords" content="custom app development pricing, fixed-price app development, app development cost, solo full-stack developer, AI app development pricing, app development quote North Alabama, hire app developer Huntsville, custom software development pricing, full-stack app development services" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/apps" />
-        <meta property="og:title" content="Custom App Development, Real Pricing | OchAI" />
-        <meta property="og:description" content="Three tiers. Real prices. One builder — authoritative, deliberate, and expert about what it actually costs to build with me, whatever the scale." />
-        <meta property="og:image" content="/images/accompaniment.avif" />
+        <meta property="og:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
+        <meta property="og:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
+        <meta property="og:image" content="https://ochai.dev/images/accompaniment.avif" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://ochai.dev/apps" />
+        <meta name="twitter:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
+        <meta name="twitter:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
         <script type="application/ld+json">{appsJsonLd}</script>
       </Helmet>
       {/* Full-screen — the same brief header visibility applies here too;

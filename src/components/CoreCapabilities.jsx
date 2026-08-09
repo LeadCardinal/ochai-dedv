@@ -13,7 +13,7 @@ const CoreCapabilities = () => {
     {
       icon: Code2,
       title: "Perfect Web Development",
-      description: "React, Vite, Tailwind—hand-coded to 100/100 Lighthouse scores. Performance optimizations that automated tools can't match.",
+      description: "OchAI's web development processes are hand-coded to 100/100 Lighthouse scores — React, Vite, Tailwind. Skill set even includes masterful app builds that seamlessly integrate with existing business systems.",
       highlight: true
     },
     {

@@ -65,7 +65,8 @@ const About = () => {
           <p className="text-lg text-slate-300 leading-relaxed mt-6">
             37 years of self-taught tech, one finance degree, and a habit of
             actually shipping the thing instead of just diagramming it. OchAI
-            works as an AI implementation consultant across North Alabama —
+            works as a full-stack web and app development consultant and AI
+            implementation specialist across North Alabama —
             not narrowly Huntsville, the whole corridor — helping businesses
             move from &ldquo;we should probably use AI for that&rdquo; to a
             system that is live and doing the work. No account manager, no

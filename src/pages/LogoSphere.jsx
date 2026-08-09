@@ -251,9 +251,18 @@ const LogoSphere = () => {
   return (
     <>
       <Helmet>
-        <title>Global Media Portfolio — JCO Digital Operations</title>
+        <title>Logo, Brand & Social Media Design Portfolio | Jeremy Och · OchAI</title>
         <link rel="canonical" href="https://ochai.dev/logos" />
-        <meta name="description" content="37+ years of brand and logo work by Jeremy Och — interactive 3D portfolio sphere." />
+        <meta name="description" content="37+ years of performance logo, brand identity, and social media design work by Jeremy Och — interactive 3D portfolio sphere spanning 117 pieces across print, digital, and social brand systems." />
+        <meta name="keywords" content="logo design portfolio, brand identity design, social media brand design, social media graphic design, graphic design portfolio, logo designer Huntsville Alabama, brand identity design North Alabama, 37 years design experience" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ochai.dev/logos" />
+        <meta property="og:title" content="Logo, Brand & Social Media Design Portfolio | Jeremy Och · OchAI" />
+        <meta property="og:description" content="37+ years of performance logo, brand identity, and social media design work by Jeremy Och — interactive 3D portfolio sphere spanning 117 pieces across print, digital, and social brand systems." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://ochai.dev/logos" />
+        <meta name="twitter:title" content="Logo, Brand & Social Media Design Portfolio | Jeremy Och · OchAI" />
+        <meta name="twitter:description" content="37+ years of performance logo, brand identity, and social media design work by Jeremy Och — interactive 3D portfolio sphere spanning 117 pieces across print, digital, and social brand systems." />
       </Helmet>
 
       <div className="relative z-10 pt-24 pb-6 px-6 text-center">
@@ -263,7 +272,7 @@ const LogoSphere = () => {
         </motion.div>
         <motion.h1 initial={{opacity:0,scale:0.96}} animate={{opacity:1,scale:1}} transition={{duration:0.7,delay:0.15}}
           className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
-          Logo Portfolio
+          Logo, Brand & Social Design Portfolio
         </motion.h1>
         <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.7,delay:0.3}}
           className="text-slate-400 text-base max-w-xl mx-auto">
@@ -276,6 +285,15 @@ const LogoSphere = () => {
         className="w-full"
         style={{height:"calc(100vh - 220px)",minHeight:"520px",background:"#06070f",cursor:"grab"}}
       />
+
+      <div className="relative z-10 px-6 py-16 max-w-2xl mx-auto text-slate-300 text-base leading-relaxed space-y-5">
+        <p>
+          117 marks on this sphere, one throughline: brand identity work built to hold up at any scale — a favicon, a business card, a billboard. Logos, brand systems, and the social media graphics that carry a brand day to day, all built in Adobe Illustrator and Photoshop, held to the same hand-finished standard as every production system on this site.
+        </p>
+        <p>
+          A logo alone rarely does the job. Post templates, content systems, consistent visual language across platforms — as much a part of brand work as the mark itself. Based in Huntsville, Alabama, taking on brand and social design work across North Alabama and remote.
+        </p>
+      </div>
 
       <div id="sphere-overlay" style={{position:"fixed",inset:0,background:"rgba(6,7,15,0.92)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:200,opacity:0,pointerEvents:"none",transition:"opacity .35s ease"}}>
         <div style={{position:"relative",maxWidth:"520px",width:"90%",background:"#0d1117",border:"1px solid rgba(100,210,255,0.2)",borderRadius:"16px",padding:"48px",display:"flex",flexDirection:"column",alignItems:"center",gap:"24px"}}>

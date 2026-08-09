@@ -567,15 +567,19 @@ const Services = () => {
   return (
     <>
       <Helmet>
-        <title>Web Development & AI Integration Services | Huntsville, AL | OchAI</title>
+        <title>Web Development & AI Integration Services | North Alabama | OchAI</title>
         <link rel="canonical" href="https://ochai.dev/services" />
-        <meta name="description" content="Custom web development, AI integration, and SEO in Huntsville AL. Guaranteed Lighthouse 100. Free discovery call." />
+        <meta name="description" content="Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. Web development built for speed, conversions, calls that come in. Free call." />
+        <meta name="keywords" content="web development services North Alabama, custom web development Huntsville Alabama, AI integration services, website development and SEO, full-stack development services, Lighthouse 100 guaranteed, custom software development North Alabama" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/services" />
-        <meta property="og:title" content="Web Development & AI Integration Services | Huntsville AL | OchAI" />
-        <meta property="og:description" content="Fast, measurable, maintainable websites. Guaranteed Lighthouse 100. Free discovery call." />
+        <meta property="og:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
+        <meta property="og:description" content="Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. Web development built for speed, conversions, calls that come in. Free call." />
         <meta property="og:image" content="https://ochai.dev/images/parallax/earth.avif" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://ochai.dev/services" />
+        <meta name="twitter:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
+        <meta name="twitter:description" content="Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. Web development built for speed, conversions, calls that come in. Free call." />
         <script type="application/ld+json">{servicesJsonLd}</script>
         <script type="application/ld+json">{servicesFaqJsonLd}</script>
         <style>{KEYFRAME_CSS}</style>
