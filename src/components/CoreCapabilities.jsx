@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, BrainCircuit, Search, BarChart3, CloudCog, Server, PenTool, Workflow, Sparkles, Zap } from 'lucide-react';
+import { Code2, BrainCircuit, Search, BarChart3, CloudCog, Server, PenTool, Workflow, Sparkles, Zap, Bot, Route } from 'lucide-react';
 
 const CoreCapabilities = () => {
   const capabilities = [
@@ -32,6 +32,18 @@ const CoreCapabilities = () => {
       icon: Search,
       title: "Technical SEO Mastery",
       description: "Search Console optimization and organic growth strategies. Perfect technical scores driving actual traffic—not vanity metrics.",
+      highlight: false
+    },
+    {
+      icon: Bot,
+      title: "GEO & AEO Ready",
+      description: "Structured so ChatGPT, Perplexity, and Google AI Overviews cite this work as the source—not just rank it. Same E-E-A-T signals search engines reward, paired with structured data and citation-worthy factual clarity.",
+      highlight: false
+    },
+    {
+      icon: Route,
+      title: "SXO — Not Just Fast, Coherent",
+      description: "Speed alone doesn't hold attention. Search Experience Optimization means the full journey—first paint to final click—has no jank and no dead ends.",
       highlight: false
     },
     {
@@ -102,6 +114,20 @@ const CoreCapabilities = () => {
           <div className="bg-slate-800/30 border border-slate-700 rounded-2xl p-8 backdrop-blur-sm">
             <p className="text-lg text-slate-300 leading-relaxed">
               <span className="text-cyan-400 font-bold">The Integration Advantage:</span> Most technical professionals excel in 1-2 areas. Agencies distribute capabilities across teams, introducing communication overhead and dependency chains. Fewer than 1,000 people worldwide can execute this complete stack solo while maintaining elite performance standards. <span className="text-cyan-400 font-bold">I am one of them.</span>
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Why AI Didn't Replace Me */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-8 text-center max-w-4xl mx-auto"
+        >
+          <div className="bg-slate-800/30 border border-slate-700 rounded-2xl p-8 backdrop-blur-sm">
+            <p className="text-lg text-slate-300 leading-relaxed">
+              <span className="text-cyan-400 font-bold">Why AI Didn't Replace Me:</span> Most web shops are playing defense against AI right now—figuring out how to justify existing next to a $20/month builder. I'm not one of them. AI implementation is the brand, not a threat to it. I'm not the guy AI is replacing—I'm the guy wielding it better than a DIY tool while still bringing the business-strategy layer a template can't touch.
             </p>
           </div>
         </motion.div>

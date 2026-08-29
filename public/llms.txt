@@ -4,5 +4,5 @@
 
 ## Pages
 - [Jeremy Och - Top 0.05% AI Implementation Specialist](/preview): Fewer than 1,000 developers worldwide execute the complete value chain solo at perfect technical standards. Three production sites. Three perfect Lighthouse scores. Zero coordination overhead.
-- [Jeremy Och | AI Implementation Specialist & Full-Stack Developer | North Alabama](/): AI implementation specialist and full-stack developer with verifiable results: 100/100 Google Lighthouse scores across multiple production sites, 89% YoY organic traffic growth, Page 1 Google rankings in under 30 days. Claude API, Adobe Firefly, ElevenLabs integration. 37+ years hands-on. Huntsville, Alabama.
-- [Web Development & AI Integration Services | North Alabama | OchAI](/services): Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. Web development built for speed, conversions, calls that come in. Free call.
+- [OchAI — Full-Stack Web Development & AI Integration | Huntsville, AL](/): Full-stack web development and AI implementation for businesses in Huntsville and beyond — built to rank AND get cited by AI Overviews. React, Node, cloud deployment. 37+ years hands-on.
+- [Web Development & AI Integration Services | North Alabama | OchAI](/services): Web development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call.

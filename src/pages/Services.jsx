@@ -116,6 +116,14 @@ const servicesFaqJsonLd = JSON.stringify({
         text: 'Yes - custom Claude API integration is built to your actual workflow, not a bolt-on chat widget. It connects to the systems doing the work, not just a chat window on top of them.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'Is my site optimized to be cited by AI search tools like ChatGPT or Google AI Overviews?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes - GEO (Generative Engine Optimization) and AEO (Answer Engine Optimization) are built in, not a separate line item. Structured data, schema markup, and citation-worthy factual clarity are part of the same architectural SEO foundation every build ships with.',
+      },
+    },
   ],
 });
 
@@ -184,7 +192,7 @@ const tiers = [
       'Google Business Profile setup & optimization (Local SEO)',
       'Blog or resource section with CMS', 'Lead generation optimization (CTAs, conversion flow review)',
       'Social media meta integration (OG tags, Twitter/X cards)',
-      'Basic competitor visibility analysis', '2 rounds of design revisions',
+      'Basic competitor visibility analysis', 'AI-search visibility check (GEO/AEO readiness)', '2 rounds of design revisions',
     ],
     addOns: 'E-commerce, advanced schema, monthly SEO retainer, Cloudflare edge maintenance',
   },
@@ -200,6 +208,7 @@ const tiers = [
       'Comprehensive keyword strategy (20+ terms, cluster mapping)',
       'Full content optimization across all pages',
       'Advanced schema markup (Organization, LocalBusiness, FAQ, etc.)',
+      'GEO/AEO optimization — structured for AI Overview & LLM citation, not just search rank',
       'Competitor gap analysis — SEO + positioning',
       'E-commerce or web application capability (scoped per project)',
       'AI integration — chatbot, automation, intelligent features',
@@ -569,17 +578,17 @@ const Services = () => {
       <Helmet>
         <title>Web Development & AI Integration Services | North Alabama | OchAI</title>
         <link rel="canonical" href="https://ochai.dev/services" />
-        <meta name="description" content="Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. Web development built for speed, conversions, calls that come in. Free call." />
-        <meta name="keywords" content="web development services North Alabama, custom web development Huntsville Alabama, AI integration services, website development and SEO, full-stack development services, Lighthouse 100 guaranteed, custom software development North Alabama" />
+        <meta name="description" content="Web development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
+        <meta name="keywords" content="web development services North Alabama, custom web development Huntsville Alabama, AI integration services, website development and SEO, full-stack development services, Lighthouse 100 guaranteed, custom software development North Alabama, GEO optimization, AEO optimization, generative engine optimization, answer engine optimization, AI Overview citations, LLM search visibility, structured data for AI search" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/services" />
         <meta property="og:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
-        <meta property="og:description" content="Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. Web development built for speed, conversions, calls that come in. Free call." />
+        <meta property="og:description" content="Web development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
         <meta property="og:image" content="https://ochai.dev/images/parallax/earth.avif" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://ochai.dev/services" />
         <meta name="twitter:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
-        <meta name="twitter:description" content="Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. Web development built for speed, conversions, calls that come in. Free call." />
+        <meta name="twitter:description" content="Web development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
         <script type="application/ld+json">{servicesJsonLd}</script>
         <script type="application/ld+json">{servicesFaqJsonLd}</script>
         <style>{KEYFRAME_CSS}</style>
@@ -715,7 +724,8 @@ const Services = () => {
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">Every build ships with what<br /><span className="text-cyan-400">others charge separately for.</span></h2>
           <p className="text-lg text-slate-300 leading-relaxed mb-6">Most shops separate technical SEO from the build because two different people are doing two different jobs. A developer builds. An SEO person patches it after. That handoff has a gap — and you pay for both and the gap.</p>
-          <p className="text-lg text-slate-300 leading-relaxed">Every build I deliver closes that gap entirely. The SEO is not bolted on after delivery — it is <strong className="text-white">architectural</strong>. Built in from line one. Not a discount. A structural advantage passed directly to you.</p>
+          <p className="text-lg text-slate-300 leading-relaxed mb-6">Every build I deliver closes that gap entirely. The SEO is not bolted on after delivery — it is <strong className="text-white">architectural</strong>. Built in from line one. Not a discount. A structural advantage passed directly to you.</p>
+          <p className="text-lg text-slate-300 leading-relaxed">Same principle, one layer further. Structured data, citation-worthy factual clarity, and schema built to be <em>read</em> by ChatGPT, Perplexity, and Google's AI Overviews — not just crawled by the old search index. GEO and AEO aren't an add-on line item; they're the same foundation, extended. That includes SXO — Search Experience Optimization. Fast doesn't mean coherent: every build is engineered so the full journey, first paint to final click, has no jank and no dead ends.</p>
         </div>
       </section>
 
@@ -724,6 +734,13 @@ const Services = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">AI Workflow Automation, Built by <span className="text-cyan-400">One Full Stack Developer</span></h2>
           <p className="text-lg text-slate-300 leading-relaxed mb-6">Most agencies hand you off between a &ldquo;web team&rdquo; and an &ldquo;AI team.&rdquo; OchAI skips the handoff — one full stack developer building your site, your app logic, and the AI workflow automation stitching them together, so nothing gets lost in translation between departments that do not actually talk to each other.</p>
           <p className="text-lg text-slate-300 leading-relaxed">That includes custom Claude API integration for workflow automation — not a chatbot bolted onto a homepage, but orchestration wired into the systems it is actually automating.</p>
+        </div>
+      </section>
+
+      <section className="relative z-10 py-24 bg-slate-950">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">Why Not Just Use an <span className="text-cyan-400">AI Builder?</span></h2>
+          <p className="text-lg text-slate-300 leading-relaxed">Fair question — most web shops are playing defense against that exact one right now, scrambling to justify existing next to a $20/month tool. OchAI isn&rsquo;t playing defense. AI implementation is the actual specialty, not a threat to route around. The difference isn&rsquo;t that AI gets avoided here — it&rsquo;s that it gets wielded by someone who also brings the business-strategy layer a template can&rsquo;t: the judgment call on what to build, not just how fast to generate it.</p>
         </div>
       </section>
 
