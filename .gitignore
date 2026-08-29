@@ -11,3 +11,5 @@ yarn-error.log*
 
 # patch scripts
 *.ps1
+
+build-log.txt
