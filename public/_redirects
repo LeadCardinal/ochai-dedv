@@ -1,2 +1,12 @@
 https://www.ochai.dev/* https://ochai.dev/:splat 301!
+
+# Kill bot-probe/config-scan paths with a real 404 before the SPA catch-all below swallows them
+/app/*      /404.html  404
+/config/*   /404.html  404
+/configs/*  /404.html  404
+/.env       /404.html  404
+/*.yaml     /404.html  404
+/*.yml      /404.html  404
+/*.env      /404.html  404
+
 /* /index.html 200
