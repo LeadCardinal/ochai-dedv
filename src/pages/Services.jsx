@@ -578,17 +578,17 @@ const Services = () => {
       <Helmet>
         <title>Web Development & AI Integration Services | North Alabama | OchAI</title>
         <link rel="canonical" href="https://ochai.dev/services" />
-        <meta name="description" content="Web development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
-        <meta name="keywords" content="web development services North Alabama, custom web development Huntsville Alabama, AI integration services, website development and SEO, full-stack development services, Lighthouse 100 guaranteed, custom software development North Alabama, GEO optimization, AEO optimization, generative engine optimization, answer engine optimization, AI Overview citations, LLM search visibility, structured data for AI search" />
+        <meta name="description" content="Huntsville web design and development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
+        <meta name="keywords" content="web development services North Alabama, custom web development Huntsville Alabama, AI integration services, website development and SEO, full-stack development services, Lighthouse 100 guaranteed, custom software development North Alabama, GEO optimization, AEO optimization, generative engine optimization, answer engine optimization, AI Overview citations, LLM search visibility, structured data for AI search, Huntsville web design, custom website development Huntsville, e-commerce website Huntsville AL, local web developers Huntsville, SEO services Huntsville, responsive web design Huntsville, WordPress development Huntsville, web design companies Huntsville AL, small business website Huntsville, digital marketing Huntsville" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/services" />
         <meta property="og:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
-        <meta property="og:description" content="Web development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
+        <meta property="og:description" content="Huntsville web design and development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
         <meta property="og:image" content="https://ochai.dev/images/parallax/earth.avif" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://ochai.dev/services" />
         <meta name="twitter:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
-        <meta name="twitter:description" content="Web development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
+        <meta name="twitter:description" content="Huntsville web design and development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
         <script type="application/ld+json">{servicesJsonLd}</script>
         <script type="application/ld+json">{servicesFaqJsonLd}</script>
         <style>{KEYFRAME_CSS}</style>
@@ -726,6 +726,15 @@ const Services = () => {
           <p className="text-lg text-slate-300 leading-relaxed mb-6">Most shops separate technical SEO from the build because two different people are doing two different jobs. A developer builds. An SEO person patches it after. That handoff has a gap — and you pay for both and the gap.</p>
           <p className="text-lg text-slate-300 leading-relaxed mb-6">Every build I deliver closes that gap entirely. The SEO is not bolted on after delivery — it is <strong className="text-white">architectural</strong>. Built in from line one. Not a discount. A structural advantage passed directly to you.</p>
           <p className="text-lg text-slate-300 leading-relaxed">Same principle, one layer further. Structured data, citation-worthy factual clarity, and schema built to be <em>read</em> by ChatGPT, Perplexity, and Google's AI Overviews — not just crawled by the old search index. GEO and AEO aren't an add-on line item; they're the same foundation, extended. That includes SXO — Search Experience Optimization. Fast doesn't mean coherent: every build is engineered so the full journey, first paint to final click, has no jank and no dead ends.</p>
+        </div>
+      </section>
+
+      <section className="relative z-10 py-24 bg-slate-950 border-t border-slate-800">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 text-center">Huntsville Web Design, Built <span className="text-cyan-400">Local</span></h2>
+          <p className="text-lg text-slate-300 leading-relaxed mb-6">Search &ldquo;web design companies Huntsville AL&rdquo; and most results are agencies that sell the project, then hand the actual build to a subcontractor a few time zones away. OchAI doesn&rsquo;t. Every custom website development engagement — a five-page small business website or a full e-commerce build — gets the same person from the discovery call to launch day.</p>
+          <p className="text-lg text-slate-300 leading-relaxed mb-6">That covers the ground local web developers get hired for: responsive web design that renders correctly on a phone in a parking lot, an e-commerce website Huntsville AL shoppers can check out on without friction, and the SEO services Huntsville businesses need to outrank the competition instead of just existing next to them. Migrating off an old WordPress development Huntsville build from years back? That&rsquo;s exactly the kind of rebuild this stack replaces — same content and rankings, none of the plugin bloat or update-and-pray security patching.</p>
+          <p className="text-lg text-slate-300 leading-relaxed">The digital marketing Huntsville businesses usually buy as a separate retainer — meta, schema, Google Business Profile, the full local SEO stack — ships inside every tier above. Not a line item added later. Part of the build.</p>
         </div>
       </section>
 
