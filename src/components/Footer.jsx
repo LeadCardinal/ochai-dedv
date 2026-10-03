@@ -62,7 +62,7 @@ const Footer = () => {
               alt="Logo" 
               width={64}
               height={64}
-              className="h-16 w-auto drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+              className="h-16 w-auto"
             />
           </motion.div>
 
