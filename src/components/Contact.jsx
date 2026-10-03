@@ -33,7 +33,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            href="https://wa.me/12563619056"
+            href="https://wa.me/12563619167"
             target="_blank"
             rel="noopener noreferrer"
             className="block bg-green-600 hover:bg-green-500 transition-colors border border-green-500 rounded-2xl p-8 shadow-lg group cursor-pointer"
@@ -45,7 +45,7 @@ const Contact = () => {
               <div>
                 <h3 className="text-xl font-bold text-white mb-1">WhatsApp Me</h3>
                 <p className="text-green-50 font-medium">Instant Response • Primary Contact</p>
-                <p className="text-white text-lg font-bold mt-1 tracking-wide">256-361-9056</p>
+                <p className="text-white text-lg font-bold mt-1 tracking-wide">256-361-9167</p>
               </div>
             </div>
           </motion.a>

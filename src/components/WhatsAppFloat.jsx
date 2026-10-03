@@ -19,7 +19,7 @@ const WhatsAppFloat = () => {
   }, []);
 
   const handleClick = () => {
-    window.open("https://wa.me/12563619056", "_blank");
+    window.open("https://wa.me/12563619167", "_blank");
   };
 
   return (
