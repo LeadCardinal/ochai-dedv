@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
+import { scrollToSection } from '@/lib/scrollToSection';
 import EliteHeroSection from '@/components/EliteHeroSection';
 import WhatMakesYouDifferent from '@/components/WhatMakesYouDifferent';
 import PerformanceExcellence from '@/components/PerformanceExcellence';
@@ -48,6 +50,13 @@ const LazyOnScroll = ({ children, rootMargin = '400px' }) => {
 };
 
 const Home = () => {
+  // Honor #hash targets (footer link, external links like ochai.dev/#contact).
+  // `key` changes on every navigation so re-clicking the same hash still scrolls.
+  const { hash, key } = useLocation();
+  useEffect(() => {
+    if (hash) scrollToSection(decodeURIComponent(hash.slice(1)));
+  }, [hash, key]);
+
   return (
     <>
       <Helmet>
