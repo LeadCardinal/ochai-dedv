@@ -4,6 +4,38 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Mail, Linkedin, Twitter } from 'lucide-react';
 
+const footerGroups = [
+  {
+    label: 'Services',
+    links: [
+      { to: '/services', label: 'Website Development' },
+      { to: '/apps', label: 'App Development' },
+      { to: '/small-business-web-development-huntsville', label: 'Small Business Web Development' },
+      { to: '/ai-integration-small-business', label: 'AI Integration' },
+      { to: '/full-stack-development-small-business', label: 'Full-Stack Development' },
+    ],
+  },
+  {
+    label: 'Explore',
+    links: [
+      { to: '/showcase', label: 'Showcase' },
+      { to: '/logos', label: 'Work' },
+      { to: '/performance', label: 'Performance' },
+      { to: '/biography', label: 'About Jeremy' },
+      { to: '/security', label: 'Security' },
+      { to: '/#contact', label: 'Contact' },
+    ],
+  },
+  {
+    label: 'Case Studies',
+    links: [
+      { to: '/case-study/reallivebonsai', label: 'reallivebonsai.us' },
+      { to: '/case-study/hsvdrone', label: 'hsvdrone.com' },
+      { to: '/case-study/themeaningsoflife', label: 'themeaningsoflife.com' },
+    ],
+  },
+];
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -30,7 +62,7 @@ const Footer = () => {
               alt="Logo" 
               width={64}
               height={64}
-              className="h-16 w-auto drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+              className="h-16 w-auto"
             />
           </motion.div>
 
@@ -74,11 +106,27 @@ const Footer = () => {
             </Link>
           </motion.div>
 
-          {/* Service pages */}
-          <nav aria-label="Services" className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-            <a href="/small-business-web-development-huntsville" className="text-slate-400 hover:text-cyan-400 transition-colors">Small Business Web Development</a>
-            <a href="/ai-integration-small-business" className="text-slate-400 hover:text-cyan-400 transition-colors">AI Integration</a>
-            <a href="/full-stack-development-small-business" className="text-slate-400 hover:text-cyan-400 transition-colors">Full-Stack Development</a>
+          {/* Site map — plain links so crawlers see them in the prerendered HTML
+              (the header dropdowns only render on open). */}
+          <nav aria-label="Footer" className="w-full max-w-3xl border-t border-slate-800/70 pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
+              {footerGroups.map((group) => (
+                <div key={group.label}>
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-600 mb-3">
+                    {group.label}
+                  </p>
+                  <ul className="space-y-2">
+                    {group.links.map((link) => (
+                      <li key={link.to}>
+                        <Link to={link.to} className="text-xs text-slate-500 hover:text-cyan-400 transition-colors">
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </nav>
 
           {/* Copyright */}
