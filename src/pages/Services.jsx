@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { CalendarDays, Mail, ArrowRight, Search, FileText, Hammer, LifeBuoy, Download } from 'lucide-react';
@@ -7,6 +7,13 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// GSAP pin wraps the pinned node in a spacer div. React removes DOM nodes
+// BEFORE running useEffect cleanups, so reverting there hits a node whose
+// parent changed ("removeChild ... not a child") and kills the whole tree on
+// navigation. Layout-effect cleanup runs before removal. Falls back to
+// useEffect on the server so the prerender doesn't warn.
+const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 const CAL_URL = 'https://cal.com/jeremy-ochai-dev';
 const EMAIL_URL =
@@ -357,7 +364,7 @@ const Services = () => {
   const tierRefs = useRef(tiers.map(() => ({ section: null, splash: null, card: null })));
   const isMobile = useMatchMedia('(max-width: 768px)');
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(subRef.current, { opacity: 0, y: 20 });
 
