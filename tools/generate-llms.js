@@ -25,7 +25,12 @@ const EXTRACTION_REGEX = {
   helmet: /<Helmet[^>]*?>([\s\S]*?)<\/Helmet>/i,
   helmetTest: /<Helmet[\s\S]*?<\/Helmet>/i,
   title: /<title[^>]*?>([\s\S]*?)<\/title>/i,
-  description: /<meta\s+name=["']description["']\s+content=["']([\s\S]*?)["']/i
+  description: /<meta\s+name=["']description["']\s+content=(["'])([\s\S]*?)\1/i,
+  servicePage: /<ServicePage\b/,
+  spPath: /\bpath=(["'])([^"']+)\1/,
+  spTitle: /\btitle=(["'])([\s\S]*?)\1/,
+  spDesc: /\bmetaDescription=(["'])([\s\S]*?)\1/,
+  canonical: /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i
 };
 
 function cleanContent(content) {
@@ -78,30 +83,59 @@ function findReactFiles(dir) {
   return fs.readdirSync(dir).map(item => path.join(dir, item));
 }
 
+// Strip block comments and whole-line // comments only. The old cleaner also
+// removed everything after "https://" on a line, which mangled the Helmet
+// block and silently dropped most pages from llms.txt.
+function stripComments(content) {
+  return content.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+}
+
+const SITE_ORIGIN = 'https://ochai.dev';
+const EXCLUDED_URLS = new Set(['/preview']);
+
+function toAbsolute(url) {
+  if (/^https?:\/\//.test(url)) return url;
+  return `${SITE_ORIGIN}${url.startsWith('/') ? url : `/${url}`}`;
+}
+
 function extractHelmetData(content, filePath, routes) {
-  const cleanedContent = cleanContent(content);
-  
-  if (!EXTRACTION_REGEX.helmetTest.test(cleanedContent)) {
-    return null;
-  }
-  
-  const helmetMatch = content.match(EXTRACTION_REGEX.helmet);
-  if (!helmetMatch) return null;
-  
-  const helmetContent = helmetMatch[1];
-  const titleMatch = helmetContent.match(EXTRACTION_REGEX.title);
-  const descMatch = helmetContent.match(EXTRACTION_REGEX.description);
-  
-  const title = cleanText(titleMatch?.[1]);
-  const description = cleanText(descMatch?.[1]);
-  
+  const code = stripComments(content);
   const fileName = path.basename(filePath, path.extname(filePath));
-  const url = routes.size && routes.has(fileName) 
-    ? routes.get(fileName) 
+  const routeUrl = routes.size && routes.has(fileName)
+    ? routes.get(fileName)
     : generateFallbackUrl(fileName);
-  
+
+  // Templated pages: <ServicePage path title metaDescription ... />
+  if (EXTRACTION_REGEX.servicePage.test(code)) {
+    const title = cleanText(code.match(EXTRACTION_REGEX.spTitle)?.[2]);
+    const description = cleanText(code.match(EXTRACTION_REGEX.spDesc)?.[2]);
+    const spPath = code.match(EXTRACTION_REGEX.spPath)?.[2];
+    if (!title) return null;
+    return {
+      url: toAbsolute(spPath || routeUrl),
+      title,
+      description: description || 'No description available'
+    };
+  }
+
+  // Pages may hold more than one <Helmet> (e.g. conditional states); use the first with a title.
+  const blocks = [...code.matchAll(/<Helmet[^>]*?>([\s\S]*?)<\/Helmet>/gi)].map(m => m[1]);
+  const found = blocks.find(b => EXTRACTION_REGEX.title.test(b));
+  if (!found) return null;
+
+  // Resolve {CONST} / content={CONST} references to top-level string constants in the file.
+  const consts = new Map();
+  for (const m of code.matchAll(/^const\s+([A-Z_][A-Z0-9_]*)\s*=\s*(["'])([\s\S]*?)\2\s*;/gm)) consts.set(m[1], m[3]);
+  const helmetContent = found
+    .replace(/(content|href)=\{([A-Z_][A-Z0-9_]*)\}/g, (all, attr, name) => consts.has(name) ? `${attr}="${consts.get(name)}"` : all)
+    .replace(/\{([A-Z_][A-Z0-9_]*)\}/g, (all, name) => consts.has(name) ? consts.get(name) : all);
+
+  const title = cleanText(helmetContent.match(EXTRACTION_REGEX.title)?.[1]);
+  const description = cleanText(helmetContent.match(EXTRACTION_REGEX.description)?.[2]);
+  const canonical = helmetContent.match(EXTRACTION_REGEX.canonical)?.[1];
+
   return {
-    url,
+    url: toAbsolute(routeUrl.startsWith('/') && routes.has(fileName) ? routeUrl : (canonical || routeUrl)),
     title: title || 'Untitled Page',
     description: description || 'No description available'
   };
@@ -116,7 +150,7 @@ const SITE_NAME = 'OchAI';
 const SITE_TAGLINE = 'AI implementation specialist and full-stack developer based in Huntsville, Alabama — Claude API, Adobe Firefly, and ElevenLabs integration, with verifiable Lighthouse-score results across production sites.';
 
 function generateLlmsTxt(pages) {
-  const sortedPages = pages.sort((a, b) => a.title.localeCompare(b.title));
+  const sortedPages = pages.filter(p => !EXCLUDED_URLS.has(p.url.replace(SITE_ORIGIN, ''))).sort((a, b) => a.title.localeCompare(b.title));
   const pageEntries = sortedPages.map(page => 
     `- [${page.title}](${page.url}): ${page.description}`
   ).join('\n');

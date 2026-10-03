@@ -42,7 +42,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: Mail, label: 'Email', url: 'mailto:jeremy@ochai.dev' },
     { icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/in/jeremy-och-ai-full-stack' },
-    { icon: Twitter, label: 'Twitter', url: 'https://x.com/@OchAI_fullstack' }
+    { icon: Twitter, label: 'Twitter', url: 'https://x.com/OchAI_fullstack' }
   ];
 
   return (
