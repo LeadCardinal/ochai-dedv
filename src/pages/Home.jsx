@@ -90,7 +90,7 @@ const Home = () => {
                 "foundingDate": "2019",
                 "founder": { "@id": "https://ochai.dev/#founder" },
                 "email": "jeremy@ochai.dev",
-                "telephone": "+1-256-361-9056",
+                "telephone": "+1-256-361-9167",
                 "priceRange": "$$",
                 "address": {
                   "@type": "PostalAddress",
