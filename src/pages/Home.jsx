@@ -29,6 +29,13 @@ const LazyOnScroll = ({ children, rootMargin = '400px' }) => {
     obs.observe(ref.current);
     return () => obs.disconnect();
   }, [rootMargin]);
+  // Header nav fires this when it can't find a target (e.g. #contact) because
+  // the section hasn't been scrolled into view yet, so mount it on demand.
+  useEffect(() => {
+    const force = () => setVisible(true);
+    window.addEventListener('ochai:force-load', force);
+    return () => window.removeEventListener('ochai:force-load', force);
+  }, []);
   return (
     <div ref={ref}>
       {visible ? (

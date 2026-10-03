@@ -87,6 +87,8 @@ const Header = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     } else if (attempt < 40) {
+      // Target may live in a lazy section that hasn't mounted yet.
+      window.dispatchEvent(new CustomEvent("ochai:force-load"));
       setTimeout(() => scrollToId(id, attempt + 1), 50);
     }
   };
