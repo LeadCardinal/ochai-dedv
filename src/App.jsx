@@ -15,6 +15,7 @@ import Home from "@/pages/Home";
 import ServicesPage from "@/pages/Services";
 import AppsPage from "@/pages/Apps";
 import Biography from "@/pages/Biography";
+import WhyOchai from "@/pages/WhyOchai";
 import Security from "@/pages/Security";
 import CaseStudyBonsai from "@/pages/CaseStudyBonsai";
 import CaseStudyHsvDrone from "@/pages/CaseStudyHsvDrone";
@@ -118,6 +119,7 @@ const AppContent = () => {
               <Route path="/ai-integration-small-business" element={<AiIntegrationSmallBusiness />} />
               <Route path="/full-stack-development-small-business" element={<FullStackSmallBusiness />} />
               <Route path="/biography" element={<Biography />} />
+              <Route path="/why-ochai" element={<WhyOchai />} />
               <Route path="/security" element={<Security />} />
               <Route path="/case-study/reallivebonsai" element={<CaseStudyBonsai />} />
               <Route path="/case-study/hsvdrone" element={<CaseStudyHsvDrone />} />

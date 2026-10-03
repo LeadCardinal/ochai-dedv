@@ -9,6 +9,7 @@ import CoreCapabilities from '@/components/CoreCapabilities';
 import Technologies from '@/components/Technologies';
 import About from '@/components/About';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
+import WhyOchaiTeaser from '@/components/WhyOchaiTeaser';
 
 const PainPointSection = React.lazy(() => import('@/components/PainPointSection'));
 const Projects = React.lazy(() => import('@/components/Projects'));
@@ -134,6 +135,7 @@ const Home = () => {
                 "name": "Jeremy Carter Och",
                 "jobTitle": "Founder, Full-Stack Developer & AI Integration Specialist",
                 "url": "https://ochai.dev/biography",
+                "image": "https://ochai.dev/images/jeremy-och-ochai-founder.avif",
                 "worksFor": { "@id": "https://ochai.dev/#organization" },
                 "sameAs": ["https://www.linkedin.com/in/jeremy-och-ai-full-stack"]
               },
@@ -156,6 +158,7 @@ const Home = () => {
         <PainPointSection />
       </LazyOnScroll>
 
+      <WhyOchaiTeaser />
       <WhatMakesYouDifferent />
       <PerformanceExcellence />
       <CoreCapabilities />
