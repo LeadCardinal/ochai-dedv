@@ -73,6 +73,13 @@ const Footer = () => {
             </a>
           </motion.div>
 
+          {/* Service pages */}
+          <nav aria-label="Services" className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            <a href="/small-business-web-development-huntsville" className="text-slate-400 hover:text-cyan-400 transition-colors">Small Business Web Development</a>
+            <a href="/ai-integration-small-business" className="text-slate-400 hover:text-cyan-400 transition-colors">AI Integration</a>
+            <a href="/full-stack-development-small-business" className="text-slate-400 hover:text-cyan-400 transition-colors">Full-Stack Development</a>
+          </nav>
+
           {/* Copyright */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}

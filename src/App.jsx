@@ -23,6 +23,9 @@ import Showcase from "@/pages/Showcase";
 import VideoPage from "@/pages/VideoPage";
 import LogoSphere from "@/pages/LogoSphere";
 import PreviewPage from "@/pages/PreviewPage";
+import SmallBusinessWebDevHuntsville from "@/pages/SmallBusinessWebDevHuntsville";
+import AiIntegrationSmallBusiness from "@/pages/AiIntegrationSmallBusiness";
+import FullStackSmallBusiness from "@/pages/FullStackSmallBusiness";
 
 // Minimal inline 404 — renders a noindex tag for any client-side navigation
 // to an unrecognized path. Cloudflare's public/404.html covers the direct-hit
@@ -111,6 +114,9 @@ const AppContent = () => {
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/apps" element={<AppsPage />} />
+              <Route path="/small-business-web-development-huntsville" element={<SmallBusinessWebDevHuntsville />} />
+              <Route path="/ai-integration-small-business" element={<AiIntegrationSmallBusiness />} />
+              <Route path="/full-stack-development-small-business" element={<FullStackSmallBusiness />} />
               <Route path="/biography" element={<Biography />} />
               <Route path="/security" element={<Security />} />
               <Route path="/case-study/reallivebonsai" element={<CaseStudyBonsai />} />
