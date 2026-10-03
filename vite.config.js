@@ -12,6 +12,7 @@ const PRERENDER_ROUTES = [
   '/ai-integration-small-business',
   '/full-stack-development-small-business',
   '/biography',
+  '/why-ochai',
   '/showcase',
   '/security',
   '/case-study/reallivebonsai',
