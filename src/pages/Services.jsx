@@ -92,7 +92,7 @@ const servicesJsonLd = JSON.stringify({
   founder: { '@type': 'Person', name: 'Jeremy Carter Och' },
   url: 'https://ochai.dev/services',
   email: 'jeremy@ochai.dev',
-  telephone: '+1-256-361-9056',
+  telephone: '+1-256-361-9167',
   priceRange: '$$',
   address: { '@type': 'PostalAddress', addressLocality: 'Huntsville', addressRegion: 'AL', addressCountry: 'US' },
   areaServed: ['Huntsville AL', 'Madison AL', 'North Alabama', 'Remote / United States'],
