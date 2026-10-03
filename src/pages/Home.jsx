@@ -74,6 +74,64 @@ const Home = () => {
             }
           }`}
         </script>
+        <script type="application/ld+json">
+          {`{
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": ["Organization", "ProfessionalService"],
+                "@id": "https://ochai.dev/#organization",
+                "name": "OchAI",
+                "legalName": "OchAI",
+                "url": "https://ochai.dev/",
+                "logo": "https://ochai.dev/images/logo1.webp",
+                "image": "https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp",
+                "description": "Full-stack web development and AI integration for small and mid-sized businesses in Huntsville and across North Alabama. React, Node, Cloudflare, and hands-on Claude API integration.",
+                "foundingDate": "2019",
+                "founder": { "@id": "https://ochai.dev/#founder" },
+                "email": "jeremy@ochai.dev",
+                "telephone": "+1-256-361-9167",
+                "priceRange": "$$",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Huntsville",
+                  "addressRegion": "AL",
+                  "addressCountry": "US"
+                },
+                "geo": { "@type": "GeoCoordinates", "latitude": 34.7304, "longitude": -86.5861 },
+                "areaServed": [
+                  { "@type": "City", "name": "Huntsville", "containedInPlace": { "@type": "State", "name": "Alabama" } },
+                  { "@type": "City", "name": "Madison", "containedInPlace": { "@type": "State", "name": "Alabama" } },
+                  { "@type": "AdministrativeArea", "name": "North Alabama" },
+                  { "@type": "Country", "name": "United States" }
+                ],
+                "serviceType": ["Web development", "AI integration", "Full-stack development", "Technical SEO"],
+                "knowsAbout": ["Claude API integration", "LLM workflow automation", "React", "Node.js", "Cloudflare Pages and Workers", "Technical SEO", "Generative Engine Optimization"],
+                "sameAs": [
+                  "https://www.linkedin.com/in/jeremy-och-ai-full-stack",
+                  "https://x.com/OchAI_fullstack"
+                ]
+              },
+              {
+                "@type": "Person",
+                "@id": "https://ochai.dev/#founder",
+                "name": "Jeremy Carter Och",
+                "jobTitle": "Founder, Full-Stack Developer & AI Integration Specialist",
+                "url": "https://ochai.dev/biography",
+                "worksFor": { "@id": "https://ochai.dev/#organization" },
+                "sameAs": ["https://www.linkedin.com/in/jeremy-och-ai-full-stack"]
+              },
+              {
+                "@type": "WebSite",
+                "@id": "https://ochai.dev/#website",
+                "url": "https://ochai.dev/",
+                "name": "OchAI",
+                "publisher": { "@id": "https://ochai.dev/#organization" },
+                "inLanguage": "en-US"
+              }
+            ]
+          }`}
+        </script>
       </Helmet>
 
       <EliteHeroSection />
