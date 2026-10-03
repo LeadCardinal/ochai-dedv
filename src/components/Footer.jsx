@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Mail, Linkedin, Twitter } from 'lucide-react';
 
 const Footer = () => {
@@ -68,9 +69,9 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <a href="/#case-studies" className="text-slate-500 hover:text-cyan-400 text-sm transition-colors">
+            <Link to="/#case-studies" className="text-slate-500 hover:text-cyan-400 text-sm transition-colors">
               The work speaks first if you need it to &rarr;
-            </a>
+            </Link>
           </motion.div>
 
           {/* Service pages */}

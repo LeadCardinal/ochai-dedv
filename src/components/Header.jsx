@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { scrollToSection } from "@/lib/scrollToSection";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -82,14 +83,7 @@ const Header = () => {
   // and when it guessed wrong the scroll silently no-op'd. This retries
   // every 50ms (up to 2s) until the element actually exists, so it works
   // regardless of how long that render actually takes.
-  const scrollToId = (id, attempt = 0) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    } else if (attempt < 40) {
-      setTimeout(() => scrollToId(id, attempt + 1), 50);
-    }
-  };
+  const scrollToId = (id) => scrollToSection(id);
 
   const handleNavigation = (id) => {
     setIsMobileMenuOpen(false);
@@ -200,7 +194,7 @@ const Header = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-slate-900 border-slate-800 text-white min-w-[180px]">
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <button onClick={() => handleNavigation("More")} className="w-full text-left">
+                <button onClick={() => handleNavigation("about")} className="w-full text-left">
                   About
                 </button>
               </DropdownMenuItem>
@@ -311,7 +305,7 @@ const Header = () => {
               <div className="h-px bg-slate-800 my-1" />
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">More</p>
               <button
-                onClick={() => handleNavigation("More")}
+                onClick={() => handleNavigation("about")}
                 className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
               >
                 About
