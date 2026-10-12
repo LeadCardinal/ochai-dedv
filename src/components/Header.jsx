@@ -112,6 +112,8 @@ const Header = () => {
         <Link to="/" className="flex items-center">
           <img
             src="/images/ochai-header-logo.avif"
+            srcSet="/images/ochai-header-logo-334.avif 334w, /images/ochai-header-logo.avif 500w"
+            sizes="167px"
             alt="OchAI — Jeremy Och"
             width={167}
             height={50}

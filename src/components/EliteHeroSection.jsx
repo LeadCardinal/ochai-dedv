@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 
 const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
-const posterSrc = isMobile ? "/videos/hero_mobile_poster.avif" : "/videos/hero_desktop_poster.avif";
 const videoSrc = isMobile ? "/videos/hero_mobile.webm" : "/videos/hero_desktop.webm";
 
 const EliteHeroSection = () => {
@@ -183,14 +182,20 @@ const EliteHeroSection = () => {
                   className="relative z-10 w-full h-auto rounded-3xl shadow-2xl border border-cyan-500/20"
                 />
               ) : (
-                <img
-                  src={posterSrc}
-                  alt="Jeremy Och - OCH AI DEV - Top .05% AI Implementation Specialist Worldwide"
-                  width="800"
-                  height="600"
-                  fetchPriority="high"
-                  className="relative z-10 w-full h-auto rounded-3xl shadow-2xl border border-cyan-500/20"
-                />
+                // <picture> lets the browser pick the right poster at HTML-parse time. The SSG
+                // worker stubs window (matchMedia -> false), so a JS-chosen src baked the DESKTOP
+                // poster into the prerendered HTML and phones fetched the wrong, larger file.
+                <picture className="contents">
+                  <source media="(max-width: 767px)" srcSet="/videos/hero_mobile_poster.avif" type="image/avif" />
+                  <img
+                    src="/videos/hero_desktop_poster.avif"
+                    alt="Jeremy Och - OCH AI DEV - Top .05% AI Implementation Specialist Worldwide"
+                    width="800"
+                    height="600"
+                    fetchPriority="high"
+                    className="relative z-10 w-full h-auto rounded-3xl shadow-2xl border border-cyan-500/20"
+                  />
+                </picture>
               )}
             </div>
           </motion.div>
