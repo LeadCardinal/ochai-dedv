@@ -28,7 +28,7 @@ const VideoPage = () => {
     uploadDate: VIDEO_UPLOAD_DATE,
     duration: VIDEO_DURATION,
     contentUrl: CONTENT_URL,
-    url: 'https://ochai.dev/performance',
+    url: 'https://ochai.dev/performance/',
     publisher: {
       '@type': 'Person',
       name: 'Jeremy Carter Och',
@@ -41,9 +41,9 @@ const VideoPage = () => {
       <Helmet>
         <title>{VIDEO_TITLE} | Jeremy Och</title>
         <meta name="description" content={VIDEO_DESCRIPTION} />
-        <link rel="canonical" href="https://ochai.dev/performance" />
+        <link rel="canonical" href="https://ochai.dev/performance/" />
         <meta property="og:type" content="video.other" />
-        <meta property="og:url" content="https://ochai.dev/performance" />
+        <meta property="og:url" content="https://ochai.dev/performance/" />
         <meta property="og:title" content={VIDEO_TITLE} />
         <meta property="og:description" content={VIDEO_DESCRIPTION} />
         <meta property="og:image" content={THUMBNAIL_URL} />

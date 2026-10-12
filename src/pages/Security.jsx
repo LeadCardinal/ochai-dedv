@@ -12,7 +12,7 @@ const Security = () => {
           name="description"
           content="Responsible disclosure guidelines and safe harbor policy for security researchers reporting vulnerabilities found on ochai.dev."
         />
-        <link rel="canonical" href="https://ochai.dev/security" />
+        <link rel="canonical" href="https://ochai.dev/security/" />
       </Helmet>
       <div className="min-h-screen bg-slate-950 text-white pt-24 pb-16">
       <div className="container mx-auto px-4 max-w-4xl">

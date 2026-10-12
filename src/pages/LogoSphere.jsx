@@ -252,15 +252,15 @@ const LogoSphere = () => {
     <>
       <Helmet>
         <title>Logo, Brand & Social Media Design Portfolio | Jeremy Och · OchAI</title>
-        <link rel="canonical" href="https://ochai.dev/logos" />
+        <link rel="canonical" href="https://ochai.dev/logos/" />
         <meta name="description" content="37+ years of performance logo, brand identity, and social media design work by Jeremy Och — interactive 3D portfolio sphere spanning 117 pieces across print, digital, and social brand systems." />
         <meta name="keywords" content="logo design portfolio, brand identity design, social media brand design, social media graphic design, graphic design portfolio, logo designer Huntsville Alabama, brand identity design North Alabama, 37 years design experience" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ochai.dev/logos" />
+        <meta property="og:url" content="https://ochai.dev/logos/" />
         <meta property="og:title" content="Logo, Brand & Social Media Design Portfolio | Jeremy Och · OchAI" />
         <meta property="og:description" content="37+ years of performance logo, brand identity, and social media design work by Jeremy Och — interactive 3D portfolio sphere spanning 117 pieces across print, digital, and social brand systems." />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://ochai.dev/logos" />
+        <meta name="twitter:url" content="https://ochai.dev/logos/" />
         <meta name="twitter:title" content="Logo, Brand & Social Media Design Portfolio | Jeremy Och · OchAI" />
         <meta name="twitter:description" content="37+ years of performance logo, brand identity, and social media design work by Jeremy Och — interactive 3D portfolio sphere spanning 117 pieces across print, digital, and social brand systems." />
       </Helmet>

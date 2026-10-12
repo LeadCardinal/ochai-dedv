@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 // Dedicated watch page for "The Pitch". The <video> element is real, server-rendered
 // markup (not behind a click), and this is the only page that declares this VideoObject.
-const PAGE_URL = 'https://ochai.dev/the-pitch';
+const PAGE_URL = 'https://ochai.dev/the-pitch/';
 const VIDEO_URL = 'https://ochai.dev/videos/pitch-spot.mp4';
 const POSTER_URL = 'https://ochai.dev/videos/pitch-poster.jpg';
 const TITLE = 'The Pitch: A 49-Second Ragtime Intro to OchAI Web Development';
@@ -88,7 +88,7 @@ const ThePitch = () => (
         </p>
 
         <div className="flex flex-wrap gap-4">
-          <Link to="/services">
+          <Link to="/services/">
             <Button className="bg-cyan-500 hover:bg-cyan-600 text-white rounded-full px-8">
               See the Services
             </Button>

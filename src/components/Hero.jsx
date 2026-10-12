@@ -29,7 +29,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[120vh] flex flex-col items-center justify-center">
-      <Link to="/showcase" className="fixed top-[54px] bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] -z-10 cursor-pointer">
+      <Link to="/showcase/" className="fixed top-[54px] bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] -z-10 cursor-pointer">
         <video
             autoPlay
             loop
@@ -98,7 +98,7 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col items-center justify-center gap-4">
-            <Link to="/biography">
+            <Link to="/biography/">
               <Button
                 size="lg"
                 variant="outline"

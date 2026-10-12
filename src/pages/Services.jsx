@@ -90,7 +90,7 @@ const servicesJsonLd = JSON.stringify({
   '@type': 'ProfessionalService',
   name: 'OchAI Web Development & AI Integration Services',
   founder: { '@type': 'Person', name: 'Jeremy Carter Och' },
-  url: 'https://ochai.dev/services',
+  url: 'https://ochai.dev/services/',
   email: 'jeremy@ochai.dev',
   telephone: '+1-256-361-9167',
   priceRange: '$$',
@@ -157,9 +157,9 @@ const CalEmbed = () => {
 };
 
 const proofPoints = [
-  { metric: '89%',     label: 'YoY organic traffic growth',       detail: 'reallivebonsai.us — zero paid ads',                  to: '/case-study/reallivebonsai' },
-  { metric: '100/100', label: 'Google Lighthouse scores',          detail: 'Performance · SEO · Accessibility · Best Practices', to: '/case-study/themeaningsoflife' },
-  { metric: 'Page 1',  label: 'Google rankings in under 30 days', detail: 'hsvdrone.com — local SEO',                           to: '/case-study/hsvdrone' },
+  { metric: '89%',     label: 'YoY organic traffic growth',       detail: 'reallivebonsai.us — zero paid ads',                  to: '/case-study/reallivebonsai/' },
+  { metric: '100/100', label: 'Google Lighthouse scores',          detail: 'Performance · SEO · Accessibility · Best Practices', to: '/case-study/themeaningsoflife/' },
+  { metric: 'Page 1',  label: 'Google rankings in under 30 days', detail: 'hsvdrone.com — local SEO',                           to: '/case-study/hsvdrone/' },
 ];
 
 const processSteps = [
@@ -584,16 +584,16 @@ const Services = () => {
     <>
       <Helmet>
         <title>Web Development & AI Integration Services | North Alabama | OchAI</title>
-        <link rel="canonical" href="https://ochai.dev/services" />
+        <link rel="canonical" href="https://ochai.dev/services/" />
         <meta name="description" content="Huntsville web design and development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
         <meta name="keywords" content="web development services North Alabama, custom web development Huntsville Alabama, AI integration services, website development and SEO, full-stack development services, Lighthouse 100 guaranteed, custom software development North Alabama, GEO optimization, AEO optimization, generative engine optimization, answer engine optimization, AI Overview citations, LLM search visibility, structured data for AI search, Huntsville web design, custom website development Huntsville, e-commerce website Huntsville AL, local web developers Huntsville, SEO services Huntsville, responsive web design Huntsville, WordPress development Huntsville, web design companies Huntsville AL, small business website Huntsville, digital marketing Huntsville" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ochai.dev/services" />
+        <meta property="og:url" content="https://ochai.dev/services/" />
         <meta property="og:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
         <meta property="og:description" content="Huntsville web design and development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
         <meta property="og:image" content="https://ochai.dev/images/parallax/earth.avif" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://ochai.dev/services" />
+        <meta name="twitter:url" content="https://ochai.dev/services/" />
         <meta name="twitter:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
         <meta name="twitter:description" content="Huntsville web design and development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
         <script type="application/ld+json">{servicesJsonLd}</script>

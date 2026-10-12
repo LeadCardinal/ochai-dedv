@@ -31,7 +31,7 @@ const ServicePage = ({
   faqs,
   related,
 }) => {
-  const url = `${SITE}${path}`;
+  const url = `${SITE}${path.replace(/\/?$/, "/")}`;
 
   const graph = {
     '@context': 'https://schema.org',
@@ -63,7 +63,7 @@ const ServicePage = ({
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'OchAI', item: `${SITE}/` },
-          { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE}/services` },
+          { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE}/services/` },
           { '@type': 'ListItem', position: 3, name: h1, item: url },
         ],
       },
@@ -114,7 +114,7 @@ const ServicePage = ({
                 <CalendarDays className="w-5 h-5" /> Book a free discovery call
               </a>
               <Link
-                to="/services"
+                to="/services/"
                 className="inline-flex items-center gap-2 border border-slate-600 hover:border-cyan-400 px-6 py-3 rounded-lg transition-colors"
               >
                 See all packages <ArrowRight className="w-4 h-4" />

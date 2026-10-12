@@ -27,7 +27,7 @@ const WhyOchaiTeaser = () => (
             handoff, and every page I publish scores 100 on all four Lighthouse measures.
           </p>
           <Link
-            to="/why-ochai"
+            to="/why-ochai/"
             className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
           >
             Read why OchAI <ArrowRight className="w-4 h-4" />

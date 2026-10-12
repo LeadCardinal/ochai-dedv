@@ -53,7 +53,7 @@ const VideoIntro = () => {
   const goServices = () => {
     markSeen();
     setIsVisible(false);
-    navigate('/services');
+    navigate('/services/');
   };
 
   useEffect(() => {

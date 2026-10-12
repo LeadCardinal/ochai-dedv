@@ -48,7 +48,7 @@ const appsJsonLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'Service',
   serviceType: 'Custom App Development',
   provider: { '@type': 'Person', name: 'Jeremy Carter Och' },
-  url: 'https://ochai.dev/apps',
+  url: 'https://ochai.dev/apps/',
   hasOfferCatalog: {
     '@type': 'OfferCatalog', name: 'App Development Tiers',
     itemListElement: TIERS.map(t => {
@@ -420,16 +420,16 @@ const Apps = () => {
       <>
         <Helmet>
           <title>Custom App Development, Real Pricing | North Alabama | OchAI</title>
-          <link rel="canonical" href="https://ochai.dev/apps" />
+          <link rel="canonical" href="https://ochai.dev/apps/" />
           <meta name="description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
           <meta name="keywords" content="custom app development pricing, fixed-price app development, app development cost, solo full-stack developer, AI app development pricing, app development quote North Alabama, hire app developer Huntsville, custom software development pricing, full-stack app development services" />
           <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://ochai.dev/apps" />
+          <meta property="og:url" content="https://ochai.dev/apps/" />
           <meta property="og:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
           <meta property="og:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
           <meta property="og:image" content="https://ochai.dev/images/accompaniment.avif" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:url" content="https://ochai.dev/apps" />
+          <meta name="twitter:url" content="https://ochai.dev/apps/" />
           <meta name="twitter:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
           <meta name="twitter:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
           <script type="application/ld+json">{appsJsonLd}</script>
@@ -510,16 +510,16 @@ const Apps = () => {
     <>
       <Helmet>
         <title>Custom App Development, Real Pricing | North Alabama | OchAI</title>
-        <link rel="canonical" href="https://ochai.dev/apps" />
+        <link rel="canonical" href="https://ochai.dev/apps/" />
         <meta name="description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
         <meta name="keywords" content="custom app development pricing, fixed-price app development, app development cost, solo full-stack developer, AI app development pricing, app development quote North Alabama, hire app developer Huntsville, custom software development pricing, full-stack app development services" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ochai.dev/apps" />
+        <meta property="og:url" content="https://ochai.dev/apps/" />
         <meta property="og:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
         <meta property="og:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
         <meta property="og:image" content="https://ochai.dev/images/accompaniment.avif" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://ochai.dev/apps" />
+        <meta name="twitter:url" content="https://ochai.dev/apps/" />
         <meta name="twitter:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
         <meta name="twitter:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
         <script type="application/ld+json">{appsJsonLd}</script>

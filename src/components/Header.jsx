@@ -136,16 +136,16 @@ const Header = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-slate-900 border-slate-800 text-white min-w-[200px]">
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-emerald-400 cursor-pointer" asChild>
-                <Link to="/services" className="w-full text-left">Website Development</Link>
+                <Link to="/services/" className="w-full text-left">Website Development</Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-emerald-400 cursor-pointer" asChild>
-                <Link to="/apps" className="w-full text-left">App Development</Link>
+                <Link to="/apps/" className="w-full text-left">App Development</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
           {/* Showcase */}
-          <Link to="/showcase">
+          <Link to="/showcase/">
             <motion.span
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -157,7 +157,7 @@ const Header = () => {
           </Link>
 
           {/* Work — Global Media Portfolio sphere */}
-          <Link to="/logos">
+          <Link to="/logos/">
             <motion.span
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -199,10 +199,10 @@ const Header = () => {
                 </button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/biography"); }} className="w-full text-left">Bio</button>
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/biography/"); }} className="w-full text-left">Bio</button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/performance"); }} className="w-full text-left">Performance</button>
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/performance/"); }} className="w-full text-left">Performance</button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
                 <button onClick={() => handleNavigation("projects")} className="w-full text-left">
@@ -219,13 +219,13 @@ const Header = () => {
                 Case Studies
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/case-study/reallivebonsai"); }} className="w-full text-left">reallivebonsai.us</button>
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/case-study/reallivebonsai/"); }} className="w-full text-left">reallivebonsai.us</button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/case-study/hsvdrone"); }} className="w-full text-left">hsvdrone.com</button>
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/case-study/hsvdrone/"); }} className="w-full text-left">hsvdrone.com</button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
-                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/case-study/themeaningsoflife"); }} className="w-full text-left">themeaningsoflife.com</button>
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/case-study/themeaningsoflife/"); }} className="w-full text-left">themeaningsoflife.com</button>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -269,28 +269,28 @@ const Header = () => {
             <div className="flex flex-col p-4 gap-4">
               <p className="text-xs font-semibold text-emerald-400/70 uppercase tracking-widest">Services</p>
               <Link
-                to="/services"
+                to="/services/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-emerald-400 hover:text-emerald-300 font-medium transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800 hover:border-emerald-500"
               >
                 Website Development
               </Link>
               <Link
-                to="/apps"
+                to="/apps/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-emerald-400 hover:text-emerald-300 font-medium transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800 hover:border-emerald-500"
               >
                 App Development
               </Link>
               <Link
-                to="/showcase"
+                to="/showcase/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg"
               >
                 Showcase
               </Link>
               <Link
-                to="/logos"
+                to="/logos/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg"
               >
@@ -311,14 +311,14 @@ const Header = () => {
                 About
               </button>
               <Link
-                to="/biography"
+                to="/biography/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
               >
                 Bio
               </Link>
               <Link
-                to="/performance"
+                to="/performance/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
               >
@@ -339,21 +339,21 @@ const Header = () => {
               <div className="h-px bg-slate-800 my-1" />
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Case Studies</p>
               <Link
-                to="/case-study/reallivebonsai"
+                to="/case-study/reallivebonsai/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-cyan-400 font-medium py-2 text-lg pl-4 border-l-2 border-slate-800 hover:border-cyan-500 transition-colors"
               >
                 reallivebonsai.us
               </Link>
               <Link
-                to="/case-study/hsvdrone"
+                to="/case-study/hsvdrone/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-cyan-400 font-medium py-2 text-lg pl-4 border-l-2 border-slate-800 hover:border-cyan-500 transition-colors"
               >
                 hsvdrone.com
               </Link>
               <Link
-                to="/case-study/themeaningsoflife"
+                to="/case-study/themeaningsoflife/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-cyan-400 font-medium py-2 text-lg pl-4 border-l-2 border-slate-800 hover:border-cyan-500 transition-colors"
               >

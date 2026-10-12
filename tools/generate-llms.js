@@ -151,8 +151,10 @@ const SITE_TAGLINE = 'AI implementation specialist and full-stack developer base
 
 function generateLlmsTxt(pages) {
   const sortedPages = pages.filter(p => !EXCLUDED_URLS.has(p.url.replace(SITE_ORIGIN, ''))).sort((a, b) => a.title.localeCompare(b.title));
+  // Pages are served at trailing-slash URLs (non-slash 308s to slash), so list those.
+  const withSlash = (u) => (u.endsWith('/') || /\.[a-z0-9]+$/i.test(u.split('#')[0]) ? u : `${u}/`);
   const pageEntries = sortedPages.map(page => 
-    `- [${page.title}](${page.url}): ${page.description}`
+    `- [${page.title}](${withSlash(page.url)}): ${page.description}`
   ).join('\n');
   
   return `# ${SITE_NAME}\n\n> ${SITE_TAGLINE}\n\n## Pages\n${pageEntries}\n`;

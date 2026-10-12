@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { MapPin, CalendarDays, ArrowRight } from 'lucide-react';
 
 const SITE = 'https://ochai.dev';
-const URL = `${SITE}/why-ochai`;
+const URL = `${SITE}/why-ochai/`;
 const CAL_URL = 'https://cal.com/jeremy-ochai-dev';
 const PHOTO = `${SITE}/images/jeremy-och-ochai-founder.avif`;
 const TITLE = 'Why OchAI | One Developer, Start to Finish | Huntsville, AL';
@@ -87,7 +87,7 @@ const WhyOchai = () => (
               <CalendarDays className="w-5 h-5" /> Book a free discovery call
             </a>
             <Link
-              to="/apps"
+              to="/apps/"
               className="inline-flex items-center gap-2 border border-slate-600 hover:border-cyan-400 px-6 py-3 rounded-lg transition-colors"
             >
               See pricing <ArrowRight className="w-4 h-4" />
@@ -130,14 +130,14 @@ const WhyOchai = () => (
             100s in all categories in an effort to remove any obstacles between me, my sites, and first page search
             results. I had crossed over into a realm the web development community perceives as impossible, or
             possible only with major limits on functions. In my experience, few chase scores that high. I have
-            100s (<Link to="/performance" className="text-cyan-400 hover:underline">see the results</Link>). I have
+            100s (<Link to="/performance/" className="text-cyan-400 hover:underline">see the results</Link>). I have
             100s while performing every single function or process that web developers, as a whole, are taught is
             impossible or not worth the effort. That is what I would most likely also say if my sites in production
             did not have scores of 100 in all four measured areas of site performance and safety mechanisms. Check
             the case studies for{' '}
-            <Link to="/case-study/reallivebonsai" className="text-cyan-400 hover:underline">reallivebonsai.us</Link>,{' '}
-            <Link to="/case-study/hsvdrone" className="text-cyan-400 hover:underline">hsvdrone.com</Link>, and{' '}
-            <Link to="/case-study/themeaningsoflife" className="text-cyan-400 hover:underline">themeaningsoflife.com</Link>.
+            <Link to="/case-study/reallivebonsai/" className="text-cyan-400 hover:underline">reallivebonsai.us</Link>,{' '}
+            <Link to="/case-study/hsvdrone/" className="text-cyan-400 hover:underline">hsvdrone.com</Link>, and{' '}
+            <Link to="/case-study/themeaningsoflife/" className="text-cyan-400 hover:underline">themeaningsoflife.com</Link>.
           </p>
           <p>
             I am here to tell you that it is absolutely worth the effort and definitely not impossible to run an
@@ -151,7 +151,7 @@ const WhyOchai = () => (
           <p>
             I purpose build web and app digital experiences for businesses that see the value in owning a web
             presence that outperforms the vast majority of sites online today, often for far less than a
-            multi-person agency charges (<Link to="/apps" className="text-cyan-400 hover:underline">see pricing</Link>).
+            multi-person agency charges (<Link to="/apps/" className="text-cyan-400 hover:underline">see pricing</Link>).
             They have to pay whole teams and offload certain aspects of the builds to others who specialize in a
             particular area they aren&rsquo;t tooled or skilled to develop. I have me, myself, and I. Me, myself, and
             I have acquired specialist level proficiency in building all functional areas of a website. I
@@ -164,10 +164,10 @@ const WhyOchai = () => (
         </article>
 
         <nav aria-label="Related" className="mt-14 border-t border-slate-800 pt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">
-          <Link to="/small-business-web-development-huntsville" className="text-cyan-400 hover:underline">Small business web development</Link>
-          <Link to="/ai-integration-small-business" className="text-cyan-400 hover:underline">AI integration</Link>
-          <Link to="/full-stack-development-small-business" className="text-cyan-400 hover:underline">Full-stack development</Link>
-          <Link to="/biography" className="text-cyan-400 hover:underline">Extended biography</Link>
+          <Link to="/small-business-web-development-huntsville/" className="text-cyan-400 hover:underline">Small business web development</Link>
+          <Link to="/ai-integration-small-business/" className="text-cyan-400 hover:underline">AI integration</Link>
+          <Link to="/full-stack-development-small-business/" className="text-cyan-400 hover:underline">Full-stack development</Link>
+          <Link to="/biography/" className="text-cyan-400 hover:underline">Extended biography</Link>
         </nav>
       </div>
     </main>

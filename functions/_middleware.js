@@ -39,7 +39,10 @@ export async function onRequest(context) {
           headers: {
             'Content-Type': 'text/markdown; charset=utf-8',
             'Vary': 'Accept',
-            'Cache-Control': 'public, max-age=0, must-revalidate',
+            // Cloudflare's CDN cache ignores Vary: Accept, so a cached markdown copy would be
+            // served to browsers (and vice versa). Never let the CDN store these responses.
+            'Cache-Control': 'no-store',
+            'Cloudflare-CDN-Cache-Control': 'no-store',
             'Content-Signal': 'ai-train=yes, search=yes, ai-input=yes',
             'X-Content-Type-Options': 'nosniff',
           },
@@ -53,5 +56,8 @@ export async function onRequest(context) {
   const res = await next();
   const out = new Response(res.body, res);
   out.headers.append('Vary', 'Accept');
+  // Same reason as above: with the CDN keyed on URL alone, a cached HTML copy would also
+  // swallow every later Accept: text/markdown request. Keep the function in the path.
+  out.headers.set('Cloudflare-CDN-Cache-Control', 'no-store');
   return out;
 }

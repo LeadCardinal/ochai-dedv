@@ -37,8 +37,8 @@ const AiIntegrationSmallBusiness = () => (
     ]}
     proof={[
       { text: 'Claude API, Adobe Firefly and ElevenLabs are in use in my own production workflows, not just demos.' },
-      { text: 'The site you are reading is structured for AI search, with schema markup, an llms.txt file and pre-rendered pages.', to: '/performance', linkLabel: 'Performance results' },
-      { text: 'Example of scoping a real engagement:', to: '/apps', linkLabel: 'App development tiers' },
+      { text: 'The site you are reading is structured for AI search, with schema markup, an llms.txt file and pre-rendered pages.', to: '/performance/', linkLabel: 'Performance results' },
+      { text: 'Example of scoping a real engagement:', to: '/apps/', linkLabel: 'App development tiers' },
     ]}
     fit={[
       'You have a specific, repeatable task you want automated or assisted.',
@@ -62,9 +62,9 @@ const AiIntegrationSmallBusiness = () => (
       { q: 'How do we start?', a: 'Book a free discovery call. We pick one task, define success, and I give you a fixed scope and price.' },
     ]}
     related={[
-      { to: '/services', label: 'Website packages, including the Symphony tier' },
-      { to: '/small-business-web-development-huntsville', label: 'Web development for Huntsville small businesses' },
-      { to: '/full-stack-development-small-business', label: 'Full-stack development for SMBs' },
+      { to: '/services/', label: 'Website packages, including the Symphony tier' },
+      { to: '/small-business-web-development-huntsville/', label: 'Web development for Huntsville small businesses' },
+      { to: '/full-stack-development-small-business/', label: 'Full-stack development for SMBs' },
     ]}
   />
 );

@@ -38,8 +38,8 @@ const FullStackSmallBusiness = () => (
     ]}
     proof={[
       { text: 'Four production properties, built and operated by me and all scoring 100 on Lighthouse: ochai.dev, reallivebonsai.us, hsvdrone.com, themeaningsoflife.com.' },
-      { text: 'A full e-commerce build with payments and analytics:', to: '/case-study/reallivebonsai', linkLabel: 'Real Live Bonsai case study' },
-      { text: 'Pricing and tiers for apps are published, not hidden:', to: '/apps', linkLabel: 'App development tiers' },
+      { text: 'A full e-commerce build with payments and analytics:', to: '/case-study/reallivebonsai/', linkLabel: 'Real Live Bonsai case study' },
+      { text: 'Pricing and tiers for apps are published, not hidden:', to: '/apps/', linkLabel: 'App development tiers' },
     ]}
     fit={[
       'You need software shaped to your process, not the other way around.',
@@ -63,9 +63,9 @@ const FullStackSmallBusiness = () => (
       { q: 'What happens after launch?', a: 'You own the code and hosting. I can continue to maintain and extend the system, or hand it to another developer with the documentation provided.' },
     ]}
     related={[
-      { to: '/services', label: 'Website packages and pricing' },
-      { to: '/small-business-web-development-huntsville', label: 'Web development for Huntsville small businesses' },
-      { to: '/ai-integration-small-business', label: 'AI integration for small and mid-sized businesses' },
+      { to: '/services/', label: 'Website packages and pricing' },
+      { to: '/small-business-web-development-huntsville/', label: 'Web development for Huntsville small businesses' },
+      { to: '/ai-integration-small-business/', label: 'AI integration for small and mid-sized businesses' },
     ]}
   />
 );

@@ -10,7 +10,7 @@ const Biography = () => {
     <>
       <Helmet>
         <title>Biography | Jeremy Och - Full Story</title>
-        <link rel="canonical" href="https://ochai.dev/biography" />
+        <link rel="canonical" href="https://ochai.dev/biography/" />
         <meta name="description" content="The complete professional journey of Jeremy Och - from self-taught technologist to top 1% digital operator in Huntsville, Alabama." />
       </Helmet>
 

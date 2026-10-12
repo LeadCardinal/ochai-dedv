@@ -38,8 +38,8 @@ const SmallBusinessWebDevHuntsville = () => (
     ]}
     proof={[
       { text: 'My own production sites (ochai.dev, reallivebonsai.us, hsvdrone.com, themeaningsoflife.com) are built the same way and score 100 on Lighthouse. Run any of them through PageSpeed Insights.' },
-      { text: 'Worked examples with the reasoning behind each decision:', to: '/case-study/hsvdrone', linkLabel: 'HSV Drone case study' },
-      { text: '37 years of hands-on technology work, in the same city you are searching from.', to: '/biography', linkLabel: 'About Jeremy' },
+      { text: 'Worked examples with the reasoning behind each decision:', to: '/case-study/hsvdrone/', linkLabel: 'HSV Drone case study' },
+      { text: '37 years of hands-on technology work, in the same city you are searching from.', to: '/biography/', linkLabel: 'About Jeremy' },
     ]}
     fit={[
       'You want one accountable person instead of a team.',
@@ -63,9 +63,9 @@ const SmallBusinessWebDevHuntsville = () => (
       { q: 'Do you work outside Huntsville?', a: 'Yes. I serve Madison and the rest of North Alabama in person and work remotely with clients across the United States.' },
     ]}
     related={[
-      { to: '/services', label: 'All website packages and pricing' },
-      { to: '/ai-integration-small-business', label: 'AI integration for small and mid-sized businesses' },
-      { to: '/full-stack-development-small-business', label: 'Full-stack development for SMBs' },
+      { to: '/services/', label: 'All website packages and pricing' },
+      { to: '/ai-integration-small-business/', label: 'AI integration for small and mid-sized businesses' },
+      { to: '/full-stack-development-small-business/', label: 'Full-stack development for SMBs' },
     ]}
   />
 );
