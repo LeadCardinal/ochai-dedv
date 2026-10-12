@@ -34,6 +34,13 @@ const VideoIntro = () => {
   const [showFork, setShowFork] = useState(false);
   const [showPitch, setShowPitch] = useState(false);
 
+  // The prerender worker stubs `window`, so the SSG HTML would carry a <video> with the
+  // DESKTOP src and preload="auto" -- every phone downloaded ~800 KiB of the wrong video
+  // before React mounted, then fetched the right one. Attach src only once running in a
+  // real browser so each device fetches exactly one file.
+  const [clientReady, setClientReady] = useState(false);
+  useEffect(() => { setClientReady(true); }, []);
+
   const markSeen = () => {
     try { sessionStorage.setItem(SESSION_KEY, '1'); } catch { /* private mode */ }
   };
@@ -80,11 +87,11 @@ const VideoIntro = () => {
         >
           <video
             ref={videoRef}
-            src={src}
+            src={clientReady ? src : undefined}
             muted
             playsInline
             autoPlay
-            preload="auto"
+            preload={clientReady ? 'auto' : 'none'}
             onCanPlay={() => {
               // Belt-and-suspenders: some desktop browsers don't honor the
               // autoPlay attribute on a dynamically-mounted element. Ask explicitly.
