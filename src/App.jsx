@@ -32,6 +32,7 @@ const L = {
   smallBiz: () => import("@/pages/SmallBusinessWebDevHuntsville"),
   aiInt: () => import("@/pages/AiIntegrationSmallBusiness"),
   fullStack: () => import("@/pages/FullStackSmallBusiness"),
+  pitch: () => import("@/pages/ThePitch"),
 };
 const Home = import.meta.env.SSR ? (await L.home()).default : React.lazy(L.home);
 const ServicesPage = import.meta.env.SSR ? (await L.services()).default : React.lazy(L.services);
@@ -49,6 +50,7 @@ const PreviewPage = import.meta.env.SSR ? (await L.preview()).default : React.la
 const SmallBusinessWebDevHuntsville = import.meta.env.SSR ? (await L.smallBiz()).default : React.lazy(L.smallBiz);
 const AiIntegrationSmallBusiness = import.meta.env.SSR ? (await L.aiInt()).default : React.lazy(L.aiInt);
 const FullStackSmallBusiness = import.meta.env.SSR ? (await L.fullStack()).default : React.lazy(L.fullStack);
+const ThePitch = import.meta.env.SSR ? (await L.pitch()).default : React.lazy(L.pitch);
 
 const ROUTE_LOADERS = {
   "/": L.home,
@@ -67,6 +69,7 @@ const ROUTE_LOADERS = {
   "/small-business-web-development-huntsville": L.smallBiz,
   "/ai-integration-small-business": L.aiInt,
   "/full-stack-development-small-business": L.fullStack,
+  "/the-pitch": L.pitch,
 };
 
 // Warm the chunk for the current path so the first client render never shows a fallback.
@@ -173,6 +176,7 @@ const AppContent = () => {
               <Route path="/case-study/hsvdrone" element={<CaseStudyHsvDrone />} />
               <Route path="/case-study/themeaningsoflife" element={<CaseStudyMeanings />} />
               <Route path="/performance" element={<VideoPage />} />
+              <Route path="/the-pitch" element={<ThePitch />} />
               <Route path="/showcase" element={<Showcase />} />
               <Route path="/logos" element={<LogoSphere />} />
               <Route path="/preview" element={<PreviewPage />} />

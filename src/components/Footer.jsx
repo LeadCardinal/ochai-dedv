@@ -21,6 +21,7 @@ const footerGroups = [
       { to: '/showcase', label: 'Showcase' },
       { to: '/logos', label: 'Work' },
       { to: '/performance', label: 'Performance' },
+      { to: '/the-pitch', label: 'The Pitch' },
       { to: '/why-ochai', label: 'Why OchAI' },
       { to: '/biography', label: 'About Jeremy' },
       { to: '/security', label: 'Security' },

@@ -12,9 +12,10 @@ const VIDEO_TITLE = 'AI Implementation Solutions Architect Full Stack Digital Op
 const VIDEO_SUBTITLE = 'Huntsville, AL — Jeremy Och';
 const VIDEO_DESCRIPTION = 'Shameless self promotion video spot on the rarity of my tool set and the performance levels they support. Find out more at https://ochai.dev';
 const VIDEO_UPLOAD_DATE = '2026-03-23T10:37:00-05:00';
-const VIDEO_DURATION = 'PT1M34S';
+// Schema describes the video this page actually plays: the self-hosted desktop file (106.7 s).
+const VIDEO_DURATION = 'PT1M47S';
+const CONTENT_URL = 'https://ochai.dev/videos/_desktop.mp4';
 const THUMBNAIL_URL = `https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`;
-const EMBED_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}`;
 
 
 const VideoPage = () => {
@@ -26,8 +27,8 @@ const VideoPage = () => {
     thumbnailUrl: THUMBNAIL_URL,
     uploadDate: VIDEO_UPLOAD_DATE,
     duration: VIDEO_DURATION,
-    contentUrl: `https://www.youtube.com/watch?v=${YOUTUBE_VIDEO_ID}`,
-    embedUrl: EMBED_URL,
+    contentUrl: CONTENT_URL,
+    url: 'https://ochai.dev/performance',
     publisher: {
       '@type': 'Person',
       name: 'Jeremy Carter Och',
@@ -46,12 +47,12 @@ const VideoPage = () => {
         <meta property="og:title" content={VIDEO_TITLE} />
         <meta property="og:description" content={VIDEO_DESCRIPTION} />
         <meta property="og:image" content={THUMBNAIL_URL} />
-        <meta property="og:video" content={`https://www.youtube.com/watch?v=${YOUTUBE_VIDEO_ID}`} />
-        <meta name="twitter:card" content="player" />
+        <meta property="og:video" content={CONTENT_URL} />
+        <meta property="og:video:type" content="video/mp4" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={VIDEO_TITLE} />
         <meta name="twitter:description" content={VIDEO_DESCRIPTION} />
         <meta name="twitter:image" content={THUMBNAIL_URL} />
-        <meta name="twitter:player" content={EMBED_URL} />
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       </Helmet>
 

@@ -19,6 +19,7 @@ const PRERENDER_ROUTES = [
   '/case-study/hsvdrone',
   '/case-study/themeaningsoflife',
   '/performance',
+  '/the-pitch',
   '/logos',
   '/preview',
 ];
