@@ -102,7 +102,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <Link to="/#case-studies" className="text-slate-500 hover:text-cyan-400 text-sm transition-colors">
+            <Link to="/#case-studies" className="text-white hover:text-cyan-400 text-sm transition-colors">
               The work speaks first if you need it to &rarr;
             </Link>
           </motion.div>
@@ -113,13 +113,13 @@ const Footer = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
               {footerGroups.map((group) => (
                 <div key={group.label}>
-                  <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-600 mb-3">
+                  <h2 className="text-[11px] font-semibold uppercase tracking-widest text-white mb-3">
                     {group.label}
-                  </p>
+                  </h2>
                   <ul className="space-y-2">
                     {group.links.map((link) => (
                       <li key={link.to}>
-                        <Link to={link.to} className="text-xs text-slate-500 hover:text-cyan-400 transition-colors">
+                        <Link to={link.to} className="inline-block py-1 text-xs text-white hover:text-cyan-400 transition-colors">
                           {link.label}
                         </Link>
                       </li>
@@ -136,7 +136,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-slate-300 text-sm"
+            className="text-white text-sm"
           >
             © {currentYear} OchAI — Jeremy Och. All rights reserved.
           </motion.p>
