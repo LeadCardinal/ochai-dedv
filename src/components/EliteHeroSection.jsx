@@ -8,7 +8,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 
-const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
 const posterSrc = isMobile ? "/videos/hero_mobile_poster.avif" : "/videos/hero_desktop_poster.avif";
 const videoSrc = isMobile ? "/videos/hero_mobile.webm" : "/videos/hero_desktop.webm";
 

@@ -10,23 +10,71 @@ import Footer from "@/components/Footer";
 import VideoIntro from "@/components/VideoIntro";
 import { Toaster } from "@/components/ui/toaster";
 
-// Static imports — these routes are prerendered; lazy = Suspense fallback in SSG output
-import Home from "@/pages/Home";
-import ServicesPage from "@/pages/Services";
-import AppsPage from "@/pages/Apps";
-import Biography from "@/pages/Biography";
-import WhyOchai from "@/pages/WhyOchai";
-import Security from "@/pages/Security";
-import CaseStudyBonsai from "@/pages/CaseStudyBonsai";
-import CaseStudyHsvDrone from "@/pages/CaseStudyHsvDrone";
-import CaseStudyMeanings from "@/pages/CaseStudyMeanings";
-import Showcase from "@/pages/Showcase";
-import VideoPage from "@/pages/VideoPage";
-import LogoSphere from "@/pages/LogoSphere";
-import PreviewPage from "@/pages/PreviewPage";
-import SmallBusinessWebDevHuntsville from "@/pages/SmallBusinessWebDevHuntsville";
-import AiIntegrationSmallBusiness from "@/pages/AiIntegrationSmallBusiness";
-import FullStackSmallBusiness from "@/pages/FullStackSmallBusiness";
+// Route code-splitting that keeps SSG intact:
+//  - SSG (import.meta.env.SSR, loaded via Vite ssrLoadModule): top-level await resolves the
+//    real component, so renderToStaticMarkup emits full page markup (never a Suspense fallback).
+//  - Client build: SSR branch is dead-code-eliminated; each page is a lazy chunk, and
+//    main.jsx awaits preloadRoute() for the current path before mounting (no blank flash).
+const L = {
+  home: () => import("@/pages/Home"),
+  services: () => import("@/pages/Services"),
+  apps: () => import("@/pages/Apps"),
+  biography: () => import("@/pages/Biography"),
+  whyOchai: () => import("@/pages/WhyOchai"),
+  security: () => import("@/pages/Security"),
+  bonsai: () => import("@/pages/CaseStudyBonsai"),
+  hsvdrone: () => import("@/pages/CaseStudyHsvDrone"),
+  meanings: () => import("@/pages/CaseStudyMeanings"),
+  showcase: () => import("@/pages/Showcase"),
+  video: () => import("@/pages/VideoPage"),
+  logos: () => import("@/pages/LogoSphere"),
+  preview: () => import("@/pages/PreviewPage"),
+  smallBiz: () => import("@/pages/SmallBusinessWebDevHuntsville"),
+  aiInt: () => import("@/pages/AiIntegrationSmallBusiness"),
+  fullStack: () => import("@/pages/FullStackSmallBusiness"),
+};
+const Home = import.meta.env.SSR ? (await L.home()).default : React.lazy(L.home);
+const ServicesPage = import.meta.env.SSR ? (await L.services()).default : React.lazy(L.services);
+const AppsPage = import.meta.env.SSR ? (await L.apps()).default : React.lazy(L.apps);
+const Biography = import.meta.env.SSR ? (await L.biography()).default : React.lazy(L.biography);
+const WhyOchai = import.meta.env.SSR ? (await L.whyOchai()).default : React.lazy(L.whyOchai);
+const Security = import.meta.env.SSR ? (await L.security()).default : React.lazy(L.security);
+const CaseStudyBonsai = import.meta.env.SSR ? (await L.bonsai()).default : React.lazy(L.bonsai);
+const CaseStudyHsvDrone = import.meta.env.SSR ? (await L.hsvdrone()).default : React.lazy(L.hsvdrone);
+const CaseStudyMeanings = import.meta.env.SSR ? (await L.meanings()).default : React.lazy(L.meanings);
+const Showcase = import.meta.env.SSR ? (await L.showcase()).default : React.lazy(L.showcase);
+const VideoPage = import.meta.env.SSR ? (await L.video()).default : React.lazy(L.video);
+const LogoSphere = import.meta.env.SSR ? (await L.logos()).default : React.lazy(L.logos);
+const PreviewPage = import.meta.env.SSR ? (await L.preview()).default : React.lazy(L.preview);
+const SmallBusinessWebDevHuntsville = import.meta.env.SSR ? (await L.smallBiz()).default : React.lazy(L.smallBiz);
+const AiIntegrationSmallBusiness = import.meta.env.SSR ? (await L.aiInt()).default : React.lazy(L.aiInt);
+const FullStackSmallBusiness = import.meta.env.SSR ? (await L.fullStack()).default : React.lazy(L.fullStack);
+
+const ROUTE_LOADERS = {
+  "/": L.home,
+  "/services": L.services,
+  "/apps": L.apps,
+  "/biography": L.biography,
+  "/why-ochai": L.whyOchai,
+  "/security": L.security,
+  "/case-study/reallivebonsai": L.bonsai,
+  "/case-study/hsvdrone": L.hsvdrone,
+  "/case-study/themeaningsoflife": L.meanings,
+  "/performance": L.video,
+  "/showcase": L.showcase,
+  "/logos": L.logos,
+  "/preview": L.preview,
+  "/small-business-web-development-huntsville": L.smallBiz,
+  "/ai-integration-small-business": L.aiInt,
+  "/full-stack-development-small-business": L.fullStack,
+};
+
+// Warm the chunk for the current path so the first client render never shows a fallback.
+export const preloadRoute = (pathname) => {
+  const key = (pathname || "/").replace(/\/+$/, "") || "/";
+  const load = ROUTE_LOADERS[key];
+  return load ? load() : Promise.resolve();
+};
 
 // Minimal inline 404 — renders a noindex tag for any client-side navigation
 // to an unrecognized path. Cloudflare's public/404.html covers the direct-hit
