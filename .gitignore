@@ -13,3 +13,6 @@ yarn-error.log*
 *.ps1
 
 build-log.txt
+
+# Wrangler local state
+.wrangler/

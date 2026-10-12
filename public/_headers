@@ -21,3 +21,12 @@
 # Cloudflare Pages' default long-lived cache instead of revalidating.
 /*
   Cache-Control: public, max-age=0, must-revalidate
+
+# Agent discovery (RFC 8288 Link headers) - homepage only. Registered rel: describedby.
+/
+  Link: </llms.txt>; rel="describedby"; type="text/plain", </index.md>; rel="alternate"; type="text/markdown"
+
+# Markdown twins for AI agents
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Content-Signal: ai-train=yes, search=yes, ai-input=yes

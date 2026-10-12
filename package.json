@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --host :: --port 3000",
-    "build": "node tools/generate-llms.js || true && vite build",
+    "build": "node tools/generate-llms.js || true && vite build && node tools/generate-markdown.mjs",
     "preview": "vite preview --host :: --port 3000"
   },
   "dependencies": {
@@ -59,6 +59,7 @@
     "postcss": "^8.4.35",
     "tailwindcss": "3.3.2",
     "terser": "^5.27.0",
+    "turndown": "^7.2.4",
     "vite": "^5.4.0"
   }
 }
