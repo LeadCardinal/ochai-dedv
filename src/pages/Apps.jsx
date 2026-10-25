@@ -506,7 +506,11 @@ const AppsDetail = () => (
 
       <DetailSection title="Built and in use: BykeBytes">
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
-          <h3 className="text-xl font-bold mb-2">Ride tracking that works with the screen off</h3>
+          <div className="flex items-center gap-4 mb-3">
+            <img src="/images/bykebytes-icon.webp" alt="BykeBytes app icon: two bicycle wheels behind an orange 88 MPH" width="72" height="72" loading="lazy"
+              className="w-16 h-16 md:w-[72px] md:h-[72px] rounded-2xl border border-slate-700 flex-shrink-0" />
+            <h3 className="text-xl font-bold">Ride tracking that works with the screen off</h3>
+          </div>
           <p className="text-slate-300 leading-relaxed">
             BykeBytes is a cycling trip tracker for Android. It starts recording by itself when you get moving and keeps going with the phone locked, in your pocket or stowed away. Each ride logs date, start and finish, average and top speed, elevation change and distance. History with CSV export and bulk delete functions. All data stays on the phone: no account, no cloud.
           </p>

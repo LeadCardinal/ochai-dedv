@@ -32,7 +32,7 @@ const CaseStudyMeanings = () => {
     },
     {
       label: "Best Practices",
-      score: 96,
+      score: 100,
       icon: Shield,
       description: "Security & Modern Web",
     },
@@ -43,7 +43,7 @@ const CaseStudyMeanings = () => {
     { label: "Fortune 500 Avg", score: 45, color: "bg-slate-700" },
     { label: "Agency Standard", score: 72, color: "bg-blue-900" },
     { label: "Best-in-Class Sites", score: 92, color: "bg-purple-900" },
-    { label: "This Project", score: 98, color: "bg-emerald-500" }, // Average of the 4 scores ~97.75
+    { label: "This Project", score: 99, color: "bg-emerald-500" }, // Average of the 4 scores (95+100+100+100)/4 = 98.75, rounded
   ];
 
   const performanceReality = [
@@ -77,7 +77,7 @@ const CaseStudyMeanings = () => {
         </title>
         <meta
           name="description"
-          content="Technical analysis of themeaningsoflife.com, a book-marketing site achieving perfect 100/100 Accessibility & SEO scores and 95/100 Performance on Google Lighthouse."
+          content="Technical analysis of themeaningsoflife.com, a book-marketing site achieving perfect 100/100 Accessibility, Best Practices & SEO scores and 95/100 Performance on Google Lighthouse."
         />
         <link rel="canonical" href="https://ochai.dev/case-study/themeaningsoflife/" />
       </Helmet>
@@ -168,8 +168,8 @@ const CaseStudyMeanings = () => {
             bg="bg-orange-500/10"
           />
           <BadgeCard
-            title="Best Practices"
-            score="96"
+            title="Perfect Best Practices"
+            score="100"
             icon={Shield}
             color="text-purple-400"
             border="border-purple-500/30"
@@ -222,7 +222,7 @@ const CaseStudyMeanings = () => {
               </div>
               <p className="mt-8 text-slate-300 text-sm italic border-l-2 border-slate-700 pl-4">
                 Most Fortune 500 sites suffer from "tag bloat" and unoptimized
-                assets, averaging scores below 50. Achieving a 98 average across
+                assets, averaging scores below 50. Achieving a 99 average across
                 all categories places this project in the top tier of global web
                 engineering.
               </p>
@@ -284,7 +284,7 @@ const CaseStudyMeanings = () => {
                 <h3 className="text-lg font-medium text-indigo-300 mb-2">
                   Lighthouse Result
                 </h3>
-                <div className="text-5xl font-bold text-white mb-2">98/100</div>
+                <div className="text-5xl font-bold text-white mb-2">99/100</div>
                 <div className="text-sm text-indigo-200/70 mb-8">
                   Average across all four Lighthouse categories
                 </div>
