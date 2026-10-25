@@ -22,13 +22,6 @@
 /*
   Cache-Control: public, max-age=0, must-revalidate
 
-# Crawler control files: short cache so edits reach bots within the hour
-/robots.txt
-  Cache-Control: public, max-age=3600, must-revalidate
-
-/sitemap.xml
-  Cache-Control: public, max-age=3600, must-revalidate
-
 # Agent discovery (RFC 8288 Link headers) - homepage only. Registered rel: describedby.
 /
   Link: </llms.txt>; rel="describedby"; type="text/plain", </index.md>; rel="alternate"; type="text/markdown"

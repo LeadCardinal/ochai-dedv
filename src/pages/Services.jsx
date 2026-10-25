@@ -587,19 +587,19 @@ const Services = () => {
   return (
     <>
       <Helmet>
-        <title>Web Development & AI Integration Services | North Alabama | OchAI</title>
+        <title>Huntsville Web Design & Development | From $2,500 | OchAI</title>
         <link rel="canonical" href="https://ochai.dev/services/" />
-        <meta name="description" content="Huntsville web design and development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
+        <meta name="description" content="Custom websites, apps and AI integration for North Alabama businesses. Fixed-price tiers from $2,500. Lighthouse 100 guaranteed. Free discovery call." />
         <meta name="keywords" content="web development services North Alabama, custom web development Huntsville Alabama, AI integration services, website development and SEO, full-stack development services, Lighthouse 100 guaranteed, custom software development North Alabama, GEO optimization, AEO optimization, generative engine optimization, answer engine optimization, AI Overview citations, LLM search visibility, structured data for AI search, Huntsville web design, custom website development Huntsville, e-commerce website Huntsville AL, local web developers Huntsville, SEO services Huntsville, responsive web design Huntsville, WordPress development Huntsville, web design companies Huntsville AL, small business website Huntsville, digital marketing Huntsville" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/services/" />
-        <meta property="og:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
-        <meta property="og:description" content="Huntsville web design and development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
+        <meta property="og:title" content="Huntsville Web Design & Development | From $2,500 | OchAI" />
+        <meta property="og:description" content="Custom websites, apps and AI integration for North Alabama businesses. Fixed-price tiers from $2,500. Lighthouse 100 guaranteed. Free discovery call." />
         <meta property="og:image" content="https://ochai.dev/images/parallax/earth.avif" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://ochai.dev/services/" />
-        <meta name="twitter:title" content="Web Development & AI Integration Services | North Alabama | OchAI" />
-        <meta name="twitter:description" content="Huntsville web design and development built for speed, conversions, and calls that come in — architected to rank AND get cited by AI Overviews. Lighthouse 100 guaranteed. Free discovery call." />
+        <meta name="twitter:title" content="Huntsville Web Design & Development | From $2,500 | OchAI" />
+        <meta name="twitter:description" content="Custom websites, apps and AI integration for North Alabama businesses. Fixed-price tiers from $2,500. Lighthouse 100 guaranteed. Free discovery call." />
         <script type="application/ld+json">{servicesJsonLd}</script>
         <script type="application/ld+json">{servicesFaqJsonLd}</script>
         <style>{KEYFRAME_CSS}</style>
@@ -658,7 +658,7 @@ const Services = () => {
 
           <div className="absolute inset-0 flex items-center pointer-events-none" style={{ zIndex: 30 }}>
             <div ref={h1PanelRef} className="w-full px-6 md:px-12 lg:px-20 text-left md:text-right md:ml-auto md:max-w-xl">
-              <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3 font-semibold pointer-events-auto">Orchestrating Your Digital Presence</p>
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3 font-semibold pointer-events-auto">Web Development &amp; AI Integration · Huntsville &amp; North Alabama</p>
               <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-tight pointer-events-auto">
                 Your Business,<br />
                 <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">Built to Perform.</span>
@@ -746,6 +746,7 @@ const Services = () => {
           <p className="text-lg text-slate-300 leading-relaxed mb-6">Search &ldquo;web design companies Huntsville AL&rdquo; and most results are agencies that sell the project, then hand the actual build to a subcontractor a few time zones away. OchAI doesn&rsquo;t. Every custom website development engagement — a five-page small business website or a full e-commerce build — gets the same person from the discovery call to launch day.</p>
           <p className="text-lg text-slate-300 leading-relaxed mb-6">That covers the ground local web developers get hired for: responsive web design that renders correctly on a phone in a parking lot, an e-commerce website Huntsville AL shoppers can check out on without friction, and the SEO services Huntsville businesses need to outrank the competition instead of just existing next to them. Migrating off an old WordPress development Huntsville build from years back? That&rsquo;s exactly the kind of rebuild this stack replaces — same content and rankings, none of the plugin bloat or update-and-pray security patching.</p>
           <p className="text-lg text-slate-300 leading-relaxed">The digital marketing Huntsville businesses usually buy as a separate retainer — meta, schema, Google Business Profile, the full local SEO stack — ships inside every tier above. Not a line item added later. Part of the build.</p>
+          <p className="text-lg text-slate-300 leading-relaxed mt-6">Need something narrower? See <Link to="/small-business-web-development-huntsville/" className="text-cyan-400 hover:text-cyan-300 underline">small-business web development in Huntsville</Link>, <Link to="/full-stack-development-small-business/" className="text-cyan-400 hover:text-cyan-300 underline">full-stack development for small business</Link>, or <Link to="/ai-integration-small-business/" className="text-cyan-400 hover:text-cyan-300 underline">AI integration for small business</Link>.</p>
         </div>
       </section>
 
