@@ -15,6 +15,22 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SITE, ORG_ID, FOUNDER_ID, breadcrumbJsonLd } from "@/lib/schemaEntities";
+
+const CASE_URL = `${SITE}/case-study/reallivebonsai/`;
+const caseStudyJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${CASE_URL}#webpage`,
+  url: CASE_URL,
+  name: "Case Study: reallivebonsai.us Organic SEO Growth | OchAI",
+  description: "SEO case study for reallivebonsai.us (Jun 2025 to Jun 2026): 1,000+ organic clicks, 48K+ impressions and a 15.1 current average position with zero paid ads.",
+  dateModified: "2026-10-25",
+  isPartOf: { "@id": `${SITE}/#website` },
+  author: { "@id": FOUNDER_ID },
+  publisher: { "@id": ORG_ID },
+  about: { "@type": "WebSite", name: "Real Live Bonsai", url: "https://reallivebonsai.us/" },
+});
 
 const CaseStudyBonsai = () => {
   // Data for Bonsai (Organic Growth)
@@ -229,8 +245,8 @@ const CaseStudyBonsai = () => {
       color: "text-emerald-400",
     },
     {
-      label: "Avg Position",
-      value: "30.2",
+      label: "Current Avg Position",
+      value: "15.1",
       icon: Search,
       color: "text-rose-400",
     },
@@ -239,15 +255,25 @@ const CaseStudyBonsai = () => {
   return (
     <div className="pt-24 pb-12 min-h-screen bg-slate-950 text-white">
       <Helmet>
-        <title>
-          Case Study: reallivebonsai.us SEO Performance | Zero Paid Ads Organic
-          Growth
-        </title>
+        <title>Case Study: reallivebonsai.us Organic SEO Growth | OchAI</title>
         <meta
           name="description"
-          content="Comprehensive SEO case study for reallivebonsai.us showing 12-month organic growth: 1000+ clicks, 48k+ impressions, and 21.3 average search position without paid advertising."
+          content="SEO case study for reallivebonsai.us (Jun 2025 to Jun 2026): 1,000+ organic clicks, 48K+ impressions and a 15.1 current average position with zero paid ads."
         />
         <link rel="canonical" href="https://ochai.dev/case-study/reallivebonsai/" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="OchAI" />
+        <meta property="og:url" content="https://ochai.dev/case-study/reallivebonsai/" />
+        <meta property="og:title" content="Case Study: reallivebonsai.us Organic SEO Growth | OchAI" />
+        <meta property="og:description" content="SEO case study for reallivebonsai.us (Jun 2025 to Jun 2026): 1,000+ organic clicks, 48K+ impressions and a 15.1 current average position with zero paid ads." />
+        <meta property="og:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://ochai.dev/case-study/reallivebonsai/" />
+        <meta name="twitter:title" content="Case Study: reallivebonsai.us Organic SEO Growth | OchAI" />
+        <meta name="twitter:description" content="SEO case study for reallivebonsai.us (Jun 2025 to Jun 2026): 1,000+ organic clicks, 48K+ impressions and a 15.1 current average position with zero paid ads." />
+        <meta name="twitter:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <script type="application/ld+json">{caseStudyJsonLd}</script>
+        <script type="application/ld+json">{breadcrumbJsonLd([{ name: "Case Study: reallivebonsai.us", path: "/case-study/reallivebonsai/" }])}</script>
       </Helmet>
 
       <div className="container mx-auto px-4">
@@ -257,7 +283,7 @@ const CaseStudyBonsai = () => {
             to="/"
             className="inline-flex items-center text-slate-300 hover:text-cyan-400 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Portfolio
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
           </Link>
         </div>
 
@@ -269,8 +295,8 @@ const CaseStudyBonsai = () => {
                 reallivebonsai.us
               </h1>
               <p className="text-xl text-slate-300 max-w-2xl">
-                Google Search Console Performance Analysis: 12-Month Organic
-                Growth
+                Google Search Console Performance Analysis: Organic Growth,
+                June 2025 to June 2026
               </p>
             </div>
             <div className="flex items-center gap-2 bg-slate-900/50 px-4 py-2 rounded-full border border-slate-800">
@@ -280,6 +306,13 @@ const CaseStudyBonsai = () => {
               </span>
             </div>
           </div>
+
+          <p className="text-sm text-slate-400 mb-6 max-w-3xl">
+            Historical results: the online store has since closed. Clicks and
+            impressions cover June 2025 to June 2026 (Google Search Console).
+            The 15.1 average position is the current figure, and the rankings
+            have held with the store inactive.
+          </p>
 
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -369,7 +402,7 @@ const CaseStudyBonsai = () => {
           {/* Position Chart */}
           <ChartCard
             title="Average Search Position"
-            subtitle="Best: 21.3 (Lower is Better)"
+            subtitle="Current: 15.1 (Lower is Better)"
             color="rose"
           >
             <div className="h-80">
@@ -397,7 +430,7 @@ const CaseStudyBonsai = () => {
               Comprehensive Performance Timeline
             </h3>
             <p className="text-slate-300">
-              Multi-metric correlation analysis over 12 months
+              Multi-metric correlation analysis, June 2025 to June 2026
             </p>
           </div>
 

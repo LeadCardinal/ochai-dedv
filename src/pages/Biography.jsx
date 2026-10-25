@@ -4,13 +4,40 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Briefcase, GraduationCap, Award, MapPin, Code } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { SITE, ORG_ID, FOUNDER_ID, breadcrumbJsonLd } from '@/lib/schemaEntities';
+
+const bioJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': `${SITE}/biography/#profilepage`,
+  url: `${SITE}/biography/`,
+  name: 'Extended Biography | Jeremy Och of OchAI',
+  dateModified: '2026-10-25',
+  isPartOf: { '@id': `${SITE}/#website` },
+  mainEntity: { '@id': FOUNDER_ID },
+  about: { '@id': FOUNDER_ID },
+  publisher: { '@id': ORG_ID },
+});
 
 const Biography = () => {
   return (
     <>
       <Helmet>
-        <title>Biography | Jeremy Och - Full Story</title>
+        <title>Extended Biography | Jeremy Och of OchAI</title>
         <link rel="canonical" href="https://ochai.dev/biography/" />
+        <meta property="og:type" content="profile" />
+        <meta property="og:site_name" content="OchAI" />
+        <meta property="og:url" content="https://ochai.dev/biography/" />
+        <meta property="og:title" content="Extended Biography | Jeremy Och of OchAI" />
+        <meta property="og:description" content="The story behind OchAI: Jeremy Och's 37+ years of self-taught technology, from the Commodore 64 to production web and AI systems in Huntsville, Alabama." />
+        <meta property="og:image" content="https://ochai.dev/images/jeremy-och-ochai-founder.avif" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://ochai.dev/biography/" />
+        <meta name="twitter:title" content="Extended Biography | Jeremy Och of OchAI" />
+        <meta name="twitter:description" content="The story behind OchAI: Jeremy Och's 37+ years of self-taught technology, from the Commodore 64 to production web and AI systems in Huntsville, Alabama." />
+        <meta name="twitter:image" content="https://ochai.dev/images/jeremy-och-ochai-founder.avif" />
+        <script type="application/ld+json">{bioJsonLd}</script>
+        <script type="application/ld+json">{breadcrumbJsonLd([{ name: 'Biography', path: '/biography/' }])}</script>
         <meta name="description" content="The story behind OchAI: Jeremy Och's 37+ years of self-taught technology, from the Commodore 64 to production web and AI systems in Huntsville, Alabama." />
       </Helmet>
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { Menu, X, ChevronDown, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -264,13 +265,20 @@ const Header = () => {
           {isMobileMenuOpen ? <X /> : <Menu />}
         </Button>
 
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
+        {/* Mobile Navigation
+            Rendered through a portal on purpose. The header has a transform
+            (framer-motion) and, once scrolled, a backdrop-filter. Both turn
+            the header into the containing block for position:fixed
+            descendants, so a fixed panel inside it was sized against the
+            82px header instead of the viewport: height collapsed to 0 and
+            the menu never appeared after scrolling. Mounted on <body> it
+            measures against the real viewport. */}
+        {isMobileMenuOpen && typeof document !== "undefined" && createPortal(
           <motion.div
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 300 }}
-            className="fixed top-[82px] left-0 right-0 bottom-0 bg-slate-950/98 backdrop-blur-md md:hidden overflow-y-auto shadow-2xl"
+            className="fixed top-[82px] left-0 right-0 bottom-0 z-[60] bg-slate-950/98 backdrop-blur-md md:hidden overflow-y-auto shadow-2xl"
           >
             <div className="flex flex-col p-4 gap-4">
               <p className="text-xs font-semibold text-emerald-400/70 uppercase tracking-widest">Services</p>
@@ -387,7 +395,8 @@ const Header = () => {
                 </a>
               </Button>
             </div>
-          </motion.div>
+          </motion.div>,
+          document.body
         )}
       </nav>
     </motion.header>

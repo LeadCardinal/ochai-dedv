@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Shield, Mail, Clock, CheckCircle } from "lucide-react";
+import { breadcrumbJsonLd } from "@/lib/schemaEntities";
 
 const Security = () => {
   return (
@@ -13,6 +14,18 @@ const Security = () => {
           content="Responsible disclosure guidelines and safe harbor policy for security researchers reporting vulnerabilities found on ochai.dev."
         />
         <link rel="canonical" href="https://ochai.dev/security/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="OchAI" />
+        <meta property="og:url" content="https://ochai.dev/security/" />
+        <meta property="og:title" content="Security Disclosure Policy | OchAI" />
+        <meta property="og:description" content="Responsible disclosure guidelines and safe harbor policy for security researchers reporting vulnerabilities found on ochai.dev." />
+        <meta property="og:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://ochai.dev/security/" />
+        <meta name="twitter:title" content="Security Disclosure Policy | OchAI" />
+        <meta name="twitter:description" content="Responsible disclosure guidelines and safe harbor policy for security researchers reporting vulnerabilities found on ochai.dev." />
+        <meta name="twitter:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <script type="application/ld+json">{breadcrumbJsonLd([{ name: "Security Disclosure Policy", path: "/security/" }])}</script>
       </Helmet>
       <div className="min-h-screen bg-slate-950 text-white pt-24 pb-16">
       <div className="container mx-auto px-4 max-w-4xl">

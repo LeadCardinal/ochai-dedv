@@ -18,6 +18,22 @@ import {
   Calendar,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SITE, ORG_ID, FOUNDER_ID, breadcrumbJsonLd } from "@/lib/schemaEntities";
+
+const CASE_URL = `${SITE}/case-study/hsvdrone/`;
+const caseStudyJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${CASE_URL}#webpage`,
+  url: CASE_URL,
+  name: "Case Study: hsvdrone.com SEO | Page 1 Rankings in 30 Days",
+  description: "SEO case study for hsvdrone.com showcasing rapid growth to Google Page 1 rankings (Position 9.0) in less than 30 days.",
+  dateModified: "2026-10-25",
+  isPartOf: { "@id": `${SITE}/#website` },
+  author: { "@id": FOUNDER_ID },
+  publisher: { "@id": ORG_ID },
+  about: { "@type": "WebSite", name: "HSV Drone", url: "https://hsvdrone.com/" },
+});
 
 const CaseStudyHsvDrone = () => {
   // Data for HSV Drone - Short timeline, immediate success
@@ -179,6 +195,19 @@ const CaseStudyHsvDrone = () => {
           content="SEO case study for hsvdrone.com showcasing rapid growth to Google Page 1 rankings (Position 9.0) in less than 30 days."
         />
         <link rel="canonical" href="https://ochai.dev/case-study/hsvdrone/" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="OchAI" />
+        <meta property="og:url" content="https://ochai.dev/case-study/hsvdrone/" />
+        <meta property="og:title" content="Case Study: hsvdrone.com SEO | Page 1 Rankings in 30 Days" />
+        <meta property="og:description" content="SEO case study for hsvdrone.com showcasing rapid growth to Google Page 1 rankings (Position 9.0) in less than 30 days." />
+        <meta property="og:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://ochai.dev/case-study/hsvdrone/" />
+        <meta name="twitter:title" content="Case Study: hsvdrone.com SEO | Page 1 Rankings in 30 Days" />
+        <meta name="twitter:description" content="SEO case study for hsvdrone.com showcasing rapid growth to Google Page 1 rankings (Position 9.0) in less than 30 days." />
+        <meta name="twitter:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <script type="application/ld+json">{caseStudyJsonLd}</script>
+        <script type="application/ld+json">{breadcrumbJsonLd([{ name: "Case Study: hsvdrone.com", path: "/case-study/hsvdrone/" }])}</script>
       </Helmet>
 
       <div className="container mx-auto px-4">
@@ -188,7 +217,7 @@ const CaseStudyHsvDrone = () => {
             to="/"
             className="inline-flex items-center text-slate-300 hover:text-cyan-400 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Portfolio
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
           </Link>
         </div>
 

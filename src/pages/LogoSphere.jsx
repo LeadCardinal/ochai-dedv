@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
+import { breadcrumbJsonLd } from "@/lib/schemaEntities";
 
 const LOGOS = Array.from({length:117},(_,i)=>`/images/logo_${String(i+1).padStart(3,'0')}.avif`);
 const RADIUS = 4.2, TILE_SIZE = 0.72, TILE_DEPTH = 0.04, HOVER_LIFT = 0.32, PRESENT_INTERVAL = 3200;
@@ -251,18 +252,22 @@ const LogoSphere = () => {
   return (
     <>
       <Helmet>
-        <title>Logo, Brand & Social Media Design Portfolio | Jeremy Och · OchAI</title>
+        <title>Logo, Brand & Social Media Design Portfolio | OchAI</title>
         <link rel="canonical" href="https://ochai.dev/logos/" />
-        <meta name="description" content="37+ years of performance logo, brand identity, and social media design work by Jeremy Och — interactive 3D portfolio sphere spanning 117 pieces across print, digital, and social brand systems." />
+        <meta name="description" content="37+ years of logo, brand identity, and social media design by Jeremy Och. Explore 117 pieces in an interactive 3D portfolio sphere." />
         <meta name="keywords" content="logo design portfolio, brand identity design, social media brand design, social media graphic design, graphic design portfolio, logo designer Huntsville Alabama, brand identity design North Alabama, 37 years design experience" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/logos/" />
-        <meta property="og:title" content="Logo, Brand & Social Media Design Portfolio | Jeremy Och · OchAI" />
-        <meta property="og:description" content="37+ years of performance logo, brand identity, and social media design work by Jeremy Och — interactive 3D portfolio sphere spanning 117 pieces across print, digital, and social brand systems." />
+        <meta property="og:title" content="Logo, Brand & Social Media Design Portfolio | OchAI" />
+        <meta property="og:description" content="37+ years of logo, brand identity, and social media design by Jeremy Och. Explore 117 pieces in an interactive 3D portfolio sphere." />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta property="og:site_name" content="OchAI" />
+        <meta property="og:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <meta name="twitter:image" content="https://inlanltghistyetrlprg.supabase.co/storage/v1/object/public/Site%20Media/social_weblink.webp" />
+        <script type="application/ld+json">{breadcrumbJsonLd([{ name: "Logo and Brand Design Portfolio", path: "/logos/" }])}</script>
         <meta name="twitter:url" content="https://ochai.dev/logos/" />
-        <meta name="twitter:title" content="Logo, Brand & Social Media Design Portfolio | Jeremy Och · OchAI" />
-        <meta name="twitter:description" content="37+ years of performance logo, brand identity, and social media design work by Jeremy Och — interactive 3D portfolio sphere spanning 117 pieces across print, digital, and social brand systems." />
+        <meta name="twitter:title" content="Logo, Brand & Social Media Design Portfolio | OchAI" />
+        <meta name="twitter:description" content="37+ years of logo, brand identity, and social media design by Jeremy Och. Explore 117 pieces in an interactive 3D portfolio sphere." />
       </Helmet>
 
       <div className="relative z-10 pt-24 pb-6 px-6 text-center">
