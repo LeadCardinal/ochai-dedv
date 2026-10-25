@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 //
 // Props: open (bool), onClose (fn)
 
-const PitchPlayer = ({ open, onClose }) => {
+const PitchPlayer = ({ open, onClose, onEnded }) => {
   const videoRef = useRef(null);
   const [ready, setReady] = useState(false);
 
@@ -38,7 +38,7 @@ const PitchPlayer = ({ open, onClose }) => {
             playsInline
             preload="auto"
             onCanPlay={() => setReady(true)}
-            onEnded={onClose}
+            onEnded={onEnded || onClose}
             className={`max-w-[92vw] max-h-[82vh] rounded-xl shadow-2xl transition-opacity duration-500 ${ready ? 'opacity-100' : 'opacity-60'}`}
             style={{ border: '2px solid #c9a84c' }}
           />

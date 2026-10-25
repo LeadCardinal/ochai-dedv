@@ -57,10 +57,16 @@ const VideoIntro = () => {
     setIsVisible(false);
   };
 
-  const goServices = () => {
+  const goTo = (path) => {
     markSeen();
     setIsVisible(false);
-    navigate('/services/');
+    navigate(path);
+  };
+
+  // Pitch played to the end: they've seen the show, so land on home.
+  const pitchFinished = () => {
+    setShowPitch(false);
+    dismiss();
   };
 
   useEffect(() => {
@@ -136,11 +142,11 @@ const VideoIntro = () => {
 
                 {/* The two CTAs — embossed gold brass plaques, the spotlight */}
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button onClick={dismiss} className="deco-emboss">
-                    I'm Hiring
-                  </button>
-                  <button onClick={goServices} className="deco-emboss">
+                  <button onClick={() => goTo('/services/')} className="deco-emboss">
                     I Need a Website
+                  </button>
+                  <button onClick={() => goTo('/apps/')} className="deco-emboss">
+                    I Need an App
                   </button>
                 </div>
 
@@ -162,7 +168,7 @@ const VideoIntro = () => {
         </motion.div>
       )}
     </AnimatePresence>
-    <PitchPlayer open={showPitch} onClose={() => setShowPitch(false)} />
+    <PitchPlayer open={showPitch} onClose={() => setShowPitch(false)} onEnded={pitchFinished} />
     </>
   );
 };
