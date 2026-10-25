@@ -5,7 +5,7 @@ import { CalendarDays, Mail, ArrowRight, Search, FileText, Hammer, LifeBuoy, Dow
 import Cal, { getCalApi } from '@calcom/embed-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SITE, ORG_ID, AREA_SERVED } from '@/lib/schemaEntities';
+import { SITE, ORG_ID, AREA_SERVED, breadcrumbJsonLd } from '@/lib/schemaEntities';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -602,6 +602,7 @@ const Services = () => {
         <meta name="twitter:description" content="Custom websites, apps and AI integration for North Alabama businesses. Fixed-price tiers from $2,500. Lighthouse 100 guaranteed. Free discovery call." />
         <script type="application/ld+json">{servicesJsonLd}</script>
         <script type="application/ld+json">{servicesFaqJsonLd}</script>
+        <script type="application/ld+json">{breadcrumbJsonLd([{ name: 'Services', path: '/services/' }])}</script>
         <style>{KEYFRAME_CSS}</style>
       </Helmet>
 

@@ -22,3 +22,14 @@ export const AREA_SERVED = [
   { '@type': 'AdministrativeArea', name: 'North Alabama' },
   { '@type': 'Country', name: 'United States' },
 ];
+
+// BreadcrumbList as a JSON string, ready for <script type="application/ld+json">.
+// crumbs: [{ name, path }] after the implicit "OchAI" home crumb; path like '/services/'.
+export const breadcrumbJsonLd = (crumbs) => JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'OchAI', item: `${SITE}/` },
+    ...crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 2, name: c.name, item: `${SITE}${c.path}` })),
+  ],
+});

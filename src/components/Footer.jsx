@@ -25,7 +25,7 @@ const footerGroups = [
       { to: '/why-ochai/', label: 'Why OchAI' },
       { to: '/biography/', label: 'About Jeremy' },
       { to: '/security/', label: 'Security' },
-      { to: '/#contact', label: 'Contact' },
+      { to: '/contact/', label: 'Contact' },
     ],
   },
   {

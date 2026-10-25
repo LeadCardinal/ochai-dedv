@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Fingerprint, Check, X, Signal, BatteryFull, MessageSquare, MessageCircle, Home, ChevronDown, CalendarDays, ArrowRight, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
-import { SITE, ORG_ID, AREA_SERVED } from '@/lib/schemaEntities';
+import { SITE, ORG_ID, AREA_SERVED, breadcrumbJsonLd } from '@/lib/schemaEntities';
 
 const LOGO = '/images/ochai-header-logo.avif';
 const CAL_URL = 'https://cal.com/jeremy-ochai-dev';
@@ -93,6 +93,8 @@ const bykebytesJsonLd = JSON.stringify({
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   creator: { '@id': ORG_ID },
 });
+
+const appsBreadcrumbJsonLd = breadcrumbJsonLd([{ name: 'Custom Apps', path: '/apps/' }]);
 
 const appsFaqJsonLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'FAQPage',
@@ -684,6 +686,7 @@ const Apps = () => {
           <script type="application/ld+json">{appsJsonLd}</script>
         <script type="application/ld+json">{appsFaqJsonLd}</script>
         <script type="application/ld+json">{bykebytesJsonLd}</script>
+        <script type="application/ld+json">{appsBreadcrumbJsonLd}</script>
         </Helmet>
         <div className="relative flex items-start bg-[#0a0a0f] pl-16"
           style={{
@@ -761,6 +764,7 @@ const Apps = () => {
         <script type="application/ld+json">{appsJsonLd}</script>
         <script type="application/ld+json">{appsFaqJsonLd}</script>
         <script type="application/ld+json">{bykebytesJsonLd}</script>
+        <script type="application/ld+json">{appsBreadcrumbJsonLd}</script>
       </Helmet>
       {/* Full-screen — the same brief header visibility applies here too;
           it was silently sitting on top of this content before, not "under" it. */}

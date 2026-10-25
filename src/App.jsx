@@ -33,6 +33,7 @@ const L = {
   aiInt: () => import("@/pages/AiIntegrationSmallBusiness"),
   fullStack: () => import("@/pages/FullStackSmallBusiness"),
   pitch: () => import("@/pages/ThePitch"),
+  contact: () => import("@/pages/ContactPage"),
 };
 const Home = import.meta.env.SSR ? (await L.home()).default : React.lazy(L.home);
 const ServicesPage = import.meta.env.SSR ? (await L.services()).default : React.lazy(L.services);
@@ -51,6 +52,7 @@ const SmallBusinessWebDevHuntsville = import.meta.env.SSR ? (await L.smallBiz())
 const AiIntegrationSmallBusiness = import.meta.env.SSR ? (await L.aiInt()).default : React.lazy(L.aiInt);
 const FullStackSmallBusiness = import.meta.env.SSR ? (await L.fullStack()).default : React.lazy(L.fullStack);
 const ThePitch = import.meta.env.SSR ? (await L.pitch()).default : React.lazy(L.pitch);
+const ContactPage = import.meta.env.SSR ? (await L.contact()).default : React.lazy(L.contact);
 
 const ROUTE_LOADERS = {
   "/": L.home,
@@ -70,6 +72,7 @@ const ROUTE_LOADERS = {
   "/ai-integration-small-business": L.aiInt,
   "/full-stack-development-small-business": L.fullStack,
   "/the-pitch": L.pitch,
+  "/contact": L.contact,
 };
 
 // Warm the chunk for the current path so the first client render never shows a fallback.
@@ -177,6 +180,7 @@ const AppContent = () => {
               <Route path="/case-study/themeaningsoflife" element={<CaseStudyMeanings />} />
               <Route path="/performance" element={<VideoPage />} />
               <Route path="/the-pitch" element={<ThePitch />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="/showcase" element={<Showcase />} />
               <Route path="/logos" element={<LogoSphere />} />
               <Route path="/preview" element={<PreviewPage />} />

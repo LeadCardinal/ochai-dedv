@@ -125,7 +125,7 @@ const Biography = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="mt-12 text-center">
-            <Link to="/#contact">
+            <Link to="/contact/">
               <Button size="lg" className="bg-cyan-500 hover:bg-cyan-600 text-white px-10 py-6 text-lg rounded-full shadow-[0_0_30px_rgba(6,182,212,0.4)]">
                 Start the Conversation
               </Button>

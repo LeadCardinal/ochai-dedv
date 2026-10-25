@@ -171,16 +171,17 @@ const Header = () => {
           </Link>
 
           {/* Contact */}
-          <motion.button
-            onClick={() => handleNavigation("contact")}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            whileHover={{ scale: 1.05 }}
-            className="text-slate-300 hover:text-white transition-colors"
-          >
-            Contact
-          </motion.button>
+          <Link to="/contact/">
+            <motion.span
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+              className="text-slate-300 hover:text-white transition-colors cursor-pointer inline-block"
+            >
+              Contact
+            </motion.span>
+          </Link>
 
           {/* About dropdown — consolidates Bio, Projects, Technologies, Case Studies */}
           <DropdownMenu>
@@ -301,12 +302,13 @@ const Header = () => {
               >
                 Work
               </Link>
-              <button
-                onClick={() => handleNavigation("contact")}
+              <Link
+                to="/contact/"
+                onClick={() => setIsMobileMenuOpen(false)}
                 className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg"
               >
                 Contact
-              </button>
+              </Link>
               <div className="h-px bg-slate-800 my-1" />
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">More</p>
               <button

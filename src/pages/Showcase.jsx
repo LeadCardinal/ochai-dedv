@@ -277,7 +277,7 @@ const Showcase = () => (
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <div className="text-center pt-4">
           <Link
-            to="/#contact"
+            to="/contact/"
             className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105"
             style={{
               background: 'linear-gradient(135deg, #c9a84c, #8a6820)',

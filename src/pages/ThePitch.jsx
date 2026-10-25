@@ -93,7 +93,7 @@ const ThePitch = () => (
               See the Services
             </Button>
           </Link>
-          <Link to="/#contact">
+          <Link to="/contact/">
             <Button variant="outline" className="rounded-full px-8 border-slate-600 text-slate-200 hover:text-cyan-400">
               Start the Conversation
             </Button>

@@ -20,6 +20,7 @@ const PRERENDER_ROUTES = [
   '/case-study/themeaningsoflife',
   '/performance',
   '/the-pitch',
+  '/contact',
   '/logos',
   '/preview',
 ];

@@ -15,6 +15,27 @@ import {
   Award,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SITE, ORG_ID, FOUNDER_ID, breadcrumbJsonLd } from "@/lib/schemaEntities";
+
+const CASE_URL = `${SITE}/case-study/themeaningsoflife/`;
+const caseStudyJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${CASE_URL}#webpage`,
+  url: CASE_URL,
+  name: "Case Study: themeaningsoflife.com | Perfect Accessibility, Best Practices & SEO Scores",
+  description:
+    "Technical analysis of themeaningsoflife.com, a book-marketing site achieving perfect 100/100 Accessibility, Best Practices & SEO scores and 95/100 Performance on Google Lighthouse.",
+  dateModified: "2026-10-25",
+  isPartOf: { "@id": `${SITE}/#website` },
+  author: { "@id": FOUNDER_ID },
+  publisher: { "@id": ORG_ID },
+  about: {
+    "@type": "WebSite",
+    name: "The Meaning(s) of Your LIFE!",
+    url: "https://themeaningsoflife.com/",
+  },
+});
 
 const CaseStudyMeanings = () => {
   const metrics = [
@@ -73,13 +94,15 @@ const CaseStudyMeanings = () => {
     <div className="pt-24 pb-12 min-h-screen bg-slate-950 text-white font-sans">
       <Helmet>
         <title>
-          Case Study: themeaningsoflife.com | Perfect Accessibility & SEO Scores
+          Case Study: themeaningsoflife.com | Perfect Accessibility, Best Practices & SEO Scores
         </title>
         <meta
           name="description"
           content="Technical analysis of themeaningsoflife.com, a book-marketing site achieving perfect 100/100 Accessibility, Best Practices & SEO scores and 95/100 Performance on Google Lighthouse."
         />
         <link rel="canonical" href="https://ochai.dev/case-study/themeaningsoflife/" />
+        <script type="application/ld+json">{caseStudyJsonLd}</script>
+        <script type="application/ld+json">{breadcrumbJsonLd([{ name: "themeaningsoflife.com case study", path: "/case-study/themeaningsoflife/" }])}</script>
       </Helmet>
 
       <div className="container mx-auto px-4">
