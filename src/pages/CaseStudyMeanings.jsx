@@ -42,7 +42,7 @@ const CaseStudyMeanings = () => {
   const benchmarks = [
     { label: "Fortune 500 Avg", score: 45, color: "bg-slate-700" },
     { label: "Agency Standard", score: 72, color: "bg-blue-900" },
-    { label: "Top 1% Global", score: 92, color: "bg-purple-900" },
+    { label: "Best-in-Class Sites", score: 92, color: "bg-purple-900" },
     { label: "This Project", score: 98, color: "bg-emerald-500" }, // Average of the 4 scores ~97.75
   ];
 
@@ -73,11 +73,11 @@ const CaseStudyMeanings = () => {
     <div className="pt-24 pb-12 min-h-screen bg-slate-950 text-white font-sans">
       <Helmet>
         <title>
-          Case Study: themeaningsoflife.com | Top 1% Global Performance
+          Case Study: themeaningsoflife.com | Perfect Accessibility & SEO Scores
         </title>
         <meta
           name="description"
-          content="Technical analysis of a top 1% globally ranked website achieving perfect 100/100 Accessibility & SEO scores and 95/100 Performance on Google Lighthouse."
+          content="Technical analysis of themeaningsoflife.com, a book-marketing site achieving perfect 100/100 Accessibility & SEO scores and 95/100 Performance on Google Lighthouse."
         />
         <link rel="canonical" href="https://ochai.dev/case-study/themeaningsoflife/" />
       </Helmet>
@@ -100,10 +100,10 @@ const CaseStudyMeanings = () => {
               <Trophy className="w-10 h-10 text-yellow-500" />
               <div>
                 <div className="text-yellow-400 font-bold text-lg">
-                  Top 1% Globally
+                  Near-Perfect Scores
                 </div>
                 <div className="text-yellow-500/70 text-xs uppercase tracking-wider">
-                  Elite Ranking
+                  Verified by Lighthouse
                 </div>
               </div>
             </div>
@@ -282,11 +282,11 @@ const CaseStudyMeanings = () => {
                   <Award className="w-10 h-10 text-indigo-400" />
                 </div>
                 <h3 className="text-lg font-medium text-indigo-300 mb-2">
-                  Global Ranking
+                  Lighthouse Result
                 </h3>
-                <div className="text-5xl font-bold text-white mb-2">TOP 1%</div>
+                <div className="text-5xl font-bold text-white mb-2">98/100</div>
                 <div className="text-sm text-indigo-200/70 mb-8">
-                  Of all websites tested worldwide
+                  Average across all four Lighthouse categories
                 </div>
 
                 <div className="bg-slate-900/60 rounded-xl p-4 text-left border border-indigo-500/20">

@@ -147,7 +147,7 @@ function generateFallbackUrl(fileName) {
 }
 
 const SITE_NAME = 'OchAI';
-const SITE_TAGLINE = 'AI implementation specialist and full-stack developer based in Huntsville, Alabama — Claude API, Adobe Firefly, and ElevenLabs integration, with verifiable Lighthouse-score results across production sites.';
+const SITE_TAGLINE = 'Full-stack web development and AI integration for businesses in Huntsville and across North Alabama — custom React and Cloudflare websites and apps, plus Claude API, Adobe Firefly, and ElevenLabs integration, with verifiable 100/100 Lighthouse results across production sites.';
 
 function generateLlmsTxt(pages) {
   const sortedPages = pages.filter(p => !EXCLUDED_URLS.has(p.url.replace(SITE_ORIGIN, ''))).sort((a, b) => a.title.localeCompare(b.title));

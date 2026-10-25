@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   ShieldCheck,
   ArrowRight,
   Award,
   Sparkles,
   ChevronDown,
+  Play,
 } from "lucide-react";
 
 const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
 const videoSrc = isMobile ? "/videos/hero_mobile.webm" : "/videos/hero_desktop.webm";
+
+const CAL_URL = "https://cal.com/jeremy-ochai-dev";
 
 const EliteHeroSection = () => {
   const [showVideo, setShowVideo] = useState(false);
@@ -40,58 +44,48 @@ const EliteHeroSection = () => {
             >
               <Sparkles className="w-5 h-5 text-emerald-400" />
               <span className="text-sm md:text-base font-bold text-emerald-400 tracking-wide uppercase">
-                Elite AI Implementation & Full-Stack Development
+                Web Development & AI Integration · North Alabama
               </span>
             </motion.div>
 
-            {/* Main Headline - Fixed Line Breaks */}
+            {/* Main Headline */}
             <motion.h1
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight"
             >
-              <span className="inline-block">
-                Top{" "}
-                <span className="text-5xl md:text-[3.5rem] lg:text-6xl align-baseline">
-                  .05%
-                </span>{" "}
-                AI Implementation
-              </span>
+              <span className="inline-block">Websites and AI systems</span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-                Specialist Worldwide
+                that actually ship.
               </span>
             </motion.h1>
 
-            {/* Hero Statement - The Money Shot */}
+            {/* Hero Statement */}
             <div className="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed space-y-4">
               <p>
                 <strong className="text-white">
-                  Top .05% means I outperform 99.95% of technical professionals
-                  worldwide.
+                  I&rsquo;m Jeremy Och. I build custom websites, apps, and AI
+                  integrations for businesses across North Alabama.
                 </strong>{" "}
-                Verified elite status—not self-reported, but measured by
-                Google's own Lighthouse benchmarks across my production
-                properties.
+                One developer, no handoffs, and no account manager standing
+                between you and the person writing the code.
               </p>
               <p>
                 <strong className="text-cyan-400">
-                  I execute the complete value chain solo as fewer than 1,000
-                  people globally do:
+                  From &ldquo;we should probably use AI for that&rdquo; to a
+                  system that is live and doing the work:
                 </strong>{" "}
-                AI orchestration → frontend/backend development → cloud
-                deployment → analytics infrastructure → business operations. All
-                at standards producing perfect technical scores and backed by
-                measurable revenue.
+                design → build → AI integration → deployment → search
+                visibility, all under one roof.
               </p>
               <p className="text-slate-200">
-                Most developers specialize. Agencies distribute across teams.{" "}
+                Every site I publish is built to load fast, be found, and get
+                cited by AI search, and I hold myself to Google&rsquo;s own
+                yardstick:{" "}
                 <span className="text-white font-semibold">
-                  I deliver the exceptionally rare combination of elite
-                  technical execution meeting complete vertical integration—at
-                  performance standards the other 99.95% call perfectionism. I
-                  call it baseline.
+                  100/100 on Lighthouse. I call it baseline.
                 </span>
               </p>
             </div>
@@ -111,12 +105,12 @@ const EliteHeroSection = () => {
                       AI Integration That Works
                     </h2>
                     <p className="text-slate-300 text-sm">
-                      Adobe Firefly, ElevenLabs, Claude API integrated into
-                      production workflows generating{" "}
+                      Claude API, Adobe Firefly, and ElevenLabs wired into real
+                      production workflows.{" "}
                       <span className="text-cyan-400">
-                        $1,200/month revenue.
+                        Complete systems, not demos.
                       </span>{" "}
-                      Complete systems, zero agency overhead.
+                      Zero agency overhead.
                     </p>
                   </div>
                 </div>
@@ -128,11 +122,10 @@ const EliteHeroSection = () => {
                       Perfect Technical Execution
                     </h2>
                     <p className="text-slate-300 text-sm">
-                      100/100 Lighthouse scores across reallivebonsai.us,
-                      hsvdrone.com, themeaningsoflife.com. Hand-coded
-                      optimizations.{" "}
+                      100/100 Lighthouse scores across four production sites,
+                      hand-coded for speed, accessibility, and SEO.{" "}
                       <span className="text-purple-400">
-                        Google's benchmarks confirm it.
+                        Google&rsquo;s benchmark confirms it.
                       </span>
                     </p>
                   </div>
@@ -140,20 +133,37 @@ const EliteHeroSection = () => {
               </div>
             </motion.div>
 
-            {/* CTA */}
+            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col items-center lg:items-start gap-5"
             >
-              <button
-                onClick={scrollToNext}
-                className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-950 transition-all duration-200 bg-cyan-500 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 hover:bg-cyan-400 shadow-[0_0_20px_rgba(8,145,178,0.5)] hover:shadow-[0_0_30px_rgba(8,145,178,0.7)] hover:-translate-y-1"
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a
+                  href={CAL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-950 transition-all duration-200 bg-cyan-500 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 hover:bg-cyan-400 shadow-[0_0_20px_rgba(8,145,178,0.5)] hover:shadow-[0_0_30px_rgba(8,145,178,0.7)] hover:-translate-y-1"
+                >
+                  Book a Discovery Call
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+                <Link
+                  to="/services/"
+                  className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-cyan-300 border border-cyan-500/60 rounded-full hover:bg-cyan-500/10 transition-colors"
+                >
+                  See Services &amp; Pricing
+                </Link>
+              </div>
+              <Link
+                to="/the-pitch/"
+                className="inline-flex items-center gap-2 text-slate-300 hover:text-cyan-300 transition-colors text-base"
               >
-                Why This Matters
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+                <Play className="w-4 h-4" />
+                Watch The Pitch, 49 seconds of ragtime
+              </Link>
             </motion.div>
           </div>
 
@@ -189,7 +199,7 @@ const EliteHeroSection = () => {
                   <source media="(max-width: 767px)" srcSet="/videos/hero_mobile_poster.avif" type="image/avif" />
                   <img
                     src="/videos/hero_desktop_poster.avif"
-                    alt="Jeremy Och - OCH AI DEV - Top .05% AI Implementation Specialist Worldwide"
+                    alt="Jeremy Och of OchAI, full-stack web development and AI integration in Huntsville, Alabama"
                     width="800"
                     height="600"
                     fetchPriority="high"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, ChevronDown, Download } from "lucide-react";
+import { Menu, X, ChevronDown, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -207,6 +207,9 @@ const Header = () => {
                 <button onClick={() => { setIsMobileMenuOpen(false); navigate("/performance/"); }} className="w-full text-left">Performance</button>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
+                <button onClick={() => { setIsMobileMenuOpen(false); navigate("/the-pitch/"); }} className="w-full text-left">The Pitch</button>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-800 focus:text-cyan-400 cursor-pointer">
                 <button onClick={() => handleNavigation("projects")} className="w-full text-left">
                   Projects
                 </button>
@@ -232,18 +235,18 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Resume CTA */}
+          {/* Book a Call CTA */}
           <Button
             asChild
-            className="ml-4 px-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg group"
+            className="ml-4 px-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg group"
           >
             <a
-              href="/images/JeremyOch_Resume.pdf"
+              href="https://cal.com/jeremy-ochai-dev"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2"
             >
-              Resume <Download className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              Book a Call <CalendarDays className="w-4 h-4 group-hover:scale-110 transition-transform" />
             </a>
           </Button>
         </div>
@@ -326,6 +329,13 @@ const Header = () => {
               >
                 Performance
               </Link>
+              <Link
+                to="/the-pitch/"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
+              >
+                The Pitch
+              </Link>
               <button
                 onClick={() => handleNavigation("projects")}
                 className="text-left text-slate-300 hover:text-white transition-colors py-2 text-lg pl-4 border-l-2 border-slate-800"
@@ -363,15 +373,15 @@ const Header = () => {
               </Link>
               <Button
                 asChild
-                className="mt-4 px-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg group"
+                className="mt-4 px-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg group"
               >
                 <a
-                  href="/images/JeremyOch_Resume.pdf"
+                  href="https://cal.com/jeremy-ochai-dev"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2"
                 >
-                  Download Resume <Download className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                  Book a Call <CalendarDays className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 </a>
               </Button>
             </div>

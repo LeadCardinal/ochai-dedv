@@ -9,11 +9,11 @@ const Projects = () => {
       title: "themeaningsoflife.com",
       category: "Philosophy & AI",
       description:
-        'A masterpiece of optimization. Achieving perfect 100/100 scores in Accessibility and SEO with 95 Performance, this site defines the modern "Top 1%" standard.',
+        'A masterpiece of optimization. Achieving perfect 100/100 scores in Accessibility and SEO with 95 Performance, this site shows what a modern, well-built site can score.',
       // Replaced with Supabase URL
       image:
         "/images/ProjectMeanings.avif",
-      tags: ["React", "Top 1% Global", "Perfect SEO"],
+      tags: ["React", "Perfect Lighthouse", "Perfect SEO"],
       link: "/case-study/themeaningsoflife",
       liveUrl: "https://themeaningsoflife.com",
       highlight: true,
@@ -81,7 +81,7 @@ const Projects = () => {
             <div className="flex items-center gap-2 text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-lg inline-flex">
               <Trophy className="w-4 h-4" />
               <span className="text-sm font-bold">
-                All projects engineered to Top 1% Performance Standards
+                All projects engineered for top Lighthouse scores
               </span>
             </div>
           </div>

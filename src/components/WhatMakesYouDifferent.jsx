@@ -7,7 +7,7 @@ const WhatMakesYouDifferent = () => {
     {
       icon: Lock,
       title: 'AI-First Architecture',
-      description: 'Production implementations of Adobe Firefly, ElevenLabs, and Claude API powering real business workflows. Not experimental demos—deployed systems generating monthly revenue with zero manual overhead.',
+      description: 'Claude API, Adobe Firefly, and ElevenLabs running inside real business workflows. Deployed systems, not experimental demos, built to take repetitive work off your plate.',
       color: 'text-rose-400',
       bg: 'bg-rose-500/10',
       border: 'border-rose-500/20'
@@ -15,7 +15,7 @@ const WhatMakesYouDifferent = () => {
     {
       icon: Layers,
       title: 'Full-Spectrum Integration',
-      description: 'Engineering → Design → Analytics → Marketing → Deployment. No handoffs, no dependency chains, no communication overhead. Complete vertical integration executed solo at enterprise standards.',
+      description: 'Design, engineering, analytics, SEO, and deployment from one person. No handoffs, no dependency chains, and nobody else to blame but me.',
       color: 'text-blue-400',
       bg: 'bg-blue-500/10',
       border: 'border-blue-500/20'
@@ -23,15 +23,15 @@ const WhatMakesYouDifferent = () => {
     {
       icon: Zap,
       title: 'Perfect Technical Execution',
-      description: 'Perfect Lighthouse scores across multiple production properties verified by Google\'s own Core Web Vitals. Hand-coded optimization that automated tools can\'t match. Not "good enough"—measurably perfect.',
+      description: '100/100 on all four Lighthouse categories across four production sites. Hand-coded where templates fall short, so your site loads fast and gives search engines and AI assistants something worth citing.',
       color: 'text-yellow-400',
       bg: 'bg-yellow-500/10',
       border: 'border-yellow-500/20'
     },
     {
       icon: Cpu,
-      title: 'Proven Business Outcomes',
-      description: '$1,200/month e-commerce revenue. Published author with ongoing sales. Multiple production web properties—all perfect Lighthouse scores, all live, all solo operations. Results speak louder than credentials.',
+      title: 'Built on Real Businesses',
+      description: 'I run my own e-commerce store, a drone-services site, and a published book’s storefront on this same stack. Everything I sell you has already been tested on my own money first.',
       color: 'text-emerald-400',
       bg: 'bg-emerald-500/10',
       border: 'border-emerald-500/20'
@@ -47,15 +47,15 @@ const WhatMakesYouDifferent = () => {
           <div className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 px-4 py-2 rounded-full mb-6 backdrop-blur-sm">
             <Target className="w-4 h-4 text-purple-400" />
             <span className="text-sm font-bold text-purple-400 tracking-wide uppercase">
-              Elite Performance Verified
+              Why OchAI
             </span>
           </div>
-          
+
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Why <span className="text-cyan-400">Top 0.05%</span> Matters
+            One Builder, <span className="text-cyan-400">Start to Finish</span>
           </h2>
           <p className="text-xl text-slate-300 leading-relaxed">
-            Most specialists stay in their lane. Agencies distribute capabilities across teams. Complete vertical integration—from AI architecture to cloud deployment to business operations—executed solo at elite standards. That combination is exceptionally rare.
+            Most specialists stay in their lane. Agencies spread your project across a team and a stack of status meetings. I keep the whole thing in one pair of hands, from first sketch to live deployment, so nothing gets lost between people.
           </p>
         </div>
 
@@ -83,7 +83,7 @@ const WhatMakesYouDifferent = () => {
         </div>
 
         {/* Bottom Stats Bar */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -93,12 +93,12 @@ const WhatMakesYouDifferent = () => {
             <div>
               <Award className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
               <div className="text-3xl font-bold text-white mb-1">100/100</div>
-              <div className="text-sm text-slate-300">Perfect Lighthouse Scores<br/>Across All Properties</div>
+              <div className="text-sm text-slate-300">Lighthouse Scores<br/>Across All Properties</div>
             </div>
             <div>
               <Target className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
-              <div className="text-3xl font-bold text-white mb-1">$1,200</div>
-              <div className="text-sm text-slate-300">Monthly E-Commerce<br/>Revenue Generated</div>
+              <div className="text-3xl font-bold text-white mb-1">37+</div>
+              <div className="text-sm text-slate-300">Years of Hands-On<br/>Technology Experience</div>
             </div>
             <div>
               <Cpu className="w-8 h-8 text-purple-400 mx-auto mb-3" />

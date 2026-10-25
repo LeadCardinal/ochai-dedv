@@ -7,7 +7,7 @@ const CoreCapabilities = () => {
     {
       icon: BrainCircuit,
       title: "AI Integration & Deployment",
-      description: "Production implementation of Adobe Firefly, ElevenLabs, Claude API, and LLM orchestration. Real systems generating measurable revenue—not demos.",
+      description: "Production implementation of Adobe Firefly, ElevenLabs, Claude API, and LLM orchestration. Real systems running in real workflows, not demos.",
       highlight: true
     },
     {
@@ -55,13 +55,13 @@ const CoreCapabilities = () => {
     {
       icon: Zap,
       title: "Creative Automation",
-      description: "Adobe Creative Cloud mastery (Photoshop, Illustrator, InDesign, Premiere, After Effects, Firefly) producing enterprise output at solo speed.",
+      description: "Adobe Creative Cloud mastery (Photoshop, Illustrator, InDesign, Premiere, After Effects, Firefly) producing polished creative work at solo speed.",
       highlight: false
     },
     {
       icon: Workflow,
       title: "Full-Stack Operations",
-      description: "E-commerce management, content strategy, marketing automation, customer service—complete business operations executing at elite standards.",
+      description: "E-commerce management, content strategy, marketing automation, customer service—the operational side of a business, which I run for my own stores and sites.",
       highlight: false
     }
   ];
@@ -74,7 +74,7 @@ const CoreCapabilities = () => {
             AI-Augmented <span className="text-purple-400">Technical Arsenal</span>
           </h2>
           <p className="text-lg text-slate-300">
-            The complete toolkit for solo execution of enterprise-grade digital products. From AI orchestration to cloud deployment to business operations—all capabilities performed at standards that produce measurable results.
+            Everything your project needs under one roof: AI orchestration, development, cloud deployment, analytics, and search visibility, all built and maintained by one developer.
           </p>
         </div>
 
@@ -90,7 +90,7 @@ const CoreCapabilities = () => {
             >
               {cap.highlight && (
                 <div className="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-                  ELITE
+                  CORE
                 </div>
               )}
               <div className={`w-12 h-12 ${cap.highlight ? 'bg-purple-500/20' : 'bg-slate-900'} rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors`}>
@@ -113,7 +113,7 @@ const CoreCapabilities = () => {
         >
           <div className="bg-slate-800/30 border border-slate-700 rounded-2xl p-8 backdrop-blur-sm">
             <p className="text-lg text-slate-300 leading-relaxed">
-              <span className="text-cyan-400 font-bold">The Integration Advantage:</span> Most technical professionals excel in 1-2 areas. Agencies distribute capabilities across teams, introducing communication overhead and dependency chains. Fewer than 1,000 people worldwide can execute this complete stack solo while maintaining elite performance standards. <span className="text-cyan-400 font-bold">I am one of them.</span>
+              <span className="text-cyan-400 font-bold">The Integration Advantage:</span> Most technical professionals excel in 1-2 areas. Agencies distribute capabilities across teams, introducing communication overhead and dependency chains. I cover the whole stack myself, which means one conversation, one invoice, and one person accountable. <span className="text-cyan-400 font-bold">Fewer moving parts, fewer surprises.</span>
             </p>
           </div>
         </motion.div>

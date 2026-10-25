@@ -77,18 +77,18 @@ const PerformanceExcellence = () => {
           <div className="flex items-center gap-2 mb-4">
             <span className="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-xs font-bold border border-yellow-500/20 uppercase tracking-wider flex items-center gap-2">
               <Trophy className="w-3 h-3" />
-              Global Ranking
+              Verified by Lighthouse
             </span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent mb-6 max-w-4xl">
-            Engineering Digital Perfection
+            Fast, Accessible, Findable
           </h2>
           <p className="text-lg text-slate-300 leading-relaxed max-w-2xl">
-            I don't just build websites; I engineer elite digital experiences.
-            My work consistently ranks in the{" "}
-            <strong>Top 1% of all websites globally</strong>, verified by Google
-            Lighthouse. While most agencies settle for "good enough," I deliver
-            perfection across every metric.
+            Every site I build is measured against Google's own Lighthouse benchmark.
+            These four are live, in production, and scoring 100 across{" "}
+            <strong>Performance, Accessibility, Best Practices, and SEO</strong>.
+            Most agencies settle for "good enough"; I treat
+            100 as the baseline.
           </p>
         </div>
 
@@ -166,9 +166,9 @@ const PerformanceExcellence = () => {
               </div>
               <div className="text-sm">
                 <span className="block font-bold text-white">
-                  Top 1% Globally
+                  100/100/100/100
                 </span>
-                <span className="text-slate-300">Performance Rank</span>
+                <span className="text-slate-300">All Four Categories</span>
               </div>
             </div>
             <div className="w-px h-8 bg-slate-800" />
@@ -177,8 +177,8 @@ const PerformanceExcellence = () => {
                 <BarChart3 className="w-5 h-5 text-blue-400" />
               </div>
               <div className="text-sm">
-                <span className="block font-bold text-white">Sub-Second</span>
-                <span className="text-slate-300">Load Times</span>
+                <span className="block font-bold text-white">Edge-Delivered</span>
+                <span className="text-slate-300">Cloudflare Global Network</span>
               </div>
             </div>
           </div>

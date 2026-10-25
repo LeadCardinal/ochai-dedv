@@ -125,7 +125,7 @@ const VideoPage = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             {[
               { label: 'Lighthouse Score', value: '100/100/100/100' },
-              { label: 'Global Percentile', value: 'Top 1%' },
+              { label: 'Production Sites', value: '4' },
               { label: 'Experience', value: '37+ Years' },
               { label: 'Location', value: 'Huntsville, AL' },
             ].map((stat) => (

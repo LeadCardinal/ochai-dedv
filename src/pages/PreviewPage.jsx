@@ -8,15 +8,15 @@ const PreviewPage = () => {
     <>
       <Helmet>
         {/* Primary Meta Tags */}
-        <title>Jeremy Och - Top 0.05% AI Implementation Specialist</title>
-        <meta name="description" content="Fewer than 1,000 developers worldwide execute the complete value chain solo at perfect technical standards. Three production sites. Three perfect Lighthouse scores. Zero coordination overhead." />
+        <title>OchAI - Websites and AI Systems That Actually Ship</title>
+        <meta name="description" content="Custom websites, apps, and AI integrations for North Alabama businesses, built start to finish by one developer. Perfect Lighthouse scores across four production sites." />
         <link rel="canonical" href="https://ochai.dev/preview" />
         
         {/* Open Graph / Social Media */}
         <meta property="og:type" content="video.other" />
         <meta property="og:url" content="https://ochai.dev/preview" />
-        <meta property="og:title" content="Jeremy Och - Elite AI Implementation Specialist" />
-        <meta property="og:description" content="Top 0.05% AI operator. Three perfect Lighthouse scores across production sites. Complete value chain execution - solo." />
+        <meta property="og:title" content="OchAI - Websites and AI Systems That Actually Ship" />
+        <meta property="og:description" content="Custom websites, apps, and AI integrations for North Alabama businesses. One developer, start to finish." />
         <meta property="og:image" content="https://ochai.dev/videos/introanimation.gif" />
         <meta property="og:video" content="https://ochai.dev/videos/Og_2_.mp4" />
         <meta property="og:video:type" content="video/mp4" />
@@ -26,8 +26,8 @@ const PreviewPage = () => {
         {/* Twitter Card */}
         <meta name="twitter:card" content="player" />
         <meta name="twitter:url" content="https://ochai.dev/preview" />
-        <meta name="twitter:title" content="Jeremy Och - Top 0.05% AI Implementation Specialist" />
-        <meta name="twitter:description" content="Three perfect Lighthouse scores. Complete value chain execution - solo." />
+        <meta name="twitter:title" content="OchAI - Websites and AI Systems That Actually Ship" />
+        <meta name="twitter:description" content="Custom websites, apps, and AI integrations. One developer, start to finish." />
         <meta name="twitter:image" content="https://ochai.dev/videos/introanimation.gif" />
       </Helmet>
 
@@ -50,16 +50,16 @@ const PreviewPage = () => {
         <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-2xl leading-tight">
-              Welcome to Elite Digital Operations
+              Websites and AI systems that actually ship.
             </h1>
             
             <p className="text-xl md:text-2xl text-slate-200 leading-relaxed drop-shadow-lg">
-              Top 0.05% AI implementation specialist. Three perfect Lighthouse scores across production sites. Complete value chain execution—solo.
+              Custom websites, apps, and AI integrations for North Alabama businesses. One developer, start to finish, 100/100 on Lighthouse.
             </p>
 
             <Link to="/">
               <button className="group bg-cyan-500 hover:bg-cyan-600 text-white px-10 py-6 text-lg rounded-full shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all hover:scale-105 flex items-center gap-3 mx-auto">
-                Visit My Homepage
+                Visit OchAI
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>

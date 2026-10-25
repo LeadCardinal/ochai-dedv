@@ -8,35 +8,35 @@ const painPointsData = [
   {
     id: 1,
     heading: "Nobody Owns the Whole Thing",
-    content: "Silos kill velocity. When frontend, backend, and infra are separate fiefdoms, projects stall. I bring a holistic 'systems thinking' approach—ensuring end-to-end ownership from the first line of code to the final production deployment. No more 'it works on my machine' excuses.",
+    content: "Most projects stall in the handoffs: designer to developer to host to whoever 'does the SEO.' I own it end to end, from the first sketch to the live deployment, so there is one person to call and nothing falls into the gaps.",
     image: "/images/1.webp",
     icon: BrainCircuit
   },
   {
     id: 2,
     heading: "Timelines Are Fiction",
-    content: "Traditional estimation is a guessing game. I replace vague promises with evidence-based engineering. By utilizing rapid prototyping, modular architecture, and continuous feedback loops, I turn predictable friction into predictable delivery. I ship features, not excuses.",
+    content: "Vague quotes and slipping dates are the industry default. I scope in writing, price by clear tiers, and show working builds early, so you see progress instead of promises.",
     image: "/images/2.avif",
     icon: Sparkles
   },
   {
     id: 3,
     heading: "Optimize for What, Exactly?",
-    content: "Engineers love to optimize, but often for the wrong metrics. Saving 5ms on a query doesn't matter if the feature generates zero revenue. I practice 'Value-First Optimization'—aligning technical performance directly with business KPIs and user retention goals.",
+    content: "A site can score beautifully and still not bring in a single call. I tie the work to what you actually need: bookings, orders, being found on Google, and being cited by AI search. Speed is the floor, not the goal.",
     image: "/images/3.webp",
     icon: Target
   },
   {
     id: 4,
     heading: "The Deployment Disaster Loop",
-    content: "If releasing code is a high-stress event, the process is broken. I build robust, self-healing CI/CD pipelines that make deployment boring, frequent, and reliable. I move from 'Release Friday Scaries' to releasing multiple times a day with zero downtime.",
+    content: "Launch day should not be a white-knuckle event. Your site ships through a Cloudflare-backed pipeline: preview, push, live, with easy rollbacks. Boring deployments are a feature.",
     image: "/images/4.webp",
     icon: Rocket
   },
   {
     id: 5,
     heading: "Data Doesn't Drive Decisions",
-    content: "Dashboards are often graveyards for data. I integrate actionable intelligence directly into application workflows. By building systems that adapt to user behavior in real-time, I turn passive statistics into active competitive advantages that drive strategy automatically.",
+    content: "Analytics nobody reads are decoration. I set up Search Console, GA4, and server-side tracking so you can see what is working, then tell you what it means in plain English.",
     image: "/images/5.webp",
     icon: TrendingUp
   }
