@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Fingerprint, Check, X, Signal, BatteryFull, MessageSquare, MessageCircle, Home } from 'lucide-react';
+import { Fingerprint, Check, X, Signal, BatteryFull, MessageSquare, MessageCircle, Home, ChevronDown, CalendarDays, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { SITE, ORG_ID, AREA_SERVED } from '@/lib/schemaEntities';
 
 const LOGO = '/images/ochai-header-logo.avif';
+const CAL_URL = 'https://cal.com/jeremy-ochai-dev';
 const ASSETS = {
   soloist: '/images/soloist.avif',
   accompaniment: '/images/accompaniment.avif',
@@ -69,6 +71,52 @@ const appsJsonLd = JSON.stringify({
     }),
   },
 });
+
+
+const FAQS = [
+  { q: 'How much does a custom app cost?', a: `App builds start at ${TIERS[0].price} (${TIERS[0].name}). Larger scopes run ${TIERS[1].price} (${TIERS[1].name}) and ${TIERS[2].price} plus ${TIERS[2].priceSuffix.replace('+ ', '')} (${TIERS[2].name}). The final price is fixed in a written proposal after a free discovery call.` },
+  { q: 'Why choose a solo developer over an agency?', a: 'You get direct communication and no hand-offs. The trade-off is limited capacity, so I am upfront about timelines and take on a small number of projects at a time.' },
+  { q: 'Who owns the code?', a: 'You do. You own the code and hosting, with documentation for the next developer. I can keep maintaining and extending the app, or hand it to another developer.' },
+  { q: 'Can you connect the app to software we already use?', a: 'Often yes. Integrations with payments, messaging, calendars, maps and existing databases are a normal part of the work.' },
+  { q: 'Do you build AI features into apps?', a: 'Yes. That includes custom Claude API integration and workflow automation, built into the system it automates rather than bolted on as a chatbot.' },
+];
+
+const appsFaqJsonLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+});
+
+const BUILDS = [
+  { title: 'Client portals and dashboards', body: 'Logins, role-based access and dashboards for businesses that have outgrown a template site.' },
+  { title: 'Workflow and internal tools', body: "Software that follows how your team actually works, instead of forcing your process into an off-the-shelf tool's shape." },
+  { title: 'E-commerce and payments', body: 'Storefronts and checkout with Stripe or Square, built and run in production.', to: '/case-study/reallivebonsai/', linkLabel: 'Real Live Bonsai case study' },
+  { title: 'AI-powered apps', body: 'Claude API integration and workflow automation wired into the system it automates, not a chatbot bolted onto a homepage.', to: '/ai-integration-small-business/', linkLabel: 'AI integration for small business' },
+];
+
+const INCLUDED = [
+  'Source code you own, with documentation for the next developer.',
+  'Database design, authentication and the integrations your process needs: payments, messaging, maps, calendars.',
+  'Deployment, hosting and security headers configured for production.',
+  'Analytics that show what users actually do.',
+];
+
+const PROCESS = [
+  { step: '01', title: 'Free discovery call', text: 'A no-obligation conversation, 20 to 30 minutes. You talk, I listen.' },
+  { step: '02', title: 'Written proposal', text: 'Deliverables, timeline and a fixed price, agreed before any work starts.' },
+  { step: '03', title: 'Milestone builds', text: 'Working software you can use and judge early. You approve before we move on.' },
+  { step: '04', title: 'Launch and support', text: 'You own the code and hosting. I can keep maintaining it, or hand it off with documentation.' },
+];
+
+const FIT = [
+  'You need software shaped to your process, not the other way around.',
+  'You want a single point of contact through build, launch and changes.',
+  'You prefer staged milestones and clear scope.',
+];
+const NOT_FIT = [
+  'You need a large in-house team embedded for many months.',
+  'You require a platform that must serve millions of users on day one.',
+  'You want a finished product off the shelf. A subscription tool will be cheaper.',
+];
 
 function useMatchMedia(query) {
   const [matches, setMatches] = useState(false);
@@ -290,7 +338,8 @@ const GenieSidebar = ({ tier, onClose, phoneRef }) => {
               </li>
             ))}
           </ul>
-          <p className="text-[10px] text-slate-400 mt-6 italic">Authoritative. Deliberate. Expert.</p>
+          <BookCall className="mt-6 px-5 py-2.5 text-sm" />
+          <p className="text-[10px] text-slate-400 mt-4 italic">Authoritative. Deliberate. Expert.</p>
         </div>
       </div>
     </div>
@@ -375,11 +424,167 @@ const MobileExpanded = ({ tier, onClose }) => {
             </li>
           ))}
         </ul>
-        <p className="text-[10px] text-slate-400 mt-8 italic text-center">Authoritative. Deliberate. Expert.</p>
+        <BookCall className="mt-6 w-full px-5 py-3 text-sm" />
+        <p className="text-[10px] text-slate-400 mt-6 italic text-center">Authoritative. Deliberate. Expert.</p>
       </div>
     </div>
   );
 };
+
+// BookCall — amber CTA that matches the page's tier accent
+const BookCall = ({ className = '' }) => (
+  <a href={CAL_URL} target="_blank" rel="noopener noreferrer"
+    className={`inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold transition-colors ${className}`}>
+    <CalendarDays className="w-4 h-4" /> Book a free discovery call
+  </a>
+);
+
+// ScrollCue — same cue the homepage hero uses, pointing at the detail below the phone
+const ScrollCue = ({ className = '' }) => (
+  <button type="button" aria-label="Scroll for more detail"
+    onClick={() => document.getElementById('apps-detail')?.scrollIntoView({ behavior: 'smooth' })}
+    className={`flex flex-col items-center gap-1 cursor-pointer ${className}`}>
+    <span className="text-slate-200 text-sm font-medium tracking-wide uppercase">Scroll for more detail</span>
+    <motion.span animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
+      <ChevronDown className="w-6 h-6 text-cyan-300" />
+    </motion.span>
+  </button>
+);
+
+// AppsDetail — real, visible, crawlable copy below the phone. Plain markup on
+// purpose (no entrance animation) so the prerendered HTML carries every word.
+const DetailSection = ({ title, children }) => (
+  <section className="py-14 border-t border-slate-800">
+    <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">{title}</h2>
+    {children}
+  </section>
+);
+
+const AppsDetail = () => (
+  <div id="apps-detail" className="bg-[#0a0a0f] text-white pb-20">
+    <div className="container mx-auto px-4 max-w-4xl">
+      <section className="pt-16 pb-14">
+        <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">Huntsville, North Alabama &amp; remote</p>
+        <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight">Custom apps for Huntsville and North Alabama businesses</h2>
+        <p className="text-lg text-slate-300 leading-relaxed">
+          OchAI is a one-developer full-stack practice in Huntsville, Alabama. Front end, back end, database, hosting and analytics all come from the same person, so your app has one owner from the first sketch to production. Serving North Alabama and remote clients.
+        </p>
+        <div className="mt-7 flex flex-wrap gap-4">
+          <BookCall className="px-6 py-3" />
+          <Link to="/services/" className="inline-flex items-center gap-2 border border-slate-600 hover:border-amber-400 px-6 py-3 rounded-full transition-colors">
+            Website packages <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      <DetailSection title="What I build">
+        <div className="grid md:grid-cols-2 gap-4">
+          {BUILDS.map(b => (
+            <div key={b.title} className="bg-slate-900/50 border border-slate-800 rounded-xl p-5">
+              <h3 className="font-bold mb-2">{b.title}</h3>
+              <p className="text-slate-300 text-sm leading-relaxed">{b.body}</p>
+              {b.to && (
+                <Link to={b.to} className="inline-block mt-3 text-sm text-amber-400 hover:text-amber-300 underline">{b.linkLabel}</Link>
+              )}
+            </div>
+          ))}
+        </div>
+      </DetailSection>
+
+      <DetailSection title="The three tiers">
+        <div className="grid md:grid-cols-3 gap-4">
+          {TIERS.map(t => (
+            <div key={t.key} className="bg-slate-900/50 border border-slate-800 rounded-xl p-5">
+              <h3 className="font-bold text-lg">{t.name}</h3>
+              <p className="text-2xl font-black text-amber-400 mt-1">{t.price}
+                {t.priceSuffix && <span className="text-sm font-normal text-slate-400 ml-1">{t.priceSuffix}</span>}
+              </p>
+              <p className="text-sm text-slate-200 mt-2">{t.tagline}</p>
+              <p className="text-sm text-slate-300 mt-2 leading-relaxed">{t.description}</p>
+              <ul className="mt-3 space-y-2">
+                {t.features.map(f => (
+                  <li key={f} className="flex items-start gap-2 text-sm text-slate-300">
+                    <Check className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />{f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p className="text-sm text-slate-400 mt-4">Prices are starting points, plus or minus final scope. The written proposal fixes the number before any work begins.</p>
+      </DetailSection>
+
+      <DetailSection title="What every build includes">
+        <ul className="space-y-3">
+          {INCLUDED.map(i => (
+            <li key={i} className="flex gap-3 text-slate-300">
+              <Check className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" /><span>{i}</span>
+            </li>
+          ))}
+        </ul>
+      </DetailSection>
+
+      <DetailSection title="How it works">
+        <div className="grid md:grid-cols-2 gap-4">
+          {PROCESS.map(p => (
+            <div key={p.step} className="bg-slate-900/50 border border-slate-800 rounded-xl p-5">
+              <p className="text-amber-400 text-xs font-bold tracking-widest mb-1">{p.step}</p>
+              <h3 className="font-bold mb-1">{p.title}</h3>
+              <p className="text-slate-300 text-sm leading-relaxed">{p.text}</p>
+            </div>
+          ))}
+        </div>
+      </DetailSection>
+
+      <DetailSection title="Proof you can check yourself">
+        <p className="text-slate-300 leading-relaxed">
+          Four production properties, built and operated by me, all scoring 100 on Lighthouse: ochai.dev, reallivebonsai.us, hsvdrone.com and themeaningsoflife.com. For a full e-commerce build with payments and analytics, read the{' '}
+          <Link to="/case-study/reallivebonsai/" className="text-amber-400 hover:text-amber-300 underline">Real Live Bonsai case study</Link>.
+          For the plain-English version of the stack, see{' '}
+          <Link to="/full-stack-development-small-business/" className="text-amber-400 hover:text-amber-300 underline">full-stack development for small business</Link>.
+        </p>
+      </DetailSection>
+
+      <DetailSection title="Best fit, and not a fit">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-slate-900/50 border border-emerald-500/30 rounded-xl p-5">
+            <h3 className="font-bold mb-3 text-emerald-300">Best fit</h3>
+            <ul className="space-y-2">
+              {FIT.map(f => <li key={f} className="flex gap-2 text-sm text-slate-300"><Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />{f}</li>)}
+            </ul>
+          </div>
+          <div className="bg-slate-900/50 border border-rose-500/30 rounded-xl p-5">
+            <h3 className="font-bold mb-3 text-rose-300">Not a fit</h3>
+            <ul className="space-y-2">
+              {NOT_FIT.map(f => <li key={f} className="flex gap-2 text-sm text-slate-300"><X className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />{f}</li>)}
+            </ul>
+          </div>
+        </div>
+      </DetailSection>
+
+      <DetailSection title="Common questions">
+        <div className="space-y-4">
+          {FAQS.map(f => (
+            <div key={f.q} className="bg-slate-900/50 border border-slate-800 rounded-xl p-5">
+              <h3 className="font-bold mb-2">{f.q}</h3>
+              <p className="text-slate-300 text-sm leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </DetailSection>
+
+      <section className="py-14 border-t border-slate-800 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-3">Tell me what you want to build.</h2>
+        <p className="text-slate-300 mb-6">The discovery call costs nothing. You talk, I listen, and you leave knowing whether it is a fit.</p>
+        <BookCall className="px-8 py-4 text-lg" />
+        <p className="text-slate-400 text-sm mt-8">
+          OchAI is run by Jeremy Och in Huntsville, Alabama. Reach me at{' '}
+          <a href="mailto:jeremy@ochai.dev" className="text-amber-400 hover:text-amber-300">jeremy@ochai.dev</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+);
 
 // Main page component
 const Apps = () => {
@@ -437,6 +642,7 @@ const Apps = () => {
           <meta name="twitter:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
           <meta name="twitter:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
           <script type="application/ld+json">{appsJsonLd}</script>
+        <script type="application/ld+json">{appsFaqJsonLd}</script>
         </Helmet>
         <div className="relative flex items-start bg-[#0a0a0f] pl-16"
           style={{
@@ -487,24 +693,9 @@ const Apps = () => {
           <h1 className="absolute top-8 left-1/2 text-white/70 text-lg font-bold tracking-tight pointer-events-none select-none">
             Deliberate Pricing, Expert Build.
           </h1>
-          {/* Full pitch, always in the DOM regardless of phase/activeTier.
-              The real copy — tagline, description, features — otherwise
-              only exists behind a fingerprint tap and a tier click, which
-              no crawler is going to perform. This is the fallback that
-              guarantees it's indexable on first paint either way. */}
-          <div className="sr-only">
-            {TIERS.map(t => (
-              <section key={t.key}>
-                <h2>{t.name} — {t.price}{t.priceSuffix ? ` ${t.priceSuffix}` : ''}</h2>
-                <p>{t.tagline}</p>
-                <p>{t.description}</p>
-                <ul>
-                  {t.features.map(f => <li key={f}>{f}</li>)}
-                </ul>
-              </section>
-            ))}
-          </div>
+          <ScrollCue className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20" />
         </div>
+        <AppsDetail />
       </>
     );
   }
@@ -527,12 +718,13 @@ const Apps = () => {
         <meta name="twitter:title" content="Custom App Development, Real Pricing | North Alabama | OchAI" />
         <meta name="twitter:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
         <script type="application/ld+json">{appsJsonLd}</script>
+        <script type="application/ld+json">{appsFaqJsonLd}</script>
       </Helmet>
       {/* Full-screen — the same brief header visibility applies here too;
           it was silently sitting on top of this content before, not "under" it. */}
       <div className="relative overflow-hidden bg-[#0a0a0f]"
         style={{
-          height: '100dvh',
+          height: 'calc(100dvh - 3.5rem)',
           paddingTop: headerCleared ? 'env(safe-area-inset-top)' : 'calc(env(safe-area-inset-top) + 75px)',
           transition: 'padding-top 600ms ease',
         }}>
@@ -553,19 +745,9 @@ const Apps = () => {
           />
         )}
         <h1 className="sr-only">Deliberate Pricing, Expert Build.</h1>
-        <div className="sr-only">
-          {TIERS.map(t => (
-            <section key={t.key}>
-              <h2>{t.name} — {t.price}{t.priceSuffix ? ` ${t.priceSuffix}` : ''}</h2>
-              <p>{t.tagline}</p>
-              <p>{t.description}</p>
-              <ul>
-                {t.features.map(f => <li key={f}>{f}</li>)}
-              </ul>
-            </section>
-          ))}
-        </div>
       </div>
+      <div className="bg-[#0a0a0f] h-14 flex items-center justify-center"><ScrollCue /></div>
+      <AppsDetail />
     </>
   );
 };
