@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { CheckCircle, XCircle, MapPin, CalendarDays, ArrowRight } from 'lucide-react';
+import { AREA_SERVED } from '@/lib/schemaEntities';
 
 const SITE = 'https://ochai.dev';
 const CAL_URL = 'https://cal.com/jeremy-ochai-dev';
@@ -44,11 +45,7 @@ const ServicePage = ({
         description: summary,
         url,
         provider: { '@id': `${SITE}/#organization` },
-        areaServed: [
-          { '@type': 'City', name: 'Huntsville' },
-          { '@type': 'City', name: 'Madison' },
-          { '@type': 'AdministrativeArea', name: 'North Alabama' },
-        ],
+        areaServed: AREA_SERVED,
         audience: { '@type': 'BusinessAudience', name: 'Small and mid-sized businesses' },
         offers: {
           '@type': 'Offer',

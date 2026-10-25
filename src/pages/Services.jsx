@@ -5,6 +5,7 @@ import { CalendarDays, Mail, ArrowRight, Search, FileText, Hammer, LifeBuoy, Dow
 import Cal, { getCalApi } from '@calcom/embed-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SITE, ORG_ID, AREA_SERVED } from '@/lib/schemaEntities';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,20 +88,23 @@ const KEYFRAME_CSS = `
 
 const servicesJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
+  '@type': 'Service',
+  '@id': `${SITE}/services/#service`,
   name: 'OchAI Web Development & AI Integration Services',
-  founder: { '@type': 'Person', name: 'Jeremy Carter Och' },
-  url: 'https://ochai.dev/services/',
-  email: 'jeremy@ochai.dev',
-  telephone: '+1-256-361-9167',
-  priceRange: '$$',
-  address: { '@type': 'PostalAddress', addressLocality: 'Huntsville', addressRegion: 'AL', addressCountry: 'US' },
-  areaServed: ['Huntsville AL', 'Madison AL', 'North Alabama', 'Remote / United States'],
-  makesOffer: [
-    { '@type': 'Offer', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '2500', priceCurrency: 'USD' }, itemOffered: { '@type': 'Service', name: 'The Quartet',  description: 'Complete professional web presence. Lighthouse 100 guaranteed. Starting at $2,500.' } },
-    { '@type': 'Offer', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '5500', priceCurrency: 'USD' }, itemOffered: { '@type': 'Service', name: 'The Ensemble', description: 'Growth web platform with keyword strategy, local SEO, CMS. Starting at $5,500.' } },
-    { '@type': 'Offer', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '12000', priceCurrency: 'USD' }, itemOffered: { '@type': 'Service', name: 'The Symphony', description: 'Full orchestration for enterprise and defense clients. AI integration, Cloudflare edge. Starting at $12,000.' } },
-  ],
+  serviceType: ['Web development', 'AI integration', 'AI workflow automation'],
+  url: `${SITE}/services/`,
+  provider: { '@id': ORG_ID },
+  areaServed: AREA_SERVED,
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'OchAI web development tiers and AI integration',
+    itemListElement: [
+      { '@type': 'Offer', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '2500', priceCurrency: 'USD' }, itemOffered: { '@type': 'Service', name: 'The Quartet',  description: 'Complete professional web presence. Lighthouse 100 guaranteed. Starting at $2,500.' } },
+      { '@type': 'Offer', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '5500', priceCurrency: 'USD' }, itemOffered: { '@type': 'Service', name: 'The Ensemble', description: 'Growth web platform with keyword strategy, local SEO, CMS. Starting at $5,500.' } },
+      { '@type': 'Offer', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: '12000', priceCurrency: 'USD' }, itemOffered: { '@type': 'Service', name: 'The Symphony', description: 'Full orchestration for enterprise and defense clients. AI integration, Cloudflare edge. Starting at $12,000.' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Workflow Automation & Claude API Integration', description: 'Custom Claude API integration and AI workflow automation wired into the systems it automates, built by the same developer who builds the site or app. Scoped per project; included in The Symphony.' } },
+    ],
+  },
 });
 
 const servicesFaqJsonLd = JSON.stringify({

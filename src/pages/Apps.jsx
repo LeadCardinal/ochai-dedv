@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Fingerprint, Check, X, Signal, BatteryFull, MessageSquare, MessageCircle, Home } from 'lucide-react';
 import { gsap } from 'gsap';
+import { SITE, ORG_ID, AREA_SERVED } from '@/lib/schemaEntities';
 
 const LOGO = '/images/ochai-header-logo.avif';
 const ASSETS = {
@@ -46,9 +47,12 @@ const TIERS = [
 // drift out of sync with the actual page content, because it's the same data.
 const appsJsonLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'Service',
+  '@id': `${SITE}/apps/#service`,
+  name: 'Custom App Development',
   serviceType: 'Custom App Development',
-  provider: { '@type': 'Person', name: 'Jeremy Carter Och' },
-  url: 'https://ochai.dev/apps/',
+  provider: { '@id': ORG_ID },
+  areaServed: AREA_SERVED,
+  url: `${SITE}/apps/`,
   hasOfferCatalog: {
     '@type': 'OfferCatalog', name: 'App Development Tiers',
     itemListElement: TIERS.map(t => {

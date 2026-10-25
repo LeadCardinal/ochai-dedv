@@ -10,6 +10,7 @@ import Technologies from '@/components/Technologies';
 import About from '@/components/About';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import WhyOchaiTeaser from '@/components/WhyOchaiTeaser';
+import { AREA_SERVED } from '@/lib/schemaEntities';
 
 const PainPointSection = React.lazy(() => import('@/components/PainPointSection'));
 const Projects = React.lazy(() => import('@/components/Projects'));
@@ -116,12 +117,7 @@ const Home = () => {
                   "addressCountry": "US"
                 },
                 "geo": { "@type": "GeoCoordinates", "latitude": 34.7304, "longitude": -86.5861 },
-                "areaServed": [
-                  { "@type": "City", "name": "Huntsville", "containedInPlace": { "@type": "State", "name": "Alabama" } },
-                  { "@type": "City", "name": "Madison", "containedInPlace": { "@type": "State", "name": "Alabama" } },
-                  { "@type": "AdministrativeArea", "name": "North Alabama" },
-                  { "@type": "Country", "name": "United States" }
-                ],
+                "areaServed": ${JSON.stringify(AREA_SERVED)},
                 "serviceType": ["Web development", "AI integration", "Full-stack development", "Technical SEO"],
                 "knowsAbout": ["Claude API integration", "LLM workflow automation", "React", "Node.js", "Cloudflare Pages and Workers", "Technical SEO", "Generative Engine Optimization"],
                 "sameAs": [
