@@ -1,5 +1,34 @@
+# ochai.dev: everything public is open to search engines and AI crawlers.
 User-agent: *
 Allow: /
-Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+# Search and retrieval bots, named explicitly
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Training crawlers (permitted, same as the site's ai-train=yes policy)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
 
 Sitemap: https://ochai.dev/sitemap.xml
