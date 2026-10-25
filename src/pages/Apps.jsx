@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Fingerprint, Check, X, Signal, BatteryFull, MessageSquare, MessageCircle, Home, ChevronDown, CalendarDays, ArrowRight } from 'lucide-react';
+import { Fingerprint, Check, X, Signal, BatteryFull, MessageSquare, MessageCircle, Home, ChevronDown, CalendarDays, ArrowRight, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { SITE, ORG_ID, AREA_SERVED } from '@/lib/schemaEntities';
 
 const LOGO = '/images/ochai-header-logo.avif';
 const CAL_URL = 'https://cal.com/jeremy-ochai-dev';
+// EAS build artifacts expire 90 days after the build (built 2026-10-25, expires ~2027-01-23).
+// Calendar reminder set for 2027-01-21: rebuild, then replace this URL.
+const BYKEBYTES_APK_URL = 'https://expo.dev/artifacts/eas/hbFQHTRJ_B8TpbmS0An-yvVZkP2Psc4xlWSbqmS9728.apk';
 const ASSETS = {
   soloist: '/images/soloist.avif',
   accompaniment: '/images/accompaniment.avif',
@@ -80,6 +83,16 @@ const FAQS = [
   { q: 'Can you connect the app to software we already use?', a: 'Often yes. Integrations with payments, messaging, calendars, maps and existing databases are a normal part of the work.' },
   { q: 'Do you build AI features into apps?', a: 'Yes. That includes custom Claude API integration and workflow automation, built into the system it automates rather than bolted on as a chatbot.' },
 ];
+
+const bykebytesJsonLd = JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'SoftwareApplication',
+  name: 'BykeBytes',
+  description: 'Cycling trip tracker for Android. Starts recording by itself when you get moving and keeps recording with the screen off. Logs speed, distance and elevation per ride, with CSV export. Data stays on the phone.',
+  applicationCategory: 'HealthAndFitnessApplication',
+  operatingSystem: 'Android',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  creator: { '@id': ORG_ID },
+});
 
 const appsFaqJsonLd = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'FAQPage',
@@ -491,6 +504,29 @@ const AppsDetail = () => (
         </div>
       </DetailSection>
 
+      <DetailSection title="Built and in use: BykeBytes">
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+          <h3 className="text-xl font-bold mb-2">Ride tracking that works with the screen off</h3>
+          <p className="text-slate-300 leading-relaxed">
+            BykeBytes is a cycling trip tracker for Android. It starts recording by itself when you get moving and keeps going with the phone locked, in your pocket or stowed away. Each ride logs date, start and finish, average and top speed, elevation change and distance. History with CSV export and bulk delete functions. All data stays on the phone: no account, no cloud.
+          </p>
+          <p className="text-slate-400 text-sm mt-3">
+            Built by OchAI with AI-assisted development, using Expo and React Native. Android only for now, shared as a direct build rather than through Google Play.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-4">
+            <a href={BYKEBYTES_APK_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-6 py-3 transition-colors">
+              <Download className="w-4 h-4" /> Download the Android app
+            </a>
+            <a href={CAL_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-slate-600 hover:border-amber-400 px-6 py-3 rounded-full transition-colors">
+              Ask about the build <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+          <p className="text-slate-500 text-xs mt-3">Your phone may ask you to allow installs from your browser. That is normal for apps outside Google Play.</p>
+        </div>
+      </DetailSection>
+
       <DetailSection title="The three tiers">
         <div className="grid md:grid-cols-3 gap-4">
           {TIERS.map(t => (
@@ -643,6 +679,7 @@ const Apps = () => {
           <meta name="twitter:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
           <script type="application/ld+json">{appsJsonLd}</script>
         <script type="application/ld+json">{appsFaqJsonLd}</script>
+        <script type="application/ld+json">{bykebytesJsonLd}</script>
         </Helmet>
         <div className="relative flex items-start bg-[#0a0a0f] pl-16"
           style={{
@@ -719,6 +756,7 @@ const Apps = () => {
         <meta name="twitter:description" content="Real prices, real performance, right now — no sales pitch required. Custom app development, fixed tiers, solo build. Free call." />
         <script type="application/ld+json">{appsJsonLd}</script>
         <script type="application/ld+json">{appsFaqJsonLd}</script>
+        <script type="application/ld+json">{bykebytesJsonLd}</script>
       </Helmet>
       {/* Full-screen — the same brief header visibility applies here too;
           it was silently sitting on top of this content before, not "under" it. */}
