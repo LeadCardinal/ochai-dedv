@@ -23,10 +23,10 @@ const VideoIntro = () => {
   });
 
   const [src] = useState(() => {
-    if (typeof window === 'undefined') return '/videos/landing-intro-desktop.mp4';
+    if (typeof window === 'undefined') return '/videos/landing-intro-desktop-h264.mp4';
     return window.matchMedia('(max-width: 767px)').matches
-      ? '/videos/landing-intro-mobile.mp4'
-      : '/videos/landing-intro-desktop.mp4';
+      ? '/videos/landing-intro-mobile-h264.mp4'
+      : '/videos/landing-intro-desktop-h264.mp4';
   });
 
   const [isVisible, setIsVisible] = useState(!alreadySeen);

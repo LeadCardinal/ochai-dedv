@@ -11,7 +11,9 @@ import {
 } from "lucide-react";
 
 const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
-const videoSrc = isMobile ? "/videos/hero_mobile.webm" : "/videos/hero_desktop.webm";
+// H.264 on purpose: the previous AV1 files only decode on the newest iPhones
+// (15 Pro and later), so everything else silently showed the poster.
+const videoSrc = isMobile ? "/videos/hero_mobile_h264.mp4" : "/videos/hero_desktop_h264.mp4";
 
 const CAL_URL = "https://cal.com/jeremy-ochai-dev";
 

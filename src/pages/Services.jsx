@@ -36,8 +36,7 @@ const ASSETS = {
   earthAvif:        '/images/parallax/earth.avif',
   earthWebm:        '/images/parallax/earth.webm',
   earthMobileAvif:  '/earth-mobile.avif',
-  earthMobileMp4:   '/earth-mobile.mp4',
-  earthMobileWebm:  '/videos/hero_mobile.webm',
+  earthMobileMp4:   '/earth-mobile-h264.mp4',
   logoMobile:       '/logo-mobile.avif',
   acronymMobile:    '/acronym-mobile.avif',
   ai:            '/images/parallax/ai.svg',
@@ -617,8 +616,7 @@ const Services = () => {
             >
               {isMobile ? (
                 <>
-                  <source src={ASSETS.earthMobileWebm} type="video/webm" />
-                  <source src={ASSETS.earthMobileMp4}  type="video/mp4" />
+                  <source src={ASSETS.earthMobileMp4} type="video/mp4" />
                 </>
               ) : (
                 <source src={ASSETS.earthWebm} type="video/webm" />
