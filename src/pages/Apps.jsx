@@ -529,7 +529,7 @@ const AppsDetail = () => (
               Ask about the build <ArrowRight className="w-4 h-4" />
             </a>
           </div>
-          <p className="text-slate-500 text-xs mt-3">Your phone may ask you to allow installs from your browser. That is normal for apps outside Google Play.</p>
+          <p className="text-slate-400 text-xs mt-3">Your phone may ask you to allow installs from your browser. That is normal for apps outside Google Play.</p>
         </div>
       </DetailSection>
 
@@ -589,16 +589,16 @@ const AppsDetail = () => (
 
       <DetailSection title="Best fit, and not a fit">
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-slate-900/50 border border-emerald-500/30 rounded-xl p-5">
+          <div className="bg-slate-900/50 border-2 border-emerald-500/60 rounded-xl p-5">
             <h3 className="font-bold mb-3 text-emerald-300">Best fit</h3>
             <ul className="space-y-2">
               {FIT.map(f => <li key={f} className="flex gap-2 text-sm text-slate-300"><Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />{f}</li>)}
             </ul>
           </div>
-          <div className="bg-slate-900/50 border border-rose-500/30 rounded-xl p-5">
-            <h3 className="font-bold mb-3 text-rose-300">Not a fit</h3>
+          <div className="bg-slate-900/50 border-2 border-red-500/60 rounded-xl p-5">
+            <h3 className="font-bold mb-3 text-red-400">Not a fit</h3>
             <ul className="space-y-2">
-              {NOT_FIT.map(f => <li key={f} className="flex gap-2 text-sm text-slate-300"><X className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />{f}</li>)}
+              {NOT_FIT.map(f => <li key={f} className="flex gap-2 text-sm text-slate-300"><X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />{f}</li>)}
             </ul>
           </div>
         </div>
