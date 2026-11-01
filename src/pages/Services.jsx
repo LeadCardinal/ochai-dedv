@@ -24,7 +24,7 @@ const EMAIL_URL =
   encodeURIComponent('Hi Jeremy,\n\nI would like to discuss a project.\n\nBusiness/Project name:\nWhat I need:\nTimeline:\nBest way to reach me:\n');
 
 const ASSETS = {
-  rocket:        '/images/parallax/rocket.svg',
+  rocket:        '/images/parallax/rocket.webp',
   asteroid:      '/images/parallax/asteroid.webp',
   asteroid2:     '/images/parallax/asteroid.webp',
   asteroid3:     '/images/parallax/asteroid.webp',
@@ -323,9 +323,9 @@ const TierCard = ({ tier }) => (
         <p className={`text-2xl md:text-3xl font-black bg-gradient-to-r ${tier.color} bg-clip-text text-transparent leading-snug`}>{tier.coverageLabel}</p>
       )}
     </div>
-    <p className="text-xs uppercase tracking-widest text-slate-500 mb-2">Best for</p>
+    <p className="text-xs uppercase tracking-widest text-slate-400 mb-2">Best for</p>
     <p className="text-slate-300 text-sm mb-8">{tier.bestFor}</p>
-    <p className="text-xs uppercase tracking-widest text-slate-500 mb-4">What is included</p>
+    <p className="text-xs uppercase tracking-widest text-slate-400 mb-4">What is included</p>
     <ul className="space-y-2 mb-8">
       {tier.includes.map((item, i) => (
         <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
@@ -335,7 +335,7 @@ const TierCard = ({ tier }) => (
       ))}
     </ul>
     {tier.addOns && (
-      <p className="text-xs text-slate-500 border-t border-slate-800 pt-4">
+      <p className="text-xs text-slate-400 border-t border-slate-800 pt-4">
         <span className="text-slate-400 font-semibold">Add-ons available: </span>{tier.addOns}
       </p>
     )}
@@ -378,6 +378,29 @@ const Services = () => {
   const ctaRightRef = useRef(null);
   const tierRefs = useRef(tiers.map(() => ({ section: null, splash: null, card: null })));
   const isMobile = useMatchMedia('(max-width: 768px)');
+  // Earth background video: the poster paints first. The video (3.2 MB on desktop) mounts only
+  // on the first real user input, or ~8s after load for passive viewers, so it never competes
+  // with first paint / LCP. No 'scroll' listener on purpose: programmatic scrolls would trigger it.
+  const [earthVideoOn, setEarthVideoOn] = React.useState(false);
+  React.useEffect(() => {
+    let timer;
+    const events = ['wheel', 'pointerdown', 'touchstart', 'keydown'];
+    const armTimer = () => { timer = setTimeout(start, 8000); };
+    const start = () => {
+      events.forEach((e) => window.removeEventListener(e, start));
+      window.removeEventListener('load', armTimer);
+      clearTimeout(timer);
+      setEarthVideoOn(true);
+    };
+    events.forEach((e) => window.addEventListener(e, start, { passive: true }));
+    if (document.readyState === 'complete') armTimer();
+    else window.addEventListener('load', armTimer);
+    return () => {
+      events.forEach((e) => window.removeEventListener(e, start));
+      window.removeEventListener('load', armTimer);
+      clearTimeout(timer);
+    };
+  }, []);
 
   useIsoLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -620,21 +643,29 @@ const Services = () => {
       {(() => {
         return (
           <div className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden z-0 pointer-events-none">
-            <video
-              key={isMobile ? 'mobile' : 'desktop'}
-              autoPlay loop muted playsInline
-              poster={isMobile ? ASSETS.earthMobileAvif : ASSETS.earthAvif}
-              className="w-full h-full object-contain"
-            >
-              {isMobile ? (
-                <>
-                  <source src={ASSETS.earthMobileMp4} type="video/mp4" />
-                </>
-              ) : (
-                <source src={ASSETS.earthWebm} type="video/webm" />
-              )}
-              <img src={isMobile ? ASSETS.earthMobileAvif : ASSETS.earthAvif} alt="Earth from space" className="w-full h-full object-contain" />
-            </video>
+            {earthVideoOn ? (
+              <video
+                key={isMobile ? 'mobile' : 'desktop'}
+                autoPlay loop muted playsInline
+                poster={isMobile ? ASSETS.earthMobileAvif : ASSETS.earthAvif}
+                className="w-full h-full object-contain"
+              >
+                {isMobile ? (
+                  <>
+                    <source src={ASSETS.earthMobileMp4} type="video/mp4" />
+                  </>
+                ) : (
+                  <source src={ASSETS.earthWebm} type="video/webm" />
+                )}
+                <img src={isMobile ? ASSETS.earthMobileAvif : ASSETS.earthAvif} alt="Earth from space" aria-hidden="true" className="w-full h-full object-contain" />
+              </video>
+            ) : (
+              // <picture> picks the right poster at HTML-parse time (the prerender can't know the viewport)
+              <picture className="contents">
+                <source media="(max-width: 768px)" srcSet={ASSETS.earthMobileAvif} type="image/avif" />
+                <img src={ASSETS.earthAvif} alt="Earth from space" aria-hidden="true" fetchPriority="high" className="w-full h-full object-contain" />
+              </picture>
+            )}
           </div>
         );
       })()}
@@ -663,7 +694,7 @@ const Services = () => {
           <div ref={rocketWrapRef} className="absolute pointer-events-none"
             style={{ zIndex: 20, top: '55vh', left: '15%', width: 140 }}>
             <div ref={rocketRef}>
-              <img src={ASSETS.rocket} alt="OchAI Gold Rocket" width={140} height={280} className="w-full h-auto" />
+              <img src={ASSETS.rocket} alt="OchAI Gold Rocket" width={140} height={321} className="w-full h-auto" />
             </div>
           </div>
 
@@ -778,7 +809,7 @@ const Services = () => {
 
       <section id="tiers" className="relative z-10 bg-black py-8">
         <div className="container mx-auto px-4 text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-4">Web Design and Development</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-4">Web Design and Development</p>
           <h2 className="text-4xl md:text-6xl font-black text-white">Choose Your <span className="bg-gradient-to-r from-emerald-400 to-violet-400 bg-clip-text text-transparent">Performance Level</span></h2>
         </div>
         {tiers.map((tier, i) => (
@@ -850,7 +881,7 @@ const Services = () => {
 
       <section className="relative z-10 py-16 bg-slate-950 border-y border-slate-800">
         <div className="container mx-auto px-4 max-w-3xl text-center">
-          <p className="text-xs uppercase tracking-widest text-slate-500 mb-4">Taking this to a boardroom?</p>
+          <p className="text-xs uppercase tracking-widest text-slate-400 mb-4">Taking this to a boardroom?</p>
           <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Download the OchAI Service Brochure</h2>
           <p className="text-slate-300 text-base md:text-lg mb-8">A designed, print-ready PDF with the full service breakdown. Built for the conversation that happens after someone asks, <em>where did you find this guy?</em></p>
           <div className="relative inline-block group">
