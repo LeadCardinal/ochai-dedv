@@ -25,21 +25,21 @@ const EMAIL_URL =
 
 const ASSETS = {
   rocket:        '/images/parallax/rocket.svg',
-  asteroid:      '/images/parallax/asteroid.svg',
-  asteroid2:     '/images/parallax/asteroid2.svg',
-  asteroid3:     '/images/parallax/asteroid3.svg',
-  asteroid4:     '/images/parallax/asteroid4.svg',
-  performance:   '/images/parallax/performance.svg',
-  accessibility: '/images/parallax/accessibility.svg',
-  bestPractices: '/images/parallax/best-practices.svg',
-  seo:           '/images/parallax/seo.svg',
+  asteroid:      '/images/parallax/asteroid.webp',
+  asteroid2:     '/images/parallax/asteroid.webp',
+  asteroid3:     '/images/parallax/asteroid.webp',
+  asteroid4:     '/images/parallax/asteroid.webp',
+  performance:   '/images/parallax/performance.webp',
+  accessibility: '/images/parallax/accessibility.webp',
+  bestPractices: '/images/parallax/best-practices.webp',
+  seo:           '/images/parallax/seo.webp',
   earthAvif:        '/images/parallax/earth.avif',
   earthWebm:        '/images/parallax/earth.webm',
   earthMobileAvif:  '/earth-mobile.avif',
   earthMobileMp4:   '/earth-mobile-h264.mp4',
   logoMobile:       '/logo-mobile.avif',
   acronymMobile:    '/acronym-mobile.avif',
-  ai:            '/images/parallax/ai.svg',
+  ai:            '/images/parallax/sparkles.webp',
   shipLogo:      '/images/parallax/ship-logo.svg',
   acronymLogo:   '/images/parallax/acronym-after-logo2.svg',
   quartet:          '/images/parallax/thequartet2.svg',
@@ -235,6 +235,18 @@ const tiers = [
 // z < 20 = behind rocket | scaleFrom/scaleTo = scale range during scroll
 // All x ranges clamped to ±60vw max — keeps travel arcs visible on desktop
 // Every entry has unique path origin + scrub speed — no two share both
+// Alt text for the decorative floating images (aria-hidden keeps screen readers quiet; crawlers still see alt)
+const ASTEROID_ALT = {
+  performance: 'Lighthouse Performance score: 100',
+  accessibility: 'Lighthouse Accessibility score: 100',
+  bestPractices: 'Lighthouse Best Practices score: 100',
+  seo: 'Lighthouse SEO score: 100',
+  asteroid: 'Floating asteroid illustration',
+  asteroid2: 'Floating asteroid illustration',
+  asteroid4: 'Floating asteroid illustration',
+  ai: 'AI sparkles illustration',
+};
+
 const asteroidDefs = [
   // performance — z dropped to 18, now behind rocket; drifts diagonally down-left
   { src: 'performance',   size: 240, top: 12, left: 72, z: 18,
@@ -284,7 +296,7 @@ const AsteroidLayer = () => { const isMobileAst = useMatchMedia('(max-width: 768
     {asteroidDefs.map((a, i) => (
       <div key={i} data-ast-idx={i} className="absolute pointer-events-none"
         style={{ width: sz(a.size), height: sz(a.size), top: `${a.top}%`, left: `${a.left}%`, zIndex: a.z }}>
-        <img src={ASSETS[a.src]} alt="" width={sz(a.size)} height={sz(a.size)} className="w-full h-full object-contain" />
+        <img src={ASSETS[a.src]} alt={ASTEROID_ALT[a.src] || 'Decorative illustration'} aria-hidden="true" width={sz(a.size)} height={sz(a.size)} className="w-full h-full object-contain" />
       </div>
     ))}
   </>
