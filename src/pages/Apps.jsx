@@ -176,7 +176,7 @@ const LockScreen = ({ onUnlock }) => {
   return (
     <div className="relative flex flex-col items-center justify-between w-full h-full bg-[#080810] select-none">
       {/* Status bar simulation — real clock, iOS-style glyphs */}
-      <div className="w-full flex justify-between items-center px-5 pt-3 text-white/40 flex-shrink-0">
+      <div className="w-full flex justify-between items-center px-5 pt-3 text-white flex-shrink-0">
         <span className="text-[10px] font-medium tracking-wide">{clock}</span>
         <div className="flex items-center gap-1.5">
           <MessageSquare className="w-3 h-3" strokeWidth={2} />
@@ -199,8 +199,8 @@ const LockScreen = ({ onUnlock }) => {
             its box right-of-center inside its own canvas. That's a source-
             asset issue (asymmetric transparent padding), not a layout bug.
             Re-export the logo centered in its canvas and remove this line. */}
-        <span className="text-white/70 text-xs tracking-widest uppercase">OchAI Dev</span>
-        <span className="text-white/30 text-[10px] mt-1">Tap to unlock</span>
+        <span className="text-white text-xs tracking-widest uppercase">OchAI Dev</span>
+        <span className="text-white text-[10px] mt-1">Tap to unlock</span>
       </div>
       {/* Fingerprint */}
       <div className="flex flex-col items-center pb-8 flex-shrink-0">
