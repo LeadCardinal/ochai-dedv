@@ -13,9 +13,33 @@
  * is hand-tuned for Lighthouse and must remain a pure SPA shell.
  */
 
-import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, mkdirSync, writeFileSync, existsSync, rmSync } from 'fs';
 import { resolve, join } from 'path';
 import { spawnSync } from 'child_process';
+
+// Route -> lazy page chunk. Reads the route table in src/App.jsx and Vite's build manifest.
+function routeChunkMap() {
+  const app = readFileSync(resolve('src/App.jsx'), 'utf-8');
+  const loaderSrc = {};
+  for (const m of app.matchAll(/(\w+):\s*\(\)\s*=>\s*import\("@\/pages\/(\w+)"\)/g)) loaderSrc[m[1]] = `src/pages/${m[2]}.jsx`;
+  const routeLoader = {};
+  for (const m of app.matchAll(/"(\/[^"]*)":\s*L\.(\w+)/g)) routeLoader[m[1]] = m[2];
+  return { loaderSrc, routeLoader };
+}
+
+// A manifest entry's built file plus everything it statically imports.
+function chunkFilesFor(manifest, entryKey) {
+  const seen = new Set();
+  const files = [];
+  const walk = (k) => {
+    if (seen.has(k) || !manifest[k]) return;
+    seen.add(k);
+    files.push(manifest[k].file);
+    (manifest[k].imports || []).forEach(walk);
+  };
+  walk(entryKey);
+  return files;
+}
 
 /**
  * @param {string[]} routes - paths to prerender e.g. ['/services', '/biography']
@@ -36,6 +60,10 @@ export default function prerenderPlugin(routes = []) {
       }
 
       const shell = readFileSync(shellPath, 'utf-8');
+      let manifest = null;
+      const manifestPath = join(outDir, '.vite', 'manifest.json');
+      try { if (existsSync(manifestPath)) manifest = JSON.parse(readFileSync(manifestPath, 'utf-8')); } catch { manifest = null; }
+      const { loaderSrc, routeLoader } = routeChunkMap();
       const rendererPath = resolve('./plugins/prerender-worker.mjs');
 
       for (const route of routes) {
@@ -111,11 +139,30 @@ export default function prerenderPlugin(routes = []) {
           out = out.replace('</head>', `${parsed.head.script}\n\t</head>`);
         }
 
+        // Perf (every route except the hand-tuned homepage):
+        //  1) the shell preloads the HOMEPAGE hero poster; other routes never show it.
+        //  2) preload this route's page chunk (+ static deps) so it downloads in parallel with the
+        //     entry script instead of after it (main.jsx awaits it before mounting).
+        if (route !== '/') {
+          out = out.replace(/<!--\s*LCP Preload[\s\S]*?-->\s*/, '');
+          out = out.replace(/<link\b[^>]*\bhref="\/videos\/hero_[^"]*"[^>]*>\s*/g, '');
+          const entryKey = loaderSrc[routeLoader[route]];
+          if (manifest && entryKey && manifest[entryKey]) {
+            const tags = chunkFilesFor(manifest, entryKey)
+              .filter((f) => !out.includes(`/${f}"`))
+              .map((f) => `<link rel="modulepreload" crossorigin href="/${f}" />`);
+            if (tags.length) out = out.replace('</head>', `\t\t${tags.join('\n\t\t')}\n\t</head>`);
+          }
+        }
+
         const routeDir = join(outDir, route.replace(/^\//, ''));
         mkdirSync(routeDir, { recursive: true });
         writeFileSync(join(routeDir, 'index.html'), out, 'utf-8');
         console.log(`[prerender] wrote dist${route}/index.html`);
       }
+
+      // The manifest was only needed here; keep dist identical to before.
+      try { rmSync(join(outDir, '.vite'), { recursive: true, force: true }); } catch { /* ignore */ }
 
       console.log(`[prerender] Done — ${routes.length} routes processed.`);
     },

@@ -39,6 +39,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    manifest: true, // read by plugins/vite-plugin-prerender.js, then removed from dist
     minify: 'esbuild',
   },
 });
