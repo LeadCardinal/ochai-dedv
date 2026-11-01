@@ -244,7 +244,7 @@ const ServicePage = ({
           <p className="text-slate-400 text-sm mt-12">
             OchAI is run by Jeremy Och in Huntsville, Alabama, serving businesses across North Alabama and remotely
             across the United States. Reach me at{' '}
-            <a href="mailto:jeremy@ochai.dev" className="text-cyan-400 hover:text-cyan-300">
+            <a href="mailto:jeremy@ochai.dev" className="text-cyan-400 hover:text-cyan-300 underline">
               jeremy@ochai.dev
             </a>
             .

@@ -60,11 +60,11 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <img 
-              src="/images/logo1.webp" 
-              alt="Logo" 
-              width={64}
-              height={64}
-              className="h-16 w-auto"
+              src="/images/logo256px.webp" 
+              alt="OchAI logo" 
+              width={128}
+              height={128}
+              className="h-32 w-32 rounded-xl bg-white p-2 object-contain"
             />
           </motion.div>
 

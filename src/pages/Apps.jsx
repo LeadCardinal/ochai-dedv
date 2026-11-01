@@ -621,7 +621,7 @@ const AppsDetail = () => (
         <BookCall className="px-8 py-4 text-lg" />
         <p className="text-slate-400 text-sm mt-8">
           OchAI is run by Jeremy Och in Huntsville, Alabama. Reach me at{' '}
-          <a href="mailto:jeremy@ochai.dev" className="text-amber-400 hover:text-amber-300">jeremy@ochai.dev</a>.
+          <a href="mailto:jeremy@ochai.dev" className="text-amber-400 hover:text-amber-300 underline">jeremy@ochai.dev</a>.
         </p>
       </section>
     </div>
