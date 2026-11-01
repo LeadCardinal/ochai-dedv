@@ -479,7 +479,7 @@ const Services = () => {
       // scroll 0–10%  : nothing (static hold, feels like normal page scroll)
       // scroll 10–40% : ship-logo slides right off screen
       // scroll 40–60% : acronym holds (drama)
-      // scroll 60–100%: acronym slides down, exposing "Every build ships"
+      // scroll 60–100%: acronym slides up and out, clearing the stage for "Every build ships"
       if (cinemaRef.current && shipLogoRef.current && acronymRef.current) {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -498,9 +498,9 @@ const Services = () => {
 
         // acronym hold is implicit 40–75% (nothing in timeline = pause)
 
-        // acronym slides down at 75%
+        // acronym slides up and out at 75%
         tl.to(acronymRef.current,
-          { y: '100vh', ease: 'power2.in' },
+          { y: '-100vh', ease: 'power2.in' },
           0.75
         );
 
