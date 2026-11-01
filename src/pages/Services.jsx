@@ -2,7 +2,6 @@ import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { CalendarDays, Mail, ArrowRight, Search, FileText, Hammer, LifeBuoy, Download } from 'lucide-react';
-import Cal, { getCalApi } from '@calcom/embed-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SITE, ORG_ID, AREA_SERVED, breadcrumbJsonLd } from '@/lib/schemaEntities';
@@ -137,9 +136,31 @@ const servicesFaqJsonLd = JSON.stringify({
   ],
 });
 
+// Cal.com embed is the last thing on the page but cost ~1s of main-thread time plus four
+// third-party requests when it mounted at page load. Now the package is a separate chunk that is
+// fetched only when this section is ~800px from the viewport. The placeholder reserves the same
+// 700px the embed uses, so nothing below it shifts.
+const LazyCal = React.lazy(() => import('@calcom/embed-react'));
+
 const CalEmbed = () => {
+  const holderRef = useRef(null);
+  const [near, setNear] = React.useState(false);
+
   useEffect(() => {
+    const el = holderRef.current;
+    if (!el) return undefined;
+    if (!('IntersectionObserver' in window)) { setNear(true); return undefined; }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { setNear(true); io.disconnect(); }
+    }, { rootMargin: '800px 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!near) return;
     (async () => {
+      const { getCalApi } = await import('@calcom/embed-react');
       const cal = await getCalApi({ namespace: 'jeremy-ochai-dev' });
       cal('ui', {
         cssVarsPerTheme: { light: { 'cal-brand': '#06b6d4' }, dark: { 'cal-brand': '#06b6d4' } },
@@ -147,15 +168,21 @@ const CalEmbed = () => {
         layout: 'month_view',
       });
     })();
-  }, []);
+  }, [near]);
 
   return (
-    <Cal
-      namespace="jeremy-ochai-dev"
-      calLink="jeremy-ochai-dev"
-      style={{ width: '100%', height: '700px', overflow: 'scroll' }}
-      config={{ layout: 'month_view' }}
-    />
+    <div ref={holderRef} style={{ width: '100%', height: '700px' }}>
+      {near && (
+        <React.Suspense fallback={null}>
+          <LazyCal
+            namespace="jeremy-ochai-dev"
+            calLink="jeremy-ochai-dev"
+            style={{ width: '100%', height: '700px', overflow: 'scroll' }}
+            config={{ layout: 'month_view' }}
+          />
+        </React.Suspense>
+      )}
+    </div>
   );
 };
 
