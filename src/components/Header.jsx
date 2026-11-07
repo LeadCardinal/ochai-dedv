@@ -1,3 +1,4 @@
+import { bookingLinkProps, openBooking } from '@/lib/bookCall';
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -243,7 +244,7 @@ const Header = () => {
             className="ml-4 px-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg group"
           >
             <a
-              href="https://cal.com/jeremy-ochai-dev"
+              href="https://cal.com/jeremy-ochai-dev" {...bookingLinkProps}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2"
@@ -386,7 +387,7 @@ const Header = () => {
                 className="mt-4 px-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg group"
               >
                 <a
-                  href="https://cal.com/jeremy-ochai-dev"
+                  href="https://cal.com/jeremy-ochai-dev" {...bookingLinkProps} onClick={(e) => { setIsMobileMenuOpen(false); openBooking(e); }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2"

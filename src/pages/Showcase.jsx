@@ -100,7 +100,7 @@ const VideoFacade = () => {
         >
           <Play className="w-8 h-8 fill-slate-950 text-slate-950 ml-1" />
         </div>
-        <span className="text-xs uppercase tracking-widest" style={{ color: 'rgba(201,168,76,0.55)' }}>
+        <span className="text-xs uppercase tracking-widest" style={{ color: 'rgba(201,168,76,0.78)' }}>
           Click to watch &nbsp;·&nbsp; 8 min
         </span>
       </div>
@@ -171,7 +171,7 @@ const Showcase = () => (
             <div className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full"
               style={{ right: '-10px', background: '#020617', border: '1px solid rgba(201,168,76,0.15)' }} />
 
-            <p className="text-xs uppercase tracking-[0.22em] mb-3" style={{ color: 'rgba(201,168,76,0.5)' }}>
+            <p className="text-xs uppercase tracking-[0.22em] mb-3" style={{ color: 'rgba(201,168,76,0.78)' }}>
               Now Screening &nbsp;·&nbsp; ochai.dev presents
             </p>
 
@@ -185,7 +185,7 @@ const Showcase = () => (
               DR.OH in the Beginning
             </h1>
 
-            <p className="text-sm tracking-wide" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            <p className="text-sm tracking-wide" style={{ color: 'rgba(255,255,255,0.55)' }}>
               A fully AI-generated multimedia experience &nbsp;·&nbsp; 8 min
             </p>
           </div>
@@ -198,7 +198,7 @@ const Showcase = () => (
               { label: 'Format', value: 'AI · Multi-Media' },
             ].map(({ label, value }) => (
               <div key={label} className="flex flex-col gap-0.5">
-                <span className="text-[9px] uppercase tracking-[0.18em]" style={{ color: 'rgba(201,168,76,0.45)' }}>{label}</span>
+                <span className="text-[9px] uppercase tracking-[0.18em]" style={{ color: 'rgba(201,168,76,0.78)' }}>{label}</span>
                 <span className="text-sm tracking-wide" style={{ color: 'rgba(255,255,255,0.6)' }}>{value}</span>
               </div>
             ))}
@@ -213,7 +213,7 @@ const Showcase = () => (
         <div className="flex justify-center mt-5 mb-14">
           <span
             className="inline-flex items-center gap-2 text-xs tracking-wide px-4 py-1.5 rounded-full"
-            style={{ background: 'rgba(201,168,76,0.06)', border: '0.5px solid rgba(201,168,76,0.18)', color: 'rgba(201,168,76,0.5)' }}
+            style={{ background: 'rgba(201,168,76,0.06)', border: '0.5px solid rgba(201,168,76,0.18)', color: 'rgba(201,168,76,0.78)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#c9a84c', opacity: 0.65 }} />
             Lighthouse 100 · zero embed weight on load
@@ -261,14 +261,14 @@ const Showcase = () => (
               <div
                 key={tool}
                 className="rounded-lg px-3 py-2 text-xs text-center tracking-wide"
-                style={{ background: 'rgba(201,168,76,0.05)', border: '0.5px solid rgba(201,168,76,0.15)', color: 'rgba(201,168,76,0.65)' }}
+                style={{ background: 'rgba(201,168,76,0.05)', border: '0.5px solid rgba(201,168,76,0.15)', color: 'rgba(201,168,76,0.78)' }}
               >
                 {tool}
               </div>
             ))}
           </div>
 
-          <p className="text-slate-500 text-xs mt-6 leading-relaxed">
+          <p className="text-slate-400 text-xs mt-6 leading-relaxed">
             — Jeremy Carter Och &nbsp;·&nbsp; Full-Stack AI Implementation Digital Operator &nbsp;·&nbsp;{' '}
             <a href="mailto:jeremy@ochai.dev" className="hover:text-amber-400 transition-colors">jeremy@ochai.dev</a>
           </p>

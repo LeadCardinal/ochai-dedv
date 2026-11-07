@@ -1,3 +1,4 @@
+import { bookingLinkProps } from '@/lib/bookCall';
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -220,7 +221,7 @@ const About = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href={CAL_URL}
+                href={CAL_URL} {...bookingLinkProps}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full transition-colors"

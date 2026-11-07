@@ -235,9 +235,15 @@ const LogoSphere = () => {
     s.startPresentation = startPresentation;
     s.stopPresentation = stopPresentation;
 
-    init();
+    // Defer the heavy sphere build (three.js fetch + 117 tiles) until after first
+    // paint so the <h1> LCP is not queued behind main-thread work.
+    let idleId, kickId;
+    if ('requestIdleCallback' in window) idleId = window.requestIdleCallback(() => init(), { timeout: 2500 });
+    else kickId = setTimeout(init, 1200);
 
     return () => {
+      if (idleId) window.cancelIdleCallback(idleId);
+      if (kickId) clearTimeout(kickId);
       cancelAnimationFrame(animId);
       if (s.presentTimer) clearInterval(s.presentTimer);
       if (s.idleTimer) clearTimeout(s.idleTimer);
@@ -275,10 +281,9 @@ const LogoSphere = () => {
           className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/20 px-4 py-2 rounded-full mb-6">
           <span className="text-xs font-bold text-cyan-400 tracking-widest uppercase">Global Media Portfolio</span>
         </motion.div>
-        <motion.h1 initial={{opacity:0,scale:0.96}} animate={{opacity:1,scale:1}} transition={{duration:0.7,delay:0.15}}
-          className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
           Logo, Brand & Social Design Portfolio
-        </motion.h1>
+        </h1>
         <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.7,delay:0.3}}
           className="text-slate-400 text-base max-w-xl mx-auto">
           A global body of work. Drag the sphere. Click any tile.

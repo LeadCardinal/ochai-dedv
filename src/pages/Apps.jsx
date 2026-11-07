@@ -1,3 +1,4 @@
+import { bookingLinkProps } from '@/lib/bookCall';
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -448,7 +449,7 @@ const MobileExpanded = ({ tier, onClose }) => {
 
 // BookCall — amber CTA that matches the page's tier accent
 const BookCall = ({ className = '' }) => (
-  <a href={CAL_URL} target="_blank" rel="noopener noreferrer"
+  <a href={CAL_URL} {...bookingLinkProps} target="_blank" rel="noopener noreferrer"
     className={`inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold transition-colors ${className}`}>
     <CalendarDays className="w-4 h-4" /> Book a free discovery call
   </a>
@@ -524,7 +525,7 @@ const AppsDetail = () => (
               className="inline-flex items-center gap-2 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-6 py-3 transition-colors">
               <Download className="w-4 h-4" /> Download the Android app
             </a>
-            <a href={CAL_URL} target="_blank" rel="noopener noreferrer"
+            <a href={CAL_URL} {...bookingLinkProps} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border border-slate-600 hover:border-amber-400 px-6 py-3 rounded-full transition-colors">
               Ask about the build <ArrowRight className="w-4 h-4" />
             </a>

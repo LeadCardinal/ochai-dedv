@@ -1,3 +1,4 @@
+import { bookingLinkProps } from '@/lib/bookCall';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
@@ -103,7 +104,7 @@ const ServicePage = ({
             <p className="text-lg md:text-xl text-slate-300 leading-relaxed">{summary}</p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a
-                href={CAL_URL}
+                href={CAL_URL} {...bookingLinkProps}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-6 py-3 rounded-lg transition-colors"

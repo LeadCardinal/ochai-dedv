@@ -1,3 +1,4 @@
+import { bookingLinkProps } from '@/lib/bookCall';
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
@@ -367,7 +368,7 @@ const TierCard = ({ tier }) => (
       </p>
     )}
     <div className="mt-8">
-      <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
+      <a href={CAL_URL} {...bookingLinkProps} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
         className={`w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white text-base transition-all duration-300 bg-gradient-to-r ${tier.color} hover:opacity-90 hover:shadow-lg`}>
         <CalendarDays className="w-5 h-5" /> Book a Discovery Call
       </a>
@@ -737,7 +738,7 @@ const Services = () => {
                   Websites, AI integrations, and digital operations built by one person to elite standards on every project, every time. Guaranteed Lighthouse 100. No exceptions.
                 </p>
                 <div className="flex flex-col sm:flex-row md:justify-end gap-3 pointer-events-auto">
-                  <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
+                  <a href={CAL_URL} {...bookingLinkProps} target="_blank" rel="noopener noreferrer" onMouseEnter={playApplause}
                     className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold text-white text-sm transition-all shadow-lg">
                     <CalendarDays className="w-4 h-4" /> Book a Free Discovery Call
                   </a>

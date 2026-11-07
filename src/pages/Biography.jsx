@@ -57,12 +57,12 @@ const Biography = () => {
             </Button>
           </Link>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-12">
+          <div className="mb-12">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">Extended Biography</h1>
             <p className="text-xl text-slate-300">The story behind OchAI, from the Commodore 64 to production web and AI systems</p>
-          </motion.div>
+          </div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="prose prose-invert prose-lg max-w-none">
+          <div className="prose prose-invert prose-lg max-w-none">
 
             <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-8 mb-8">
               <div className="flex items-start gap-4 mb-6">
@@ -155,7 +155,7 @@ const Biography = () => {
               <p className="mb-0"><a href="/images/JeremyOch_Resume.pdf" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold">Download my résumé (PDF)</a></p>
             </div>
 
-          </motion.div>
+          </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="mt-12 text-center">
             <Link to="/contact/">
