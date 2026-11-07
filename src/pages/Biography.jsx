@@ -4,19 +4,25 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Briefcase, GraduationCap, Award, MapPin, Code } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { SITE, ORG_ID, FOUNDER_ID, breadcrumbJsonLd } from '@/lib/schemaEntities';
+import { SITE, ORG_ID, FOUNDER_ID, founderNode, breadcrumbJsonLd } from '@/lib/schemaEntities';
 
 const bioJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
-  '@id': `${SITE}/biography/#profilepage`,
-  url: `${SITE}/biography/`,
-  name: 'Extended Biography | Jeremy Och of OchAI',
-  dateModified: '2026-10-25',
-  isPartOf: { '@id': `${SITE}/#website` },
-  mainEntity: { '@id': FOUNDER_ID },
-  about: { '@id': FOUNDER_ID },
-  publisher: { '@id': ORG_ID },
+  '@graph': [
+    {
+      '@type': 'ProfilePage',
+      '@id': `${SITE}/biography/#profilepage`,
+      url: `${SITE}/biography/`,
+      name: 'Extended Biography | Jeremy Och of OchAI',
+      dateCreated: '2026-01-23T10:16:54-06:00',
+      dateModified: '2026-11-07T01:10:00-06:00',
+      isPartOf: { '@id': `${SITE}/#website` },
+      mainEntity: { '@id': FOUNDER_ID },
+      about: { '@id': FOUNDER_ID },
+      publisher: { '@id': ORG_ID },
+    },
+    founderNode,
+  ],
 });
 
 const Biography = () => {
@@ -106,15 +112,15 @@ const Biography = () => {
                   <p className="text-slate-300 mb-4">Not just "full-stack developer"—full-spectrum digital operator:</p>
                   <div className="grid gap-4">
                     <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
-                      <h4 className="text-lg font-semibold text-cyan-400 mb-2">Build → Market → Measure</h4>
+                      <h3 className="text-lg font-semibold text-cyan-400 mb-2">Build → Market → Measure</h3>
                       <p className="text-slate-300 text-sm mb-0">GTM strategy, SEO optimization, conversion tracking, iterative improvement based on actual user data.</p>
                     </div>
                     <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
-                      <h4 className="text-lg font-semibold text-cyan-400 mb-2">Design → Development → Deployment</h4>
+                      <h3 className="text-lg font-semibold text-cyan-400 mb-2">Design → Development → Deployment</h3>
                       <p className="text-slate-300 text-sm mb-0">Adobe expertise enables pixel-perfect implementation without designer dependencies.</p>
                     </div>
                     <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
-                      <h4 className="text-lg font-semibold text-cyan-400 mb-2">AI Integration → Automation</h4>
+                      <h3 className="text-lg font-semibold text-cyan-400 mb-2">AI Integration → Automation</h3>
                       <p className="text-slate-300 text-sm mb-0">Production-grade AI tool integration for content creation. Not just API calls—actually using these systems to ship faster.</p>
                     </div>
                   </div>
@@ -153,7 +159,7 @@ const Biography = () => {
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="mt-12 text-center">
             <Link to="/contact/">
-              <Button size="lg" className="bg-cyan-500 hover:bg-cyan-600 text-white px-10 py-6 text-lg rounded-full shadow-[0_0_30px_rgba(6,182,212,0.4)]">
+              <Button size="lg" className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-10 py-6 text-lg rounded-full shadow-[0_0_30px_rgba(6,182,212,0.4)]">
                 Start the Conversation
               </Button>
             </Link>

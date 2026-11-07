@@ -26,7 +26,7 @@ const caseStudyJsonLd = JSON.stringify({
   name: "Case Study: themeaningsoflife.com | Perfect Accessibility, Best Practices & SEO Scores",
   description:
     "Technical analysis of themeaningsoflife.com, a book-marketing site achieving perfect 100/100 Accessibility, Best Practices & SEO scores and 95/100 Performance on Google Lighthouse.",
-  dateModified: "2026-10-25",
+  dateModified: "2026-10-25T00:00:00-05:00",
   isPartOf: { "@id": `${SITE}/#website` },
   author: { "@id": FOUNDER_ID },
   publisher: { "@id": ORG_ID },

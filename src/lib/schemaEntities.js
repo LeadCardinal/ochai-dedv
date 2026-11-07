@@ -33,3 +33,22 @@ export const breadcrumbJsonLd = (crumbs) => JSON.stringify({
     ...crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 2, name: c.name, item: `${SITE}${c.path}` })),
   ],
 });
+
+// Full Person node for pages whose JSON-LD has to stand on its own. Google's
+// Rich Results parser does not resolve @id references across pages, so a
+// ProfilePage whose mainEntity is only { '@id': FOUNDER_ID } reports an
+// "Unnamed item". Same @id as the homepage node, so the entities still merge.
+// Keep in sync with the #founder node in Home.jsx.
+export const founderNode = {
+  '@type': 'Person',
+  '@id': FOUNDER_ID,
+  name: 'Jeremy Carter Och',
+  jobTitle: 'Founder, Full-Stack Developer & AI Integration Specialist',
+  url: `${SITE}/biography/`,
+  image: `${SITE}/images/jeremy-och-ochai-founder.avif`,
+  worksFor: { '@type': 'Organization', '@id': ORG_ID, name: 'OchAI', url: `${SITE}/` },
+  sameAs: [
+    'https://www.linkedin.com/in/jeremy-och-ai-full-stack',
+    'https://x.com/OchAI_fullstack',
+  ],
+};

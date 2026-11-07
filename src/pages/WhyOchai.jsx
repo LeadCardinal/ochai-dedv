@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { MapPin, CalendarDays, ArrowRight } from 'lucide-react';
+import { founderNode } from '@/lib/schemaEntities';
 
 const SITE = 'https://ochai.dev';
 const URL = `${SITE}/why-ochai/`;
@@ -20,9 +21,12 @@ const graph = {
       url: URL,
       name: TITLE,
       description: DESC,
+      dateCreated: '2026-10-03T12:46:49-05:00',
+      dateModified: '2026-11-07T01:10:00-06:00',
       mainEntity: { '@id': `${SITE}/#founder` },
       isPartOf: { '@id': `${SITE}/#website` },
     },
+    founderNode,
     {
       '@type': 'BreadcrumbList',
       itemListElement: [

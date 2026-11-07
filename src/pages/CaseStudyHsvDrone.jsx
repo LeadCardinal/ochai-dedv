@@ -28,7 +28,7 @@ const caseStudyJsonLd = JSON.stringify({
   url: CASE_URL,
   name: "Case Study: hsvdrone.com SEO | Page 1 Rankings in 30 Days",
   description: "SEO case study for hsvdrone.com showcasing rapid growth to Google Page 1 rankings (Position 9.0) in less than 30 days.",
-  dateModified: "2026-10-25",
+  dateModified: "2026-10-25T00:00:00-05:00",
   isPartOf: { "@id": `${SITE}/#website` },
   author: { "@id": FOUNDER_ID },
   publisher: { "@id": ORG_ID },

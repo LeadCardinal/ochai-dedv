@@ -25,7 +25,7 @@ const caseStudyJsonLd = JSON.stringify({
   url: CASE_URL,
   name: "Case Study: reallivebonsai.us Organic SEO Growth | OchAI",
   description: "SEO case study for reallivebonsai.us (Jun 2025 to Jun 2026): 1,000+ organic clicks, 48K+ impressions and a 15.1 current average position with zero paid ads.",
-  dateModified: "2026-10-25",
+  dateModified: "2026-10-25T00:00:00-05:00",
   isPartOf: { "@id": `${SITE}/#website` },
   author: { "@id": FOUNDER_ID },
   publisher: { "@id": ORG_ID },
