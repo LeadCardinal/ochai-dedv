@@ -30,6 +30,7 @@ const L = {
   logos: () => import("@/pages/LogoSphere"),
   preview: () => import("@/pages/PreviewPage"),
   smallBiz: () => import("@/pages/SmallBusinessWebDevHuntsville"),
+  smallBizSeo: () => import("@/pages/SmallBusinessSeoHuntsville"),
   aiInt: () => import("@/pages/AiIntegrationSmallBusiness"),
   fullStack: () => import("@/pages/FullStackSmallBusiness"),
   pitch: () => import("@/pages/ThePitch"),
@@ -49,6 +50,7 @@ const VideoPage = import.meta.env.SSR ? (await L.video()).default : React.lazy(L
 const LogoSphere = import.meta.env.SSR ? (await L.logos()).default : React.lazy(L.logos);
 const PreviewPage = import.meta.env.SSR ? (await L.preview()).default : React.lazy(L.preview);
 const SmallBusinessWebDevHuntsville = import.meta.env.SSR ? (await L.smallBiz()).default : React.lazy(L.smallBiz);
+const SmallBusinessSeoHuntsville = import.meta.env.SSR ? (await L.smallBizSeo()).default : React.lazy(L.smallBizSeo);
 const AiIntegrationSmallBusiness = import.meta.env.SSR ? (await L.aiInt()).default : React.lazy(L.aiInt);
 const FullStackSmallBusiness = import.meta.env.SSR ? (await L.fullStack()).default : React.lazy(L.fullStack);
 const ThePitch = import.meta.env.SSR ? (await L.pitch()).default : React.lazy(L.pitch);
@@ -69,6 +71,7 @@ const ROUTE_LOADERS = {
   "/logos": L.logos,
   "/preview": L.preview,
   "/small-business-web-development-huntsville": L.smallBiz,
+  "/small-business-seo-huntsville": L.smallBizSeo,
   "/ai-integration-small-business": L.aiInt,
   "/full-stack-development-small-business": L.fullStack,
   "/the-pitch": L.pitch,
@@ -170,6 +173,7 @@ const AppContent = () => {
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/apps" element={<AppsPage />} />
               <Route path="/small-business-web-development-huntsville" element={<SmallBusinessWebDevHuntsville />} />
+              <Route path="/small-business-seo-huntsville" element={<SmallBusinessSeoHuntsville />} />
               <Route path="/ai-integration-small-business" element={<AiIntegrationSmallBusiness />} />
               <Route path="/full-stack-development-small-business" element={<FullStackSmallBusiness />} />
               <Route path="/biography" element={<Biography />} />

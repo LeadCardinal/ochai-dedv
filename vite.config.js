@@ -9,6 +9,7 @@ const PRERENDER_ROUTES = [
   '/services',
   '/apps',
   '/small-business-web-development-huntsville',
+  '/small-business-seo-huntsville',
   '/ai-integration-small-business',
   '/full-stack-development-small-business',
   '/biography',

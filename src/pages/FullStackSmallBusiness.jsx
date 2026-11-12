@@ -63,6 +63,7 @@ const FullStackSmallBusiness = () => (
       { q: 'What happens after launch?', a: 'You own the code and hosting. I can continue to maintain and extend the system, or hand it to another developer with the documentation provided.' },
     ]}
     related={[
+      { to: '/small-business-seo-huntsville/', label: 'SEO for Huntsville businesses, included in every build' },
       { to: '/services/', label: 'Website packages and pricing' },
       { to: '/small-business-web-development-huntsville/', label: 'Web development for Huntsville small businesses' },
       { to: '/ai-integration-small-business/', label: 'AI integration for small and mid-sized businesses' },
