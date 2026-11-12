@@ -121,6 +121,27 @@ const VideoPage = () => {
             </p>
           </div>
 
+          {/* Why SEO is baked into every build */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-xl p-8 mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+              Why every build ships at 100 out of 100
+            </h2>
+            <div className="space-y-5 text-slate-300 leading-relaxed">
+              <p>
+                Every website I build, with no exception, from concept through to live is based on a four-principled aim at giving Google Search precisely what it asks for. Google commands the market share of internet searches. Google gives us a tool to benchmark our efforts relative to what they feel is important for developers to pay close attention to while building and engineering their websites and website functions. Why? So that Google can ensure it is presenting qualified search results that, through the conventions Google itself outlined and formed, deliver content matched properly with user intent. So they built Lighthouse, through PageSpeed Insights, to inform us of exactly where we place on the scale of adherence across four critical aspects of page and site performance. Lighthouse grades 0 to 100 in each of Performance/Speed, Accessibility, Best Practices, and SEO. There is no mystery here. They name the wants, and they give us a tool that fully analyzes our sites against those wants. Along with the score come heaps of information on precisely where our pages, with more attention, could better meet their vision and so better reach intentful searches with meaningful content.
+              </p>
+              <p>
+                Then they take it a step further and SHOW US how people find our content: what country they searched from, what kind of device they used, the actual terms that invoked our site, and where we ranked among the sites served for those searches. Google spoon-feeds us the entire way. So why do so many websites land well short of 100 on one metric or more? Because they take them as suggestions. I perceive them as crystal clear expectations from the gatekeepers of search, on how to better serve the people they serve. It&apos;s the test with all the answers in front of you. It&apos;s the hand that holds you through every build so you don&apos;t fall astray. And it throws a tool on top that can score each line of new code and tell any developer how that line affected the site and the user experience.
+              </p>
+              <p>
+                Lighthouse is the foundation, not the ceiling. Search no longer ends at ten blue links. AI assistants and agents read the web now too, and few sites are built for them. So every build I ship also carries structured data that ties the business, its services and its people together as one entity. It carries an llms.txt regenerated on every build, so machines get a clean map of the site. Crawler rules name the search and AI bots instead of leaving them to guess. Pages are pre-rendered, so what a crawler fetches is what a visitor sees. Service area and local intent are mapped before a word of copy is written. Search Console and Bing are wired up on day one, so the feedback loop starts at launch. That&apos;s why ochai.dev reads 3 out of 3 on Google&apos;s Agentic Browsing check alongside the four 100s.
+              </p>
+              <p className="text-white font-semibold">
+                I don&apos;t understand getting anything less than 100 out of 100. I just don&apos;t. And I don&apos;t ship one that isn&apos;t, each and every time.
+              </p>
+            </div>
+          </section>
+
           {/* Stats row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             {[

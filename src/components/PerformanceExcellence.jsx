@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   Trophy,
   Zap,
@@ -183,6 +184,22 @@ const PerformanceExcellence = () => {
             </div>
           </div>
         </div>
+
+        {/* Pull-quote */}
+        <figure className="mt-12 mx-auto max-w-2xl text-center">
+          <blockquote className="text-xl md:text-2xl font-semibold text-white leading-snug">
+            I don&apos;t understand getting anything less than 100 out of 100. I just don&apos;t.
+          </blockquote>
+          <figcaption className="mt-4 text-sm text-slate-300">
+            Google names the wants and hands over the test.{" "}
+            <Link
+              to="/performance/"
+              className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4"
+            >
+              Why every build ships at 100
+            </Link>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );
