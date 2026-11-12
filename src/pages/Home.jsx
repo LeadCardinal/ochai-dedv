@@ -62,19 +62,19 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>OchAI — Full-Stack Web Development & AI Integration | Huntsville, AL</title>
+        <title>Huntsville Web Developer | Sites That Score 100 | OchAI</title>
         <link rel="canonical" href="https://ochai.dev/" />
-        <meta name="title" content="OchAI — Full-Stack Web Development & AI Integration | Huntsville, AL" />
-        <meta name="description" content="Full-stack web development and AI implementation for businesses in Huntsville and beyond — built to rank AND get cited by AI Overviews. React, Node, cloud deployment. 37+ years hands-on." />
+        <meta name="title" content="Huntsville Web Developer | Sites That Score 100 | OchAI" />
+        <meta name="description" content="Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. One Huntsville developer: web, apps, AI integration, SEO built in." />
         <meta name="keywords" content="web development Huntsville AL, custom website development North Alabama, small business web developer Huntsville, app development Huntsville, AI integration for small business, AI workflow automation, Claude API integration, Adobe Firefly integration, ElevenLabs integration, technical SEO, GEO optimization, AEO optimization, answer engine optimization, AI Overview citations, 100/100 Lighthouse websites, React web developer, Cloudflare Pages hosting, full-stack development consultant" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ochai.dev/" />
-        <meta property="og:title" content="OchAI — Full-Stack Web Development & AI Integration | Huntsville, AL" />
-        <meta property="og:description" content="Full-stack web development and AI implementation for businesses in Huntsville and beyond — built to rank AND get cited by AI Overviews. React, Node, cloud deployment. 37+ years hands-on." />
+        <meta property="og:title" content="Huntsville Web Developer | Sites That Score 100 | OchAI" />
+        <meta property="og:description" content="Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. One Huntsville developer: web, apps, AI integration, SEO built in." />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://ochai.dev/" />
-        <meta property="twitter:title" content="OchAI — Full-Stack Web Development & AI Integration | Huntsville, AL" />
-        <meta property="twitter:description" content="Full-stack web development and AI implementation for businesses in Huntsville and beyond. React, Node, and hands-on AI integration — built to be cited by AI Overviews." />
+        <meta property="twitter:title" content="Huntsville Web Developer | Sites That Score 100 | OchAI" />
+        <meta property="twitter:description" content="Up, ranking, and scoring 100s on Lighthouse before the others reach the desk. One Huntsville developer: web, apps, AI integration, SEO built in." />
         <script type="application/ld+json">
           {`{
             "@context": "https://schema.org",
