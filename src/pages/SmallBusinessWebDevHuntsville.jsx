@@ -63,6 +63,7 @@ const SmallBusinessWebDevHuntsville = () => (
       { q: 'Do you work outside Huntsville?', a: 'Yes. I serve Madison and the rest of North Alabama in person and work remotely with clients across the United States.' },
     ]}
     related={[
+      { to: '/small-business-seo-huntsville/', label: 'SEO for Huntsville businesses, included in every build' },
       { to: '/services/', label: 'All website packages and pricing' },
       { to: '/ai-integration-small-business/', label: 'AI integration for small and mid-sized businesses' },
       { to: '/full-stack-development-small-business/', label: 'Full-stack development for SMBs' },

@@ -48,14 +48,14 @@ const ServicePage = ({
         provider: { '@id': `${SITE}/#organization` },
         areaServed: AREA_SERVED,
         audience: { '@type': 'BusinessAudience', name: 'Small and mid-sized businesses' },
-        offers: {
+        ...(pricing.minPrice ? { offers: {
           '@type': 'Offer',
           priceSpecification: {
             '@type': 'PriceSpecification',
             minPrice: pricing.minPrice,
             priceCurrency: 'USD',
           },
-        },
+        } } : {}),
       },
       {
         '@type': 'BreadcrumbList',

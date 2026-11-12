@@ -11,6 +11,7 @@ const footerGroups = [
       { to: '/services/', label: 'Website Development' },
       { to: '/apps/', label: 'App Development' },
       { to: '/small-business-web-development-huntsville/', label: 'Small Business Web Development' },
+      { to: '/small-business-seo-huntsville/', label: 'Huntsville SEO' },
       { to: '/ai-integration-small-business/', label: 'AI Integration' },
       { to: '/full-stack-development-small-business/', label: 'Full-Stack Development' },
     ],

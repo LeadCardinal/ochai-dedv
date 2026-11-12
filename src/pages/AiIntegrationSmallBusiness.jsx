@@ -62,6 +62,7 @@ const AiIntegrationSmallBusiness = () => (
       { q: 'How do we start?', a: 'Book a free discovery call. We pick one task, define success, and I give you a fixed scope and price.' },
     ]}
     related={[
+      { to: '/small-business-seo-huntsville/', label: 'SEO for Huntsville businesses, included in every build' },
       { to: '/services/', label: 'Website packages, including the Symphony tier' },
       { to: '/small-business-web-development-huntsville/', label: 'Web development for Huntsville small businesses' },
       { to: '/full-stack-development-small-business/', label: 'Full-stack development for SMBs' },
